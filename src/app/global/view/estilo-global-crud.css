@@ -1,0 +1,92 @@
+/* ELEMENTOS PADRÕES */
+body{
+    /* margin: 40px; */
+    margin: 1.8rem;
+}
+
+p{
+    color: blue;   
+    /* position: fixed;
+    display: inline;
+    padding: 10px; */
+}
+
+legend{
+    font: 100% verdana, arial, tahoma, sans-serif;
+    font-size: 1.52rem;
+    font-weight: bold;
+}
+
+/* CLASSES */
+.embrulho-campos{
+    margin-top: 5px;
+    border-color: black;
+    border-style: dashed ;
+    border-radius: 10px ;
+    border-width: 0.5px;
+    padding: 30px;
+
+    /*SCROLL */
+     height: 28rem;
+    overflow-y: auto; /*só aparece o scroll quando necessário*/
+}
+/* Estilizando SCROLL */
+::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+    border-radius: 10px;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: #F4F4F4;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #dad7d7;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #007bff;
+}
+
+.embrulho-botoes{
+    margin-top: 5px;
+    border-color: black;
+    border-style: dashed ;
+    border-radius: 10px ;
+    border-width: 0.5px;
+    padding: 20px;
+}
+
+.espaco{
+    margin-right: 50px;
+}
+
+.buttonPesquisa{
+    /* background-image: url("https://st2.depositphotos.com/3994049/6882/v/950/depositphotos_68824077-stock-illustration-realistic-magnifier-magnifying-glass-vector.jpg"); */
+    background-image: url("./../../imagens/pesquisa.png");
+    background-repeat: no-repeat;
+    background-color : transparent;
+    background-size: 30px;
+    background-position: center;
+    width : 40px;
+    height: 40px;
+    padding-left: 30px;
+    border: 0px;
+}
+
+.preenchimentoObrigatorio{
+    color: blue;
+}
+
+.posicao-centro-vertical{
+    display: flex ;
+    align-items: center ;
+    justify-content: center ;
+}
+
+.espacamento-botoes{
+    margin-right: 5px !important;
+    margin-left: 5px !important;
+}

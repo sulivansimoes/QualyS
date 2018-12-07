@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro Locais</title>
+
+    <!-- BootStrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+<body>
+    <form action="#" method="POST" autocomplete="off">
+        <fieldset>
+            <legend>Cadastro Local</legend>
+            <div class="embrulho-campos">
+                
+                <p>Campos em azul são de preenchimento obrigatório</p>
+                <div class="form-row">
+                    <!-- ID -->
+                    <div class="form-group col-md-2">
+                        <label for="inputIdLocal" class="preenchimentoObrigatorio">ID</label>
+                        <div class="input-group-append">
+                            <input type="text" id="inputIdLocal" name="inputIdLocal" required maxlength="4" [(ngModel)]="local.id" class="form-control">
+                            <input type="button" id="buttonPesquisa" name="buttonPesquisa" onclick="alert('teste')" class="buttonPesquisa espaco">
+                        </div>
+                    </div>
+                    <!-- DESCRIÇÃO -->
+                    <div class="form-group col-md-6 espaco">
+                        <label for="inputDescricaoLocal" class="preenchimentoObrigatorio">Descrição</label>
+                        <input type="text" id="inputDescricaoLocal" name="inputDescricaoLocal" required maxlength="25" [(ngModel)]="local.descricao" class="form-control">
+                    </div>
+                    <!-- BLOQUEADO -->
+                    <div class="form-group espaco">
+                        <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
+                        <select id="inputBloqueado" name="inputBloqueado" required [(ngModel)]="local.bloqueado" class="form-control">
+                            <option value=false>Não</option>
+                            <option value=true>Sim</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- <fieldset class="embrulho-botoes">
+            <div class="posicao-centro-vertical">
+                <button type="submit" class="btn btn-lg btn-primary espacamento-botoes">Salvar</button>
+                <button type="button" class="btn btn-lg btn-primary espacamento-botoes">Cancelar</button>
+            </div>
+        </fieldset> -->
+        
+        <!-- <app-botoes-salvar-fechar [acaoSalvar]=teste02></app-botoes-salvar-fechar> -->
+    </form>
+</body>
+</html>
