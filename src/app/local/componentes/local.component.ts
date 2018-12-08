@@ -22,12 +22,12 @@ export class LocalComponent implements OnInit {
   /**
    * Resumo: Salva novo local.
    */
-  salvaLocal(){
-    //TODO
+  private salvaLocal(){
+    alert("Salvou local");
   }
 
-  teste02(){
-    alert("chamando função de local");
+  private fechaTela(){
+    alert("Fecha tela de cadstro de local");
   }
 
 }

@@ -11,9 +11,15 @@ import { Frequencia } from './../Model/frequencia';
   ]
 })
 export class FrequenciaComponent implements OnInit {
-
+    
+  // TAMANHO DOS CAMPOS 
+  private SIZE_ID        = 4;
+  private SIZE_DESCRICAO = 15;
+  
   private frequencia:Frequencia = new Frequencia();
   private frequecias:Frequencia[] = [];
+
+
 
   constructor() { }
 

@@ -20,12 +20,9 @@
                 <p>Campos em azul são de preenchimento obrigatório</p>
                 <div class="form-row">
                     <!-- ID -->
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-2 espaco">
                         <label for="inputIdLocal" class="preenchimentoObrigatorio">ID</label>
-                        <div class="input-group-append">
-                            <input type="text" id="inputIdLocal" name="inputIdLocal" required maxlength="4" [(ngModel)]="local.id" class="form-control">
-                            <input type="button" id="buttonPesquisa" name="buttonPesquisa" onclick="alert('teste')" class="buttonPesquisa espaco">
-                        </div>
+                        <input type="text" id="inputIdLocal" name="inputIdLocal" required maxlength="4" [(ngModel)]="local.id" class="form-control">
                     </div>
                     <!-- DESCRIÇÃO -->
                     <div class="form-group col-md-6 espaco">
@@ -44,14 +41,8 @@
             </div>
         </fieldset>
 
-        <!-- <fieldset class="embrulho-botoes">
-            <div class="posicao-centro-vertical">
-                <button type="submit" class="btn btn-lg btn-primary espacamento-botoes">Salvar</button>
-                <button type="button" class="btn btn-lg btn-primary espacamento-botoes">Cancelar</button>
-            </div>
-        </fieldset> -->
-        
-        <!-- <app-botoes-salvar-fechar [acaoSalvar]=teste02></app-botoes-salvar-fechar> -->
+        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaLocal($event)
+                                  (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>
     </form>
 </body>
 </html>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Programa } from './../model/programa';
+
 @Component({
   selector: 'app-programa',
   templateUrl: './../view/programa.component.html',
@@ -10,9 +12,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProgramaComponent implements OnInit {
 
+  private programa:Programa = new Programa();
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  private salvaPrograma(){
+    alert("Salvou programa!")
   }
 
+  private fechaTela(){
+    alert("Fechou tela programa!");
+  }
 }

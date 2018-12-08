@@ -22,12 +22,12 @@
                     <!-- ID -->
                     <div class="form-group col-md-1 espaco">
                         <label for="inputIdFrequencia" class="preenchimentoObrigatorio">ID</label>
-                        <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength="4" [(ngModel)]="frequencia.id" class="form-control">                            
+                        <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID}} [(ngModel)]="frequencia.id" class="form-control">                            
                     </div>
                     <!-- DESCRIÇÃO -->
                     <div class="form-group col-md-6 espaco">
                         <label for="inputDescricaoFrequencia" class="preenchimentoObrigatorio">Descrição</label>
-                        <input type="text" id="inputDescricaoFrequencia" name="inputDescricaoFrequencia" required maxlength="15" [(ngModel)]="frequencia.descricao" class="form-control">
+                        <input type="text" id="inputDescricaoFrequencia" name="inputDescricaoFrequencia" required maxlength={{SIZE_DESCRICAO}} [(ngModel)]="frequencia.descricao" class="form-control">
                     </div>
                 </div>
             </div>

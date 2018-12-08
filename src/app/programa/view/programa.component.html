@@ -1,3 +1,90 @@
-<p>
-  programa works!
-</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cadastro Programa</title>
+
+  <!-- BootStrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <form action="#" method="POST" autocomplete="off">
+    <fieldset>
+      <legend>Cadastro Programa</legend>
+      <div class="embrulho-campos">
+
+        <p>Campos em azul são de preenchimento obrigatório</p>
+        <div class="form-row">
+          <!-- ID -->
+          <div class="form-group col-md-1 espaco">
+            <label for="inputIdPrograma" class="preenchimentoObrigatorio">ID</label>
+            <input type="text" id="inputIdPrograma" name="inputIdPrograma" required maxlength="4" [(ngModel)]="programa.id"
+              class="form-control">
+          </div> 
+          <!-- DESCRIÇÃO -->
+          <div class="form-group col-md-6 espaco">
+            <label for="inputDescricaoPrograma" class="preenchimentoObrigatorio">Descrição</label>
+            <input type="text" id="inputDescricaoPrograma" name="inputDescricaoPrograma" required maxlength="60"
+              [(ngModel)]="programa.descricao" class="form-control">
+          </div>
+          <!-- SIGLA -->
+          <div class="form-group col-md-2 espaco">
+            <label for="inputSiglaPrograma" class="preenchimentoObrigatorio">Sigla</label>
+            <input type="text" id="inputSiglaPrograma" name="inputSiglaPrograma" required maxlength="8" [(ngModel)]="programa.sigla"
+              class="form-control">
+          </div>
+          <!-- DATA VIGENCIA -->
+          <div class="form-group col-md-2 espaco">
+            <label for="inputDataVigencia" class="preenchimentoObrigatorio">Data vigência</label>
+            <input type="date" id="inputDataVigencia" name="inputDataVigencia" required [(ngModel)]="programa.dataVigencia"
+              class="form-control">
+          </div>
+          <!-- DATA REVISAO -->
+          <div class="form-group col-md-2 espaco">
+            <label for="inputDataRevisao">Data revisão</label>
+            <input type="date" id="inputDataRevisao" name="inputDataRevisao" [(ngModel)]="programa.dataRevisao" class="form-control">
+          </div>
+          <!-- ID FREQUENCIA -->
+          <div class="form-group col-md-2 espaco">
+            <label for="inputIdFrequencia" class="preenchimentoObrigatorio">Frequência</label>
+            <div class="input-group-append">
+              <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength="4" [(ngModel)]="programa.idFrequencia"
+                class="form-control">
+              <input type="button" id="buttonPesquisa" name="buttonPesquisa" onclick="alert('teste')" class="buttonPesquisa">
+            </div>
+          </div>
+          <!-- VERSAO -->
+          <div class="form-group espaco"> 
+            <label for="inputVersao" class="preenchimentoObrigatorio">Versão</label>
+            <input type="text" id="inputVersao" name="inputVersao" required maxlength="3" [(ngModel)]="programa.versao"
+              class="form-control">
+          </div>
+          <!-- OFICIO CIRCULAR -->
+          <div class="form-group espaco">
+            <label for="inputOficio" class="preenchimentoObrigatorio">Oficio circular</label>
+            <textarea id="inputOficio" name="inputOficio" required  rows="6" cols="50" [(ngModel)]="programa.oficio" class="form-control" ></textarea>
+          </div>
+          <!-- BLOQUEADO -->
+          <div class="form-group espaco">
+            <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
+            <select id="inputBloqueado" name="inputBloqueado" required [(ngModel)]="programa.bloqueado" class="form-control">
+              <option value=false>Não</option>
+              <option value=true>Sim</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+    </fieldset>
+
+    <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaPrograma($event) 
+                              (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>
+  </form>
+</body>
+
+</html>
