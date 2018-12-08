@@ -1,0 +1,61 @@
+/* COMPONETES PADRÕES */
+body,form{
+    margin: 1.8rem;
+}
+
+table,td,th{
+    border-collapse: collapse;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    text-align: left;
+    padding-left:50px;
+}
+tr:hover{
+    background-color: #f0f0f0;
+}
+
+/* CLASSES */
+
+.embrulho-cabecalho-formulario{
+    margin-top: 5px;
+    border-color: black;
+    border-style: dashed ;
+    border-radius: 10px ;
+    border-width: 0.5px;
+    padding: 30px;
+}
+
+.embrulho-item-formulario{
+    margin-top: 5px;
+    border-color: black;
+    border-style: dashed ;
+    border-radius: 10px ;
+    border-width: 0.5px;
+    padding: 20px;
+}
+
+.embrulho-botoes{
+    margin-top: 5px;
+    border-color: black;
+    border-style: dashed ;
+    border-radius: 10px ;
+    border-width: 0.5px;
+    padding: 20px;
+}
+
+.buttonEditar{
+    background-image: url("./../../imagens/editar.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: 30px;
+    background-position: center;
+    width : 100px;
+    height: 40px;
+    padding-left: 30px;
+    border: 0px;
+}
+
+
+
+
+

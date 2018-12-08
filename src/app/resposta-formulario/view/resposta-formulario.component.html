@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Resposta Forumulário</title>
+
+    <!-- BootStrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <form action="#" method="POST" autocomplete="off">
+        <fieldset class="embrulho-cabecalho-formulario">
+             <!--NOME DO FORUMALARIO A SER RESPONDIDO-->
+            <legend>{{ nomeFormulario }}</legend>
+
+                <!-- CABELACHO FORMULARIO -->
+                <div class="form-row">
+                    <!-- DATA EMISSAO -->
+                    <div class="form-group col-md-2">
+                        <label for="inputEmissao" class="preenchimentoObrigatorio">Data Emissão</label>
+                        <input type="date" id="inputEmissao" required class="form-control">
+                    </div>
+                    <!-- HORA EMISSAO -->
+                    <div class="form-group col-md-2">
+                        <label for="inputHoraEmissao" class="preenchimentoObrigatorio">Hora Emissão</label>
+                        <input type="time" id="inputHoraEmissao" required class="form-control">
+                    </div>
+                </div>
+                <!-- ITENS FORMULARIO -->
+                <table>
+                    <thead>
+                        <th>Item</th>
+                        <th>Pergunta</th>
+                        <th>Conforme</th>
+                        <th>Não Conforme</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01</td>
+                            <td>Lampadas ok?</td>
+                            <td><input type="radio" required name="resposta1" ></td>
+                            <td><input type="radio" required name="resposta1" ></td>
+                        </tr>
+                        <tr>
+                            <td>02</td>
+                            <td>Lixeira ok?</td>
+                            <td><input type="radio"  required name="resposta2"></td>
+                            <td><input type="radio"  required name="resposta2"></td>
+                        </tr>
+                        <tr>
+                            <td>03</td>
+                            <td>Pragas ok?</td>
+                            <td><input type="radio" required name="resposta3"></td>
+                            <td><input type="radio" required name="resposta3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+        </fieldset>
+        <!-- LISTA DE INCONFORMES  -->
+        <fieldset class="embrulho-item-formulario">
+            <legend>Inconformes</legend>
+            <table>
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <td>01 - Uma Lampada queimada</td>
+                        <td><input type="button" onclick="alert('teste no editar')" class="buttonEditar"></td>
+                    </tr>
+                    <tr>
+                        <td>03 - Há Vestigio de pragas</td>
+                        <td><input type="button" onclick="alert('teste no editar')" class="buttonEditar"></td>
+                    </tr>
+                    <tr>
+                </tbody>
+            </table>
+        </fieldset>
+        <!--  BOTOES -->
+        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaRespostaFormulario($event)
+                                  (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>
+
+      </form>
+</body>
+</html>

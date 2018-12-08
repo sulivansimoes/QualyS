@@ -1,5 +1,5 @@
 /**
- * Resumo: Classe de Objeto de tranferecia ( TO ) de LOCAL 
+ * @description: Classe de Objeto de tranferecia ( TO ) de LOCAL 
  */
 export class Local{
 
@@ -9,8 +9,8 @@ export class Local{
 
     /**  
     * @constructor
-    * @param {number} id - Código identificador do local ( chave primária )
-    * @param {string} descricao - Descrição do local
+    * @param {number } id - Código identificador do local ( chave primária )
+    * @param {string } descricao - Descrição do local
     * @param {boolean} bloqueado - Flag do cadastro, indicando se está ou não bloqueado.
     */
     constructor(id?:number, descricao?:string, bloqueado?:boolean){
