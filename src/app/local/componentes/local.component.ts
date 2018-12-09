@@ -24,6 +24,7 @@ export class LocalComponent implements OnInit {
    */
   private salvaLocal(){
     alert("Salvou local");
+    
   }
 
   private fechaTela(){

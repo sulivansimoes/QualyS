@@ -30,25 +30,6 @@ legend{
      height: 28rem;
     overflow-y: auto; /*só aparece o scroll quando necessário*/
 }
-/* Estilizando SCROLL */
-::-webkit-scrollbar-track {
-    background-color: #F4F4F4;
-    border-radius: 10px;
-}
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-    background: #F4F4F4;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #dad7d7;
-    border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #007bff;
-}
 
 .embrulho-botoes{
     margin-top: 5px;
