@@ -2,6 +2,7 @@
 import { NgModule     } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule  } from '@angular/forms';
+
 // COMPONENTES PERSONALIZADOS
 import { BotoesSalvarFecharComponent } from './componentes/botoes-salvar-fechar.component';
 import { TelaConsultaPadraoComponent } from './componentes/tela-consulta-padrao.component';
@@ -13,10 +14,11 @@ import { TelaConsultaPadraoComponent } from './componentes/tela-consulta-padrao.
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [
-    BotoesSalvarFecharComponent
+    BotoesSalvarFecharComponent,
+    TelaConsultaPadraoComponent
   ]
 })
 export class ComponenteGlobalModule { }

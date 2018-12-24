@@ -1,3 +1,63 @@
-<p>
-  tela-consulta-padrao works!
-</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pesquisa</title>
+</head>
+
+<body>
+    <!-- PRECISA DELEGAR CHAMADA DO MODAL PARA BOTÃO EXTERNO AO COMPONENT. --> 
+    <button  id="botaoPesquisaModal" type="button" (click)="acionaModalPesquia()">
+        chama modal
+    </button>
+       
+    <div class="modal fade filtroModal"  id="modalPesquisa" tabindex="-1" role="dialog" aria-labelledby="filtroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filtroModalLabel">Pesquisa</h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <!-- FILTRO DE PESQUISA  -->
+                            <div class="input-group-append posicao-centro-vertical">
+                                <input type="text" class="form-control col-md-8" name="inputpesquisar" [(ngModel)]="inputPesquisa">
+                                <input type="button" value="Pesquisar" (click)="botaoPesquisarClicado.emit(inputPesquisa)" class="btn btn-primary">
+                            </div>
+                            <!-- TABELA COM DADOS -->
+                            <div class="scroll"> 
+                                <table *ngIf="tabelaDeDados.length > 0">
+                                    <thead>
+                                        <th *ngFor="let itemCabecalho of cabecalhoTabela">
+                                            {{ itemCabecalho }}
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let dado of tabelaDeDados" (click)="itemSelecionadoClicado.emit( dado )">
+                                          <td *ngFor="let itemCabecalho of cabecalhoTabela; index as coluna" >
+                                              {{ dado[coluna] }}
+                                          </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- CASO NÃO HAJA DADOS -->
+                                <div *ngIf="tabelaDeDados.length == 0" class="msgNaoHaDados">
+                                        Não há dados para exibir
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

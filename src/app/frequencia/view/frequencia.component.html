@@ -16,10 +16,19 @@
                 <p>Campos em azul são de preenchimento obrigatório</p>
                 <div class="form-row">
                     <!-- ID -->
-                    <div class="form-group col-md-1 espaco">
+                    <!-- <div class="form-group col-md-1 espaco">
                         <label for="inputIdFrequencia" class="preenchimentoObrigatorio">ID</label>
-                        <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID}} [(ngModel)]="frequencia.id" class="form-control">                            
-                    </div>
+                        <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID}} [(ngModel)]="frequencia.id"  disabled class="form-control">                            
+                    </div> -->
+                    <!-- TESTE COM LUPA -->
+                    <div class="form-group col-md-2">
+                            <label for="inputId" class="preenchimentoObrigatorio">ID</label>
+                            <div class="input-group-append">
+                                <input type="text" id="inputIdLocal" required maxlength="4"  name="inputIdLocal" [(ngModel)]="frequencia.id" class="form-control">
+                                <input type="button" id="buttonPesquisa" (click)="acionaModal.emit()"  class="buttonPesquisa espaco">
+                            </div>
+                        </div>
+                    <!-- FIM TESTE -->
                     <!-- DESCRIÇÃO -->
                     <div class="form-group col-md-6 espaco">
                         <label for="inputDescricaoFrequencia" class="preenchimentoObrigatorio">Descrição</label>
@@ -28,6 +37,16 @@
                 </div>
             </div>
         </fieldset>
+
+        <!-- TESTE DE CONSULTA PADRÃO -->
+        <app-tela-consulta-padrao 
+            (botaoPesquisarClicado) ="pesquisaFrequencia($event)"
+            (itemSelecionadoClicado)="itemSelecionado($event)"
+            [cabecalhoTabela]="cabecalhoTabela"
+            [tabelaDeDados]="frequenciasFiltradas"
+        >
+        </app-tela-consulta-padrao>
+        <!-- FIM TESTE -->
 
         <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaFrequencia($event)
                                   (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>

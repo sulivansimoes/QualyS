@@ -8,7 +8,7 @@ export class Programa{
    private sigla        :string;
    private dataVigencia :Date;
    private dataRevisao  :Date;
-   private id_frequencia:number;
+   private idFrequencia :number;
    private versao       :string;
    private oficio       :string;
    private bloqueado    :boolean;
@@ -20,13 +20,13 @@ export class Programa{
     * @param {string } sigla        - Sigla ( abreviação ) da descrição do programa
     * @param {Date   } dataVigencia - Data da vigencia do programa do programa.
     * @param {Date   } dataRevisao  - Data em que programa foi revisado.
-    * @param {number } id_frequencia- id da frequencia; Frequencia que os formulários do programa devem ser respondidos.
+    * @param {number } idFrequencia - id da frequencia; Frequencia que os formulários do programa devem ser respondidos.
     * @param {string } versao       - Versão do programa.
     * @param {string } oficio       - Oficio circular do programa.
     * @param {boolean} bloqueado    - Flag do cadastro, indicando se está ou não bloqueado.
     */
    constructor(id?:number        , descricao?:string    , sigla?:string , dataVigencia?:Date,
-               dataRevisao?:Date , id_frequencia?:number, versao?:string, oficio?:string    ,
+               dataRevisao?:Date , idFrequencia?:number , versao?:string, oficio?:string    ,
                bloqueado?:boolean){
 
         this.id           = id;
@@ -34,10 +34,10 @@ export class Programa{
         this.sigla        = sigla;
         this.dataVigencia = dataVigencia;
         this.dataRevisao  = dataRevisao;
-        this.id_frequencia= id_frequencia;
+        this.idFrequencia = idFrequencia;
         this.versao       = versao;
         this.oficio       = oficio;
-        this.bloqueado    = bloqueado;
+        this.bloqueado    = (bloqueado == null) ? false : bloqueado;
    }
 
    /**
@@ -85,7 +85,7 @@ export class Programa{
     * @return {number} ( id_frequencia ) - Id da frequencia do programa.
     */
    public getIdFrequencia():number{
-       return this.id_frequencia;
+       return this.idFrequencia;
    }
 
    /**
@@ -154,10 +154,10 @@ export class Programa{
 
    /**
     * @description: Seta conteudo do id da frequencia vinculada ao programa.
-    * @param {number} id_frequencia - Id da frequencia vinculada ao programa.
+    * @param {number} idFrequencia - Id da frequencia vinculada ao programa.
     */
-   public setIdFrequencia(id_frequencia:number):void{
-        this.id_frequencia = id_frequencia;
+   public setIdFrequencia(idFrequencia:number):void{
+        this.idFrequencia = idFrequencia;
    }
 
    /**

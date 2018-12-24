@@ -27,7 +27,7 @@ export class Usuario{
         this.email = email;
         this.senha = senha;
         this.assinatura = assinatura;
-        this.bloqueado  = bloqueado;
+        this.bloqueado  = (bloqueado == null) ? false : bloqueado;
     }
 
     /**

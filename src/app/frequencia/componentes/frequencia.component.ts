@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit   } from '@angular/core';
 
-import { Frequencia } from './../Model/frequencia';
+import { Frequencia          } from './../Model/frequencia';
+import { parseObjectsToArray } from 'src/app/global/funcoes/functionsComuns';
 
 @Component({
   selector: 'app-frequencia',
@@ -12,28 +13,46 @@ import { Frequencia } from './../Model/frequencia';
 })
 export class FrequenciaComponent implements OnInit {
     
-  // TAMANHO DOS CAMPOS 
+  //TAMANHO DOS CAMPOS 
   private SIZE_ID        = 4;
   private SIZE_DESCRICAO = 15;
-  
+
   private frequencia:Frequencia = new Frequencia();
-  private frequecias:Frequencia[] = [];
+  private frequecias:Frequencia[]   = [];
 
+  //Usado no modal de pesquida - TESTE
+  private cabecalhoTabela = []
+  private frequenciasFiltradas:any[]= [];
 
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
+    this.cabecalhoTabela.push(["ID"],["DESCRIÇÃO"]); 
+   
   }
-
+  
+  ngOnInit() { }
+  
   private salvaFrequencia(){
+    
     this.frequecias.push(this.frequencia);
     this.frequencia = new Frequencia();
-    console.log(this.frequecias);
+
+   this.frequenciasFiltradas = ( parseObjectsToArray( this.frequecias ));
+   console.log(this.frequecias)
   }
 
   private fechaTela(){
     alert("fecha tela frequencia.")
+  }
+
+  private itemSelecionado(dado:any){
+    this.frequencia.setId(dado[0]);
+    this.fechaTela();
+  }
+
+  //TESTE DA TELA DE CONSULTA
+  private pesquisaFrequencia(filtro:string){
+    this.frequenciasFiltradas  = this.frequenciasFiltradas.filter( f => f[0].startsWith(filtro) || //Código
+                                                                        f[1].startsWith(filtro) ); //Descrição
   }
 
   //TODO

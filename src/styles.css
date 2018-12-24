@@ -17,3 +17,10 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #007bff;
 }
+
+/*CLASSES GENÉRICAS*/
+.posicao-centro-vertical{
+    display: flex ;
+    align-items: center ;
+    justify-content: center ;
+}

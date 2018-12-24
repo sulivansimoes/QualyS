@@ -19,19 +19,19 @@
           <!-- ID -->
           <div class="form-group col-md-1 espaco">
             <label for="inputIdPrograma" class="preenchimentoObrigatorio">ID</label>
-            <input type="text" id="inputIdPrograma" name="inputIdPrograma" required maxlength="4" [(ngModel)]="programa.id"
+            <input type="text" id="inputIdPrograma" name="inputIdPrograma" required maxlength={{SIZE_ID}} [(ngModel)]="programa.id"
               class="form-control">
           </div> 
           <!-- DESCRIÇÃO -->
           <div class="form-group col-md-6 espaco">
             <label for="inputDescricaoPrograma" class="preenchimentoObrigatorio">Descrição</label>
-            <input type="text" id="inputDescricaoPrograma" name="inputDescricaoPrograma" required maxlength="60"
+            <input type="text" id="inputDescricaoPrograma" name="inputDescricaoPrograma" required maxlength={{SIZE_DESCRICAO}}
               [(ngModel)]="programa.descricao" class="form-control">
           </div>
           <!-- SIGLA -->
           <div class="form-group col-md-2 espaco">
             <label for="inputSiglaPrograma" class="preenchimentoObrigatorio">Sigla</label>
-            <input type="text" id="inputSiglaPrograma" name="inputSiglaPrograma" required maxlength="8" [(ngModel)]="programa.sigla"
+            <input type="text" id="inputSiglaPrograma" name="inputSiglaPrograma" required maxlength={{SIZE_SIGLA}} [(ngModel)]="programa.sigla"
               class="form-control">
           </div>
           <!-- DATA VIGENCIA -->
@@ -49,7 +49,7 @@
           <div class="form-group col-md-2 espaco">
             <label for="inputIdFrequencia" class="preenchimentoObrigatorio">Frequência</label>
             <div class="input-group-append">
-              <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength="4" [(ngModel)]="programa.idFrequencia"
+              <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID_FREQUENCIA}} [(ngModel)]="programa.idFrequencia"
                 class="form-control">
               <input type="button" id="buttonPesquisa" name="buttonPesquisa" onclick="alert('teste')" class="buttonPesquisa">
             </div>
@@ -57,7 +57,7 @@
           <!-- VERSAO -->
           <div class="form-group espaco"> 
             <label for="inputVersao" class="preenchimentoObrigatorio">Versão</label>
-            <input type="text" id="inputVersao" name="inputVersao" required maxlength="3" [(ngModel)]="programa.versao"
+            <input type="text" id="inputVersao" name="inputVersao" required maxlength={{SIZE_VERSAO}} [(ngModel)]="programa.versao"
               class="form-control">
           </div>
           <!-- OFICIO CIRCULAR -->
@@ -67,8 +67,8 @@
           </div>
           <!-- BLOQUEADO -->
           <div class="form-group espaco">
-            <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
-            <select id="inputBloqueado" name="inputBloqueado" required [(ngModel)]="programa.bloqueado" class="form-control">
+            <label for="inputBloqueadoPrograma" class="preenchimentoObrigatorio">Bloqueado</label>
+            <select id="inputBloqueadoPrograma" name="inputBloqueadoPrograma" required [(ngModel)]="programa.bloqueado" class="form-control">
               <option value=false>Não</option>
               <option value=true>Sim</option>
             </select>

@@ -1,5 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
+
+/**
+ * @description Componente fornece uma tela padrão com dois botões "Salvar" e "Cancelar"
+ * @output {EventEmitter<any>} ( botaoSalvarClicado ) - Recebe um evento (Função) que será acionado quando clicar no botão Salvar.
+ * @output {EventEmitter<any>} ( botaoFecharClicado ) - Recebe um evento (Função) que será acionado quando clicar no botão Salvar.  
+ */
 @Component({
   selector: 'app-botoes-salvar-fechar',
   templateUrl: './../view/botoes-salvar-fechar.component.html',

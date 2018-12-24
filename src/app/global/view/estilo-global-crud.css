@@ -27,7 +27,7 @@ legend{
     padding: 30px;
 
     /*SCROLL */
-     height: 28rem;
+    height: 28rem;
     overflow-y: auto; /*só aparece o scroll quando necessário*/
 }
 

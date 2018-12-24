@@ -1,0 +1,35 @@
+/* COMPONENTE PADRÃO */
+table,td,tr{
+    padding-right: 30px;
+    /* padding-left: 30px; */
+    text-align: left;
+}
+
+
+table{
+    width: 100%
+}
+
+
+tr:hover{
+    background-color: #f0f0f0;
+}
+
+/*CLASSES*/
+.scroll{
+    height: 24em;
+    width: 100%;
+    overflow-y: auto; /*só aparece o scroll quando necessário*/
+    overflow-x: auto; /*só aparece o scroll quando necessário*/
+}
+
+.msgNaoHaDados{
+    color: crimson;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 3rem;
+    display: flex ;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-width: 100%;
+}
