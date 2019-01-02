@@ -1,0 +1,55 @@
+<!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
+<nav class="navbar  sticky-top navbar-dark bg-dark navbar-expand-lg">
+
+    <a class="navbar-brand" href="#">QualyS</a>
+
+    <!-- BOTÃO PARA RESPONSIVIDADE -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <!-- CADASTROS -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Cadastros
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="local">Local</a>
+                    <a class="dropdown-item" routerLink="frequencia">Frequência</a>
+                    <a class="dropdown-item" routerLink="programa">Programa</a>
+                    <a class="dropdown-item" routerLink="cadastro-formulario">Formulário</a>
+                    <a class="dropdown-item" routerLink="usuario">Usuário</a>
+                </div>
+            </li>
+
+            <!-- LANÇAMENTOS -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Lançamentos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="#">Formulários</a>
+                    <a class="dropdown-item" routerLink="#">Infoconforme</a>
+                </div>
+            </li>
+
+            <!-- RELATÓRIOS -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Relatórios
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="#">Relatório 01</a>
+                    <a class="dropdown-item" routerLink="#">Relatório 02</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

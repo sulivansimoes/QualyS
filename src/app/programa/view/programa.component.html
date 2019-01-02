@@ -18,8 +18,8 @@
         <div class="form-row">
           <!-- ID -->
           <div class="form-group col-md-1 espaco">
-            <label for="inputIdPrograma" class="preenchimentoObrigatorio">ID</label>
-            <input type="text" id="inputIdPrograma" name="inputIdPrograma" required maxlength={{SIZE_ID}} [(ngModel)]="programa.id"
+            <label for="inputIdPrograma">ID</label>
+            <input type="text" id="inputIdPrograma" name="inputIdPrograma"  disabled required maxlength={{SIZE_ID}} [(ngModel)]="programa.id"
               class="form-control">
           </div> 
           <!-- DESCRIÇÃO -->
@@ -31,14 +31,12 @@
           <!-- SIGLA -->
           <div class="form-group col-md-2 espaco">
             <label for="inputSiglaPrograma" class="preenchimentoObrigatorio">Sigla</label>
-            <input type="text" id="inputSiglaPrograma" name="inputSiglaPrograma" required maxlength={{SIZE_SIGLA}} [(ngModel)]="programa.sigla"
-              class="form-control">
+            <input type="text" id="inputSiglaPrograma" name="inputSiglaPrograma" required maxlength={{SIZE_SIGLA}} [(ngModel)]="programa.sigla" class="form-control">
           </div>
           <!-- DATA VIGENCIA -->
           <div class="form-group col-md-2 espaco">
             <label for="inputDataVigencia" class="preenchimentoObrigatorio">Data vigência</label>
-            <input type="date" id="inputDataVigencia" name="inputDataVigencia" required [(ngModel)]="programa.dataVigencia"
-              class="form-control">
+            <input type="date" id="inputDataVigencia" name="inputDataVigencia" required [(ngModel)]="programa.dataVigencia" class="form-control">
           </div>
           <!-- DATA REVISAO -->
           <div class="form-group col-md-2 espaco">
@@ -49,16 +47,14 @@
           <div class="form-group col-md-2 espaco">
             <label for="inputIdFrequencia" class="preenchimentoObrigatorio">Frequência</label>
             <div class="input-group-append">
-              <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID_FREQUENCIA}} [(ngModel)]="programa.idFrequencia"
-                class="form-control">
-              <input type="button" id="buttonPesquisa" name="buttonPesquisa" onclick="alert('teste')" class="buttonPesquisa">
+              <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID_FREQUENCIA}} [(ngModel)]="programa.idFrequencia" class="form-control">
+              <input type="button" id="buttonPesquisa" name="buttonPesquisa" (click)=acionaModalPesquia() class="buttonPesquisa">
             </div>
           </div>
           <!-- VERSAO -->
           <div class="form-group espaco"> 
             <label for="inputVersao" class="preenchimentoObrigatorio">Versão</label>
-            <input type="text" id="inputVersao" name="inputVersao" required maxlength={{SIZE_VERSAO}} [(ngModel)]="programa.versao"
-              class="form-control">
+            <input type="text" id="inputVersao" name="inputVersao" required maxlength={{SIZE_VERSAO}} [(ngModel)]="programa.versao" class="form-control">
           </div>
           <!-- OFICIO CIRCULAR -->
           <div class="form-group espaco">
@@ -73,11 +69,20 @@
               <option value=true>Sim</option>
             </select>
           </div>
-
         </div>
       </div>
     </fieldset>
 
+    <!-- COMPONENTE DE PESQUISA DA FREQUENCIA -->
+    <app-tela-consulta-padrao
+        (botaoPesquisarClicado)="pesquisaFrequencia($event)"
+        (itemSelecionadoClicado)="itemSelecionado($event)"
+        [cabecalhoTabela]="cabecalhoTabelaFrequencia"
+        [tabelaDeDados]="frequenciasFiltradas"
+    >
+    </app-tela-consulta-padrao>
+
+    <!-- BOTÕES P/ SALVAR OU CANCELAR CADASTRO -->
     <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaPrograma($event) 
                               (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>
   </form>

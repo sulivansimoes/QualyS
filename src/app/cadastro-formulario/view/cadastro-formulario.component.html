@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro Formulário</title>
+</head>
+
+<body>
+
+    <form action="#" method="POST" autocomplete="off">
+        <fieldset>
+            <legend>Cadastro Formulário</legend>
+            <div>
+                <!-- <div class="embrulho-campos">  -->
+                <p>Campos em azul são de preenchimento obrigatório</p>
+                <div class="form-row">
+
+                    <!-- ID DO FORMULARIO -->
+                    <div class="form-group col-md-1 espaco">
+                        <label for="inputID">ID</label>
+                        <input type="text" id="inputID" name="inputID" disabled required maxlength={{SIZE_ID}}
+                            [(ngModel)]="formulario.id" class="form-control">
+                    </div>
+                    <!-- DESCRIÇÃO FORMULARIO -->
+                    <div class="form-group col-md-4 espaco">
+                        <label for="inputDescricaoPrograma" class="preenchimentoObrigatorio">Descrição formulário</label>
+                        <input type="text" id="inputDescricaoPrograma" name="inputDescricaoPrograma" required maxlength={{SIZE_DESCRICAO}}
+                            [(ngModel)]="formulario.descricao" class="form-control">
+                    </div>
+                    <!-- ID PROGRAMA -->
+                    <div class="form-group col-md-2">
+                        <label for="inputPrograma" class="preenchimentoObrigatorio">Programa</label>
+                        <div class="input-group-append">
+                            <input type="text" id="inputPrograma" name="inputPrograma" required maxlength={{SIZE_PROGRAMA}}
+                                [(ngModel)]="formulario.idPrograma" class="form-control">
+                            <input type="button" id="buttonPesquisa" (click)="acionaModalPesquia()" class="buttonPesquisa espaco">
+                        </div>
+                    </div>
+                    <!-- ID LOCAL -->
+                    <div class="form-group col-md-2">
+                        <label for="inputLocal" class="preenchimentoObrigatorio">Local</label>
+                        <div class="input-group-append">
+                            <input type="text" id="inputLocal" name="inputLocal" required maxlength={{SIZE_LOCAL}}
+                                [(ngModel)]="formulario.idLocal" class="form-control">
+                            <input type="button" id="buttonPesquisa" (click)="acionaModalPesquia()" class="buttonPesquisa espaco">
+                        </div>
+                    </div>
+                    <!-- BLOQUEADO -->
+                    <div class="form-group espaco">
+                        <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
+                        <select id="inputBloqueado" name="inputBloqueado" required [(ngModel)]="formulario.bloqueado"
+                            class="form-control">
+                            <option value=false>Não</option>
+                            <option value=true>Sim</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+        <!-- SE TABLE FICAR DENTRO DO FORM DA PROBLEMA NA ADIÇÃO DE ITENS. -->
+        
+    </form>
+    
+    <!-- BOTÃO P/ ADIÇÃO DE ITEM -->
+    <input type="button" class="buttonAdicao" (click)="adicionaItem()">
+    
+    <!-- TABELA COM PERGUNTAS DO FOMULÁRIO -->
+    <table class="table table-sm">
+        <thead class="thead-dark">
+            <th scope="col">Item</th>
+            <th scope="col">Pergunta</th>
+            <th scope="col">Bloqueado</th>
+            <th scope="col">#</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of getCadastroFormulario().getItens()">
+                <!-- ITEM -->
+                <td>
+                    <input type="number" id="inputItem" name="inputItem" [(ngModel)]="item.item" disabled class="form-control col-md-2">
+                </td>
+                <!-- PERGUNTA -->
+                <td>
+                    <input type="text" id="inputPergunta" name="inputPergunta" [(ngModel)]="item.pergunta" class="form-control">
+                </td>
+                <!-- BLOQUEADO -->
+                <td>
+                    <select id="inputBloqueado" name="inputBloqueado" required class="form-control col-md-5">
+                        <option value=false>Não</option>
+                        <option value=true>Sim</option>
+                    </select>
+                </td>
+                <!-- BOTÃO P/ REMOÇÃO DE ITENS -->
+                <td><input type="button" class="buttonExclui" (click)="deletaItem(item)"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    
+    <!-- COMPONENTE DE PESQUISA -->
+    <app-tela-consulta-padrao
+    (botaoPesquisarClicado)="pesquisaPrograma($event)"
+    (itemSelecionadoClicado)="itemProgramaSelecionado($event)"
+    [cabecalhoTabela]="cabecalhoTabelaPrograma"
+    [tabelaDeDados]="programasFiltrados"
+    >
+    </app-tela-consulta-padrao>
+
+    <!-- BOTÕES PARA SALVAR FORMULÁRIO -->
+    <!-- <app-botoes-salvar-fechar (botaoSalvarClicado)=salvarFormulario($event)
+        (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar> -->
+</body>
+</html>

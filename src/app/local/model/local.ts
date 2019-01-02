@@ -61,7 +61,7 @@ export class Local{
 
     /**
     * @description: Seta status do local
-    * @param {boolean} bloqueado - Flag do cadastro, indicando se está ou não bloqueado.
+    * @param {boolean} status - Flag do cadastro, indicando se está ou não bloqueado.
     */
     public setBloqueado(status:boolean):void{
         this.bloqueado = status;

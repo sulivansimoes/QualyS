@@ -1,7 +1,7 @@
+// COMPONETES PADRÕES
 import { Component, OnInit   } from '@angular/core';
-
+// COMPONENTES PERSONALIZDOS
 import { Frequencia          } from './../Model/frequencia';
-import { parseObjectsToArray } from 'src/app/global/funcoes/functionsComuns';
 
 @Component({
   selector: 'app-frequencia',
@@ -20,41 +20,30 @@ export class FrequenciaComponent implements OnInit {
   private frequencia:Frequencia = new Frequencia();
   private frequecias:Frequencia[]   = [];
 
-  //Usado no modal de pesquida - TESTE
-  private cabecalhoTabela = []
-  private frequenciasFiltradas:any[]= [];
-
   constructor() {
-    this.cabecalhoTabela.push(["ID"],["DESCRIÇÃO"]); 
-   
+    /**
+     * @TODO desenvolver...
+     */
   }
   
   ngOnInit() { }
   
+  /**
+   * @description Envia solicitação para salvar frequência no BD
+   */
   private salvaFrequencia(){
     
     this.frequecias.push(this.frequencia);
     this.frequencia = new Frequencia();
-
-   this.frequenciasFiltradas = ( parseObjectsToArray( this.frequecias ));
-   console.log(this.frequecias)
   }
 
+  /**
+   * @description: fecha tela de inclusão.
+   */
   private fechaTela(){
-    alert("fecha tela frequencia.")
+    /**
+     * @TODO desenvolver...
+     */
   }
 
-  private itemSelecionado(dado:any){
-    this.frequencia.setId(dado[0]);
-    this.fechaTela();
-  }
-
-  //TESTE DA TELA DE CONSULTA
-  private pesquisaFrequencia(filtro:string){
-    this.frequenciasFiltradas  = this.frequenciasFiltradas.filter( f => f[0].startsWith(filtro) || //Código
-                                                                        f[1].startsWith(filtro) ); //Descrição
-  }
-
-  //TODO
-  //DESENVOLVER LÓGICA.
 }

@@ -13,4 +13,6 @@ export function parseObjectsToArray( objeto:any ){
     }    
     return array;
 }
+
+
     
