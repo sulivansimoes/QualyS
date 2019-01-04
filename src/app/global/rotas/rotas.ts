@@ -10,11 +10,11 @@ import { CadastroFormularioComponent } from '../../cadastro-formulario/component
 
 export const rotas : Routes = [
 
-    { path: "frequencia"         , component:FrequenciaComponent         },
-    { path: "cadastro-formulario", component:CadastroFormularioComponent },
-    { path: "local"              , component:LocalComponent              },
-    { path: "programa"           , component:ProgramaComponent           },
-    { path: "usuario"            , component:UsuarioComponent            },
-    { path: '', redirectTo :  '' , pathMatch : 'full'},
-    { path: '**'                 , component:PageNotFoundComponent       },
+    { path: "frequencia"         , component: FrequenciaComponent         },
+    { path: "cadastro-formulario", component: CadastroFormularioComponent },
+    { path: "local"              , component: LocalComponent              },
+    { path: "programa"           , component: ProgramaComponent           },
+    { path: "usuario"            , component: UsuarioComponent            },
+    { path: '', redirectTo :  '' , pathMatch: 'full'                      },
+    { path: '**'                 , component: PageNotFoundComponent       },
 ];

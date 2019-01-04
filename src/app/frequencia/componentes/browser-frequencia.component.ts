@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-inconforme',
-  templateUrl: './../view/incoforme.component.html',
+  selector: 'app-browser-frequencia',
+  templateUrl: '/../view/browser-frequencia.component.html',
   styleUrls: [
-    './../view/incoforme.component.css',
+    '/../view/browser-frequencia.component.css',
     './../../global/view/estilo-global-crud.css',
     './../../global/view/icones.css'
   ]
 })
-export class IncoformeComponent implements OnInit {
+export class BrowserFrequenciaComponent implements OnInit {
 
   constructor() { }
 

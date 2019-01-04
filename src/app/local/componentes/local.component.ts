@@ -7,7 +7,8 @@ import { Local } from './../Model/local';
   templateUrl: './../view/local.component.html',
   styleUrls: [
     './../view/local.component.css' , 
-    './../../global/view/estilo-global-crud.css'
+    './../../global/view/estilo-global-crud.css',
+    './../../global/view/icones.css'
   ]
 })
 export class LocalComponent implements OnInit {

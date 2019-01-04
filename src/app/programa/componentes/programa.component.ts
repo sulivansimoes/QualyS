@@ -10,7 +10,8 @@ import { parseObjectsToArray } from 'src/app/global/funcoes/functionsComuns';
   templateUrl: './../view/programa.component.html',
   styleUrls: [
     './../view/programa.component.css',
-    './../../global/view/estilo-global-crud.css'
+    './../../global/view/estilo-global-crud.css',
+    './../../global/view/icones.css'
   ]
 })
 export class ProgramaComponent implements OnInit {

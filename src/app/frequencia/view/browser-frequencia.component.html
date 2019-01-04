@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Browser Frêquencia</title>
+</head>
+
+<body>
+
+    Browser Frêquencia 
+
+    <!-- BOTÃO DE SAIR DO BROWSER -->
+    <div>
+        <input type="button" class="buttonSair" style="float:left" >
+    </div>
+    <div class="posicao-centro-vertical">
+        <!-- PESQUISA REGISTRO-->
+        <div class="form-group col-md-6" >
+            <div class="input-group-append">
+                <input type="text" id="inputLocal" required maxlength="100" class="form-control" autocomplete="off">
+                <input type="button" id="buttonPesquisa" onclick="alert('teste')" class="buttonPesquisa">
+            </div>
+        </div>
+        <!-- BOTÃO DE INCLUSÃO DE REGISTRO -->
+        <div>
+            <input type="button" value="Incluir" class="btn btn-primary">
+        </div>
+    </div>
+
+
+    <!-- TABELA -->
+    <div>
+        <table class="table table-sm" id="tableAluno">
+            <thead class="thead-dark">
+                <th scope="col">COLUNA 01</th>
+                <th scope="col">COLUNA 02</th>
+                <th scope="col">COLUNA 03</th>
+                <th>#</th>
+                <th>#</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>LINHA 01</td>
+                    <td>LINHA 01</td>
+                    <td>LINHA 01</td>
+                    <td> <input type="button" class="buttonExclui"> </td>
+                    <td> <input type="button" class="buttonEditar"> </td>
+                </tr>
+                <tr>
+                    <td>LINHA 02</td>
+                    <td>LINHA 02</td>
+                    <td>LINHA 02</td>
+                    <td> <input type="button" class="buttonExclui"> </td>
+                    <td> <input type="button" class="buttonEditar"> </td>
+                </tr>
+                <tr>
+                    <td>LINHA 03</td>
+                    <td>LINHA 03</td>
+                    <td>LINHA 03</td>
+                    <td> <input type="button" class="buttonExclui"> </td>
+                    <td> <input type="button" class="buttonEditar"> </td>
+                </tr>
+                <tr>
+                    <td>LINHA 04</td>
+                    <td>LINHA 04</td>
+                    <td>LINHA 04</td>
+                    <td> <input type="button" class="buttonExclui"> </td>
+                    <td> <input type="button" class="buttonEditar"> </td>
+                </tr>
+                <tr>
+                    <td>LINHA 02</td>
+                    <td>LINHA 02</td>
+                    <td>LINHA 02</td>
+                    <td> <input type="button" class="buttonExclui"> </td>
+                    <td> <input type="button" class="buttonEditar"> </td>
+                </tr>
+                <tr>
+                    <td>LINHA 03</td>
+                    <td>LINHA 03</td>
+                    <td>LINHA 03</td>
+                    <td> <input type="button" class="buttonExclui"> </td>
+                    <td> <input type="button" class="buttonEditar"> </td>
+                </tr>
+                <tr>
+                    <td>LINHA 04</td>
+                    <td>LINHA 04</td>
+                    <td>LINHA 04</td>
+                    <td> <input type="button" class="buttonExclui"> </td>
+                    <td> <input type="button" class="buttonEditar"> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- PAGINAÇÃO -->
+    <nav class="posicao-centro-vertical">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+</body>
+
+</html>

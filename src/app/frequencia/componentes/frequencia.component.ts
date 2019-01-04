@@ -8,7 +8,8 @@ import { Frequencia          } from './../Model/frequencia';
   templateUrl: './../view/frequencia.component.html',
   styleUrls: [
     './../view/frequencia.component.css',
-    './../../global/view/estilo-global-crud.css'
+    './../../global/view/estilo-global-crud.css',
+    './../../global/view/icones.css'
   ]
 })
 export class FrequenciaComponent implements OnInit {

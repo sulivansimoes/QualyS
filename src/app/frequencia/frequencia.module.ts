@@ -6,10 +6,12 @@ import { FormsModule  } from '@angular/forms';
 import { ComponenteGlobalModule } from './../global/componente-global.module';
 // COMPONENTES PERSONALIZADOS
 import { FrequenciaComponent    } from './componentes/frequencia.component';
+import { BrowserFrequenciaComponent } from './componentes/browser-frequencia.component';
 
 @NgModule({
   declarations: [
     FrequenciaComponent,
+    BrowserFrequenciaComponent,
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { FrequenciaComponent    } from './componentes/frequencia.component';
     ComponenteGlobalModule
   ],
   exports: [
-    FrequenciaComponent
+    FrequenciaComponent,
+    BrowserFrequenciaComponent
   ]
 })
 export class FrequenciaModule { }

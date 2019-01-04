@@ -1,0 +1,81 @@
+.buttonPesquisa{
+    background-image: url("./../../imagens/pesquisa.png");
+    background-repeat: no-repeat;
+    background-color : transparent;
+    background-size: 30px;
+    background-position: center;
+    width : 40px;
+    height: 40px;
+    padding-left: 30px;
+    border: 0px;
+}
+
+.buttonExclui{
+    background-image: url("./../../imagens/lixo.jpg");
+    background-repeat: no-repeat;
+    background-color : transparent;
+    background-size: 30px;
+    background-position: center;
+    width : 40px;
+    height: 40px;
+    padding-left: 30px;
+    border: 0px;
+}
+
+.buttonExclui:hover{
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.buttonAdicao{
+    background-image: url("./../../imagens/adicao.png");
+    background-repeat: no-repeat;
+    background-color : transparent;
+    background-size: 50px;
+    background-position: center;
+    width : 50px;
+    height: 50px;
+    border: 0px;
+}
+
+.buttonAdicao:hover{
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.buttonSair{
+    background-image: url("./../../imagens/sair.jpg");
+    background-repeat: no-repeat;
+    background-color : transparent;
+    background-size: 40px;
+    background-position: center;
+    width : 40px;
+    height: 40px;
+    border: 0px;
+}
+
+.buttonEditar{
+    background-image: url("./../../imagens/editar.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: 30px;
+    background-position: center;
+    width : 40px;
+    height: 40px;
+    border: 0px;
+}
+
+.buttonEditar:hover{
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+

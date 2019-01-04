@@ -8,7 +8,8 @@ import { Usuario } from './../model/usuario';
   templateUrl: './../view/usuario.component.html',
   styleUrls: [
     './../view/usuario.component.css',
-    './../../global/view/estilo-global-crud.css'
+    './../../global/view/estilo-global-crud.css',
+    './../../global/view/icones.css'
   ]
 })
 export class UsuarioComponent implements OnInit {

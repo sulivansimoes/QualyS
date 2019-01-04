@@ -5,7 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './../view/resposta-formulario.component.html',
   styleUrls: [
     './../view/resposta-formulario.component.css',
-    './../../global/view/estilo-global-crud.css'
+    './../../global/view/estilo-global-crud.css',
+    './../../global/view/icones.css'
   ]
 })
 export class RespostaFormularioComponent implements OnInit {

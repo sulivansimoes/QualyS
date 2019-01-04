@@ -12,7 +12,8 @@ import { parseObjectsToArray} from 'src/app/global/funcoes/functionsComuns';
   templateUrl: './../view/cadastro-formulario.component.html',
   styleUrls: [
     './../view/cadastro-formulario.component.css',
-    './../../global/view/estilo-global-crud.css'
+    './../../global/view/estilo-global-crud.css',
+    './../../global/view/icones.css'
   ]
 })
 export class CadastroFormularioComponent implements OnInit {
