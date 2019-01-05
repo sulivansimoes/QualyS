@@ -1,4 +1,4 @@
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 // COMPONETES PADRÕES
 import { Component, OnInit   } from '@angular/core';
 // COMPONENTES PERSONALIZDOS
@@ -22,7 +22,7 @@ export class FrequenciaComponent implements OnInit {
   private frequencia:Frequencia = new Frequencia();
   private frequecias:Frequencia[]   = [];
 
-  constructor() {
+  constructor(private router:Router) {
     /**
      * @TODO desenvolver...
      */
@@ -40,13 +40,13 @@ export class FrequenciaComponent implements OnInit {
   }
 
   /**
-   * @description: fecha tela de inclusão.
-   */
+   * @description: fecha tela de inclusão e volta para a tela de browser.
+   * */
   private fechaTela(){
-    /**
-     * @TODO desenvolver...
-     */
-    RouterLink.bind('browser-frequncia');
+   
+    if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
+      this.router.navigateByUrl("browser-frequencia");
+    }
   }
 
 }

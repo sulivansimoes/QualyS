@@ -1,5 +1,6 @@
 // COMPONENTES PADRÕES
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 // COMPONENTES PERSONALIZADOS
 import { Programa   } from './../model/programa';
 import { Frequencia } from './../../frequencia/model/frequencia';
@@ -30,7 +31,7 @@ export class ProgramaComponent implements OnInit {
   private frequencias:Frequencia[]=[ new Frequencia(1,'DIARIA'), new Frequencia(2,'SEMANAL') ];
   private frequenciasFiltradas:any[]= parseObjectsToArray( this.frequencias ) ;
 
-  constructor() {
+  constructor(private router:Router) {
     /**
      * @todo desenvolver...
      */
@@ -48,13 +49,13 @@ export class ProgramaComponent implements OnInit {
   }
 
   /**
-   * @description: fecha tela de inclusão.
-   */
-  private fechaTela() {
-    alert("Fechou tela cadastro programa!");
-    /**
-     * @TODO desenvolver...
-     */
+   * @description: fecha tela de inclusão e volta para a tela de browser.
+   * */
+  private fechaTela(){
+   
+    if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
+      this.router.navigateByUrl("browser-programa");
+    }
   }
  
   /**

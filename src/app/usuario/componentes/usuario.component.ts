@@ -1,5 +1,6 @@
 // COMPONTENTES PADRÕES
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 // COMPONENTES PERSONALIZADOS
 import { Usuario } from './../model/usuario';
 
@@ -24,9 +25,21 @@ export class UsuarioComponent implements OnInit {
   private confirmaSenha:string;
   
 
-  constructor() { }
+  constructor(private router:Router) {
+
+  }
 
   ngOnInit() {
+  }
+
+  /**
+   * @description: fecha tela de inclusão e volta para a tela de browser.
+   * */
+  private fechaTela(){
+   
+    if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
+      this.router.navigateByUrl("browser-usuario");
+    }
   }
 
 }

@@ -1,5 +1,6 @@
 // COMPONENTES PADRÕES
 import { Component, OnInit  } from '@angular/core';
+import { Router } from '@angular/router';
 // COMPONENTES PERSONALIZADOS
 import { Local } from './../../local/model/local';
 import { Programa } from './../../programa/model/programa';
@@ -37,7 +38,7 @@ export class CadastroFormularioComponent implements OnInit {
   private locais:Local []=[ new Local(1,'DEPOSITO MATERIA PRIMA'), new Local(2,'VESTIARIO') ];
   private locaisFiltrados:any[]= parseObjectsToArray ( this.locais ) ; 
 
-  constructor() { 
+  constructor(private router:Router) { 
    /**
     * @todo desenvolver...
     */
@@ -60,13 +61,14 @@ export class CadastroFormularioComponent implements OnInit {
      */
   }
 
-  /**
-   * @description: fecha tela de inclusão.
-   */
+   /**
+   * @description: fecha tela de inclusão e volta para a tela de browser.
+   * */
   private fechaTela(){
-    /**
-     * @todo desenvolver...
-     */
+   
+    if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
+      this.router.navigateByUrl("browser-cadastro-formulario");
+    }
   }
 
   /**

@@ -1,5 +1,7 @@
+// COMPONENTES PADRÕES
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
+// COMPONENTES PERSONALIZADOS
 import { Local } from './../Model/local';
 
 @Component({
@@ -16,7 +18,7 @@ export class LocalComponent implements OnInit {
   private local:Local = new Local();
   private locais:Local[] = [];
     
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() { }
 
@@ -28,8 +30,14 @@ export class LocalComponent implements OnInit {
     
   }
 
+  /**
+   * @description: fecha tela de inclusão e volta para a tela de browser.
+   * */
   private fechaTela(){
-    alert("Fecha tela de cadstro de local");
+   
+    if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
+      this.router.navigateByUrl("browser-local");
+    }
   }
 
 }
