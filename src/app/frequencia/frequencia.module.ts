@@ -26,7 +26,6 @@ const appRoutes = rotas;
     ComponenteGlobalModule
   ],
   exports: [
-    FrequenciaComponent,
     BrowserFrequenciaComponent
   ]
 })

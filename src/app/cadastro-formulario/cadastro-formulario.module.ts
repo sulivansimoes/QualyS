@@ -25,7 +25,6 @@ const appRoutes = rotas;
     ComponenteGlobalModule
   ],
   exports: [
-    CadastroFormularioComponent,
     BrowserCadastroFormularioComponent
   ]
 })

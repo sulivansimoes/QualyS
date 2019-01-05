@@ -10,7 +10,6 @@ import { Usuario } from './../model/usuario';
   styleUrls: [
     './../view/usuario.component.css',
     './../../global/view/estilo-global-crud.css',
-    './../../global/view/icones.css'
   ]
 })
 export class UsuarioComponent implements OnInit {

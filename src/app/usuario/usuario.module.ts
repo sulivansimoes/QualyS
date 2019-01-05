@@ -25,7 +25,6 @@ const appRoutes = rotas;
     ComponenteGlobalModule
   ],
   exports: [
-    UsuarioComponent,
     BrowserUsuarioComponent
   ]
 })

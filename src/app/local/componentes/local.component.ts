@@ -10,7 +10,6 @@ import { Local } from './../Model/local';
   styleUrls: [
     './../view/local.component.css' , 
     './../../global/view/estilo-global-crud.css',
-    './../../global/view/icones.css'
   ]
 })
 export class LocalComponent implements OnInit {

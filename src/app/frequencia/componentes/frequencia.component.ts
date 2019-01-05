@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
 // COMPONETES PADRÕES
 import { Component, OnInit   } from '@angular/core';
+import { Router } from '@angular/router';
 // COMPONENTES PERSONALIZDOS
 import { Frequencia          } from './../Model/frequencia';
 
@@ -10,7 +10,6 @@ import { Frequencia          } from './../Model/frequencia';
   styleUrls: [
     './../view/frequencia.component.css',
     './../../global/view/estilo-global-crud.css',
-    './../../global/view/icones.css'
   ]
 })
 export class FrequenciaComponent implements OnInit {

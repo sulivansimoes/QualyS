@@ -35,7 +35,7 @@
                         <label for="inputPrograma" class="preenchimentoObrigatorio">Programa</label>
                         <div class="input-group-append">
                             <input type="text" id="inputPrograma" name="inputPrograma" required maxlength={{SIZE_PROGRAMA}}
-                                [(ngModel)]="formulario.idPrograma" class="form-control">
+                                [(ngModel)]="formulario.idPrograma" (keyup.F2)=acionaModalPesquia() class="form-control">
                             <input type="button" id="buttonPesquisa" (click)="acionaModalPesquia()" class="buttonPesquisa espaco">
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         <label for="inputLocal" class="preenchimentoObrigatorio">Local</label>
                         <div class="input-group-append">
                             <input type="text" id="inputLocal" name="inputLocal" required maxlength={{SIZE_LOCAL}}
-                                [(ngModel)]="formulario.idLocal" class="form-control">
+                                [(ngModel)]="formulario.idLocal" (keyup.F2)=acionaModalPesquia() class="form-control">
                             <input type="button" id="buttonPesquisa" (click)="acionaModalPesquia()" class="buttonPesquisa espaco">
                         </div>
                     </div>

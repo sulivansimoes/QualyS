@@ -47,7 +47,7 @@
           <div class="form-group col-md-2 espaco">
             <label for="inputIdFrequencia" class="preenchimentoObrigatorio">Frequência</label>
             <div class="input-group-append">
-              <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID_FREQUENCIA}} [(ngModel)]="programa.idFrequencia" class="form-control">
+              <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID_FREQUENCIA}} [(ngModel)]="programa.idFrequencia" (keyup.F2)=acionaModalPesquia() class="form-control">
               <input type="button" id="buttonPesquisa" name="buttonPesquisa" (click)=acionaModalPesquia() class="buttonPesquisa">
             </div>
           </div>
