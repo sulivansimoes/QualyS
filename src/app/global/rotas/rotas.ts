@@ -7,14 +7,24 @@ import { ProgramaComponent           } from '../../programa/componentes/programa
 import { LocalComponent              } from '../../local/componentes/local.component';
 import { FrequenciaComponent         } from '../../frequencia/componentes/frequencia.component';
 import { CadastroFormularioComponent } from '../../cadastro-formulario/componentes/cadastro-formulario.component';
+import { BrowserFrequenciaComponent  } from './../../frequencia/componentes/browser-frequencia.component';
+import { BrowserLocalComponent       } from './../../local/componentes/browser-local.component';
+import { BrowserProgramaComponent    } from './../../programa/componentes/browser-programa.component';
+import { BrowserUsuarioComponent     } from './../../usuario/componentes/browser-usuario.component';
+import { BrowserCadastroFormularioComponent } from './../../cadastro-formulario/componentes/browser-cadastro-formulario.component';
 
 export const rotas : Routes = [
 
-    { path: "frequencia"         , component: FrequenciaComponent         },
-    { path: "cadastro-formulario", component: CadastroFormularioComponent },
-    { path: "local"              , component: LocalComponent              },
-    { path: "programa"           , component: ProgramaComponent           },
-    { path: "usuario"            , component: UsuarioComponent            },
-    { path: '', redirectTo :  '' , pathMatch: 'full'                      },
-    { path: '**'                 , component: PageNotFoundComponent       },
+    { path: "browser-frequencia"            , component: BrowserFrequenciaComponent         },
+    { path: "browser-cadastro-formulario"   , component: BrowserCadastroFormularioComponent },
+    { path: "browser-local"                 , component: BrowserLocalComponent              },
+    { path: "browser-programa"              , component: BrowserProgramaComponent           },
+    { path: "browser-usuario"               , component: BrowserUsuarioComponent            },
+    { path: "browser-local/local"           , component: LocalComponent                     },
+    { path: "browser-programa/programa"     , component: ProgramaComponent                  },
+    { path: "browser-frequencia/frequencia" , component: FrequenciaComponent                },
+    { path: "browser-usuario/usuario"       , component: UsuarioComponent                   },
+    { path: "browser-cadastro-formulario/cadastro-formulario", component: CadastroFormularioComponent        },
+    { path: '', redirectTo :  ''            , pathMatch: 'full'                             },
+    { path: '**'                            , component: PageNotFoundComponent              }
 ];

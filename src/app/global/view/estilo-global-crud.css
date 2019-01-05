@@ -1,7 +1,9 @@
 /* ELEMENTOS PADRÕES */
 body{
-    /* margin: 40px; */
-    margin: 1.8rem;
+    margin-top: 1.0rem;
+    margin-left: 1.8rem;
+    margin-right: 1.8rem;
+    margin-bottom: 1.8rem;
 }
 
 p{
@@ -58,4 +60,25 @@ tr:hover{
 .espacamento-botoes{
     margin-right: 5px !important;
     margin-left: 5px !important;
+}
+
+.titulo-browser{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.5rem;
+    border-bottom-style: solid;
+    border-bottom-width: 0.03px;
+    margin-bottom: 20px;
+}
+
+.botaoIncluirBrowser{
+    width: 8rem;
+    margin-left: 4rem;
+    margin-bottom: 0.9rem;
+}
+
+.bordas-tabela{
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.03px;
 }

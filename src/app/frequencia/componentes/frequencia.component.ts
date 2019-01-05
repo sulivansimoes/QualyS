@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 // COMPONETES PADRÕES
 import { Component, OnInit   } from '@angular/core';
 // COMPONENTES PERSONALIZDOS
@@ -45,6 +46,7 @@ export class FrequenciaComponent implements OnInit {
     /**
      * @TODO desenvolver...
      */
+    RouterLink.bind('browser-frequncia');
   }
 
 }
