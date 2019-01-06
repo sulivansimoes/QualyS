@@ -29,14 +29,22 @@
 
             <!-- LANÇAMENTOS -->
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLancamentos" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Lançamentos
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" routerLink="#">Formulários</a>
-                    <a class="dropdown-item" routerLink="#">Infoconforme</a>
-                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Formulários</a>
+                        <ul class="dropdown-menu">
+                            <!-- OS FORMULÁRIOS DEVEM VIR DO BANCO DE DADOS -->
+                            <li><a class="dropdown-item" href="#">VISTORIA VESTIARIO MASCULINO</a></li>
+                            <li><a class="dropdown-item" href="#">VISTORIA VESTIARIO FEMININO</a></li>
+                            <li><a class="dropdown-item" href="#">VISTORIA DEPOSITO MANUTENÇÃO</a></li>
+                            <li><a class="dropdown-item" href="#">VISTORIA DEPOSITO EMBALAGEM</a></li>
+                        </ul>
+                    </li>
+                    <a class="dropdown-item" routerLink="#">Inconforme</a>
+                </ul>
             </li>
 
             <!-- RELATÓRIOS -->
@@ -52,8 +60,14 @@
                 </div>
             </li>
         </ul>
-        
+
+        <!-- NOME DO USUÁRIO LOGADO NO SISTEMA -->
+        <!-- <span class="navbar-text">
+                usuário: 138.265.386-23 |
+        </span> -->
+
         <!-- AJUDA -->
         <a class="nav-link" href="#">Ajuda</a>
+
     </div>
 </nav>

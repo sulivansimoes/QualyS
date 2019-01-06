@@ -40,5 +40,5 @@ export class UsuarioComponent implements OnInit {
       this.router.navigateByUrl("browser-usuario");
     }
   }
-
+  
 }
