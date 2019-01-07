@@ -11,6 +11,8 @@ import { BrowserFrequenciaComponent  } from './../../frequencia/componentes/brow
 import { BrowserLocalComponent       } from './../../local/componentes/browser-local.component';
 import { BrowserProgramaComponent    } from './../../programa/componentes/browser-programa.component';
 import { BrowserUsuarioComponent     } from './../../usuario/componentes/browser-usuario.component';
+import { BrowserInconformeComponent  } from './../../inconforme/componentes/browser-inconforme.component';
+import { RespostaFormularioComponent } from './../../resposta-formulario/componentes/resposta-formulario.component';
 import { BrowserCadastroFormularioComponent } from './../../cadastro-formulario/componentes/browser-cadastro-formulario.component';
 
 export const rotas : Routes = [
@@ -20,11 +22,13 @@ export const rotas : Routes = [
     { path: "browser-local"                 , component: BrowserLocalComponent              },
     { path: "browser-programa"              , component: BrowserProgramaComponent           },
     { path: "browser-usuario"               , component: BrowserUsuarioComponent            },
+    { path: "browser-inconforme"            , component: BrowserInconformeComponent         },
     { path: "browser-local/local"           , component: LocalComponent                     },
     { path: "browser-programa/programa"     , component: ProgramaComponent                  },
     { path: "browser-frequencia/frequencia" , component: FrequenciaComponent                },
     { path: "browser-usuario/usuario"       , component: UsuarioComponent                   },
     { path: "browser-cadastro-formulario/cadastro-formulario", component: CadastroFormularioComponent        },
+    { path: "resposta-formulario"           , component: RespostaFormularioComponent        },
     { path: '', redirectTo :  ''            , pathMatch: 'full'                             },
     { path: '**'                            , component: PageNotFoundComponent              }
 ];

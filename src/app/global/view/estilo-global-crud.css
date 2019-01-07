@@ -70,9 +70,15 @@ tr:hover{
     margin-left: 1rem;
 }
 
-.botaoIncluirBrowser{
+.botaoBrowser{
     width: 8rem;
     margin-left: 4rem;
+    margin-bottom: 0.9rem;
+}
+
+.botaoBrowser2{
+    width: 8rem;
+    margin-left: 0.5rem;
     margin-bottom: 0.9rem;
 }
 

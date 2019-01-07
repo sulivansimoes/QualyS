@@ -15,7 +15,13 @@ export class RespostaFormularioComponent implements OnInit {
 // private respostas
 // private inconformes
 
-  constructor() { }
+  private hoje:Date = new Date()
+  private teste = null;
+
+  constructor() { 
+    this.teste = this.hoje.getDate()+"/"+this.hoje.getUTCMonth()+1+"/"+this.hoje.getFullYear();
+    console.log(this.hoje);
+  }
 
   ngOnInit() {  }
 
