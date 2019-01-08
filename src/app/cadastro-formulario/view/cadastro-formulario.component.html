@@ -71,7 +71,7 @@
     <!-- TABELA COM PERGUNTAS DO FOMULÁRIO -->
     <table class="table table-sm bordas-tabela">
         <thead class="thead-dark">
-            <th scope="col">Item</th>
+            <th scope="col" class="largura-coluna-item">Item</th>
             <th scope="col">Pergunta</th>
             <th scope="col">Bloqueado</th>
             <th scope="col">#</th>
@@ -79,8 +79,8 @@
         <tbody>
             <tr *ngFor="let item of getCadastroFormulario().getItens()">
                 <!-- ITEM -->
-                <td>
-                    <input type="number" id="inputItem" name="inputItem" [(ngModel)]="item.item" disabled class="form-control col-md-2">
+                <td class="largura-coluna-item">
+                    <input type="number" id="inputItem" name="inputItem" [(ngModel)]="item.item" disabled class="form-control col-md-2 largura-coluna-item">
                 </td>
                 <!-- PERGUNTA -->
                 <td>

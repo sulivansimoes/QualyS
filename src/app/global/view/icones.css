@@ -80,6 +80,46 @@
     transform: scale(1.1);
 }
 
+.buttonConforme{
+    background-image: url("./../../imagens/planilha_conforme.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: 30px;
+    background-position: center;
+    width : 40px;
+    height: 40px;
+    border: 0px;   
+    float: left !important; 
+}
+
+.buttonConforme:hover{
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.buttonX{
+    background-image: url("./../../imagens/x.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: 30px;
+    background-position: center;
+    width : 40px;
+    height: 40px;
+    border: 0px;   
+    float: left !important; 
+}
+
+.buttonX:hover{
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
 .bolaVermelha{
     background-image: url("./../../imagens/bola_vermelha.png");
     background-repeat: no-repeat;
@@ -103,4 +143,6 @@
     border: 0px;    
     float: left !important;
 }
+
+
 
