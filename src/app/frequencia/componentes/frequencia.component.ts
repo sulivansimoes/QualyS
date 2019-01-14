@@ -46,6 +46,7 @@ export class FrequenciaComponent implements OnInit {
     if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
       this.router.navigateByUrl("browser-frequencia");
     }
+    
   }
 
 }

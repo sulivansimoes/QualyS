@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 import { PageNotFoundComponent       } from './../componentes/page-not-found.component';
 import { UsuarioComponent            } from '../../usuario/componentes/usuario.component';
 import { ProgramaComponent           } from '../../programa/componentes/programa.component';
+import { InconformeComponent         } from './../../inconforme/componentes/inconforme.component';
 import { LocalComponent              } from '../../local/componentes/local.component';
 import { FrequenciaComponent         } from '../../frequencia/componentes/frequencia.component';
 import { CadastroFormularioComponent } from '../../cadastro-formulario/componentes/cadastro-formulario.component';
@@ -26,6 +27,7 @@ export const rotas : Routes = [
     { path: "browser-local/local"           , component: LocalComponent                     },
     { path: "browser-programa/programa"     , component: ProgramaComponent                  },
     { path: "browser-frequencia/frequencia" , component: FrequenciaComponent                },
+    { path: "browser-inconforme/inconforme" , component: InconformeComponent                },
     { path: "browser-usuario/usuario"       , component: UsuarioComponent                   },
     { path: "browser-cadastro-formulario/cadastro-formulario", component: CadastroFormularioComponent        },
     { path: "resposta-formulario"           , component: RespostaFormularioComponent        },

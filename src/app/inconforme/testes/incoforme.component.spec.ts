@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IncoformeComponent } from '../componentes/incoforme.component';
+import { InconformeComponent } from '../componentes/inconforme.component';
 
 describe('IncoformeComponent', () => {
-  let component: IncoformeComponent;
-  let fixture: ComponentFixture<IncoformeComponent>;
+  let component: InconformeComponent;
+  let fixture: ComponentFixture<InconformeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IncoformeComponent ]
+      declarations: [ InconformeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IncoformeComponent);
+    fixture = TestBed.createComponent(InconformeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

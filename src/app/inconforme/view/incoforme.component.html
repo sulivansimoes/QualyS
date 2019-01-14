@@ -1,3 +1,62 @@
-<p>
-  incoforme works!
-</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro Frequência</title>
+</head>
+<body>
+    <form action="#" method="POST" autocomplete="off">
+        <fieldset>
+            <legend>Correção inconforme</legend>
+            <div class="embrulho-campos">
+                
+                <p>Campos em azul são de preenchimento obrigatório</p>
+                <div class="form-row">
+                    <!-- ID -->
+                    <div class="form-group col-md-1 espaco">
+                        <label for="inputIdIncoforme">Programa</label>
+                        <input type="number" id="inputIdIncoforme" name="inputIdIncoforme" [(ngModel)]="inconforme.id" disabled class="form-control">                            
+                    </div>
+                    <!-- ITEM -->
+                    <div class="form-group col-md-1 espaco">
+                        <label for="inputItem">Item</label>
+                        <input type="number" id="inputItem" name="inputItem" [(ngModel)]="inconforme.id" disabled class="form-control">
+                    </div>
+                    <!-- DATA EMISSAO DA INCONFORMIDADE -->
+                    <div class="form-group col-md-2 espaco">
+                      <label for="inputDataEmissao">Emissao Inconformidade</label>
+                      <input type="date" name="inputDataEmissao" id="inputDataEmissao" [(ngModel)]="inconforme.dataEmissao" disabled class="form-control">
+                    </div>
+                    <!-- HORA EMISSAO DA INCONFORMIDADE -->
+                    <div class="form-group col-md-2 espaco">
+                      <label for="inputHoraEmissao">Hora Inconformidade</label>
+                      <input type="time" name="inputHoraEmissao" id="inputHoraEmissao" [(ngModel)]="inconforme.horaEmissao" disabled class="form-control">
+                    </div>
+                    <!-- DATA CORRECAO -->
+                    <div class="form-group col-md-2 espaco">
+                      <label for="inputDataCorrecao" class="preenchimentoObrigatorio">Data correção</label>
+                      <input type="date" id="inputDataCorrecao" name="inputDataCorrecao" class="form-control">
+                    </div>
+                    <!-- DESCRICAO DO INCONFORME -->
+                    <div class="form-group espaco">
+                      <label for="inputDescricaoInconforme">Inconformidade</label>
+                      <textarea id="inputDescricaoInconforme" name="inputDescricaoInconforme" rows="6" cols="50" disabled [(ngModel)]="inconforme.descInconforme" class="form-control" ></textarea>
+                    </div>
+                    <!-- CORRECAO INCONFORME -->
+                    <div class="form-group">
+                        <label for="inputCorrecaoInconforme" class="preenchimentoObrigatorio">Ação corretiva</label>
+                        <textarea id="inputCorrecaoInconforme" name="inputCorrecaoInconforme" rows="6" cols="50" [(ngModel)]="inconforme.acaoCorretiva" class="form-control" ></textarea>
+                    </div>                  
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- BOTÕES P/ SALVAR OU CANCELAR ACAO CORRETIVA DA INCONFORMIDADE -->
+        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaFrequencia($event)
+                                  (botaoFecharClicado)= fechaTela($event) ></app-botoes-salvar-fechar>
+    </form>
+</body>
+</html>

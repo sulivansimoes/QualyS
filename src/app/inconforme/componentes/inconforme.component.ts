@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Inconforme } from '../model/inconforme';
 
 @Component({
   selector: 'app-inconforme',
@@ -9,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
     './../../global/view/icones.css'
   ]
 })
-export class IncoformeComponent implements OnInit {
+export class InconformeComponent implements OnInit {
 
   constructor() { }
+
+  private inconforme:Inconforme= new Inconforme();
 
   ngOnInit() {
   }
