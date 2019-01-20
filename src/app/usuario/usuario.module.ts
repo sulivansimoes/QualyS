@@ -7,6 +7,7 @@ import { FormsModule  } from '@angular/forms';
 import { ComponenteGlobalModule } from './../global/componente-global.module';
 //COMPONENTES PERSONALIZADOS
 import { UsuarioComponent        } from './componentes/usuario.component';
+import { LoginComponent          } from './componentes/login.component';
 import { BrowserUsuarioComponent } from './componentes/browser-usuario.component';
 import { rotas                   } from '../global/rotas/rotas';
 
@@ -14,6 +15,7 @@ const appRoutes = rotas;
 
 @NgModule({
   declarations: [
+    LoginComponent,
     UsuarioComponent,
     BrowserUsuarioComponent
   ],
@@ -25,6 +27,7 @@ const appRoutes = rotas;
     ComponenteGlobalModule
   ],
   exports: [
+    LoginComponent,
     BrowserUsuarioComponent
   ]
 })

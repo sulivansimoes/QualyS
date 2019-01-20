@@ -1,6 +1,7 @@
 // COMPONENTES PADRÕES
 import { Routes } from '@angular/router';
 // COMPONENTES PERSONALIZADOS
+import { LoginComponent              } from './../../usuario/componentes/login.component';
 import { PageNotFoundComponent       } from './../componentes/page-not-found.component';
 import { UsuarioComponent            } from '../../usuario/componentes/usuario.component';
 import { ProgramaComponent           } from '../../programa/componentes/programa.component';
@@ -18,6 +19,7 @@ import { BrowserCadastroFormularioComponent } from './../../cadastro-formulario/
 
 export const rotas : Routes = [
 
+    { path: "login"                         , component: LoginComponent                     },
     { path: "browser-frequencia"            , component: BrowserFrequenciaComponent         },
     { path: "browser-cadastro-formulario"   , component: BrowserCadastroFormularioComponent },
     { path: "browser-local"                 , component: BrowserLocalComponent              },
