@@ -15,7 +15,7 @@ h1{
 .logoMarcaQualyS{
     background-repeat: no-repeat;
     margin-left: 42%;
-    position: absolute;
+    position: fixed;
 }
 
 .logoMarcaQualyS:hover{
@@ -23,7 +23,6 @@ h1{
     -moz-opacity: 0.65;
     filter: alpha(opacity = 65);
 }
-
 
 .login-box{
     width: 320px;
