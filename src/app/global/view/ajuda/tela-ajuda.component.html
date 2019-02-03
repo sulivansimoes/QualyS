@@ -28,6 +28,10 @@
               {{ textoDefinicao }}
             </div>
 
+            <div *ngIf="textoAdicional.trim() != '' ">
+              {{ textoAdicional }}
+            </div>
+
             <div *ngIf="textoImportante01.trim() != '' " class="embrulho-importante">
               {{ textoImportante01 }}
             </div>

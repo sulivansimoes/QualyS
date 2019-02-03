@@ -49,16 +49,29 @@ export class NavBarComponent implements OnInit {
         console.log("Modal ajuda frequencia");
       break;
       case "/browser-programa" : case "/browser-programa/programa" :
-
+      
+        $("#modalAjudaCadastroPrograma").modal();   
         console.log("Modal ajuda programa");
       break;
       case "/browser-cadastro-formulario" : case "/browser-cadastro-formulario/cadastro-formulario" :
-        
+      
+        $("#modalAjudaCadastroFormulario").modal();   
         console.log("Modal ajuda formulário");
       break;
       case "/browser-usuario" : case "/browser-usuario/usuario" :
 
+        $("#modalAjudaCadastroUsuario").modal();   
         console.log("Modal ajuda usuário");
+      break;
+      case "/browser-inconforme": case "/browser-inconforme/inconforme":
+      
+        $("#modalAjudaCadastroInconformes").modal();   
+        console.log("Modal ajuda inconformes");
+      break;
+      case  "/resposta-formulario":
+        
+        $("#modalAjudaCadastroRespostaFormulario").modal();   
+        console.log("Modal ajuda resposta formulário");
       break;
       default :
         console.log("[botão 'Ajuda' clicado]: Ajuda para rota: "+this.router.url+" não encontrada.");

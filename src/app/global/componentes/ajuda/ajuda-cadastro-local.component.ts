@@ -19,7 +19,7 @@ export class AjudaCadastroLocalComponent implements OnInit {
   private textoObservacao01:string="";
   private textoImportante02:string="";
   private textoObservacao02:string="";
-  private campos: string[][]=[]
+  private campos: string[][]=[];
 
   constructor() { 
 

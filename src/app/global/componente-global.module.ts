@@ -10,8 +10,13 @@ import { TelaConsultaPadraoComponent } from './componentes/tela-consulta-padrao.
 import { PageNotFoundComponent       } from './componentes/page-not-found.component';
 import { rotas                       } from './rotas/rotas';
 import { TelaAjudaComponent          } from './componentes/ajuda/tela-ajuda.component';
+import { AjudaInconformeComponent    } from './componentes/ajuda/ajuda-inconforme.component';
 import { AjudaCadastroLocalComponent } from './componentes/ajuda/ajuda-cadastro-local.component';
 import { AjudaCadastroFrequenciaComponent } from './componentes/ajuda/ajuda-cadastro-frequencia.component';
+import { AjudaCadastroUsuarioComponent    } from './componentes/ajuda/ajuda-cadastro-usuario.component';
+import { AjudaCadastroProgramaComponent   } from './componentes/ajuda/ajuda-cadastro-programa.component';
+import { AjudaCadastroFormularioComponent } from './componentes/ajuda/ajuda-cadastro-formulario.component';
+import { AjudaRespostaFormularioComponent } from './componentes/ajuda/ajuda-resposta-formulario.component';
 
 const appRoutes = rotas
 
@@ -23,7 +28,12 @@ const appRoutes = rotas
     PageNotFoundComponent,
     TelaAjudaComponent,
     AjudaCadastroLocalComponent,
-    AjudaCadastroFrequenciaComponent
+    AjudaCadastroFrequenciaComponent,
+    AjudaCadastroUsuarioComponent,
+    AjudaCadastroProgramaComponent,
+    AjudaCadastroFormularioComponent,
+    AjudaRespostaFormularioComponent,
+    AjudaInconformeComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +46,12 @@ const appRoutes = rotas
     TelaConsultaPadraoComponent,
     PageNotFoundComponent,
     AjudaCadastroLocalComponent,
-    AjudaCadastroFrequenciaComponent
+    AjudaCadastroFrequenciaComponent,
+    AjudaCadastroUsuarioComponent,
+    AjudaCadastroProgramaComponent,
+    AjudaCadastroFormularioComponent,
+    AjudaRespostaFormularioComponent,
+    AjudaInconformeComponent
   ]
 })
 export class ComponenteGlobalModule { }
