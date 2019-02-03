@@ -17,7 +17,7 @@
       <form method="post" autocomplete="off">
         <!-- CPF LOGIN -->
         <label for="inputCpfLogin">CPF</label>
-        <input type="text" placeholder="Entre com CPF" maxlength=14 required [(ngModel)]="user" (keyup)="formataCpf(inputCpf.value)" id="inputCpfLogin" name="inputCpfLogin" #inputCpf>
+        <input type="text" placeholder="Entre com CPF" maxlength=14 required [(ngModel)]="user" (keydown)="formataCpf(inputCpf.value)" id="inputCpfLogin" name="inputCpfLogin" #inputCpf>
         <!-- SENHA -->
         <label for="inputSenhaLogin">Senha</label>
         <input type="password" placeholder="Entre com a senha" maxlength=20 required [(ngModel)]="senha" id="inputSenhaLogin" name="inputSenhaLogin">

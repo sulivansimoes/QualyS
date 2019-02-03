@@ -9,6 +9,7 @@ import { ComponenteGlobalModule } from './../global/componente-global.module';
 import { LocalComponent         } from './componentes/local.component';
 import { BrowserLocalComponent  } from './componentes/browser-local.component';
 import { rotas                  } from '../global/rotas/rotas';
+import { AjudaCadastroLocalComponent } from '../global/componentes/ajuda/ajuda-cadastro-local.component';
 
 const appRoutes = rotas;
 
@@ -16,6 +17,7 @@ const appRoutes = rotas;
   declarations: [
     LocalComponent,
     BrowserLocalComponent,
+    // AjudaCadastroLocalComponent,
   ],
   imports: [
     CommonModule,

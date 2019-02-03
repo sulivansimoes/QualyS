@@ -1,0 +1,29 @@
+/* ATRIBUTOS PADROES */
+span{
+    font-weight: bold;
+}
+
+/* CLASSES */
+.modal-full-screen{
+    max-width: 100% !important;
+    margin: 1.25rem;
+}
+
+.embrulho-observacao{
+    background:rgb(255, 255, 198); 
+    padding:5px;
+    border-radius:5px;
+}
+
+.embrulho-importante{
+    background:lightcoral;
+    padding:5px; 
+    border-radius:5px;
+}
+
+.embrulho-campos{
+    border-style:solid ; 
+    border-width: 1px; 
+    border-radius: 5px;
+    padding: 20px;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ajuda</title>
+</head>
+
+<body>
+
+  <div class="modal fade" id={{idModal}} tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-full-screen" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id={{idModalTitle}}>Ajuda</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <article>
+
+            <h1><u>{{ textoTitulo }}</u></h1>
+
+            <div *ngIf="textoDefinicao.trim() != '' ">
+              {{ textoDefinicao }}
+            </div>
+            <br>
+            <div *ngIf="textoImportante01.trim() != '' " class="embrulho-importante">
+              {{ textoImportante01 }}
+            </div>
+            <br>
+            <div *ngIf="textoObservacao01.trim() != '' " class="embrulho-observacao">
+              <br>
+              {{ textoObservacao01 }}
+              <br>
+            </div>
+            <!-- APRESETA CAMPOS COM SUA RESPECTIVA EXPLICAÇÃO -->
+            <div class="embrulho-campos">
+
+              <p><span>O cadastro é composto pelas seguintes informações:</span></p>
+
+              <ul *ngFor="let campo of campos">
+                <li><span>{{ campo[00] }}</span> - {{ campo[01] }} </li>
+              </ul>
+            </div>
+            <br>
+
+            <div *ngIf="textoImportante02.trim() != '' " class="embrulho-importante">
+              <br>
+              {{ textoImportante02 }}
+              <br>
+            </div>
+
+            <div *ngIf="textoObservacao02.trim() != '' " class="embrulho-observacao">
+              {{ textoObservacao02 }}
+              <br>
+            </div>
+          </article>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

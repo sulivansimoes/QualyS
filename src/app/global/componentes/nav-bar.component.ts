@@ -1,3 +1,5 @@
+// COMPONENTES PADRÕES
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     //#################################################################################
@@ -27,6 +29,41 @@ export class NavBarComponent implements OnInit {
       });
       return false;
     });
+  }
+
+ /**
+  * @description Método responsável por alterar qual modal de ajuda será chamado quando o botão 'Ajuda' for clicado.
+  */
+  private alternaAjuda(): void {
+
+    switch (this.router.url) {
+
+      case "/browser-local" : case "/browser-local/local" :      
+
+        $("#modalAjudaCadastroLocal").modal();        
+        console.log("Modal ajuda local");
+      break;
+      case "/browser-frequencia" :  case "/browser-frequencia/frequencia" :
+
+        $("#modalAjudaCadastroFrequencia").modal();        
+        console.log("Modal ajuda frequencia");
+      break;
+      case "/browser-programa" : case "/browser-programa/programa" :
+
+        console.log("Modal ajuda programa");
+      break;
+      case "/browser-cadastro-formulario" : case "/browser-cadastro-formulario/cadastro-formulario" :
+        
+        console.log("Modal ajuda formulário");
+      break;
+      case "/browser-usuario" : case "/browser-usuario/usuario" :
+
+        console.log("Modal ajuda usuário");
+      break;
+      default :
+        console.log("[botão 'Ajuda' clicado]: Ajuda para rota: "+this.router.url+" não encontrada.");
+      break;
+    }
   }
 
 }

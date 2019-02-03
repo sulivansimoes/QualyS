@@ -9,6 +9,9 @@ import { BotoesSalvarFecharComponent } from './componentes/botoes-salvar-fechar.
 import { TelaConsultaPadraoComponent } from './componentes/tela-consulta-padrao.component';
 import { PageNotFoundComponent       } from './componentes/page-not-found.component';
 import { rotas                       } from './rotas/rotas';
+import { TelaAjudaComponent          } from './componentes/ajuda/tela-ajuda.component';
+import { AjudaCadastroLocalComponent } from './componentes/ajuda/ajuda-cadastro-local.component';
+import { AjudaCadastroFrequenciaComponent } from './componentes/ajuda/ajuda-cadastro-frequencia.component';
 
 const appRoutes = rotas
 
@@ -17,7 +20,10 @@ const appRoutes = rotas
     NavBarComponent,
     BotoesSalvarFecharComponent,
     TelaConsultaPadraoComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TelaAjudaComponent,
+    AjudaCadastroLocalComponent,
+    AjudaCadastroFrequenciaComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +34,9 @@ const appRoutes = rotas
     NavBarComponent,
     BotoesSalvarFecharComponent,
     TelaConsultaPadraoComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AjudaCadastroLocalComponent,
+    AjudaCadastroFrequenciaComponent
   ]
 })
 export class ComponenteGlobalModule { }
