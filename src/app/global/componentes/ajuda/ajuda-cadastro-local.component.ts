@@ -9,10 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AjudaCadastroLocalComponent implements OnInit {
 
-  // IDENTIFICADORES E CONFIGURAÇÕES DO MODAL
+  // IDENTIFICADOR DO MODAL
   private idModal = "modalAjudaCadastroLocal";
-  private idModalTitle = this.idModal+"Title";
-
   // COMPOSIÇÃO DO MODAL
   private textoTitulo:string="Local";
   private textoDefinicao:string="";

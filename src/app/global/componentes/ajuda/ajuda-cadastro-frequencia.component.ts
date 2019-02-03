@@ -9,10 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AjudaCadastroFrequenciaComponent implements OnInit {
 
-   // IDENTIFICADORES E CONFIGURAÇÕES DO MODAL
-   private idModal = "modalAjudaCadastroFrequencia";
-   private idModalTitle = this.idModal+"Title";
- 
+   // IDENTIFICADOR DO MODAL
+   private idModal = "modalAjudaCadastroFrequencia"; 
    // COMPOSIÇÃO DO MODAL
    private textoTitulo:string="Frequência";
    private textoDefinicao:string="";
@@ -26,13 +24,11 @@ export class AjudaCadastroFrequenciaComponent implements OnInit {
    constructor() { 
  
      this.textoDefinicao += "Nesta rotina são cadastradas todas as frequências utlizadas no sistema. "+
-                            "Todo programa de autocontrole necessita ser respondido em períodos de tempo ( frequência ) "+
-                            "Todo programa cadastrado no sistema deve ser associado a uma frequência, caso contrário, o  "+
-                            "Cadastro de Programas não será concluído."
+                            "Todo programa de autocontrole necessita ser respondido em períodos de tempo denomidados no sistema como frequência. ";
+
+    this.textoImportante01 += "IMPORTANTE: Todo programa cadastrado no sistema deve ser associado a uma frequência, "+
+                              "caso contrário, o Cadastro de Programas não será concluído.";
      
-    //  this.textoImportante01 += "IMPORTANTE: 
-                              //  "
-//  
      this.campos.push( ["ID"        , "Código identificador da frequência, este campo é preenchido automaticamente pelo sistema."]);
      this.campos.push( ["Descrição" , "Descrição da frêquencia cadastrada, por exemplo: DIARIA, MENSAL etc.."]);
    }

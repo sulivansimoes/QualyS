@@ -3,6 +3,10 @@ span{
     font-weight: bold;
 }
 
+article > div{
+    margin-top: 1rem;
+}
+
 /* CLASSES */
 .modal-full-screen{
     max-width: 100% !important;

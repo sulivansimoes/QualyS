@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AjudaCadastroFrequenciaComponent } from './ajuda-cadastro-frequencia.component';
+import { AjudaCadastroFrequenciaComponent } from '../../componentes/ajuda/ajuda-cadastro-frequencia.component';
 
 describe('AjudaCadastroFrequenciaComponent', () => {
   let component: AjudaCadastroFrequenciaComponent;

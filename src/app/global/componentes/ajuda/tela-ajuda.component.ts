@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
  * @Input {string} ( idModal ) - ID do do modal que será criado.
  * @Input {string} ( textoTitulo ) - Titulo da Ajuda
  * @Input {string} ( textoDefinicao ) - Texto contendo uma explicação do que se trata a rotina, posicionado após o titulo.
- * @Input {string} ( textoAdicional ) - Texto adicional à ajuda,
+ * @Input {string} ( textoAdicional ) - Texto adicional à ajuda, posicionado após o textoDefinição
  * @Input {string} ( textoImportante01 ) - Texto 01 classificado como importante, posicionado após o texto adicional e antes do quadro de campos
  * @Input {string} ( textoImportante02 ) - Texto 02 classificado como importante, posicionado após o quadro de campos
  * @Input {string} ( textoObservacao01 ) - Texto 01 classificado como observação, posicionado antes do texto adicional e antes do quadro de campos
@@ -25,7 +25,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TelaAjudaComponent implements OnInit {
   
   // COMPOSIÇÃO DO MODAL
-  @Input() textoTitulo:string="Local";
+  @Input() textoTitulo:string="";
   @Input() textoDefinicao:string="";
   @Input() textoAdicional:string="";
   @Input() textoImportante01:string="";
