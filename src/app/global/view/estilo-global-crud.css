@@ -25,26 +25,20 @@ input[type="button"]{
 }
 
 /* CLASSES */
-.embrulho-campos{
-    margin-top: 5px;
-    border-color: black;
-    border-style: dashed ;
-    border-radius: 10px ;
-    border-width: 0.5px;
+.embrulho-campos{  
     padding: 30px;
-
+    border: 1px solid #eee;
+    border-radius: 4px;
+    
     /*SCROLL */
     height: 28rem;
-    overflow-y: auto; /*só aparece o scroll quando necessário*/
-}
+    overflow-y: auto;  /*só aparece o scroll quando necessário*/
+} 
 
 .embrulho-botoes{
-    margin-top: 5px;
-    border-color: black;
-    border-style: dashed ;
-    border-radius: 10px ;
-    border-width: 0.5px;
+    border: 1px solid #eee;
     padding: 20px;
+    border-radius: 4px;
 }
 
 .espaco{
