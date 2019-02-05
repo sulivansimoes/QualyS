@@ -12,23 +12,24 @@
 
     <form action="#" method="POST" autocomplete="off">
         <fieldset class="embrulho-cabecalho-formulario">
-             <!--NOME DO FORUMALARIO A SER RESPONDIDO-->
+            <!--NOME DO FORUMALARIO A SER RESPONDIDO-->
             <legend>{{ nomeFormulario }}</legend>
 
-                <!-- CABELACHO FORMULARIO -->
-                <div class="form-row">
-                    <!-- DATA EMISSAO -->
-                    <div class="form-group col-md-2">
-                        <label for="inputEmissao" class="preenchimentoObrigatorio">Data Emissão</label>
-                        <input type="text" id="inputEmissao" required name="inputEmissao" [(ngModel)]="teste" class="form-control">
-                    </div>
-                    <!-- HORA EMISSAO -->
-                    <div class="form-group col-md-2">
-                        <label for="inputHoraEmissao" class="preenchimentoObrigatorio">Hora Emissão</label>
-                        <input type="time" id="inputHoraEmissao" required class="form-control">
-                    </div>
+            <!-- CABELACHO FORMULARIO -->
+            <div class="form-row borda-inferior">
+                <!-- DATA EMISSAO -->
+                <div class="form-group col-md-2 espaco">
+                    <label for="inputEmissao" class="preenchimentoObrigatorio">Data Emissão</label>
+                    <input type="text" id="inputEmissao" required name="inputEmissao" [(ngModel)]="teste" class="form-control">
                 </div>
-                <!-- ITENS FORMULARIO -->
+                <!-- HORA EMISSAO -->
+                <div class="form-group col-md-2">
+                    <label for="inputHoraEmissao" class="preenchimentoObrigatorio">Hora Emissão</label>
+                    <input type="time" id="inputHoraEmissao" required class="form-control">
+                </div>
+            </div>
+            <!-- ITENS FORMULARIO -->
+            <div>
                 <table>
                     <thead>
                         <th>Item</th>
@@ -40,14 +41,14 @@
                         <tr>
                             <td>01</td>
                             <td>Lampadas ok?</td>
-                            <td><input type="radio" required name="resposta1" ></td>
-                            <td><input type="radio" required name="resposta1" ></td>
+                            <td><input type="radio" required name="resposta1"></td>
+                            <td><input type="radio" required name="resposta1"></td>
                         </tr>
                         <tr>
                             <td>02</td>
                             <td>Lixeira ok?</td>
-                            <td><input type="radio"  required name="resposta2"></td>
-                            <td><input type="radio"  required name="resposta2"></td>
+                            <td><input type="radio" required name="resposta2"></td>
+                            <td><input type="radio" required name="resposta2"></td>
                         </tr>
                         <tr>
                             <td>03</td>
@@ -57,6 +58,7 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
         </fieldset>
         <!-- LISTA DE INCONFORMES  -->
         <fieldset class="embrulho-item-formulario">
@@ -75,11 +77,12 @@
                     <tr>
                 </tbody>
             </table>
+            <!-- <div style="color:#3CB371; font-size:20px">Nenhuma inconformidade lançada. </div> -->
         </fieldset>
         <!--  BOTOES -->
-        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaRespostaFormulario($event)
-                                  (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>
+        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaRespostaFormulario($event) (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>
 
-      </form>
+    </form>
 </body>
+
 </html>

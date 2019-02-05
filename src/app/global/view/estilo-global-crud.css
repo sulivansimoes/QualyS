@@ -24,6 +24,18 @@ input[type="button"]{
     cursor:pointer;
 }
 
+input[type="date"] {
+    background:#fff url(././../../imagens/calendario.png) 97% 50% no-repeat ;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
 /* CLASSES */
 .embrulho-campos{  
     padding: 30px;
@@ -74,16 +86,11 @@ input[type="button"]{
     margin-bottom: 0.9rem;
 }
 
-.botaoBrowser2{
-    width: 8rem;
-    margin-left: 0.5rem;
-    margin-bottom: 0.9rem;
-}
-
 .bordas-tabela{
     border-collapse: collapse;
     border-style: solid;
     border-color: black;
     border-width: 0.03px;
+    margin-bottom: 0.4rem;
 }
 
