@@ -9,10 +9,9 @@
 </head>
 
 <body>
-
     <form action="#" method="POST" autocomplete="off">
         <fieldset class="embrulho-cabecalho-formulario">
-            <!--NOME DO FORUMALARIO A SER RESPONDIDO-->
+            <!-- NOME DO FORUMALARIO A SER RESPONDIDO -->
             <legend>{{ nomeFormulario }}</legend>
 
             <!-- CABELACHO FORMULARIO -->
@@ -20,7 +19,7 @@
                 <!-- DATA EMISSAO -->
                 <div class="form-group col-md-2 espaco">
                     <label for="inputEmissao" class="preenchimentoObrigatorio">Data Emissão</label>
-                    <input type="text" id="inputEmissao" required name="inputEmissao" [(ngModel)]="teste" class="form-control">
+                    <input type="date" id="inputEmissao" required name="inputEmissao" [(ngModel)]="teste" class="form-control">
                 </div>
                 <!-- HORA EMISSAO -->
                 <div class="form-group col-md-2">
@@ -41,8 +40,8 @@
                         <tr>
                             <td>01</td>
                             <td>Lampadas ok?</td>
-                            <td><input type="radio" required name="resposta1"></td>
-                            <td><input type="radio" required name="resposta1"></td>
+                            <td><input type="radio" required name="resposta1" (click)="retirarInconforme()"></td>
+                            <td><input type="radio" required name="resposta1" (click)="geraInconforme()"></td>
                         </tr>
                         <tr>
                             <td>02</td>
@@ -56,6 +55,7 @@
                             <td><input type="radio" required name="resposta3"></td>
                             <td><input type="radio" required name="resposta3"></td>
                         </tr>
+         
                     </tbody>
                 </table>
             </div>
@@ -63,7 +63,7 @@
         <!-- LISTA DE INCONFORMES  -->
         <fieldset class="embrulho-item-formulario">
             <legend>Inconformes</legend>
-            <table>
+            <!-- <table>
                 <thead></thead>
                 <tbody>
                     <tr>
@@ -76,8 +76,8 @@
                     </tr>
                     <tr>
                 </tbody>
-            </table>
-            <!-- <div style="color:#3CB371; font-size:20px">Nenhuma inconformidade lançada. </div> -->
+            </table> -->
+            <div class="font-green">Nenhuma inconformidade lançada. </div>
         </fieldset>
         <!--  BOTOES -->
         <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaRespostaFormulario($event) (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>

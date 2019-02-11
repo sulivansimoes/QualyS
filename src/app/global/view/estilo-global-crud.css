@@ -25,11 +25,11 @@ input[type="button"]{
 }
 
 input[type="date"] {
-    background:#fff url(././../../imagens/calendario.png) 97% 50% no-repeat ;
+    background:#fff url(././../../imagens/calendario.png) 93% 50% no-repeat ;
 }
 
 input[type="date"]::-webkit-inner-spin-button {
-    display: none;
+    display: none; 
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {

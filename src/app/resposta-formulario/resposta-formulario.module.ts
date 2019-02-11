@@ -14,7 +14,7 @@ import { RespostaFormularioComponent  } from './componentes/resposta-formulario.
   imports: [
     CommonModule,
     FormsModule,
-
+ 
     ComponenteGlobalModule
   ],
   exports: [

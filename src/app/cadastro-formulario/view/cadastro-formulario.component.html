@@ -101,16 +101,20 @@
     
     
     <!-- COMPONENTE DE PESQUISA -->
-    <app-tela-consulta-padrao
-    (botaoPesquisarClicado)="pesquisaPrograma($event)"
-    (itemSelecionadoClicado)="itemProgramaSelecionado($event)"
-    [cabecalhoTabela]="cabecalhoTabelaPrograma"
-    [tabelaDeDados]="programasFiltrados"
-    >
-    </app-tela-consulta-padrao>
+    <!-- <ng-content id="consultaPrograma"> -->
+        <app-tela-consulta-padrao
+            (botaoPesquisarClicado)="pesquisaPrograma($event)"
+            (itemSelecionadoClicado)="itemProgramaSelecionado($event)"
+            [cabecalhoTabela]="cabecalhoTabelaPrograma"
+            [tabelaDeDados]="programasFiltrados"
+        >
+        </app-tela-consulta-padrao>
+    <!-- </ng-content> -->
 
     <!-- BOTÕES PARA SALVAR FORMULÁRIO -->
-    <app-botoes-salvar-fechar (botaoSalvarClicado)=salvarFormulario($event)
-        (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>
+    <app-botoes-salvar-fechar 
+        (botaoSalvarClicado)=salvarFormulario($event)
+        (botaoFecharClicado)=fechaTela($event)>
+    </app-botoes-salvar-fechar>
 </body>
 </html>

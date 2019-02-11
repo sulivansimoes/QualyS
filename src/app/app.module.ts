@@ -29,7 +29,7 @@ const appRoutes = rotas
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
-    
+  
     ComponenteGlobalModule,
     LocalModule,
     FrequenciaModule,
