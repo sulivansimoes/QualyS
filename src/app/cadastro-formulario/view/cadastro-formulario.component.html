@@ -13,8 +13,7 @@
     <form action="#" method="POST" autocomplete="off">
         <fieldset>
             <legend>Cadastro Formulário</legend>
-            <div>
-                <!-- <div class="embrulho-campos">  -->
+            <div class="embrulho-campos-mod2">
                 <p>Campos em azul são de preenchimento obrigatório</p>
                 <div class="form-row">
 
@@ -35,8 +34,8 @@
                         <label for="inputPrograma" class="preenchimentoObrigatorio">Programa</label>
                         <div class="input-group-append">
                             <input type="text" id="inputPrograma" name="inputPrograma" required maxlength={{SIZE_PROGRAMA}}
-                                [(ngModel)]="formulario.idPrograma" (keyup.F2)=acionaModalPesquia() class="form-control">
-                            <input type="button" id="buttonPesquisa" (click)="acionaModalPesquia()" class="buttonPesquisa espaco">
+                                [(ngModel)]="formulario.idPrograma" (keyup.F2)=acionaModalPesquisa() class="form-control">
+                            <input type="button" id="buttonPesquisa" (click)="acionaModalPesquisa()" class="buttonPesquisa espaco">
                         </div>
                     </div>
                     <!-- ID LOCAL -->
@@ -44,8 +43,8 @@
                         <label for="inputLocal" class="preenchimentoObrigatorio">Local</label>
                         <div class="input-group-append">
                             <input type="text" id="inputLocal" name="inputLocal" required maxlength={{SIZE_LOCAL}}
-                                [(ngModel)]="formulario.idLocal" (keyup.F2)=acionaModalPesquia() class="form-control">
-                            <input type="button" id="buttonPesquisa" (click)="acionaModalPesquia()" class="buttonPesquisa espaco">
+                                [(ngModel)]="formulario.idLocal" (keyup.F2)=acionaModalPesquisa() class="form-control">
+                            <input type="button" id="buttonPesquisa" (click)="acionaModalPesquisa()" class="buttonPesquisa espaco">
                         </div>
                     </div>
                     <!-- BLOQUEADO -->
@@ -98,23 +97,21 @@
             </tr>
         </tbody>
     </table>
-    
-    
+        
     <!-- COMPONENTE DE PESQUISA -->
-    <!-- <ng-content id="consultaPrograma"> -->
-        <app-tela-consulta-padrao
-            (botaoPesquisarClicado)="pesquisaPrograma($event)"
-            (itemSelecionadoClicado)="itemProgramaSelecionado($event)"
-            [cabecalhoTabela]="cabecalhoTabelaPrograma"
-            [tabelaDeDados]="programasFiltrados"
-        >
-        </app-tela-consulta-padrao>
-    <!-- </ng-content> -->
+    <app-tela-consulta-padrao
+        (botaoPesquisarClicado)="pesquisaPrograma($event)"
+        (itemSelecionadoClicado)="itemProgramaSelecionado($event)"
+        [cabecalhoTabela]="cabecalhoTabelaPrograma"
+        [tabelaDeDados]="programasFiltrados"
+    >
+    </app-tela-consulta-padrao>
 
     <!-- BOTÕES PARA SALVAR FORMULÁRIO -->
     <app-botoes-salvar-fechar 
         (botaoSalvarClicado)=salvarFormulario($event)
-        (botaoFecharClicado)=fechaTela($event)>
+        (botaoFecharClicado)=fechaTela($event)
+    >
     </app-botoes-salvar-fechar>
 </body>
 </html>

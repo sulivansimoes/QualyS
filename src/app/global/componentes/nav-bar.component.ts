@@ -73,6 +73,11 @@ export class NavBarComponent implements OnInit {
         $("#modalAjudaCadastroRespostaFormulario").modal();   
         console.log("Modal ajuda resposta formulário");
       break;
+      case "/" :
+
+        $("#modalAjudaMenuPrincial").modal();   
+        console.log("Modal ajuda menu principal");
+      break;
       default :
         console.log("[botão 'Ajuda' clicado]: Ajuda para rota: "+this.router.url+" não encontrada.");
       break;

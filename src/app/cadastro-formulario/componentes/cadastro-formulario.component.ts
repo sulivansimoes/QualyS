@@ -19,11 +19,15 @@ import { parseObjectsToArray} from 'src/app/global/funcoes/functionsComuns';
 })
 export class CadastroFormularioComponent implements OnInit {
 
-  //TAMANHO MAXIMO DE CAMPOS
+  // TAMANHO MAXIMO DE CAMPOS
   private SIZE_ID        = 4;
   private SIZE_DESCRICAO = 40;
   private SIZE_PROGRAMA  = 4;
   private SIZE_LOCAL     = 4;
+  // CONTROLE CONSULTA
+  private CONSULTA_LOCAL     = 1;
+  private CONSULTA_PROGRAMA  = 2;
+  private consultaAcionada   = 0;
 
   private formulario: CadastroFormulario = null;
   private itemFormulario: ItemFormulario = null;
@@ -117,6 +121,16 @@ export class CadastroFormularioComponent implements OnInit {
     return this.itemFormulario;
   }
 
+  private escolhePesquisa(cosulta:number):void{
+
+  }
+
+  private escolheItemSelecionado(){
+
+  }
+
+   
+
    /**
    * @description Preenche input do local de acordo com o clique que o usuário deu sobre determinado local.
    * @param dado id do local que foi seleciona (clicada) pelo usuário
@@ -134,7 +148,7 @@ export class CadastroFormularioComponent implements OnInit {
     this.formulario.setIdPrograma(dado[0]);
     this.fechaModalPesquisa();
   }
-
+  
  /**
    * @description: Pesquisa/Filtra registros de acordo com conteúdo informado pelo usuário e os prove no modal de pesquisa.
    * @param {string} filtro - conteudo a ser pesquisado 
@@ -167,15 +181,28 @@ export class CadastroFormularioComponent implements OnInit {
    * @description: Aciona/Exibe o modal de pesquisa via javascript ( faz uso de JQuery do bootstrap ).
    * @see https://getbootstrap.com/docs/4.0/components/modal/
    */
-  private acionaModalPesquia() {
+  private acionaModalPesquisa(consulta:number):void {
+    
     $("#modalPesquisa").modal();
+
+    switch(consulta){
+      case this.CONSULTA_LOCAL:
+        this.consultaAcionada = this.CONSULTA_LOCAL;
+      break;
+      case this.CONSULTA_PROGRAMA:
+        this.consultaAcionada = this.CONSULTA_PROGRAMA;
+      break;
+      default :
+        console.log("Erro inesperado! consulta '"+consulta+"' chamada na função acionaModalPesquisa() não foi encontrada.");
+      break;
+    }
   }
 
   /**
   *  @description: Fecha o modal de pesquisa via javascript ( faz uso de JQuery do bootstrap ).
   *  @see https://getbootstrap.com/docs/4.0/components/modal/
   */
-  private fechaModalPesquisa() {
+  private fechaModalPesquisa():void {
     $('#modalPesquisa').modal('hide');
   }
 }

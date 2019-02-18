@@ -24,6 +24,10 @@ input[type="button"]{
     cursor:pointer;
 }
 
+input[type="radio"]{
+    cursor:pointer; 
+}
+
 input[type="date"] {
     background:#fff url(././../../imagens/calendario.png) 93% 50% no-repeat ;
 }
@@ -46,6 +50,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 28rem;
     overflow-y: auto;  /*só aparece o scroll quando necessário*/
 } 
+
+.embrulho-campos-mod2{
+    border-top: 1px solid #eee;
+    /* border-left: 1px solid #eee; */
+    /* border-right: 1px solid #eee; */
+}
 
 .embrulho-botoes{
     border: 1px solid #eee;

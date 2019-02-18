@@ -17,7 +17,6 @@ const appRoutes = rotas;
   declarations: [
     LocalComponent,
     BrowserLocalComponent,
-    // AjudaCadastroLocalComponent,
   ],
   imports: [
     CommonModule,

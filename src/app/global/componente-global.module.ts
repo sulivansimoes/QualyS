@@ -10,6 +10,7 @@ import { TelaConsultaPadraoComponent } from './componentes/tela-consulta-padrao.
 import { PageNotFoundComponent       } from './componentes/page-not-found.component';
 import { rotas                       } from './rotas/rotas';
 import { TelaAjudaComponent          } from './componentes/ajuda/tela-ajuda.component';
+import { AjudaMenuPrincipalComponent } from './componentes/ajuda/ajuda-menu-principal.component';
 import { AjudaInconformeComponent    } from './componentes/ajuda/ajuda-inconforme.component';
 import { AjudaCadastroLocalComponent } from './componentes/ajuda/ajuda-cadastro-local.component';
 import { AjudaCadastroFrequenciaComponent } from './componentes/ajuda/ajuda-cadastro-frequencia.component';
@@ -27,6 +28,7 @@ const appRoutes = rotas
     TelaConsultaPadraoComponent,
     PageNotFoundComponent,
     TelaAjudaComponent,
+    AjudaMenuPrincipalComponent,
     AjudaCadastroLocalComponent,
     AjudaCadastroFrequenciaComponent,
     AjudaCadastroUsuarioComponent,
@@ -45,6 +47,7 @@ const appRoutes = rotas
     BotoesSalvarFecharComponent,
     TelaConsultaPadraoComponent,
     PageNotFoundComponent,
+    AjudaMenuPrincipalComponent,
     AjudaCadastroLocalComponent,
     AjudaCadastroFrequenciaComponent,
     AjudaCadastroUsuarioComponent,
