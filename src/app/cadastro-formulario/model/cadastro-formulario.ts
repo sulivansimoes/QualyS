@@ -9,6 +9,7 @@ import { ItemFormulario } from './item-formulario';
     private descricao  : string;
     private idPrograma : number;
     private idLocal    : number;
+    private idFrequencia :number;
     private itens      : ItemFormulario[];
     private bloqueado  : boolean;
     
@@ -18,18 +19,20 @@ import { ItemFormulario } from './item-formulario';
      * @param {string } descricao  - Descrição do formulário de perguntas.
      * @param {number } idPrograma - Id do programa que está atrelado ao formulário ( chave estrangeira )
      * @param {number } idLocal    - Id do local onde o formulário de perguntas será aplicado. ( chave estrangeira )
+     * @param {number } idFrequencia - id da frequencia; Frequencia que os formulários do programa devem ser respondidos.
      * @param {Array  } itens      - Itens que compõe o formulário de perguntas.
      * @param {boilean} bloqueado  - Flag do cadastro, indicando se item está ou não bloqueado. 
      */
-    constructor(id?:number              , descricao?:string , idPrograma?:number, idLocal?:number,
-                itens?: ItemFormulario[], bloqueado?:boolean){
+    constructor(id?:number              , descricao?:string      , idPrograma?:number, idLocal?:number,
+                idFrequencia?:number    ,itens?: ItemFormulario[], bloqueado?:boolean){
 
-        this.id         = id;
-        this.descricao  = descricao;
-        this.idPrograma = idPrograma;
-        this.idLocal    = idLocal;
-        this.itens      = (itens == null) ? [] :itens;
-        this.bloqueado  = (bloqueado == null) ? false : bloqueado;
+        this.id           = id;
+        this.descricao    = descricao;
+        this.idPrograma   = idPrograma;
+        this.idLocal      = idLocal;
+        this.idFrequencia = idFrequencia;
+        this.itens        = (itens == null) ? [] :itens;
+        this.bloqueado    = (bloqueado == null) ? false : bloqueado;
     }
 
     /**
@@ -62,6 +65,14 @@ import { ItemFormulario } from './item-formulario';
      */
     public getLocal():number{
         return this.idLocal;
+    }
+
+    /**
+     * @description: Retorna id da frequencia do programa.
+     * @return {number} ( idFrequencia ) - Id da frequencia do programa.
+     */
+    public getIdFrequencia():number{
+        return this.idFrequencia;
     }
 
     /**
@@ -120,6 +131,14 @@ import { ItemFormulario } from './item-formulario';
      */
     public setIdLocal(idLocal:number):void{
         this.idLocal = idLocal;
+    }
+    
+    /**
+     * @description: Seta conteudo do id da frequencia vinculada ao programa.
+     * @param {number} idFrequencia - Id da frequencia vinculada ao programa.
+     */
+    public setIdFrequencia(idFrequencia:number):void{
+        this.idFrequencia = idFrequencia;
     }
 
     /**

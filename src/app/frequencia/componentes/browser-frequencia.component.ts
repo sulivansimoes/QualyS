@@ -16,11 +16,5 @@ export class BrowserFrequenciaComponent implements OnInit {
   ngOnInit() {
   }
 
-  teste(){
-    let testeRafaela = document.getElementById("testeRADIO");
-    
-    
-  }
-
-
+ 
 }

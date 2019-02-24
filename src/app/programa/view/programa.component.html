@@ -43,23 +43,10 @@
             <label for="inputDataRevisao">Data revisão</label>
             <input type="date" id="inputDataRevisao" name="inputDataRevisao" [(ngModel)]="programa.dataRevisao" class="form-control">
           </div>
-          <!-- ID FREQUENCIA -->
-          <div class="form-group col-md-2 espaco">
-            <label for="inputIdFrequencia" class="preenchimentoObrigatorio">Frequência</label>
-            <div class="input-group-append">
-              <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID_FREQUENCIA}} [(ngModel)]="programa.idFrequencia" (keyup.F2)=acionaModalPesquia() class="form-control">
-              <input type="button" id="buttonPesquisa" name="buttonPesquisa" (click)=acionaModalPesquia() class="buttonPesquisa">
-            </div>
-          </div>
           <!-- VERSAO -->
           <div class="form-group espaco"> 
             <label for="inputVersao" class="preenchimentoObrigatorio">Versão</label>
             <input type="text" id="inputVersao" name="inputVersao" required maxlength={{SIZE_VERSAO}} [(ngModel)]="programa.versao" class="form-control">
-          </div>
-          <!-- OFICIO CIRCULAR -->
-          <div class="form-group espaco">
-            <label for="inputOficio" class="preenchimentoObrigatorio">Legislação referência</label>
-            <textarea id="inputOficio" name="inputOficio" required  rows="6" cols="50" [(ngModel)]="programa.oficio" class="form-control" ></textarea>
           </div>
           <!-- BLOQUEADO -->
           <div class="form-group espaco">
@@ -69,18 +56,14 @@
               <option value=true>Sim</option>
             </select>
           </div>
+          <!-- OFICIO CIRCULAR -->
+          <div class="form-group espaco">
+            <label for="inputOficio" class="preenchimentoObrigatorio">Legislação referência</label>
+            <textarea id="inputOficio" name="inputOficio" required  rows="6" cols="50" [(ngModel)]="programa.oficio" class="form-control" ></textarea>
+          </div>
         </div>
       </div>
     </fieldset>
-
-    <!-- COMPONENTE DE PESQUISA DA FREQUENCIA -->
-    <app-tela-consulta-padrao
-        (botaoPesquisarClicado)="pesquisaFrequencia($event)"
-        (itemSelecionadoClicado)="itemSelecionado($event)"
-        [cabecalhoTabela]="cabecalhoTabelaFrequencia"
-        [tabelaDeDados]="frequenciasFiltradas"
-    >
-    </app-tela-consulta-padrao>
 
     <!-- BOTÕES P/ SALVAR OU CANCELAR CADASTRO -->
     <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaPrograma($event) 

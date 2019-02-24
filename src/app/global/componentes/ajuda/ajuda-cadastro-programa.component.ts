@@ -27,8 +27,6 @@ export class AjudaCadastroProgramaComponent implements OnInit {
                            "manipuladores de produtos apícolas obrigatóriamente necessitam fazer implantação de programas "+
                            "de qualidade exigidos pelos órgãos regulamentadores SIF ( Sistema de inspeção federal ) e pela ANVISA "+
                            "( Agência nacional de vigilância sanitária ). Exemplo: BPF, PPHO, APPCC e PAC's ";
-
-    this.textoImportante01 += "IMPORTANTE: A premissa para concluir este cadastro é ter previamente cadastrado a 'Frequência' a ser utilizada.";
     
     this.textoObservacao01+= "Nesta rotina são cadastrados todos programas exigidos pelos órgãos regulamentadores.";
         
@@ -37,7 +35,6 @@ export class AjudaCadastroProgramaComponent implements OnInit {
     this.campos.push(["Sigla"        , "Sigla do programa cadastrado, por exemplo: PAC-1, PPHO."]);
     this.campos.push(["Data Vigência", "Data em que o programa passou a ser vigente."]);
     this.campos.push(["Data Revisão" , "Última data em que o programa foi revisado."]);
-    this.campos.push(["Frequência"   , "Código da frequência em que o programa ( formulários do programa ) em questão deve ser respondido."]);
     this.campos.push(["Versão"       , "Versão do programa, por exemplo: 001, 003, etc."]);
     this.campos.push(["Legislação Referência", "Legislação referência do programa"]);
     this.campos.push(["Bloqueado"    , "Indica se o programa está bloqueado ( ativo ) ou não na empresa, caso esteja bloqueado não será permitido o uso do cadastro posteriormente."]);

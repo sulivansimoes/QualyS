@@ -8,7 +8,6 @@ export class Programa{
    private sigla        :string;
    private dataVigencia :Date;
    private dataRevisao  :Date;
-   private idFrequencia :number;
    private versao       :string;
    private oficio       :string;
    private bloqueado    :boolean;
@@ -20,21 +19,18 @@ export class Programa{
     * @param {string } sigla        - Sigla ( abreviação ) da descrição do programa
     * @param {Date   } dataVigencia - Data da vigencia do programa do programa.
     * @param {Date   } dataRevisao  - Data em que programa foi revisado.
-    * @param {number } idFrequencia - id da frequencia; Frequencia que os formulários do programa devem ser respondidos.
     * @param {string } versao       - Versão do programa.
     * @param {string } oficio       - Oficio circular do programa.
     * @param {boolean} bloqueado    - Flag do cadastro, indicando se está ou não bloqueado.
     */
-   constructor(id?:number        , descricao?:string    , sigla?:string , dataVigencia?:Date,
-               dataRevisao?:Date , idFrequencia?:number , versao?:string, oficio?:string    ,
-               bloqueado?:boolean){
+   constructor(id?:number        , descricao?:string , sigla?:string  , dataVigencia?:Date,
+               dataRevisao?:Date , versao?:string    , oficio?:string , bloqueado?:boolean){
 
         this.id           = id;
         this.descricao    = descricao;
         this.sigla        = sigla;
         this.dataVigencia = dataVigencia;
         this.dataRevisao  = dataRevisao;
-        this.idFrequencia = idFrequencia;
         this.versao       = versao;
         this.oficio       = oficio;
         this.bloqueado    = (bloqueado == null) ? false : bloqueado;
@@ -78,14 +74,6 @@ export class Programa{
     */
    public getDataRevisao():Date{
        return this.dataRevisao;
-   }
-
-   /**
-    * @description: Retorna id da frequencia do programa.
-    * @return {number} ( id_frequencia ) - Id da frequencia do programa.
-    */
-   public getIdFrequencia():number{
-       return this.idFrequencia;
    }
 
    /**
@@ -150,14 +138,6 @@ export class Programa{
     */
    public setDataRevisao(dataRevisao:Date):void{
        this.dataRevisao = dataRevisao;
-   }
-
-   /**
-    * @description: Seta conteudo do id da frequencia vinculada ao programa.
-    * @param {number} idFrequencia - Id da frequencia vinculada ao programa.
-    */
-   public setIdFrequencia(idFrequencia:number):void{
-        this.idFrequencia = idFrequencia;
    }
 
    /**

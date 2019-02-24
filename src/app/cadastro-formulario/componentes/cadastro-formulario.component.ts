@@ -27,6 +27,7 @@ export class CadastroFormularioComponent implements OnInit {
   // CONTROLE CONSULTA
   private CONSULTA_LOCAL     = 1;
   private CONSULTA_PROGRAMA  = 2;
+  private SIZE_ID_FREQUENCIA = 4;
   private consultaAcionada   = 0;
 
   private formulario: CadastroFormulario = null;

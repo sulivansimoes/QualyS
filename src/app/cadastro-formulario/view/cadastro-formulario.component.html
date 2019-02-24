@@ -42,11 +42,18 @@
                     <div class="form-group col-md-2">
                         <label for="inputLocal" class="preenchimentoObrigatorio">Local</label>
                         <div class="input-group-append">
-                            <input type="text" id="inputLocal" name="inputLocal" required maxlength={{SIZE_LOCAL}}
-                                [(ngModel)]="formulario.idLocal" (keyup.F2)=acionaModalPesquisa() class="form-control">
+                            <input type="text" id="inputLocal" name="inputLocal" required maxlength={{SIZE_LOCAL}} [(ngModel)]="formulario.idLocal" (keyup.F2)=acionaModalPesquisa() class="form-control">
                             <input type="button" id="buttonPesquisa" (click)="acionaModalPesquisa()" class="buttonPesquisa espaco">
                         </div>
                     </div>
+                    <!-- ID FREQUENCIA -->
+                    <div class="form-group col-md-2">
+                        <label for="inputIdFrequencia" class="preenchimentoObrigatorio">Frequência</label>
+                        <div class="input-group-append">
+                            <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID_FREQUENCIA}} [(ngModel)]="formulario.idFrequencia" (keyup.F2)=acionaModalPesquia() class="form-control">
+                            <input type="button" id="buttonPesquisa" name="buttonPesquisa" (click)=acionaModalPesquia() class="buttonPesquisa">
+                        </div>  
+                    </div>                    
                     <!-- BLOQUEADO -->
                     <div class="form-group espaco">
                         <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
