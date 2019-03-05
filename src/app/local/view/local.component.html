@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro Locais</title>
-</head>
-<body>
+<div class="embrulho-principal">
     <form action="#" method="POST" autocomplete="off">
         <fieldset>
             <legend>Cadastro Local</legend>
             <div class="embrulho-campos">
-                
+
                 <p>Campos em azul são de preenchimento obrigatório</p>
                 <div class="form-row">
                     <!-- ID -->
                     <div class="form-group col-md-2 espaco">
                         <label for="inputIdLocal">ID</label>
-                        <input type="text" id="inputIdLocal" name="inputIdLocal" disabled required maxlength="4" [(ngModel)]="local.id" class="form-control">
+                        <input type="text" id="inputIdLocal" name="inputIdLocal" disabled maxlength="4" [(ngModel)]="local.id" class="form-control">
                     </div>
                     <!-- DESCRIÇÃO -->
                     <div class="form-group col-md-6 espaco">
@@ -37,8 +28,8 @@
             </div>
         </fieldset>
 
-        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaLocal($event)
-                                  (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>
+        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaLocal($event) 
+                                (botaoFecharClicado)=fechaTela($event)>
+        </app-botoes-salvar-fechar>
     </form>
-</body>
-</html>
+</div>

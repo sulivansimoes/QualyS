@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro Formulário</title>
-</head>
-
-<body>
-
+<div class="embrulho-principal">
     <form action="#" method="POST" autocomplete="off">
         <fieldset>
             <legend>Cadastro Formulário</legend>
@@ -20,21 +9,18 @@
                     <!-- ID DO FORMULARIO -->
                     <div class="form-group col-md-1 espaco">
                         <label for="inputID">ID</label>
-                        <input type="text" id="inputID" name="inputID" disabled required maxlength={{SIZE_ID}}
-                            [(ngModel)]="formulario.id" class="form-control">
+                        <input type="text" id="inputID" name="inputID" disabled maxlength={{SIZE_ID}} [(ngModel)]="formulario.id" class="form-control">
                     </div>
                     <!-- DESCRIÇÃO FORMULARIO -->
                     <div class="form-group col-md-4 espaco">
                         <label for="inputDescricaoPrograma" class="preenchimentoObrigatorio">Descrição formulário</label>
-                        <input type="text" id="inputDescricaoPrograma" name="inputDescricaoPrograma" required maxlength={{SIZE_DESCRICAO}}
-                            [(ngModel)]="formulario.descricao" class="form-control">
+                        <input type="text" id="inputDescricaoPrograma" name="inputDescricaoPrograma" required maxlength={{SIZE_DESCRICAO}} [(ngModel)]="formulario.descricao" class="form-control">
                     </div>
                     <!-- ID PROGRAMA -->
                     <div class="form-group col-md-2">
                         <label for="inputPrograma" class="preenchimentoObrigatorio">Programa</label>
                         <div class="input-group-append">
-                            <input type="text" id="inputPrograma" name="inputPrograma" required maxlength={{SIZE_PROGRAMA}}
-                                [(ngModel)]="formulario.idPrograma" (keyup.F2)=acionaModalPesquisa() class="form-control">
+                            <input type="text" id="inputPrograma" name="inputPrograma" required maxlength={{SIZE_PROGRAMA}} [(ngModel)]="formulario.idPrograma" (keyup.F2)=acionaModalPesquisa() class="form-control">
                             <input type="button" id="buttonPesquisa" (click)="acionaModalPesquisa()" class="buttonPesquisa espaco">
                         </div>
                     </div>
@@ -50,15 +36,14 @@
                     <div class="form-group col-md-2">
                         <label for="inputIdFrequencia" class="preenchimentoObrigatorio">Frequência</label>
                         <div class="input-group-append">
-                            <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID_FREQUENCIA}} [(ngModel)]="formulario.idFrequencia" (keyup.F2)=acionaModalPesquia() class="form-control">
-                            <input type="button" id="buttonPesquisa" name="buttonPesquisa" (click)=acionaModalPesquia() class="buttonPesquisa">
-                        </div>  
-                    </div>                    
+                            <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required  maxlength={{SIZE_ID_FREQUENCIA}} [(ngModel)]="formulario.idFrequencia" (keyup.F2)=acionaModalPesquia() class="form-control">
+                            <input type="button" id="buttonPesquisa" name="buttonPesquisa" (click)=acionaModalPesquia()  class="buttonPesquisa">
+                        </div>
+                    </div>
                     <!-- BLOQUEADO -->
                     <div class="form-group espaco">
                         <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
-                        <select id="inputBloqueado" name="inputBloqueado" required [(ngModel)]="formulario.bloqueado"
-                            class="form-control">
+                        <select id="inputBloqueado" name="inputBloqueado" required [(ngModel)]="formulario.bloqueado" class="form-control">
                             <option value=false>Não</option>
                             <option value=true>Sim</option>
                         </select>
@@ -68,12 +53,12 @@
             </div>
         </fieldset>
         <!-- SE TABLE FICAR DENTRO DO FORM DA PROBLEMA NA ADIÇÃO DE ITENS. -->
-        
+
     </form>
-    
+
     <!-- BOTÃO P/ ADIÇÃO DE ITEM -->
     <input type="button" class="buttonAdicao" (click)="adicionaItem()">
-    
+
     <!-- TABELA COM PERGUNTAS DO FOMULÁRIO -->
     <table class="table table-sm bordas-tabela">
         <thead class="thead-dark">
@@ -86,11 +71,13 @@
             <tr *ngFor="let item of getCadastroFormulario().getItens()">
                 <!-- ITEM -->
                 <td class="largura-coluna-item">
-                    <input type="number" id="inputItem" name="inputItem" [(ngModel)]="item.item" disabled class="form-control col-md-2 largura-coluna-item">
+                    <input type="number" id="inputItem" name="inputItem" [(ngModel)]="item.item" disabled
+                        class="form-control col-md-2 largura-coluna-item">
                 </td>
                 <!-- PERGUNTA -->
                 <td>
-                    <input type="text" id="inputPergunta" name="inputPergunta" [(ngModel)]="item.pergunta" class="form-control">
+                    <input type="text" id="inputPergunta" name="inputPergunta" [(ngModel)]="item.pergunta"
+                        class="form-control">
                 </td>
                 <!-- BLOQUEADO -->
                 <td>
@@ -104,7 +91,7 @@
             </tr>
         </tbody>
     </table>
-        
+
     <!-- COMPONENTE DE PESQUISA -->
     <app-tela-consulta-padrao
         (botaoPesquisarClicado)="pesquisaPrograma($event)"
@@ -115,10 +102,7 @@
     </app-tela-consulta-padrao>
 
     <!-- BOTÕES PARA SALVAR FORMULÁRIO -->
-    <app-botoes-salvar-fechar 
-        (botaoSalvarClicado)=salvarFormulario($event)
-        (botaoFecharClicado)=fechaTela($event)
-    >
+    <app-botoes-salvar-fechar (botaoSalvarClicado)=salvarFormulario($event) 
+                            (botaoFecharClicado)=fechaTela($event)>
     </app-botoes-salvar-fechar>
-</body>
-</html>
+</div>

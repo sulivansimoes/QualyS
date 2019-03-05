@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Cadastro Programa</title>
-</head>
-
-<body>
+<div class="embrulho-principal">
   <form action="#" method="POST" autocomplete="off">
     <fieldset>
       <legend>Cadastro Programa</legend>
@@ -19,14 +9,12 @@
           <!-- ID -->
           <div class="form-group col-md-1 espaco">
             <label for="inputIdPrograma">ID</label>
-            <input type="text" id="inputIdPrograma" name="inputIdPrograma"  disabled required maxlength={{SIZE_ID}} [(ngModel)]="programa.id"
-              class="form-control">
-          </div> 
+            <input type="text" id="inputIdPrograma" name="inputIdPrograma" disabled required maxlength={{SIZE_ID}} [(ngModel)]="programa.id" class="form-control">
+          </div>
           <!-- DESCRIÇÃO -->
           <div class="form-group col-md-6 espaco">
             <label for="inputDescricaoPrograma" class="preenchimentoObrigatorio">Descrição</label>
-            <input type="text" id="inputDescricaoPrograma" name="inputDescricaoPrograma" required maxlength={{SIZE_DESCRICAO}}
-              [(ngModel)]="programa.descricao" class="form-control">
+            <input type="text" id="inputDescricaoPrograma" name="inputDescricaoPrograma" required maxlength={{SIZE_DESCRICAO}} [(ngModel)]="programa.descricao" class="form-control">
           </div>
           <!-- SIGLA -->
           <div class="form-group col-md-2 espaco">
@@ -44,7 +32,7 @@
             <input type="date" id="inputDataRevisao" name="inputDataRevisao" [(ngModel)]="programa.dataRevisao" class="form-control">
           </div>
           <!-- VERSAO -->
-          <div class="form-group espaco"> 
+          <div class="form-group espaco">
             <label for="inputVersao" class="preenchimentoObrigatorio">Versão</label>
             <input type="text" id="inputVersao" name="inputVersao" required maxlength={{SIZE_VERSAO}} [(ngModel)]="programa.versao" class="form-control">
           </div>
@@ -59,7 +47,7 @@
           <!-- OFICIO CIRCULAR -->
           <div class="form-group espaco">
             <label for="inputOficio" class="preenchimentoObrigatorio">Legislação referência</label>
-            <textarea id="inputOficio" name="inputOficio" required  rows="6" cols="50" [(ngModel)]="programa.oficio" class="form-control" ></textarea>
+            <textarea id="inputOficio" name="inputOficio" required rows="6" cols="50" [(ngModel)]="programa.oficio" class="form-control"></textarea>
           </div>
         </div>
       </div>
@@ -67,8 +55,7 @@
 
     <!-- BOTÕES P/ SALVAR OU CANCELAR CADASTRO -->
     <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaPrograma($event) 
-                              (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>
+                              (botaoFecharClicado)=fechaTela($event)>
+    </app-botoes-salvar-fechar>
   </form>
-</body>
-
-</html>
+</div>

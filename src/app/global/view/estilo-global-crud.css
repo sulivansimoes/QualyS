@@ -1,11 +1,4 @@
 /* ELEMENTOS PADRÕES */
-body{
-    margin-top: 1.0rem;
-    margin-left: 1.8rem;
-    margin-right: 1.8rem;
-    margin-bottom: 0rem;
-}
-
 p{
     color: blue;   
 }
@@ -41,6 +34,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* CLASSES */
+.embrulho-principal{
+    margin-top: 1.0rem;
+    margin-left: 1.8rem;
+    margin-right: 1.8rem;
+    margin-bottom: 0rem;
+}
+
 .embrulho-campos{  
     padding: 30px;
     border: 1px solid #eee;

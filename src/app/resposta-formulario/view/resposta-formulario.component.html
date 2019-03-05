@@ -1,88 +1,77 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<form action="#" method="POST" autocomplete="off">
+    <fieldset class="embrulho-cabecalho-formulario">
+        <!-- NOME DO FORUMALARIO A SER RESPONDIDO -->
+        <legend>{{ nomeFormulario }}</legend>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Resposta Forumulário</title>
-</head>
-
-<body>
-    <form action="#" method="POST" autocomplete="off">
-        <fieldset class="embrulho-cabecalho-formulario">
-            <!-- NOME DO FORUMALARIO A SER RESPONDIDO -->
-            <legend>{{ nomeFormulario }}</legend>
-
-            <!-- CABELACHO FORMULARIO -->
-            <div class="form-row borda-inferior">
-                <!-- DATA EMISSAO -->
-                <div class="form-group col-md-2 espaco">
-                    <label for="inputEmissao" class="preenchimentoObrigatorio">Data Emissão</label>
-                    <input type="date" id="inputEmissao" required name="inputEmissao" [(ngModel)]="teste" class="form-control">
-                </div>
-                <!-- HORA EMISSAO -->
-                <div class="form-group col-md-2">
-                    <label for="inputHoraEmissao" class="preenchimentoObrigatorio">Hora Emissão</label>
-                    <input type="time" id="inputHoraEmissao" required class="form-control">
-                </div>
+        <!-- CABELACHO FORMULARIO -->
+        <div class="form-row borda-inferior">
+            <!-- DATA EMISSAO -->
+            <div class="form-group col-md-2 espaco">
+                <label for="inputEmissao" class="preenchimentoObrigatorio">Data Emissão</label>
+                <input type="date" id="inputEmissao" required name="inputEmissao" [(ngModel)]="teste" class="form-control">
             </div>
-            <!-- ITENS FORMULARIO -->
-            <div>
-                <table>
-                    <thead>
-                        <th>Item</th>
-                        <th>Pergunta</th>
-                        <th>Conforme</th>
-                        <th>Não Conforme</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Ha vestigios de pragas ?</td>
-                            <td><input type="radio" required name="resposta1" (click)="retirarInconforme()"></td>
-                            <td><input type="radio" required name="resposta1" (click)="geraInconforme()"></td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Lixeira ok?</td>
-                            <td><input type="radio" required name="resposta2"></td>
-                            <td><input type="radio" required name="resposta2"></td>
-                        </tr>
-                        <tr>
-                            <td>03</td>
-                            <td>Lampadas ok?</td>
-                            <td><input type="radio" required name="resposta3"></td>
-                            <td><input type="radio" required name="resposta3"></td>
-                        </tr>
-         
-                    </tbody>
-                </table>
+            <!-- HORA EMISSAO -->
+            <div class="form-group col-md-2">
+                <label for="inputHoraEmissao" class="preenchimentoObrigatorio">Hora Emissão</label>
+                <input type="time" id="inputHoraEmissao" required class="form-control">
             </div>
-        </fieldset>
-        <!-- LISTA DE INCONFORMES  -->
-        <fieldset class="embrulho-item-formulario">
-            <legend>Inconformes</legend>
+        </div>
+        <!-- ITENS FORMULARIO -->
+        <div>
             <table>
-                <thead></thead>
+                <thead>
+                    <th>Item</th>
+                    <th>Pergunta</th>
+                    <th>Conforme</th>
+                    <th>Não Conforme</th>
+                </thead>
                 <tbody>
                     <tr>
-                        <td>01 - Uma Lampada queimada</td>
-                        <td><input type="button" onclick="alert('teste no editar')" class="buttonEditar"></td>
+                        <td>01</td>
+                        <td>Ha vestigios de pragas ?</td>
+                        <td><input type="radio" required name="resposta1" (click)="retirarInconforme()"></td>
+                        <td><input type="radio" required name="resposta1" (click)="geraInconforme()"></td>
                     </tr>
                     <tr>
-                        <td>03 - Há Vestigio de pragas</td>
-                        <td><input type="button" onclick="alert('teste no editar')" class="buttonEditar"></td>
+                        <td>02</td>
+                        <td>Lixeira ok?</td>
+                        <td><input type="radio" required name="resposta2"></td>
+                        <td><input type="radio" required name="resposta2"></td>
                     </tr>
                     <tr>
+                        <td>03</td>
+                        <td>Lampadas ok?</td>
+                        <td><input type="radio" required name="resposta3"></td>
+                        <td><input type="radio" required name="resposta3"></td>
+                    </tr>
+
                 </tbody>
             </table>
-            <!-- <div class="font-green">Nenhuma inconformidade lançada. </div> -->
-        </fieldset>
-        <!--  BOTOES -->
-        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaRespostaFormulario($event) (botaoFecharClicado)=fechaTela($event)></app-botoes-salvar-fechar>
+        </div>
+    </fieldset>
+    <!-- LISTA DE INCONFORMES  -->
+    <fieldset class="embrulho-item-formulario">
+        <legend>Não conformes</legend>
+        <table>
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <td>01 - Uma Lampada queimada</td>
+                    <td><input type="button" onclick="alert('teste no editar')" class="buttonEditar"></td>
+                </tr>
+                <tr>
+                    <td>03 - Há Vestigio de pragas</td>
+                    <td><input type="button" onclick="alert('teste no editar')" class="buttonEditar"></td>
+                </tr>
+                <tr>
+            </tbody>
+        </table>
+        <!-- <div class="font-green">Nenhuma inconformidade lançada. </div> -->
+    </fieldset>
+    <!--  BOTOES -->
+    <app-botoes-salvar-fechar 
+                            (botaoSalvarClicado)=salvaRespostaFormulario($event)
+                            (botaoFecharClicado)=fechaTela($event)>
+    </app-botoes-salvar-fechar>
 
-    </form>
-</body>
-
-</html>
+</form>

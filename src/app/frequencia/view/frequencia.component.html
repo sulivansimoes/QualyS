@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro Frequência</title>
-</head>
-<body>
+<div class="embrulho-principal">
     <form action="#" method="POST" autocomplete="off">
         <fieldset>
             <legend>Cadastro Frequência</legend>
             <div class="embrulho-campos">
-                
+
                 <p>Campos em azul são de preenchimento obrigatório</p>
                 <div class="form-row">
                     <!-- ID -->
                     <div class="form-group col-md-1 espaco">
                         <label for="inputIdFrequencia">ID</label>
-                        <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID}} [(ngModel)]="frequencia.id"  disabled class="form-control">                            
+                        <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID}}
+                            [(ngModel)]="frequencia.id" disabled class="form-control">
                     </div>
                     <!-- DESCRIÇÃO -->
                     <div class="form-group col-md-6 espaco">
@@ -30,8 +22,8 @@
         </fieldset>
 
         <!-- BOTÕES P/ SALVAR OU CANCELAR CADASTRO -->
-        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaFrequencia($event)
-                                  (botaoFecharClicado)= fechaTela($event) ></app-botoes-salvar-fechar>
+        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaFrequencia($event) 
+                                (botaoFecharClicado)=fechaTela($event)>
+        </app-botoes-salvar-fechar>
     </form>
-</body>
-</html>
+</div>
