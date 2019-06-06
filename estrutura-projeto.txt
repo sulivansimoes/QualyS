@@ -1,0 +1,17 @@
+ESTRUTURA 01 - ISOMENTO DE MÓDULOS, CADA UM TEM SOMENTE O QUE PRECISA.
+
+	QualyS
+	  |
+	  |______QualySApiNodeJS
+	  |			   |__________node_modules
+	  |
+	  |______QualysAngular
+	  |			   |__________node_modules
+	  |
+	  |______QualysIonic 						(implementação futura)
+	  |			   |__________node_modules
+	  |
+	  |______QualysElectron 					(implementação futura)
+	  |			   |__________node_modules
+	  |
+	  |______[...]

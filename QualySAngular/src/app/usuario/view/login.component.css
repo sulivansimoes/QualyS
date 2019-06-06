@@ -94,3 +94,7 @@ h1{
     top: -50px; 
     left: calc(50% - 50px);    
 }
+
+.fundo-Login{
+    background-color: #5DBCD2 !important;
+}

@@ -24,7 +24,7 @@ export class AjudaMenuPrincipalComponent implements OnInit {
   constructor() { 
 
     this.textoDefinicao += "Bem vindo ao QualyS. Nosso objetivo é ajuda-lo com os programas de " +
-                           "qualidade exigidos pelos órgãos regulamentadores SIF ( Sistema de inspeção federal ) " +
+                           "qualidade exigidos pelos órgãos regulamentadores SIF ( Serviço de inspeção federal ) " +
                            "e ANVISA ( Agência nacional de vigilância sanitária )."
 
     this.textoAdicional += "Para navegar pelo sistema clique nas opções posicionadas na parte superior da tela. Cada " +

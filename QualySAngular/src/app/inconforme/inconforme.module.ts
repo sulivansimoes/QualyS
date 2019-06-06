@@ -7,7 +7,7 @@ import { ComponenteGlobalModule } from './../global/componente-global.module';
 //MODULOS PERSONALILZADOS
 
 //COMPONENTES PERSONALIZADOS
-import { InconformeComponent         } from './componentes/inconforme.component';
+import { InconformeComponent        } from './componentes/inconforme.component';
 import { BrowserInconformeComponent } from './componentes/browser-inconforme.component';
 import { rotas                      } from '../global/rotas/rotas';
 
