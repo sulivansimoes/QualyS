@@ -1,0 +1,19 @@
+{
+  "name": "qualysapinodejs",
+  "version": "1.0.0",
+  "description": "nApi em NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Súlivan Simões",
+  "license": "ISC",
+  "dependencies": {
+    "connect-multiparty": "^2.2.0",
+    "consign": "^0.1.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.1.1",
+    "pg": "^7.11.0",
+    "validator": "^11.1.0"
+  }
+}
