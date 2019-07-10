@@ -16,14 +16,19 @@ function salvaFrequencia(application, request, response){
     let modelFrequencia = null;
     let connection      = null;    
     let erros           = [];
+    let erros_aux       = null;
     
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    erros = validator_interno.isObjectEmpty(dados);   
-    
-    if (erros.length > 0){
+    erros_aux = validator_interno.isObjectEmpty(dados);
+    if( erros_aux ){
+        erros.push(erros_aux);
+        erros_aux = null;
+    }
 
+
+    if (erros.length > 0){
         response.status(422).json({ 
                                     status:3, 
                                     mensagem: msg_status_3_A,
@@ -32,11 +37,11 @@ function salvaFrequencia(application, request, response){
         return; 
     }
         
-    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
+     connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
+     connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
         
-    modelFrequencia = new application.app.models.frequenciaDAO( connection );   //Instanciando model da frequencia, passando a instancia de conexão com banco de dados.
-    modelFrequencia.salvaFrequencia(dados, response);                           //Enviando frequencia para o model para ser salva.
+     modelFrequencia = new application.app.models.frequenciaDAO( connection );   //Instanciando model da frequencia, passando a instancia de conexão com banco de dados.
+     modelFrequencia.salvaFrequencia(dados, response);                           //Enviando frequencia para o model para ser salva.
     
 };
 
@@ -54,11 +59,13 @@ function deletaFrequencia(application, request, response){
     let connection      = null;    
     let erros           = false;
            
+    console.log(parseInt(idFrequencia))
+
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-  //  erros = !Number.isNaN(idFrequencia);
-    console.log(Number.isNaN(idFrequencia));
+    //  erros = !Number.isNaN(idFrequencia);
+   // console.log(Number.isNaN(idFrequencia));
     if( erros ){
 
         response.status(422).json({ 

@@ -1,8 +1,16 @@
 /**
- * @description Valida se existe algum elemento do objeto vazio.
- * @param   {JSON } objeto, objeto em formato JSON contendo campos que devem ser validados.
- * @returns {Array} camposVazios, array contendo todas as chaves dos elementos do objeto que se encontram vazios. 
- * @example isObjectEmpty( { nome:"Súlivan", sobrenome:"Simões", idade:"" } )
+ * @description Valida se existe algum elemento vazio no objeto.
+ * @param   {JSON} objeto, objeto em formato JSON contendo campos que devem ser validados.
+ * @returns {JSON} se existir campos vazios, retorna um JSON contendo todas as chaves dos elementos
+ *                 que estão vazios. Caso não exista nenhum campo vazio, retorna null.
+ * @example 
+ * isObjectEmpty( { nome:"Súlivan", sobrenome:"Simões", idade:""} ) //chamada
+ * { campos_vazios: [ 'idade' ] } //retorno
+ * 
+ * @example 
+ * isObjectEmpty( { nome:"Súlivan", sobrenome:"Simões", idade:"21"} ) //chamada
+ * null //retorno
+ * 
  * @see : https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/values
  */
  function isObjectEmpty(objeto){
@@ -34,9 +42,9 @@
 
             camposVazios.push(chaves[i]);
         }
-    }
+    } 
 
-    return camposVazios;
+    return ( camposVazios.length > 0 ? { campos_vazios : camposVazios } : null );
 }
 
 
