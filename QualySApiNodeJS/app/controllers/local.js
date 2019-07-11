@@ -1,6 +1,6 @@
 //Bibliotecas
-const validator_interno = require("./../libs/validators");
-const {msg_status_3_A}  = require("./../libs/mensagens_padroes");
+const validator_interno = require("../libs/validators");
+const {msg_status_3_A}  = require("../libs/mensagens_padroes");
 
 
 /**
@@ -9,13 +9,13 @@ const {msg_status_3_A}  = require("./../libs/mensagens_padroes");
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function salvaFrequencia(application, request, response){
+function salvaLocal(application, request, response){
 
-    let dados           = request.body;
-    let modelFrequencia = null;
-    let connection      = null;    
-    let erros_aux       = null;
-    let erros           = [];
+    let dados       = request.body;
+    let modelLocal  = null;
+    let connection  = null;    
+    let erros_aux   = null;
+    let erros       = [];
     
     //-----------------------------------------------------
     // Validando informações 
@@ -40,8 +40,8 @@ function salvaFrequencia(application, request, response){
      connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
      connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
         
-     modelFrequencia = new application.app.models.frequenciaDAO( connection );   //Instanciando model da frequencia, passando a instancia de conexão com banco de dados.
-     modelFrequencia.salvaFrequencia(dados, response);                           //Enviando frequencia para o model para ser salva.
+     modelLocal = new application.app.models.localDAO( connection );   //Instanciando model da local, passando a instancia de conexão com banco de dados.
+     modelLocal.salvaLocal(dados, response);                           //Enviando local para o model para ser salva.
     
 };
 
@@ -52,13 +52,13 @@ function salvaFrequencia(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function atualizaFrequencia(application, request, response){
+function atualizaLocal(application, request, response){
 
-    let dados           = request.body;
-    let modelFrequencia = null;
-    let connection      = null;    
-    let erros_aux       = null;
-    let erros           = [];
+    let dados       = request.body;
+    let modelLocal  = null;
+    let connection  = null;    
+    let erros_aux   = null;
+    let erros       = [];
     
     //-----------------------------------------------------
     // Validando informações 
@@ -82,9 +82,9 @@ function atualizaFrequencia(application, request, response){
         
     connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
     connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-        
-    modelFrequencia = new application.app.models.frequenciaDAO( connection );   //Instanciando model da frequencia, passando a instancia de conexão com banco de dados.
-    modelFrequencia.atualizaFrequencia(dados, response);                        //Enviando frequencia para o model para ser salva.
+    
+    modelLocal = new application.app.models.localDAO( connection );   //Instanciando model do local, passando a instancia de conexão com banco de dados.
+    modelLocal.atualizaLocal(dados, response);                        //Enviando local para o model para ser salva.
     
 };
 
@@ -95,17 +95,17 @@ function atualizaFrequencia(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function deletaFrequencia(application, request, response){
+function deletaLocal(application, request, response){
 
-    let idFrequencia    = Number.parseInt(request.body.id);
-    let modelFrequencia = null;
-    let connection      = null;    
-    let erros           = null;
+    let idLocal    = Number.parseInt(request.body.id);
+    let modelLocal = null;
+    let connection = null;    
+    let erros      = null;
            
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    if ( Number.isNaN( idFrequencia ) ){
+    if ( Number.isNaN( idLocal ) ){
 
         erros = ["id"];
     };
@@ -123,8 +123,8 @@ function deletaFrequencia(application, request, response){
     connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
     connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
         
-    modelFrequencia = new application.app.models.frequenciaDAO( connection );   //Instanciando model da frequencia, passando a instancia de conexão com banco de dados.
-    modelFrequencia.deletaFrequencia(idFrequencia, response);                   //Enviando frequencia para o model para ser salva.
+    modelLocal = new application.app.models.localDAO( connection );   //Instanciando model do local, passando a instancia de conexão com banco de dados.
+    modelLocal.deletaLocal(idLocal, response);                        //Enviando local para o model para ser salva.
     
 };
 
@@ -133,7 +133,8 @@ function deletaFrequencia(application, request, response){
  * Exportando funções 
  */
 module.exports = {
-    salvaFrequencia   ,
-    atualizaFrequencia,
-    deletaFrequencia  ,
+    salvaLocal   ,
+    atualizaLocal,
+    deletaLocal  ,
 }
+

@@ -1,9 +1,9 @@
 //Bibliotecas
-const {msg_status_1_A, msg_status_2_A} = require("./../libs/mensagens_padroes"); 
-const {msg_status_1_B, msg_status_2_B} = require("./../libs/mensagens_padroes"); 
-const {msg_status_1_C, msg_status_2_C} = require("./../libs/mensagens_padroes"); 
+const {msg_status_1_A, msg_status_2_A} = require("../libs/mensagens_padroes"); 
+const {msg_status_1_B, msg_status_2_B} = require("../libs/mensagens_padroes"); 
+const {msg_status_1_C, msg_status_2_C} = require("../libs/mensagens_padroes"); 
 
-class FrequenciaDAO{
+class LocalDAO{
 
     /**
      * @constructor
@@ -16,17 +16,25 @@ class FrequenciaDAO{
 
 
     /**
-     * @description : Salva nova frequencia no banco de dados.
-     * @param frequencia, objeto contendo informações da nova frequencia que deverá ser salva.
+     * @description : Salva nova local no banco de dados.
+     * @param local, objeto contendo informações da nova local que deverá ser salva.
      * @param response, objeto de response da requisição.
      * @obs   o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
-    salvaFrequencia(frequencia, response){
+    salvaLocal(local, response){
 
         this._connection = this._connection.openPoolConnection();
         
-        let cSql    = "INSERT INTO frequencia(descricao) VALUES ( UPPER( TRIM($1) ) )";
-        let aValues = [ frequencia.descricao ];
+        let cSql    = "INSERT INTO local( descricao, bloqueado ) "
+                    + " VALUES(                    " 
+                    + "         UPPER( TRIM($1) ), "                              
+                    + "         $2                 "
+                    + "        )                   ";
+
+        let aValues = [ 
+                        local.descricao,
+                        local.bloqueado,
+                      ];
 
         this._connection.query(cSql, aValues)
                         .then( ()    => {   
@@ -48,21 +56,24 @@ class FrequenciaDAO{
 
 
     /**
-     * @description: Atualiza frequencia no banco de dados.
-     * @param {*} frequencia, id da frequencia que deve ser alterada.
+     * @description: Atualiza local no banco de dados.
+     * @param {*} local, id da local que deve ser alterada.
      * @param response, objeto de response da requisição.
      * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
-    atualizaFrequencia(frequencia, response){
+    atualizaLocal(local, response){
        
         this._connection = this._connection.openPoolConnection();
         
-        let cSql    = "UPDATE frequencia SET descricao = ( UPPER( TRIM($1) ) )" + 
-                      " WHERE id = $2 ";
+        let cSql    = "UPDATE local SET "
+                    + " descricao = ( UPPER( TRIM($1) ) ) , " 
+                    + " bloqueado = $2 "
+                    + " WHERE id  = $3 ";
 
         let aValues = [ 
-                        frequencia.descricao, 
-                        frequencia.id 
+                        local.descricao, 
+                        local.bloqueado, 
+                        local.id       , 
                       ];
 
         this._connection.query(cSql, aValues)
@@ -82,27 +93,27 @@ class FrequenciaDAO{
                                             this._connection.end();
                                         }); 
     }
-
+    
 
     /**
-     * @description: Deleta frequencia do banco de dados.
-     * @param {*} idFrequencia, id da frequencia que deve ser deletada.
+     * @description: Deleta local do banco de dados.
+     * @param {*} idLocal, id do local que deve ser deletado.
      * @param response, objeto de response da requisição.
      * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
-    deletaFrequencia(idFrequencia, response){
+    deletaLocal(idLocal, response){
 
-       this._connection = this._connection.openPoolConnection();
-        
-        let cSql    = "DELETE FROM frequencia WHERE id = $1";
-        let aValues = [ idFrequencia ];
-        
+        this._connection = this._connection.openPoolConnection();
+         
+        let cSql    = "DELETE FROM local WHERE id = $1";
+        let aValues = [ idLocal ];
+         
         this._connection.query(cSql, aValues)
                         .then( ()    => {   
                                             response.status(200).json({ 
-                                                                        status:1, 
-                                                                        mensagem:msg_status_1_B
-                                                                     });
+                                                                         status:1, 
+                                                                         mensagem:msg_status_1_B
+                                                                      });
                                         })
                         .catch(erros => {                                             
                                             response.status(500).json({ 
@@ -115,6 +126,7 @@ class FrequenciaDAO{
                                         });        
     }
 
+    
 }
 
 
@@ -122,5 +134,5 @@ class FrequenciaDAO{
  * Exportando instancia da classe
  */
 module.exports = function(){
-    return FrequenciaDAO;
+    return LocalDAO;
 }
