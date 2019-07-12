@@ -1,0 +1,74 @@
+//Bibliotecas
+const {msg_status_1_A, msg_status_2_A} = require("./../libs/mensagens_padroes"); 
+const {msg_status_1_B, msg_status_2_B} = require("./../libs/mensagens_padroes"); 
+const {msg_status_1_C, msg_status_2_C} = require("./../libs/mensagens_padroes"); 
+
+class usuarioDAO{
+
+    /**
+     * @constructor
+     * @param {*} connection, instancia de uma conexão do PostgreSQL. 
+     */
+    constructor(connection){
+                 
+        this._connection = connection;
+    }
+
+
+    /**
+     * @description : Salva novo usuario no banco de dados.
+     * @param programa, objeto contendo informações da nova frequencia que deverá ser salva.
+     * @param response, objeto de response da requisição.
+     * @obs   o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
+     */
+    salvaUsuario(usuario, response){
+
+        this._connection = this._connection.openPoolConnection();
+        
+        let cSql    = "INSERT INTO programas(cpf, nome, email, senha, assinatura, bloqueado) "
+                    + " VALUES(                    " 
+                    + "         TRIM($1)         , "   //[01]-cpf                          
+                    + "         TRIM($2)         , "   //[02]-nome
+                    + "         LOWER( TRIM($3) ), "   //[03]-email
+                    + "         TRIM($4)         , "   //[04]-senha
+                    + "         TRIM($5)         , "   //[05]-assinatura (diretório contendo imagem)
+                    + "         $7                 "   //[07]-bloqueado
+                    + "        )                   "
+
+        let aValues = [ 
+                        usuario.cpf         ,   //[01]
+                        usuario.nome        ,   //[02]
+                        usuario.email       ,   //[03]
+                        usuario.senha       ,   //[04]
+                        usuario.assinatura  ,   //[05]
+                        usuario.bloqueado   ,   //[07]
+                      ];
+
+        this._connection.query(cSql, aValues)
+                        .then( ()    => {   
+                                            response.status(200).json({ 
+                                                                        status:1, 
+                                                                        mensagem:msg_status_1_A
+                                                                     });
+                                        })
+                        .catch(erros => {                                             
+                                            response.status(500).json({ 
+                                                                        status:2, 
+                                                                        mensagem:msg_status_2_A + erros 
+                                                                     });
+                                        })
+                        .finally(()  => {
+                                            console.log("fechou conexão");
+                                            this._connection.end();
+                                        });
+    }
+
+}
+
+
+/**
+ * Exportando instancia da classe
+ */
+module.exports = function(){
+    return usuarioDAO;
+}
