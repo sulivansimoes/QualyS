@@ -20,7 +20,7 @@ function salvaFrequencia(application, request, response){
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    erros_aux = validator_interno.isObjectEmpty(dados);
+    erros_aux = validator_interno.isObjectEmpty(dados, ["id"]);
     if( erros_aux ){
 
         erros.push(erros_aux);

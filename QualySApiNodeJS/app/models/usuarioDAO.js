@@ -17,7 +17,7 @@ class usuarioDAO{
 
     /**
      * @description : Salva novo usuario no banco de dados.
-     * @param programa, objeto contendo informações da nova frequencia que deverá ser salva.
+     * @param programa, objeto contendo informações do novo usuario que deverá ser salvo.
      * @param response, objeto de response da requisição.
      * @obs   o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
@@ -25,14 +25,14 @@ class usuarioDAO{
 
         this._connection = this._connection.openPoolConnection();
         
-        let cSql    = "INSERT INTO programas(cpf, nome, email, senha, assinatura, bloqueado) "
+        let cSql    = "INSERT INTO usuario(cpf, nome, email, senha, assinatura, bloqueado) "
                     + " VALUES(                    " 
                     + "         TRIM($1)         , "   //[01]-cpf                          
                     + "         TRIM($2)         , "   //[02]-nome
                     + "         LOWER( TRIM($3) ), "   //[03]-email
                     + "         TRIM($4)         , "   //[04]-senha
                     + "         TRIM($5)         , "   //[05]-assinatura (diretório contendo imagem)
-                    + "         $7                 "   //[07]-bloqueado
+                    + "         $6                 "   //[06]-bloqueado
                     + "        )                   "
 
         let aValues = [ 
@@ -41,7 +41,7 @@ class usuarioDAO{
                         usuario.email       ,   //[03]
                         usuario.senha       ,   //[04]
                         usuario.assinatura  ,   //[05]
-                        usuario.bloqueado   ,   //[07]
+                        usuario.bloqueado   ,   //[06]
                       ];
 
         this._connection.query(cSql, aValues)
@@ -62,6 +62,86 @@ class usuarioDAO{
                                             this._connection.end();
                                         });
     }
+
+
+    /**
+     * @description: Atualiza usuario no banco de dados.
+     * @param {*} local, id do usuario que deve ser alterado.
+     * @param response, objeto de response da requisição.
+     * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
+     */
+    atualizaUsuario(usuario, response){
+       
+        this._connection = this._connection.openPoolConnection();
+        
+        let cSql    = "UPDATE usuario SET "
+                    + " nome       = TRIM($1)         , "   //[01]-nome                              
+                    + " email      = LOWER( TRIM($2) ), "   //[02]-email      
+                    + " senha      = TRIM($3)         , "   //[03]-senha        
+                    + " assinatura = TRIM($4)         , "   //[04]-assinatura (diretório contendo imagem)       
+                    + " bloqueado  = $5                 "   //[05]-bloqueado      
+                    + " WHERE cpf  = TRIM($6)           "   //[06]-cpf
+                    
+
+        let aValues = [ 
+                        usuario.nome        ,   //[01]
+                        usuario.email       ,   //[02]
+                        usuario.senha       ,   //[03]
+                        usuario.assinatura  ,   //[04]
+                        usuario.bloqueado   ,   //[05]
+                        usuario.cpf         ,   //[06]
+                      ];
+
+        this._connection.query(cSql, aValues)
+                        .then( ()    => {   
+                                            response.status(200).json({ 
+                                                                        status:1, 
+                                                                        mensagem:msg_status_1_C
+                                                                     });
+                                        })
+                        .catch(erros => {                                             
+                                            response.status(500).json({ 
+                                                                        status:2, 
+                                                                        mensagem:msg_status_2_C + erros 
+                                                                     });
+                                        })
+                        .finally(()  => {
+                                            this._connection.end();
+                                        }); 
+    }
+    
+
+    /**
+     * @description: Deleta usuario do banco de dados.
+     * @param {*} cpf, cpf do usuario que deve ser deletado.
+     * @param response, objeto de response da requisição.
+     * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
+     */
+    deletaUsuario(cpf, response){
+
+        this._connection = this._connection.openPoolConnection();
+         
+        let cSql    = "DELETE FROM usuario WHERE cpf = TRIM($1)";
+        let aValues = [ cpf ];
+         
+        this._connection.query(cSql, aValues)
+                        .then( ()    => {   
+                                            response.status(200).json({ 
+                                                                         status:1, 
+                                                                         mensagem:msg_status_1_B
+                                                                      });
+                                        })
+                        .catch(erros => {                                             
+                                            response.status(500).json({ 
+                                                                        status:2, 
+                                                                        mensagem:msg_status_2_B + erros 
+                                                                     });
+                                        })
+                        .finally(()  => {
+                                            this._connection.end();                                                           
+                                        });        
+    }
+
 
 }
 

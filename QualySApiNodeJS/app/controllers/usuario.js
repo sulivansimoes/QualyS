@@ -1,4 +1,5 @@
 //Bibliotecas
+const crypto            = require("crypto");
 const validator_interno = require("../libs/validators");
 const {msg_status_3_A}  = require("../libs/mensagens_padroes");
 
@@ -8,11 +9,12 @@ const {msg_status_3_A}  = require("../libs/mensagens_padroes");
  * @param : application, aplicação servidora do express.
  * @param : request, objeto do request.
  * @param : response, objeto do response.
+ * @see   : https://nodejs.org/api/crypto.html#crypto_crypto
  */
-function salvaLocal(application, request, response){
+function salvaUsuario(application, request, response){
 
     let dados       = request.body;
-    let modelLocal  = null;
+    let modelUsuario= null;
     let connection  = null;    
     let erros_aux   = null;
     let erros       = [];
@@ -20,7 +22,7 @@ function salvaLocal(application, request, response){
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    erros_aux = validator_interno.isObjectEmpty(dados, ["id"]);
+    erros_aux = validator_interno.isObjectEmpty(dados, ["id","email"]);
     if( erros_aux ){
 
         erros.push(erros_aux);
@@ -37,11 +39,19 @@ function salvaLocal(application, request, response){
         return; 
     }
         
-     connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-     connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-        
-     modelLocal = new application.app.models.localDAO( connection );   //Instanciando model da local, passando a instancia de conexão com banco de dados.
-     modelLocal.salvaLocal(dados, response);                           //Enviando local para o model para ser salva.
+    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
+    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
+    
+
+    //-----------------------------------------------------
+    // Criptografando senha.
+    //-----------------------------------------------------
+    dados.senha = crypto.createHash('MD5')
+                        .update(dados.senha)
+                        .digest('hex');
+
+    modelUsuario = new application.app.models.usuarioDAO( connection );   //Instanciando model do usuario, passando a instancia de conexão com banco de dados.
+    modelUsuario.salvaUsuario(dados, response);                           //Enviando usuario para o model para ser salva.
     
 };
 
@@ -52,10 +62,10 @@ function salvaLocal(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function atualizaLocal(application, request, response){
+function atualizaUsuario(application, request, response){
 
     let dados       = request.body;
-    let modelLocal  = null;
+    let modelUsuario= null;
     let connection  = null;    
     let erros_aux   = null;
     let erros       = [];
@@ -63,7 +73,7 @@ function atualizaLocal(application, request, response){
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    erros_aux = validator_interno.isObjectEmpty(dados);
+    erros_aux = validator_interno.isObjectEmpty(dados,["email"]);
     if( erros_aux ){
 
         erros.push(erros_aux);
@@ -80,11 +90,19 @@ function atualizaLocal(application, request, response){
         return; 
     }
         
+    
+    //-----------------------------------------------------
+    // Criptografando senha.
+    //-----------------------------------------------------
+    dados.senha = crypto.createHash('MD5')
+                         .update(dados.senha)
+                         .digest('hex');
+
     connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
     connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
     
-    modelLocal = new application.app.models.localDAO( connection );   //Instanciando model do local, passando a instancia de conexão com banco de dados.
-    modelLocal.atualizaLocal(dados, response);                        //Enviando local para o model para ser salva.
+    modelUsuario = new application.app.models.usuarioDAO( connection );   //Instanciando model do usuario, passando a instancia de conexão com banco de dados.
+    modelUsuario.atualizaUsuario(dados, response);                        //Enviando usuario para o model para ser salva.
     
 };
 
@@ -95,36 +113,38 @@ function atualizaLocal(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function deletaLocal(application, request, response){
+function deletaUsuario(application, request, response){
 
-    let idLocal    = Number.parseInt(request.body.id);
+    let cpf        = request.body.cpf;
     let modelLocal = null;
     let connection = null;    
-    let erros      = null;
-           
+    let erros       = [];
+    
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    if ( Number.isNaN( idLocal ) ){
+    erros_aux = validator_interno.isObjectEmpty( { cpf: cpf }, [] );
+    if( erros_aux ){
 
-        erros = ["id"];
-    };
+        erros.push(erros_aux);
+        erros_aux = null;
+    }
 
-    if( erros ){
+    if (erros.length > 0){
 
         response.status(422).json({ 
-            status:3, 
-            mensagem: msg_status_3_A,
-            campos_numericos: erros
-        });
+                                    status:3, 
+                                    mensagem: msg_status_3_A,
+                                    campos_invalidos: erros
+                                 });
         return; 
     }
 
     connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
     connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
         
-    modelLocal = new application.app.models.localDAO( connection );   //Instanciando model do local, passando a instancia de conexão com banco de dados.
-    modelLocal.deletaLocal(idLocal, response);                        //Enviando local para o model para ser salva.
+    modelLocal = new application.app.models.usuarioDAO( connection );   //Instanciando model do usuario, passando a instancia de conexão com banco de dados.
+    modelLocal.deletaUsuario(cpf, response);                            //Enviando usuario para o model para ser salva.
     
 };
 
@@ -133,8 +153,7 @@ function deletaLocal(application, request, response){
  * Exportando funções 
  */
 module.exports = {
-    salvaLocal   ,
-    atualizaLocal,
-    deletaLocal  ,
+    salvaUsuario   ,
+    atualizaUsuario,
+    deletaUsuario  ,
 }
-

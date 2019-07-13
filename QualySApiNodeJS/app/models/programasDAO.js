@@ -18,7 +18,7 @@ class ProgramasDAO{
 
     /**
      * @description : Salva novo programa no banco de dados.
-     * @param programa, objeto contendo informações da nova frequencia que deverá ser salva.
+     * @param programa, objeto contendo informações do novo programa que deverá ser salvo.
      * @param response, objeto de response da requisição.
      * @obs   o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
@@ -119,7 +119,7 @@ class ProgramasDAO{
     
     /**
      * @description: Deleta programa do banco de dados.
-     * @param {*} idPrograma, id do programa que deve ser deletada.
+     * @param {*} idPrograma, id do programa que deve ser deletado.
      * @param response, objeto de response da requisição.
      * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
