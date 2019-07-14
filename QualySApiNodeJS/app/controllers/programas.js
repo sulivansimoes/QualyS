@@ -13,7 +13,6 @@ function salvaPrograma(application, request, response){
 
     let dados         = request.body;
     let modelPrograma = null;
-    let connection    = null;    
     let erros_aux     = null;
     let erros         = [];
     
@@ -43,11 +42,8 @@ function salvaPrograma(application, request, response){
     dados.data_vigencia = new Date( dados.data_vigencia );
     dados.data_revisao  = new Date( dados.data_revisao  );
     
-    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-        
-    modelPrograma = new application.app.models.programasDAO( connection );   //Instanciando model do programa, passando a instancia de conexão com banco de dados.
-    modelPrograma.salvaPrograma(dados, response);                            //Enviando programa para o model para ser salva.
+    modelPrograma = new application.app.models.programasDAO();   //Instanciando model do programa
+    modelPrograma.salvaPrograma(dados, response);                //Enviando programa para o model para ser salvo.
     
 };
 
@@ -60,11 +56,9 @@ function salvaPrograma(application, request, response){
  */
 function atualizaPrograma(application, request, response){
 
-    let dados          = request.body;
-    let modelPrograma  = null;
-    let connection     = null;    
-    let erros_aux      = null;
-    let erros          = [];
+    let dados       = request.body;
+    let erros_aux   = null;
+    let erros       = [];
     
     //-----------------------------------------------------
     // Validando informações 
@@ -92,11 +86,8 @@ function atualizaPrograma(application, request, response){
     dados.data_vigencia = new Date( dados.data_vigencia );
     dados.data_revisao  = new Date( dados.data_revisao  );
            
-    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-        
-    modelPrograma = new application.app.models.programasDAO( connection );   //Instanciando model do programa, passando a instancia de conexão com banco de dados.
-    modelPrograma.atualizaPrograma(dados, response);                         //Enviando programa para o model para ser salva.
+    modelPrograma = new application.app.models.programasDAO();   //Instanciando model do programa
+    modelPrograma.atualizaPrograma(dados, response);             //Enviando programa para o model para ser salva.
     
 };
 
@@ -111,7 +102,6 @@ function deletaPrograma(application, request, response){
 
     let idPrograma     = Number.parseInt(request.body.id);
     let modelPrograma  = null;
-    let connection     = null;    
     let erros          = null;
            
     //-----------------------------------------------------
@@ -132,12 +122,8 @@ function deletaPrograma(application, request, response){
         return; 
     }
 
-    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-        
-    modelPrograma = new application.app.models.programasDAO( connection );    //Instanciando model do programa, passando a instancia de conexão com banco de dados.
-    modelPrograma.deletaPrograma(idPrograma, response);                       //Enviando programa para o model para ser salva.
-    
+    modelPrograma = new application.app.models.programasDAO();    //Instanciando model do programa.
+    modelPrograma.deletaPrograma(idPrograma, response);           //Enviando programa para o model para ser salva.
 };
 
 

@@ -15,7 +15,6 @@ function salvaUsuario(application, request, response){
 
     let dados       = request.body;
     let modelUsuario= null;
-    let connection  = null;    
     let erros_aux   = null;
     let erros       = [];
     
@@ -39,9 +38,6 @@ function salvaUsuario(application, request, response){
         return; 
     }
         
-    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-    
 
     //-----------------------------------------------------
     // Criptografando senha.
@@ -50,8 +46,8 @@ function salvaUsuario(application, request, response){
                         .update(dados.senha)
                         .digest('hex');
 
-    modelUsuario = new application.app.models.usuarioDAO( connection );   //Instanciando model do usuario, passando a instancia de conexão com banco de dados.
-    modelUsuario.salvaUsuario(dados, response);                           //Enviando usuario para o model para ser salva.
+    modelUsuario = new application.app.models.usuarioDAO();   //Instanciando model do usuario
+    modelUsuario.salvaUsuario(dados, response);               //Enviando usuario para o model para ser salva.
     
 };
 
@@ -66,7 +62,6 @@ function atualizaUsuario(application, request, response){
 
     let dados       = request.body;
     let modelUsuario= null;
-    let connection  = null;    
     let erros_aux   = null;
     let erros       = [];
     
@@ -98,10 +93,7 @@ function atualizaUsuario(application, request, response){
                          .update(dados.senha)
                          .digest('hex');
 
-    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-    
-    modelUsuario = new application.app.models.usuarioDAO( connection );   //Instanciando model do usuario, passando a instancia de conexão com banco de dados.
+    modelUsuario = new application.app.models.usuarioDAO();   //Instanciando model do usuario
     modelUsuario.atualizaUsuario(dados, response);                        //Enviando usuario para o model para ser salva.
     
 };
@@ -117,7 +109,6 @@ function deletaUsuario(application, request, response){
 
     let cpf        = request.body.cpf;
     let modelLocal = null;
-    let connection = null;    
     let erros       = [];
     
     //-----------------------------------------------------
@@ -140,11 +131,8 @@ function deletaUsuario(application, request, response){
         return; 
     }
 
-    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-        
-    modelLocal = new application.app.models.usuarioDAO( connection );   //Instanciando model do usuario, passando a instancia de conexão com banco de dados.
-    modelLocal.deletaUsuario(cpf, response);                            //Enviando usuario para o model para ser salva.
+    modelLocal = new application.app.models.usuarioDAO();   //Instanciando model do usuario
+    modelLocal.deletaUsuario(cpf, response);                //Enviando usuario para o model para ser salva.
     
 };
 

@@ -16,9 +16,9 @@
  * isObjectEmpty( { nome:"", sobrenome:"Simões", idade:"21"}, ["nome"] ) //chamada
  * null //retorno, nesse exemplo o nome apesar de estar vazio não é validado
  * 
- * @see : https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/values
- * @see : https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/eval
- * @see : https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+ * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/values
+ * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/eval
+ * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
  */
  function isObjectEmpty(valida, naoValida){
 

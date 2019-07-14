@@ -13,7 +13,6 @@ function salvaLocal(application, request, response){
 
     let dados       = request.body;
     let modelLocal  = null;
-    let connection  = null;    
     let erros_aux   = null;
     let erros       = [];
     
@@ -37,12 +36,8 @@ function salvaLocal(application, request, response){
         return; 
     }
         
-     connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-     connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-        
-     modelLocal = new application.app.models.localDAO( connection );   //Instanciando model da local, passando a instancia de conexão com banco de dados.
-     modelLocal.salvaLocal(dados, response);                           //Enviando local para o model para ser salva.
-    
+     modelLocal = new application.app.models.localDAO();   //Instanciando model da local
+     modelLocal.salvaLocal(dados, response);               //Enviando local para o model para ser salva.    
 };
 
 
@@ -56,7 +51,6 @@ function atualizaLocal(application, request, response){
 
     let dados       = request.body;
     let modelLocal  = null;
-    let connection  = null;    
     let erros_aux   = null;
     let erros       = [];
     
@@ -79,13 +73,9 @@ function atualizaLocal(application, request, response){
                                  });
         return; 
     }
-        
-    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-    
-    modelLocal = new application.app.models.localDAO( connection );   //Instanciando model do local, passando a instancia de conexão com banco de dados.
-    modelLocal.atualizaLocal(dados, response);                        //Enviando local para o model para ser salva.
-    
+          
+    modelLocal = new application.app.models.localDAO();   //Instanciando model do local
+    modelLocal.atualizaLocal(dados, response);            //Enviando local para o model para ser salva.
 };
 
 
@@ -99,7 +89,6 @@ function deletaLocal(application, request, response){
 
     let idLocal    = Number.parseInt(request.body.id);
     let modelLocal = null;
-    let connection = null;    
     let erros      = null;
            
     //-----------------------------------------------------
@@ -120,12 +109,8 @@ function deletaLocal(application, request, response){
         return; 
     }
 
-    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-        
-    modelLocal = new application.app.models.localDAO( connection );   //Instanciando model do local, passando a instancia de conexão com banco de dados.
-    modelLocal.deletaLocal(idLocal, response);                        //Enviando local para o model para ser salva.
-    
+    modelLocal = new application.app.models.localDAO();   //Instanciando model do local
+    modelLocal.deletaLocal(idLocal, response);            //Enviando local para o model para ser salva.    
 };
 
 

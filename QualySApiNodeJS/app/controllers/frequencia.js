@@ -13,7 +13,6 @@ function salvaFrequencia(application, request, response){
 
     let dados           = request.body;
     let modelFrequencia = null;
-    let connection      = null;    
     let erros_aux       = null;
     let erros           = [];
     
@@ -37,11 +36,8 @@ function salvaFrequencia(application, request, response){
         return; 
     }
         
-     connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-     connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-        
-     modelFrequencia = new application.app.models.frequenciaDAO( connection );   //Instanciando model da frequencia, passando a instancia de conexão com banco de dados.
-     modelFrequencia.salvaFrequencia(dados, response);                           //Enviando frequencia para o model para ser salva.
+     modelFrequencia = new application.app.models.frequenciaDAO();   //Instanciando model da frequencia
+     modelFrequencia.salvaFrequencia(dados, response);               //Enviando frequencia para o model para ser salva.
     
 };
 
@@ -55,8 +51,6 @@ function salvaFrequencia(application, request, response){
 function atualizaFrequencia(application, request, response){
 
     let dados           = request.body;
-    let modelFrequencia = null;
-    let connection      = null;    
     let erros_aux       = null;
     let erros           = [];
     
@@ -80,12 +74,8 @@ function atualizaFrequencia(application, request, response){
         return; 
     }
         
-    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-        
-    modelFrequencia = new application.app.models.frequenciaDAO( connection );   //Instanciando model da frequencia, passando a instancia de conexão com banco de dados.
-    modelFrequencia.atualizaFrequencia(dados, response);                        //Enviando frequencia para o model para ser salva.
-    
+    modelFrequencia = new application.app.models.frequenciaDAO();   //Instanciando model da frequencia
+    modelFrequencia.atualizaFrequencia(dados, response);            //Enviando frequencia para o model para ser salva.
 };
 
 
@@ -99,7 +89,6 @@ function deletaFrequencia(application, request, response){
 
     let idFrequencia    = Number.parseInt(request.body.id);
     let modelFrequencia = null;
-    let connection      = null;    
     let erros           = null;
            
     //-----------------------------------------------------
@@ -120,11 +109,8 @@ function deletaFrequencia(application, request, response){
         return; 
     }
 
-    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
-    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
-        
-    modelFrequencia = new application.app.models.frequenciaDAO( connection );   //Instanciando model da frequencia, passando a instancia de conexão com banco de dados.
-    modelFrequencia.deletaFrequencia(idFrequencia, response);                   //Enviando frequencia para o model para ser salva.
+    modelFrequencia = new application.app.models.frequenciaDAO();   //Instanciando model da frequencia
+    modelFrequencia.deletaFrequencia(idFrequencia, response);       //Enviando frequencia para o model para ser salva.
     
 };
 

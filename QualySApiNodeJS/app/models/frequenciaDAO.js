@@ -1,4 +1,5 @@
 //Bibliotecas
+const topConnection                    = require("./processosPG");
 const {msg_status_1_A, msg_status_2_A} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_B, msg_status_2_B} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_C, msg_status_2_C} = require("./../libs/mensagens_padroes"); 
@@ -7,11 +8,9 @@ class FrequenciaDAO{
 
     /**
      * @constructor
-     * @param {*} connection, instancia de uma conexão do PostgreSQL. 
      */
-    constructor(connection){
+    constructor(){
                  
-        this._connection = connection;
     }
 
 
@@ -23,27 +22,10 @@ class FrequenciaDAO{
      */
     salvaFrequencia(frequencia, response){
 
-        this._connection = this._connection.openPoolConnection();
-        
         let cSql    = "INSERT INTO frequencia(descricao) VALUES ( UPPER( TRIM($1) ) )";
         let aValues = [ frequencia.descricao ];
 
-        this._connection.query(cSql, aValues)
-                        .then( ()    => {   
-                                            response.status(200).json({ 
-                                                                        status:1, 
-                                                                        mensagem:msg_status_1_A
-                                                                     });
-                                        })
-                        .catch(erros => {                                             
-                                            response.status(500).json({ 
-                                                                        status:2, 
-                                                                        mensagem:msg_status_2_A + erros 
-                                                                     });
-                                        })
-                        .finally(()  => {
-                                            this._connection.end();
-                                        });
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_A, msg_status_2_A);
     }
 
 
@@ -55,8 +37,6 @@ class FrequenciaDAO{
      */
     atualizaFrequencia(frequencia, response){
        
-        this._connection = this._connection.openPoolConnection();
-        
         let cSql    = "UPDATE frequencia SET descricao = ( UPPER( TRIM($1) ) )" + 
                       " WHERE id = $2 ";
 
@@ -64,23 +44,8 @@ class FrequenciaDAO{
                         frequencia.descricao, 
                         frequencia.id 
                       ];
-
-        this._connection.query(cSql, aValues)
-                        .then( ()    => {   
-                                            response.status(200).json({ 
-                                                                        status:1, 
-                                                                        mensagem:msg_status_1_C
-                                                                     });
-                                        })
-                        .catch(erros => {                                             
-                                            response.status(500).json({ 
-                                                                        status:2, 
-                                                                        mensagem:msg_status_2_C + erros 
-                                                                     });
-                                        })
-                        .finally(()  => {
-                                            this._connection.end();
-                                        }); 
+        
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_C, msg_status_2_C);
     }
 
 
@@ -92,29 +57,11 @@ class FrequenciaDAO{
      */
     deletaFrequencia(idFrequencia, response){
 
-       this._connection = this._connection.openPoolConnection();
-        
         let cSql    = "DELETE FROM frequencia WHERE id = $1";
         let aValues = [ idFrequencia ];
         
-        this._connection.query(cSql, aValues)
-                        .then( ()    => {   
-                                            response.status(200).json({ 
-                                                                        status:1, 
-                                                                        mensagem:msg_status_1_B
-                                                                     });
-                                        })
-                        .catch(erros => {                                             
-                                            response.status(500).json({ 
-                                                                        status:2, 
-                                                                        mensagem:msg_status_2_B + erros 
-                                                                     });
-                                        })
-                        .finally(()  => {
-                                            this._connection.end();                                                           
-                                        });        
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_B, msg_status_2_B);      
     }
-
 }
 
 

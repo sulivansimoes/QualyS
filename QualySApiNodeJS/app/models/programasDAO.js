@@ -1,4 +1,5 @@
 //Bibliotecas
+const topConnection                    = require("./processosPG");
 const {msg_status_1_A, msg_status_2_A} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_B, msg_status_2_B} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_C, msg_status_2_C} = require("./../libs/mensagens_padroes"); 
@@ -8,11 +9,9 @@ class ProgramasDAO{
 
     /**
      * @constructor
-     * @param {*} connection, instancia de uma conexão do PostgreSQL. 
      */
-    constructor(connection){
+    constructor(){
                  
-        this._connection = connection;
     }
     
 
@@ -24,8 +23,6 @@ class ProgramasDAO{
      */
     salvaPrograma(programa, response){
 
-        this._connection = this._connection.openPoolConnection();
-        
         let cSql    = "INSERT INTO programas(descricao, sigla, data_vigencia, data_revisao, versao, oficio, bloqueado) "
                     + " VALUES(                    " 
                     + "         UPPER( TRIM($1) ), "   //[01]-descricao                          
@@ -47,23 +44,7 @@ class ProgramasDAO{
                         programa.bloqueado    ,   //[07]
                       ];
 
-        this._connection.query(cSql, aValues)
-                        .then( ()    => {   
-                                            response.status(200).json({ 
-                                                                        status:1, 
-                                                                        mensagem:msg_status_1_A
-                                                                     });
-                                        })
-                        .catch(erros => {                                             
-                                            response.status(500).json({ 
-                                                                        status:2, 
-                                                                        mensagem:msg_status_2_A + erros 
-                                                                     });
-                                        })
-                        .finally(()  => {
-                                            console.log("fechou conexão");
-                                            this._connection.end();
-                                        });
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_A, msg_status_2_A);                      
     }    
 
 
@@ -75,8 +56,6 @@ class ProgramasDAO{
      */
     atualizaPrograma(programa, response){
        
-        this._connection = this._connection.openPoolConnection();
-        
         let cSql    = "UPDATE programas SET                "
                     + " descricao     = UPPER( TRIM($1) ), "    //[01]   
                     + " sigla         = UPPER( TRIM($2) ), "    //[02]
@@ -98,22 +77,7 @@ class ProgramasDAO{
                         programa.id               //[08]
                       ];
 
-        this._connection.query(cSql, aValues)
-                        .then( ()    => {   
-                                            response.status(200).json({ 
-                                                                        status:1, 
-                                                                        mensagem:msg_status_1_C
-                                                                     });
-                                        })
-                        .catch(erros => {                                             
-                                            response.status(500).json({ 
-                                                                        status:2, 
-                                                                        mensagem:msg_status_2_C + erros 
-                                                                     });
-                                        })
-                        .finally(()  => {
-                                            this._connection.end();
-                                        }); 
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_C, msg_status_2_C);                                            
     }  
     
     
@@ -125,30 +89,11 @@ class ProgramasDAO{
      */
     deletaPrograma(idPrograma, response){
 
-        this._connection = this._connection.openPoolConnection();
-         
         let cSql    = "DELETE FROM programas WHERE id = $1";
         let aValues = [ idPrograma ];
          
-        this._connection.query(cSql, aValues)
-                        .then( ()    => {   
-                                            response.status(200).json({ 
-                                                                        status:1, 
-                                                                        mensagem:msg_status_1_B
-                                                                     });
-                                        })
-                        .catch(erros => {                                             
-                                            response.status(500).json({ 
-                                                                        status:2, 
-                                                                        mensagem:msg_status_2_B + erros 
-                                                                     });
-                                        })
-                        .finally(()  => {
-                                            this._connection.end();                                                           
-                                        });        
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_B, msg_status_2_B);             
     }
-
-
 }
 
 

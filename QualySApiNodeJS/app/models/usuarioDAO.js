@@ -1,4 +1,5 @@
 //Bibliotecas
+const topConnection                    = require("./processosPG");
 const {msg_status_1_A, msg_status_2_A} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_B, msg_status_2_B} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_C, msg_status_2_C} = require("./../libs/mensagens_padroes"); 
@@ -7,11 +8,9 @@ class usuarioDAO{
 
     /**
      * @constructor
-     * @param {*} connection, instancia de uma conexão do PostgreSQL. 
      */
-    constructor(connection){
+    constructor(){
                  
-        this._connection = connection;
     }
 
 
@@ -23,8 +22,6 @@ class usuarioDAO{
      */
     salvaUsuario(usuario, response){
 
-        this._connection = this._connection.openPoolConnection();
-        
         let cSql    = "INSERT INTO usuario(cpf, nome, email, senha, assinatura, bloqueado) "
                     + " VALUES(                    " 
                     + "         TRIM($1)         , "   //[01]-cpf                          
@@ -44,23 +41,7 @@ class usuarioDAO{
                         usuario.bloqueado   ,   //[06]
                       ];
 
-        this._connection.query(cSql, aValues)
-                        .then( ()    => {   
-                                            response.status(200).json({ 
-                                                                        status:1, 
-                                                                        mensagem:msg_status_1_A
-                                                                     });
-                                        })
-                        .catch(erros => {                                             
-                                            response.status(500).json({ 
-                                                                        status:2, 
-                                                                        mensagem:msg_status_2_A + erros 
-                                                                     });
-                                        })
-                        .finally(()  => {
-                                            console.log("fechou conexão");
-                                            this._connection.end();
-                                        });
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_A, msg_status_2_A);
     }
 
 
@@ -72,8 +53,6 @@ class usuarioDAO{
      */
     atualizaUsuario(usuario, response){
        
-        this._connection = this._connection.openPoolConnection();
-        
         let cSql    = "UPDATE usuario SET "
                     + " nome       = TRIM($1)         , "   //[01]-nome                              
                     + " email      = LOWER( TRIM($2) ), "   //[02]-email      
@@ -92,22 +71,7 @@ class usuarioDAO{
                         usuario.cpf         ,   //[06]
                       ];
 
-        this._connection.query(cSql, aValues)
-                        .then( ()    => {   
-                                            response.status(200).json({ 
-                                                                        status:1, 
-                                                                        mensagem:msg_status_1_C
-                                                                     });
-                                        })
-                        .catch(erros => {                                             
-                                            response.status(500).json({ 
-                                                                        status:2, 
-                                                                        mensagem:msg_status_2_C + erros 
-                                                                     });
-                                        })
-                        .finally(()  => {
-                                            this._connection.end();
-                                        }); 
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_C, msg_status_2_C);
     }
     
 
@@ -119,29 +83,11 @@ class usuarioDAO{
      */
     deletaUsuario(cpf, response){
 
-        this._connection = this._connection.openPoolConnection();
-         
         let cSql    = "DELETE FROM usuario WHERE cpf = TRIM($1)";
         let aValues = [ cpf ];
-         
-        this._connection.query(cSql, aValues)
-                        .then( ()    => {   
-                                            response.status(200).json({ 
-                                                                         status:1, 
-                                                                         mensagem:msg_status_1_B
-                                                                      });
-                                        })
-                        .catch(erros => {                                             
-                                            response.status(500).json({ 
-                                                                        status:2, 
-                                                                        mensagem:msg_status_2_B + erros 
-                                                                     });
-                                        })
-                        .finally(()  => {
-                                            this._connection.end();                                                           
-                                        });        
+        
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_B, msg_status_2_B);      
     }
-
 
 }
 
