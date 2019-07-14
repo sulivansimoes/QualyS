@@ -73,10 +73,45 @@ function salvaFormulario(application, request, response){
 
 
 /**
+ * @description : Pega dados do request, valida, e envia para o model deletar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function deletaFormulario(application, request, response){
+
+    let idFormulario  = Number.parseInt(request.body.id);
+    let modelLocal    = null;
+    let erros         = null;
+           
+    //-----------------------------------------------------
+    // Validando informações 
+    //-----------------------------------------------------
+    if ( Number.isNaN( idFormulario ) ){
+
+        erros = ["id"];
+    };
+
+    if( erros ){
+
+        response.status(422).json({ 
+            status:3, 
+            mensagem: msg_status_3_A,
+            campos_numericos: erros
+        });
+        return; 
+    }
+
+    modelLocal = new application.app.models.formularioDAO();   //Instanciando model do local
+    modelLocal.deletaLocal(idFormulario, response);            //Enviando local para o model para ser salva.    
+};
+
+
+/**
  * Exportando funções 
  */
 module.exports = {
     salvaFormulario   ,
   //  atualizaFormulario,
-  //  deletaFormulario  ,
+    deletaFormulario  ,
 }
