@@ -63,23 +63,27 @@ class FormularioDAO{
                 //----------------------------------------------------------------
                 // Query para salvar os itens [perguntas] do Formulário 
                 //----------------------------------------------------------------                        
-                let cSql_itens  = "INSERT INTO item_formulario (id_cabecalho, pergunta, bloqueado) "
+                let cSql_itens  = "INSERT INTO item_formulario ( id_cabecalho, item, pergunta, bloqueado ) "
                                 + " VALUES(             " 
-                                + "         $1        , "    //[01]-id_cabecalho                      
-                                + "         TRIM($2)  , "    //[03]-pergunta
-                                + "         $3          "    //[04]-bloqueado
+                                + "         $1        , "                                                                              //[01]-id_cabecalho                      
+                                + "         ( SELECT COALESCE( MAX(item) , 0) + 1 FROM item_formulario  WHERE id_cabecalho = $2 ) , "  //[02]-item
+                                + "         TRIM($3)  , "                                                                              //[03]-pergunta
+                                + "         $4          "                                                                              //[04]-bloqueado
                                 + "        )            ";
 
-                //for( percorre itens )                
-                let aItensValues = [
-                                    idCabecalho         ,       //[01]
-                                    formulario.pergunta ,       //[02]
-                                    formulario.item_bloqueado   //[03]
-                                ];
-                  
-                //salva itens                                           
-                await this._connection.query(cSql_itens, aItensValues);
-                //encerra for
+ 
+                for(let item in formulario.itens){         
+
+                    let aItensValues = [
+                                        idCabecalho                     ,       //[01]
+                                        idCabecalho                     ,       //[02]
+                                        formulario.itens[item].pergunta ,       //[03]
+                                        formulario.itens[item].item_bloqueado   //[04]
+                                       ];
+                    
+                     //salva intens
+                     await this._connection.query(cSql_itens, aItensValues);
+                }
 
                 //finaliza transação com Banco
                 await this._connection.query('COMMIT');
@@ -105,9 +109,7 @@ class FormularioDAO{
                 this._connection.end();
             }    
             
-        })().catch(e => console.error(e)); 
-                    
-                                
+        })().catch(e => console.error(e));                                                 
     }
 }
 

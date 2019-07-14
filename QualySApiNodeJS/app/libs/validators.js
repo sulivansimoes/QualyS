@@ -1,3 +1,4 @@
+
 /**
  * @description Valida se existe algum elemento vazio no objeto.
  * @param   {JSON } objeto, objeto em formato JSON contendo campos que devem ser validados.

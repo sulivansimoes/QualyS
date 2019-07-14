@@ -16,18 +16,43 @@ function salvaFormulario(application, request, response){
     let erros_aux       = null;
     let erros           = [];
     
-    console.log(dados)
+
+    //-----------------------------------------------------
+    // Transformando a string de itens em array de JSON
+    //-----------------------------------------------------
+    
+    /**
+     * @todo fazer uma livadação para ver se o schema é JSON antes de tentar fazer a
+     * conversão
+     */
+    dados.itens = eval(dados.itens);
+    console.log(dados);
 
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    erros_aux = validator_interno.isObjectEmpty(dados, ["id_programa","item"]);
+    //validando cabecalho
+    erros_aux = validator_interno.isObjectEmpty(dados, ["id_programa","itens"]);
     if( erros_aux ){
 
         erros.push(erros_aux);
         erros_aux = null;
     }
 
+    //Validando itens
+    for(let item in dados.itens){
+
+        erros_aux = validator_interno.isObjectEmpty(dados.itens[item], ["item_bloqueado"]);
+        if( erros_aux ){
+    
+            erros.push(erros_aux);
+            erros_aux = null;
+        }
+    }
+
+    //-----------------------------------------------------
+    // Se existir erros de validação
+    //-----------------------------------------------------
     if (erros.length > 0){
 
         response.status(422).json({ 
