@@ -111,6 +111,59 @@ class FormularioDAO{
             
         })().catch(e => console.error(e));                                                 
     }
+
+
+    /**
+     * @description: Deleta formulario do banco de dados.
+     * @param {*} idFormulario, id do formulario que deve ser deletado.
+     * @param response, objeto de response da requisição.
+     * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
+     */
+    deletaFormulario(idFormulario, response){
+
+        (async () => {
+            
+            this._connection = await this._connection.openPoolConnection();
+
+            try {
+            
+                //Inicia toda transação
+                await this._connection.query('BEGIN');    
+
+                let cSql_itens      = "DELETE FROM item_formulario WHERE id_cabecalho = $1";
+                let cSql_cabecalho  = "DELETE FROM cabecalho_formulario WHERE id = $1";
+                let aValues         = [ idFormulario ];
+               
+                await this._connection.query(cSql_itens    , aValues); 
+                await this._connection.query(cSql_cabecalho, aValues);
+
+                //finaliza transação com Banco
+                await this._connection.query('COMMIT');
+                
+                //Se der tudo certo
+                response.status(200).json({ 
+                    status:1, 
+                    mensagem:msg_status_1_B 
+                });
+
+            } catch (erros) {
+                
+                await this._connection.query('ROLLBACK');
+                
+                response.status(500).json({ 
+                    status:2, 
+                    mensagem:msg_status_2_B + erros 
+                });
+                
+            } finally {
+                
+                console.log("fechou conexão");
+                this._connection.end();
+            }    
+            
+        })().catch(e => console.error(e));               
+    }
+    
 }
 
 

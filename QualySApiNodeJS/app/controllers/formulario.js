@@ -82,6 +82,7 @@ function deletaFormulario(application, request, response){
 
     let idFormulario  = Number.parseInt(request.body.id);
     let modelLocal    = null;
+    let connection    = null;  
     let erros         = null;
            
     //-----------------------------------------------------
@@ -102,8 +103,12 @@ function deletaFormulario(application, request, response){
         return; 
     }
 
-    modelLocal = new application.app.models.formularioDAO();   //Instanciando model do local
-    modelLocal.deletaLocal(idFormulario, response);            //Enviando local para o model para ser salva.    
+    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
+    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
+       
+    modelFormulario = new application.app.models.formularioDAO( connection );   //Instanciando model da formulario, passando a instancia de conexão com banco de dados.
+    modelFormulario.deletaFormulario(idFormulario, response);                   //Enviando formulario para o model para ser deletado.
+
 };
 
 
