@@ -35,7 +35,8 @@ function executaQuery(cSql, aValues, response, cMensagemSucesso, cMensagemErro){
                                                              });
                               })
               .finally(()  => {
-                                    this._connection.end();
+                                    console.log("Fechando conexão com banco de dados.");
+                                    connection.end();
                               });
 }
 
