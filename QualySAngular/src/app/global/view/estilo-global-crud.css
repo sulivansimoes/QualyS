@@ -72,9 +72,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .posicao-centro-vertical{
-    display: flex ;
-    align-items: center ;
-    justify-content: center ;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .titulo-browser{
@@ -97,10 +97,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .bordas-tabela{
-    border-collapse: collapse;
-    border-style: solid;
-    border-color: black;
-    border-width: 0.03px;
-    margin-bottom: 0.4rem;
+    border-collapse: collapse !important;
+    border-style: solid !important;
+    border-color: black !important;
+    border-width: 0.03px !important;
+    margin-bottom: 0.4rem !important;
 }
 

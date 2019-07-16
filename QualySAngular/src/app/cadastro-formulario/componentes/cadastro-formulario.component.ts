@@ -36,12 +36,12 @@ export class CadastroFormularioComponent implements OnInit {
   private itens:ItemFormulario[]= [];
 
   // USADO NOS MODAIS DE CONSULTA
-  private cabecalhoTabelaPrograma = [["ID"],["DESCRIÇÃO"]];
-  private programas:Programa []=[ new Programa(1,'PROGRAMA 1'), new Programa(2,'PROGRAMA 2') ];
-  private programasFiltrados:any[]= parseObjectsToArray ( this.programas ) ; 
-  private cabecalhoTabelaLocal = [["ID"],["DESCRIÇÃO"]];
-  private locais:Local []=[ new Local(1,'DEPOSITO MATERIA PRIMA'), new Local(2,'VESTIARIO') ];
-  private locaisFiltrados:any[]= parseObjectsToArray ( this.locais ) ; 
+  // private cabecalhoTabelaPrograma = [["ID"],["DESCRIÇÃO"]];
+  // private programas:Programa []=[ new Programa(1,'PROGRAMA 1'), new Programa(2,'PROGRAMA 2') ];
+  // private programasFiltrados:any[]= parseObjectsToArray ( this.programas ) ; 
+  // private cabecalhoTabelaLocal = [["ID"],["DESCRIÇÃO"]];
+  // private locais:Local []=[ new Local(1,'DEPOSITO MATERIA PRIMA'), new Local(2,'VESTIARIO') ];
+  // private locaisFiltrados:any[]= parseObjectsToArray ( this.locais ) ; 
 
   constructor(private router:Router) { 
    /**
@@ -51,9 +51,9 @@ export class CadastroFormularioComponent implements OnInit {
 
   ngOnInit() { 
 
-    if(this.getCadastroFormulario().getQuantidadeItens() === 0){
-      this.adicionaItem();
-    }
+    // if(this.getCadastroFormulario().getQuantidadeItens() === 0){
+    //   this.adicionaItem();
+    // }
   }
 
  /**
@@ -81,45 +81,45 @@ export class CadastroFormularioComponent implements OnInit {
    */
   private adicionaItem(){
 
-    let ultimoItem = this.getCadastroFormulario().getQuantidadeItens();
+    // let ultimoItem = this.getCadastroFormulario().getQuantidadeItens();
 
-    this.getCadastroFormulario().addItem(new ItemFormulario( null,            //IdCabeçalho
-                                                             ultimoItem  + 1, //Item
-                                                             null,            //Pergunta
-                                                             null) );         //Bloqueado
+    // this.getCadastroFormulario().addItem(new ItemFormulario( null,            //IdCabeçalho
+    //                                                          ultimoItem  + 1, //Item
+    //                                                          null,            //Pergunta
+    //                                                          null) );         //Bloqueado
 
-    console.log(this.getCadastroFormulario().getItens());                                                             
+    // console.log(this.getCadastroFormulario().getItens());                                                             
   }
 
   /**
    * @description Deleta o item ( pergunta ) do fomulário
    * @param {ItemFormulario} item - Item à ser excluído do formulário.
    */
-  private deletaItem(item:ItemFormulario){
+  private deletaItem(/*item:ItemFormulario*/){
    
-    this.getCadastroFormulario().removeItem(item);
+    // this.getCadastroFormulario().removeItem(item);
   }
 
   /**
    * @description Retorna instancia de CadastroFormulário alocado.
    * @return {CadastroFormulario} - instancia alocada em memória
    */
-  private getCadastroFormulario():CadastroFormulario{
-    if( this.formulario == null ){
-      this.formulario = new CadastroFormulario();
-    }
-    return this.formulario;
+  private getCadastroFormulario()/*:CadastroFormulario*/{
+    // if( this.formulario == null ){
+    //   this.formulario = new CadastroFormulario();
+    // }
+    // return this.formulario;
   }
 
   /**
    * @description Retorna instancia de ItemFormulario alocado
    * @return {ItemFormulario}  - instancia alocada em memória
    */
-  private getItemFormulario():ItemFormulario{
-    if( this.itemFormulario == null ){
-      this.itemFormulario = new ItemFormulario()
-    }
-    return this.itemFormulario;
+  private getItemFormulario()/*:ItemFormulario*/{
+    // if( this.itemFormulario == null ){
+    //   this.itemFormulario = new ItemFormulario()
+    // }
+    // return this.itemFormulario;
   }
 
   private escolhePesquisa(cosulta:number):void{
@@ -137,8 +137,8 @@ export class CadastroFormularioComponent implements OnInit {
    * @param dado id do local que foi seleciona (clicada) pelo usuário
    */
   private itemLocalSelecionado(dado:any){
-    this.formulario.setIdLocal(dado[0]);
-    this.fechaModalPesquisa();
+    // this.formulario.setIdLocal(dado[0]);
+    // this.fechaModalPesquisa();
   }
 
   /**
@@ -146,8 +146,8 @@ export class CadastroFormularioComponent implements OnInit {
    * @param dado id do programa que foi seleciona (clicada) pelo usuário
    */
   private itemProgramaSelecionado(dado:any){
-    this.formulario.setIdPrograma(dado[0]);
-    this.fechaModalPesquisa();
+    // this.formulario.setIdPrograma(dado[0]);
+    // this.fechaModalPesquisa();
   }
   
  /**
@@ -156,12 +156,12 @@ export class CadastroFormularioComponent implements OnInit {
    */ 
   private pesquisaLocal(filtro:string){
 
-    if(filtro && filtro.trim() != ""){
-      this.locaisFiltrados  = this.locaisFiltrados.filter( f => f[0] == filtro         || //Código
-                                                                f[1].startsWith(filtro)); //Descrição
-    }else{
-      this.locaisFiltrados = parseObjectsToArray(this.locais);
-    }
+    // if(filtro && filtro.trim() != ""){
+    //   this.locaisFiltrados  = this.locaisFiltrados.filter( f => f[0] == filtro         || //Código
+    //                                                             f[1].startsWith(filtro)); //Descrição
+    // }else{
+    //   this.locaisFiltrados = parseObjectsToArray(this.locais);
+    // }
   }
 
   /**
@@ -170,12 +170,12 @@ export class CadastroFormularioComponent implements OnInit {
    */ 
   private pesquisaPrograma(filtro:string){
 
-    if(filtro && filtro.trim() != ""){
-      this.programasFiltrados  = this.programasFiltrados.filter( f => f[0] == filtro         || //Código
-                                                                      f[1].startsWith(filtro)); //Descrição
-    }else{
-      this.programasFiltrados = parseObjectsToArray(this.programas);
-    }
+    // if(filtro && filtro.trim() != ""){
+    //   this.programasFiltrados  = this.programasFiltrados.filter( f => f[0] == filtro         || //Código
+    //                                                                   f[1].startsWith(filtro)); //Descrição
+    // }else{
+    //   this.programasFiltrados = parseObjectsToArray(this.programas);
+    // }
   }
 
   /**
@@ -186,17 +186,17 @@ export class CadastroFormularioComponent implements OnInit {
     
     $("#modalPesquisa").modal();
 
-    switch(consulta){
-      case this.CONSULTA_LOCAL:
-        this.consultaAcionada = this.CONSULTA_LOCAL;
-      break;
-      case this.CONSULTA_PROGRAMA:
-        this.consultaAcionada = this.CONSULTA_PROGRAMA;
-      break;
-      default :
-        console.log("Erro inesperado! consulta '"+consulta+"' chamada na função acionaModalPesquisa() não foi encontrada.");
-      break;
-    }
+    // switch(consulta){
+    //   case this.CONSULTA_LOCAL:
+    //     this.consultaAcionada = this.CONSULTA_LOCAL;
+    //   break;
+    //   case this.CONSULTA_PROGRAMA:
+    //     this.consultaAcionada = this.CONSULTA_PROGRAMA;
+    //   break;
+    //   default :
+    //     console.log("Erro inesperado! consulta '"+consulta+"' chamada na função acionaModalPesquisa() não foi encontrada.");
+    //   break;
+    // }
   }
 
   /**

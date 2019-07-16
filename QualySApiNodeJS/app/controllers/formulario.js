@@ -80,10 +80,10 @@ function salvaFormulario(application, request, response){
  */
 function deletaFormulario(application, request, response){
 
-    let idFormulario  = Number.parseInt(request.body.id);
-    let modelLocal    = null;
-    let connection    = null;  
-    let erros         = null;
+    let idFormulario    = Number.parseInt(request.body.id);
+    let modelFormulario = null;
+    let connection      = null;  
+    let erros           = null;
            
     //-----------------------------------------------------
     // Validando informações 

@@ -115,6 +115,16 @@ function deletaFrequencia(application, request, response){
 };
 
 
+function getAllFrequencias(application, request, response){
+
+    modelFrequencia = null;
+
+    modelFrequencia = new application.app.models.frequenciaDAO();   //Instanciando model da frequencia
+    modelFrequencia.getAllFrequencias(response);       
+
+}
+
+
 /**
  * Exportando funções 
  */
@@ -122,4 +132,5 @@ module.exports = {
     salvaFrequencia   ,
     atualizaFrequencia,
     deletaFrequencia  ,
+    getAllFrequencias , 
 }

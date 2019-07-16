@@ -130,8 +130,8 @@ class FormularioDAO{
                 //Inicia toda transação
                 await this._connection.query('BEGIN');    
 
-                let cSql_itens      = "DELETE FROM item_formulario WHERE id_cabecalho = $1";
-                let cSql_cabecalho  = "DELETE FROM cabecalho_formulario WHERE id = $1";
+                let cSql_itens      = "DELETE FROM item_formulario WHERE id_cabecalho = $1 ";
+                let cSql_cabecalho  = "DELETE FROM cabecalho_formulario WHERE id = $1 ";
                 let aValues         = [ idFormulario ];
                
                 await this._connection.query(cSql_itens    , aValues); 

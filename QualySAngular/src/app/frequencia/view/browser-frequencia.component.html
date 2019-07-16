@@ -30,53 +30,33 @@
                 <th>#</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>LINHA 01</td>
-                    <td>LINHA 01</td>
+                <tr *ngFor="let frequencia of frequencias | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;">
+                    <td> {{ frequencia.id        }} </td>
+                    <td> {{ frequencia.descricao }} </td>
                     <td> <input type="button" class="buttonExclui"> </td>
                     <td> <input type="button" class="buttonEditar"> </td>
                 </tr>
-                <tr>
-                    <td>LINHA 02</td>
-                    <td>LINHA 02</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-                <tr>
-                    <td>LINHA 03</td>
-                    <td>LINHA 03</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-                <tr>
-                    <td>LINHA 04</td>
-                    <td>LINHA 04</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-                <tr>
-                    <td>LINHA 05</td>
-                    <td>LINHA 05</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-                <tr>
-                    <td>LINHA 06</td>
-                    <td>LINHA 06</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-                <tr>
-                    <td>LINHA 07</td>
-                    <td>LINHA 07</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-            </tbody>
+            </tbody>            
         </table>
+
+        <!-- PAGINAÇÃO -->
+        <pagination-controls
+                (pageChange)="paginaAtual = $event"
+                maxSize = "5"
+                directionLinks = "true"
+                autoHide = "true"
+                responsive = "true"
+                previousLabel = ""
+                nextLabel = ""
+                screenReaderPaginationLabel = "Paginação"
+                screenReaderPageLabel = "page"
+                screenReaderCurrentLabel = "Você está na página"
+                class=" posicao-centro-vertical " 
+        >
+        </pagination-controls>
     </div>
     <!-- PAGINAÇÃO -->
-    <nav class="posicao-centro-vertical">
+    <!-- <nav class="posicao-centro-vertical">
         <ul class="pagination">
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -94,5 +74,5 @@
                 </a>
             </li>
         </ul>
-    </nav>
+    </nav> -->
 </div>

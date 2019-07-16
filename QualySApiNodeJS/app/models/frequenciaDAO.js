@@ -3,6 +3,7 @@ const topConnection                    = require("./processosPG");
 const {msg_status_1_A, msg_status_2_A} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_B, msg_status_2_B} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_C, msg_status_2_C} = require("./../libs/mensagens_padroes"); 
+const {msg_status_1_D, msg_status_2_D} = require("./../libs/mensagens_padroes"); 
 
 class FrequenciaDAO{
 
@@ -61,6 +62,14 @@ class FrequenciaDAO{
         let aValues = [ idFrequencia ];
         
         topConnection.executaQuery(cSql, aValues, response, msg_status_1_B, msg_status_2_B);      
+    }
+
+
+    getAllFrequencias(response){
+
+        let cSql    =  "SELECT id, descricao FROM frequencia"
+
+        topConnection.executaQuery(cSql, [],  response, msg_status_1_D, msg_status_2_D);      
     }
 }
 

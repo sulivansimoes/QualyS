@@ -22,10 +22,12 @@ function executaQuery(cSql, aValues, response, cMensagemSucesso, cMensagemErro){
     connection = connection.openPoolConnection();         //Abrindo conexão com banco de dados.
 
     connection.query(cSql, aValues)
-              .then( ()    => {   
+              .then(result => {   
                                     response.status(200).json({ 
                                                                 status:1, 
-                                                                mensagem:cMensagemSucesso
+                                                                mensagem:cMensagemSucesso,
+                                                                linhas_afetadas: result.rowCount,
+                                                                registros: result.rows 
                                                              });
                               })
               .catch(erros => {                                             

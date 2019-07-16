@@ -3,7 +3,7 @@ const { Pool, Client } = require('pg');
 
 /**
  * @description : Classe contendo métodos responsáveis por abrir conexões no o banco de dados PostgreSQL
- * @see         : https://node-postgres.com/features/connecting
+ * @see           https://node-postgres.com/features/connecting
  */
 class ConnectionPostgreSQL{
     

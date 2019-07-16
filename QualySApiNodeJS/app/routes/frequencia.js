@@ -17,5 +17,10 @@ module.exports = function(application){
 
         application.app.controllers.frequencia.deletaFrequencia(application, req, res );
     });
+
+    application.get("/api/frequencia", function(req, res){
+
+        application.app.controllers.frequencia.getAllFrequencias(application, req, res);
+    });
     
 }

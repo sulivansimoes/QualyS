@@ -4,6 +4,7 @@ import { NgModule         } from '@angular/core';
 import { FormsModule      } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule     } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 // MÓDULOS PERSONALIZADOS
 import { LocalModule      } from './local/local.module';
 import { ProgramaModule   } from './programa/programa.module';
@@ -29,6 +30,7 @@ const appRoutes = rotas
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
+    HttpClientModule,
   
     ComponenteGlobalModule,
     LocalModule,
