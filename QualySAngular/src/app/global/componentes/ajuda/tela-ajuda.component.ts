@@ -13,7 +13,8 @@ import { Component, OnInit, Input } from '@angular/core';
  * @Input {string} ( textoObservacao02 ) - Texto 02 classificado como observação, posicionado após o quadro de campos
  * @Input {array} ( campos ) - Array bidimensional de string, contendo o nome do campo e uma explicação exemplo de um campo - Exemplo CAMPO['ID']['Código identificador']
  * 
- * @example $("#NOME_DO_ID").modal() - O nome do id passado no databinding, será utilizado para acionar a Ajuda
+ * @example
+ *    $("#NOME_DO_ID").modal()  //O nome do id passado no databinding, será utilizado para acionar a Ajuda
  *  */
 @Component({
   selector: 'tela-ajuda',
@@ -34,7 +35,7 @@ export class TelaAjudaComponent implements OnInit {
   @Input() textoObservacao02:string="";
   @Input() campos: string[][]=[];
   // IDENTIFICADORES E CONFIGURAÇÕES DO MODAL
-  @Input() idModal = "modalAjudaCadastroFrequencia";
+  @Input() idModal = "modalAjudaMenuPrincial";
   private  idModalTitle = this.idModal+"Title";
 
   constructor() { }

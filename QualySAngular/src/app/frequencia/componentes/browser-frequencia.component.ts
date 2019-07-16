@@ -17,36 +17,30 @@ export class BrowserFrequenciaComponent implements OnInit {
 
   frequencias:Frequencia[] = []; 
   resultadoApi  = null;
+  erroApi       = null;
 
   public paginaAtual = 1; // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
 
   constructor(private frequenciaService : FrequenciaService) {
 
-    // for(let i=0; i < 80; i++){
-
-    //   let frequencia = new Frequencia();
-  
-    //   frequencia.setId(i);
-    //   frequencia.setDescricao("teste "+i);
-  
-    //   this.frequencias.push(frequencia);
-    // }
-    this.getAll() ;
-   
-  
-   }
+     this.getAll() ;
+  }
 
   ngOnInit() {
   }
 
   getAll(){
     this.frequenciaService.getAllFrequencias().subscribe(
-      result => {
 
+      result => {
         this.resultadoApi = result;
-        console.log(this.resultadoApi.mensagem);
-        this.frequencias  = this.resultadoApi.registros;
+        this.frequencias  = this.resultadoApi.registros;        
+                },
+      error =>{
+        this.erroApi = error ;
+        console.log(this.erroApi );
       }
+
     );
   }
 

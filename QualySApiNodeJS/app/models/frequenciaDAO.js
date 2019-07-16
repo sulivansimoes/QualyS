@@ -65,6 +65,10 @@ class FrequenciaDAO{
     }
 
 
+    /**
+     * @description Consulta todas as frequencias no banco de dados
+     * @param {response} response 
+     */
     getAllFrequencias(response){
 
         let cSql    =  "SELECT id, descricao FROM frequencia"

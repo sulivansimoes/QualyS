@@ -1,7 +1,8 @@
 // MÓDULOS PADRÕES
 import { Injectable              } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable              } from 'rxjs';
+import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
+import {catchError               } from 'rxjs/operators';
+import { Observable ,throwError  } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
 import { Frequencia              } from './frequencia';
 
@@ -48,10 +49,27 @@ export class FrequenciaService {
    */
   getAllFrequencias() : Observable<Frequencia[]>{
 
-    return this.http.get<Frequencia[]>(this.frequenciaApi);
+    return this.http.get<Frequencia[]>(this.frequenciaApi)
+                    .pipe(
+                            catchError(
+                                        this.errorHandler
+                                      )
+                          );
+      
+                  
   }
 
-  // Salvar
+
+  /**
+   * @description Função intercepta e lança erros originados ao tentar fazer solicitações à API.
+   * @param error erros gerados ao fazer solicitações à API
+   * @returns retorna uma string contendo o erro que acontenceu. 
+   */
+  errorHandler(error : HttpErrorResponse){
+
+    return throwError( error.error.mensagem || "Servidor com Erro! "+ error.message);
+  }
+
 
   // Editar
 
@@ -59,5 +77,4 @@ export class FrequenciaService {
 
   // Pesquisar
 
-  // Retornar todos registros
 }
