@@ -13,7 +13,7 @@ module.exports = function(application){
     });
 
 
-    application.delete("/api/frequencia", function(req, res){
+    application.delete("/api/frequencia/:id", function(req, res){
 
         application.app.controllers.frequencia.deletaFrequencia(application, req, res );
     });

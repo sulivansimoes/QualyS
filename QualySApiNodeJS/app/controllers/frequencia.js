@@ -87,7 +87,7 @@ function atualizaFrequencia(application, request, response){
  */
 function deletaFrequencia(application, request, response){
 
-    let idFrequencia    = Number.parseInt(request.body.id);
+    let idFrequencia    = Number.parseInt(request.params.id);
     let modelFrequencia = null;
     let erros           = null;
            

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges,SimpleChanges , Input } from '@angular/core';
 
 
 /**
@@ -12,15 +12,18 @@ import { Component, OnInit, Input } from '@angular/core';
     './../view/tela-erros.component.css'
   ]
 })
-export class TelaErrosComponent implements OnInit {
+export class TelaErrosComponent implements OnInit, OnChanges {
 
   @Input() mensagemErro:string = "" 
 
-  constructor() { 
-    
-  }
+  constructor() { }
+  
+  ngOnInit() { }
+  
+  //Fica escutando alterações no conteudo na mensagem
+  //caso encontre. Aciona o modal 
+  ngOnChanges(  changes: SimpleChanges ){
 
-  ngOnInit() { 
     this.acionaModalErro();
   }
 
@@ -38,5 +41,6 @@ export class TelaErrosComponent implements OnInit {
   */
   private fechaModaErro(){
     $('#modalErro').modal('hide');
+    this.mensagemErro="";
   }
 }

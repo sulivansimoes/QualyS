@@ -1,6 +1,8 @@
 // COMPONETES PADRÕES
-import { Component, OnInit   } from '@angular/core';
-import { Router              } from '@angular/router';
+import { Component, OnInit      } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription           } from 'rxjs';
+
 // COMPONENTES PERSONALIZDOS
 import { Frequencia          } from './../model/frequencia';
 import { FrequenciaService   } from './../model/frequencia.service';
@@ -19,17 +21,38 @@ export class FrequenciaComponent implements OnInit {
   private SIZE_ID        = 4;
   private SIZE_DESCRICAO = 15;
 
+  private inscricao               = new Subscription;
   private frequencia:Frequencia   = null;
-  private frequecias:Frequencia[] = [];
 
-  constructor(private router:Router, private frequenciaService:FrequenciaService ) {
-   //constructor(private router:Router, private frequenciaService:FrequenciaService ) { 
-    this.frequencia = new Frequencia();
-    // this.frequencia = 
+  constructor( private router:Router , 
+               private frequenciaService:FrequenciaService,
+               private route: ActivatedRoute ) {
+      
+      this.frequencia = new Frequencia();
   }
   
 
-  ngOnInit() { }
+  ngOnInit() { 
+    
+      //Recupera o conteudo dos parametros e inicializa campos.
+      //Também resgata a instancia da inscrição.
+      this.inscricao = this.route.queryParams.subscribe(
+                          (queryParams: any) => {
+
+                            this.frequencia.id        = queryParams['id'];
+                            this.frequencia.descricao = queryParams['descricao'];
+                          }
+                       );
+  }
+
+  
+  /**
+   * Destruo a inscrição ao finalizar
+   */
+  ngOnDestroy(){
+
+     this.inscricao.unsubscribe();
+  }
   
 
   /**
@@ -39,10 +62,6 @@ export class FrequenciaComponent implements OnInit {
    
     this.frequenciaService.salvaFrequencia(this.frequencia).subscribe( values => alert("deu certo"));
     this.frequencia = new Frequencia();
-  }
-
-  private deletaFrequencia(){
-    
   }
 
 

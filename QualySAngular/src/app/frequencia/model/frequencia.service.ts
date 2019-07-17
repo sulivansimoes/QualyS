@@ -37,9 +37,14 @@ export class FrequenciaService {
    * @param frequencia objeto da frequencia que deve ser deletada
    * @returns Observable
    */
-  deletaFrequencia(frequencia : Frequencia) : Observable<Frequencia> {
+  deletaFrequencia(frequencia : Frequencia) {
 
-    return this.http.delete<Frequencia>( this.frequenciaApi + "/" + frequencia.getId() );
+    return this.http.delete<Frequencia>( this.frequenciaApi + "/" + frequencia.id )
+                    .pipe(
+                            catchError(
+                                        this.errorHandler
+                                      )
+                    );
   }
 
 
@@ -55,8 +60,6 @@ export class FrequenciaService {
                                         this.errorHandler
                                       )
                           );
-      
-                  
   }
 
 
@@ -72,8 +75,6 @@ export class FrequenciaService {
 
 
   // Editar
-
-  // Deletar
 
   // Pesquisar
 

@@ -3,8 +3,8 @@
  */
 export class Frequencia{
 
-    private id: number;
-    private descricao: string;
+    public id: number;
+    public descricao: string;
 
     /**  
      * @constructor
