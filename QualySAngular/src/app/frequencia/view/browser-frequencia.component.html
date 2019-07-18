@@ -55,9 +55,9 @@
         >
         </pagination-controls>
 
-        <!-- CASO EXISTA ERROS, ACIONA DE MODAL COMPONENTE DE ERRO -->
+        <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
         <div *ngIf="errosApi">
-            <tela-erros [mensagemErro]="errosApi"></tela-erros>
+            <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
         </div> 
     </div>
 

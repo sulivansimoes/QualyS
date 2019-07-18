@@ -9,21 +9,48 @@
                     <!-- ID -->
                     <div class="form-group col-md-1 espaco">
                         <label for="inputIdFrequencia">ID</label>
-                        <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required maxlength={{SIZE_ID}}
-                            [(ngModel)]="frequencia.id" disabled class="form-control">
+
+                        <input type="text"
+                               id="inputIdFrequencia" 
+                               name="inputIdFrequencia" 
+                               required maxlength={{SIZE_ID}}
+                               [(ngModel)]="frequencia.id" 
+                               disabled 
+                               class="form-control"
+                        >
                     </div>
                     <!-- DESCRIÇÃO -->
                     <div class="form-group col-md-6 espaco">
                         <label for="inputDescricaoFrequencia" class="preenchimentoObrigatorio">Descrição</label>
-                        <input type="text" id="inputDescricaoFrequencia" name="inputDescricaoFrequencia" required maxlength={{SIZE_DESCRICAO}} [(ngModel)]="frequencia.descricao" class="form-control">
+
+                        <input type = "text"
+                               id   = "inputDescricaoFrequencia" 
+                               name = "inputDescricaoFrequencia"
+                               required 
+                               maxlength   = {{SIZE_DESCRICAO}} 
+                               [(ngModel)] = "frequencia.descricao"
+                               [class.is-invalid] = "camposObrigatorios"
+                               class="form-control"
+                        >
                     </div>
                 </div>
             </div>
         </fieldset>
 
         <!-- BOTÕES P/ SALVAR OU CANCELAR CADASTRO -->
-        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaFrequencia($event) 
+        <app-botoes-salvar-fechar (botaoSalvarClicado)=salva($event) 
                                   (botaoFecharClicado)=fechaTela($event)>
         </app-botoes-salvar-fechar>
     </form>
+
+    <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+    <div *ngIf="errosApi">
+        <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
+    </div>
+
+    <!-- MENSAGEM DE ALERTA -->
+    <div *ngIf="mensagemAviso">
+        <tela-mensagem [mensagemAviso]="mensagemAviso"></tela-mensagem>
+    </div>
+
 </div>

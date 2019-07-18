@@ -28,7 +28,28 @@ export class FrequenciaService {
    */
   salvaFrequencia(frequencia : Frequencia) : Observable<Frequencia> {
 
-    return this.http.post<Frequencia>(this.frequenciaApi, frequencia, httpOption);
+    return this.http.post<Frequencia>(this.frequenciaApi, frequencia, httpOption)
+                    .pipe(
+                      catchError(
+                                  this.errorHandler
+                                )
+                    ); 
+  }
+
+
+  /**
+   * @description envia solicitação para API atualizar frequencia na base de dados.
+   * @param frequencia objeto da frequencia que deve ser atualizada.
+   * @returns Observable
+   */
+  atualizaFrequencia(frequencia : Frequencia): Observable<Frequencia>{
+
+    return this.http.put<Frequencia>(this.frequenciaApi, frequencia, httpOption)
+                    .pipe(
+                      catchError(
+                                  this.errorHandler
+                                )
+                    );    
   }
 
 
@@ -73,8 +94,6 @@ export class FrequenciaService {
     return throwError( error.error.mensagem || "Servidor com Erro! "+ error.message);
   }
 
-
-  // Editar
 
   // Pesquisar
 

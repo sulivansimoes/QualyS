@@ -37,7 +37,7 @@ function executaQuery(cSql, aValues, response, cMensagemSucesso, cMensagemErro){
                                                              });
                               })
               .finally(()  => {
-                                    console.log("Fechada conexão com banco de dados.");
+                                    // console.log("Fechada conexão com banco de dados.");
                                     connection.end();
                               });
 }

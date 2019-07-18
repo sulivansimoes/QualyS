@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TelaErrosComponent } from '../componentes/tela-erros.component';
+import { TelaMensagemComponent } from '../componentes/tela-mensagem.component';
 
-describe('TelaErrosComponent', () => {
-  let component: TelaErrosComponent;
-  let fixture: ComponentFixture<TelaErrosComponent>;
+describe('TelaMensagemComponent', () => {
+  let component: TelaMensagemComponent;
+  let fixture: ComponentFixture<TelaMensagemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TelaErrosComponent ]
+      declarations: [ TelaMensagemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TelaErrosComponent);
+    fixture = TestBed.createComponent(TelaMensagemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

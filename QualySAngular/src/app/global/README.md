@@ -15,5 +15,5 @@ A pasta global contém todos componentes que podem ser reaproveitados em todo o 
    5. `ajuda` : A ajuda tem um layout padrão fornecido pelo componente `tela-ajuda`
                 todas as ajudas do projeto ultilizam esse componente padrão. 
 
-   6. `tela-erros` : Contém um componente que fornece uma tela em modal para apresentar mensagens de erro.
+   6. `tela-mensagem` : Contém um componente que fornece uma tela em modal para apresentar mensagens para                      o usuário.
 

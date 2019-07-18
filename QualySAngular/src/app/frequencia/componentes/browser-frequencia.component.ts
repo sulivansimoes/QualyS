@@ -15,12 +15,12 @@ import { FrequenciaService } from './../model/frequencia.service';
   ]
 })
 export class BrowserFrequenciaComponent implements OnInit {
-
-  public frequencias:Frequencia[] = []; 
+  
+  public inscricao     = new Subscription;
   public resultadoApi  = null;
   public errosApi      = null;
   public paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
-  public inscricao     = Subscription;
+  public frequencias:Frequencia[] = []; 
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -29,16 +29,25 @@ export class BrowserFrequenciaComponent implements OnInit {
      this.getAll() ;
   }
 
+
   ngOnInit() { }
 
+
+  /**
+   * destruo a inscrição ao fechar.
+   */
   ngOnDestroy(){
-    //fazer o inscricao receber o sbscribe e depois destruir a incrição
-    // this.inscricao.;
+    
+    this.inscricao.unsubscribe();
   }
 
+
+  /**
+   * @description: Se inscreve no serviço que envia solicitação para API resgatar todas frequências na base de dados.
+   */
   getAll(){
 
-    this.frequenciaService.getAllFrequencias().subscribe(
+    this.inscricao = this.frequenciaService.getAllFrequencias().subscribe(
 
         result => {
                     this.resultadoApi = result;
@@ -51,9 +60,13 @@ export class BrowserFrequenciaComponent implements OnInit {
   }
 
 
+  /**
+   * @description: Se inscreve no serviço que envia solicitação para API excluir frequência na base de dados.
+   * @param frequencia, frequencia à ser salva na base de dados.
+   */
   excluiFrequencia(frequencia : Frequencia){
 
-    this.frequenciaService.deletaFrequencia(frequencia).subscribe(
+    this.inscricao = this.frequenciaService.deletaFrequencia(frequencia).subscribe(
 
       result => {
                   this.getAll();
@@ -75,6 +88,4 @@ export class BrowserFrequenciaComponent implements OnInit {
     this.errosApi = error + " /countErros: " + BrowserFrequenciaComponent.countErros++  ;
     console.log(this.errosApi);
   }
-
- 
 }

@@ -72,6 +72,7 @@ class FrequenciaDAO{
     getAllFrequencias(response){
 
         let cSql    =  "SELECT id, descricao FROM frequencia"
+                    +  " ORDER BY id "
 
         topConnection.executaQuery(cSql, [],  response, msg_status_1_D, msg_status_2_D);      
     }

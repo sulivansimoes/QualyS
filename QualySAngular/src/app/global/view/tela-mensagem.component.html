@@ -10,23 +10,23 @@
 
 <body>
 
-  <div class="modal fade" id="modalErro" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="modalMensagem" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-full-screen" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalErro">Problema</h5>
+          <h5 class="modal-title" id="modalMensagem">{{titulo}}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <article>
-
-           <!-- <h1><u>Aviso!</u></h1> -->
-
+           
+            <!-- MENSAGENS DE ERRO -->
             <div *ngIf="mensagemErro.trim() != '' " class="alert alert-danger">                
-                <span>
-                    Ocorreu um erro na aplicação. 
+              <h1><u>Ops!</u></h1>
+              <span>
+                    <br>Ocorreu um erro na aplicação. 
                     <br>A culpa é nossa :(
                     <br>Sentimos muito, e pedimos desculpa pelo inconveniente.
                     <br><br>Erro ocasionado: 
@@ -34,12 +34,27 @@
                 </span>
             </div>
 
+
+          <!-- MENSAGEM DE AVISO -->
+          <div *ngIf="mensagemAviso.trim() != '' " class="alert alert-warning">                
+              <span>
+                  <strong> {{ mensagemAviso }} </strong>
+               </span>
+            </div>
+
+
+          <!-- MENSAGEM DE SUCESSO -->
+           <div *ngIf="mensagemSucesso.trim() != '' " class="alert alert-primary">                
+              <span>
+                <strong> {{ mensagemSucesso }} </strong>
+              </span>
+           </div>
        
-        </article>
+          </article>
         </div>
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-secondary" (click)="fechaModaErro()">Fechar</button>
+          <button type="button" class="btn btn-secondary" (click)="fechaModalMensagem()">Fechar</button>
         </div>
       </div>
     </div>

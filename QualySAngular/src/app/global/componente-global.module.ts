@@ -9,7 +9,7 @@ import { BotoesSalvarFecharComponent } from './componentes/botoes-salvar-fechar.
 import { TelaConsultaPadraoComponent } from './componentes/tela-consulta-padrao.component';
 import { PageNotFoundComponent       } from './componentes/page-not-found.component';
 import { rotas                       } from './rotas/rotas';
-import { TelaErrosComponent          } from './componentes/tela-erros.component';
+import { TelaMensagemComponent       } from './componentes/tela-mensagem.component';
 import { TelaAjudaComponent          } from './componentes/ajuda/tela-ajuda.component';
 import { AjudaMenuPrincipalComponent } from './componentes/ajuda/ajuda-menu-principal.component';
 import { AjudaInconformeComponent    } from './componentes/ajuda/ajuda-inconforme.component';
@@ -28,7 +28,7 @@ const appRoutes = rotas
     BotoesSalvarFecharComponent,
     TelaConsultaPadraoComponent,
     PageNotFoundComponent,
-    TelaErrosComponent,
+    TelaMensagemComponent,
     TelaAjudaComponent,
     AjudaMenuPrincipalComponent,
     AjudaCadastroLocalComponent,
@@ -48,7 +48,7 @@ const appRoutes = rotas
     NavBarComponent,
     BotoesSalvarFecharComponent,
     TelaConsultaPadraoComponent,
-    TelaErrosComponent,
+    TelaMensagemComponent,
     PageNotFoundComponent,
     AjudaMenuPrincipalComponent,
     AjudaCadastroLocalComponent,

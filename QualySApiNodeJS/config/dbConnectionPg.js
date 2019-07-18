@@ -37,7 +37,7 @@ class ConnectionPostgreSQL{
      */
     openPoolConnection(){
         
-        console.log("Abrindo conexão no PostgreSql em modo pool");
+        // console.log("Abrindo conexão no PostgreSql em modo pool");
         return new Pool(this._config);
     };
 }
