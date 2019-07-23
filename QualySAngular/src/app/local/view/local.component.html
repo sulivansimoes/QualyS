@@ -9,17 +9,41 @@
                     <!-- ID -->
                     <div class="form-group col-md-2 espaco">
                         <label for="inputIdLocal">ID</label>
-                        <input type="text" id="inputIdLocal" name="inputIdLocal" disabled maxlength="4" [(ngModel)]="local.id" class="form-control">
+
+                        <input type = "text" 
+                               id   = "inputIdLocal" 
+                               name = "inputIdLocal" 
+                               disabled  
+                               [(ngModel)] = "local.id"
+                               class="form-control"
+                        >
                     </div>
                     <!-- DESCRIÇÃO -->
                     <div class="form-group col-md-6 espaco">
                         <label for="inputDescricaoLocal" class="preenchimentoObrigatorio">Descrição</label>
-                        <input type="text" id="inputDescricaoLocal" name="inputDescricaoLocal" required maxlength="25" [(ngModel)]="local.descricao" class="form-control">
+                      
+                        <input type = "text" 
+                               id   = "inputDescricaoLocal" 
+                               name = "inputDescricaoLocal" 
+                               required
+                               maxlength   =  {{SIZE_DESCRICAO}} 
+                               [(ngModel)] = "local.descricao"
+                               [class.is-invalid] = "camposObrigatorios"
+                               class="form-control"
+                        >
                     </div>
                     <!-- BLOQUEADO -->
                     <div class="form-group espaco">
                         <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
-                        <select id="inputBloqueado" name="inputBloqueado" required [(ngModel)]="local.bloqueado" class="form-control">
+
+                        <select id="inputBloqueado" 
+                                name="inputBloqueado" 
+                                required 
+                                [(ngModel)]="local.bloqueado" 
+                                [class.is-invalid] = "camposObrigatorios"
+                                class="form-control"
+                        >
+                          
                             <option value=false>Não</option>
                             <option value=true>Sim</option>
                         </select>
@@ -28,8 +52,20 @@
             </div>
         </fieldset>
 
-        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaLocal($event) 
-                                (botaoFecharClicado)=fechaTela($event)>
+        <!-- BOTÕES P/ SALVAR OU CANCELAR CADASTRO -->
+        <app-botoes-salvar-fechar (botaoSalvarClicado)=salva($event) 
+                                  (botaoFecharClicado)=fechaTela($event)>
         </app-botoes-salvar-fechar>
     </form>
+
+    <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+    <div *ngIf="errosApi">
+        <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
+    </div>
+
+    <!-- MENSAGEM DE ALERTA -->
+    <div *ngIf="mensagemAviso">
+        <tela-mensagem [mensagemAviso]="mensagemAviso"></tela-mensagem>
+    </div>
+
 </div>

@@ -3,7 +3,7 @@ const topConnection                    = require("./processosPG");
 const {msg_status_1_A, msg_status_2_A} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_B, msg_status_2_B} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_C, msg_status_2_C} = require("./../libs/mensagens_padroes"); 
-
+const {msg_status_1_D, msg_status_2_D} = require("./../libs/mensagens_padroes"); 
 
 class ProgramasDAO{
 
@@ -94,6 +94,46 @@ class ProgramasDAO{
          
         topConnection.executaQuery(cSql, aValues, response, msg_status_1_B, msg_status_2_B);             
     }
+
+
+    /**
+     * @description Consulta todos os programas no banco de dados
+     * @param {response} response 
+     */
+    getAllProgramas(response){
+
+        let cSql    =  "SELECT id , "
+                    +  "       descricao, " 
+                    +  "       sigla, "
+                    +  "       data_vigencia ,"
+                    +  "       data_revisao  ,"
+                    +  "       versao, "
+                    +  "       oficio, "
+                    +  "       bloqueado "
+                    +  " FROM programas "
+                    +  " ORDER BY id "
+
+        topConnection.executaQuery(cSql, [],  response, msg_status_1_D, msg_status_2_D);      
+    }   
+    
+    
+    /**
+     * @description Consulta os programas no banco de dados por descrição
+     * @param {String  } descricao, descricao à ser pesquisada.
+     * @param {response} response 
+     */
+    getProgramasPorDescricao(descricao , response){
+
+        let cSql    =  "SELECT id          , descricao, sigla , data_vigencia, "
+                    +  "       data_revisao, versao   , oficio, bloqueado "
+                    +  " FROM programas "
+                    +  " WHERE descricao LIKE UPPER('%' || $1 || '%')"
+                    +  " ORDER BY id "              
+
+        let aValues = [ descricao ];
+
+        topConnection.executaQuery(cSql, aValues,  response, msg_status_1_D, msg_status_2_D);      
+    }       
 }
 
 

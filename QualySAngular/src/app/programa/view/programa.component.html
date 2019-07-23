@@ -9,53 +9,129 @@
           <!-- ID -->
           <div class="form-group col-md-1 espaco">
             <label for="inputIdPrograma">ID</label>
-            <input type="text" id="inputIdPrograma" name="inputIdPrograma" disabled required maxlength={{SIZE_ID}} [(ngModel)]="programa.id" class="form-control">
+
+              <input type = "text"
+                     id   = "inputIdPrograma" 
+                     name = "inputIdPrograma" 
+                     disabled 
+                     [(ngModel)]="programa.id" 
+                     class="form-control"
+              >
           </div>
           <!-- DESCRIÇÃO -->
           <div class="form-group col-md-6 espaco">
-            <label for="inputDescricaoPrograma" class="preenchimentoObrigatorio">Descrição</label>
-            <input type="text" id="inputDescricaoPrograma" name="inputDescricaoPrograma" required maxlength={{SIZE_DESCRICAO}} [(ngModel)]="programa.descricao" class="form-control">
+              <label for="inputDescricaoPrograma" class="preenchimentoObrigatorio">Descrição</label>
+
+              <input type = "text"
+                     id   = "inputDescricaoPrograma" 
+                     name = "inputDescricaoPrograma" 
+                     required 
+                     maxlength={{SIZE_DESCRICAO}} 
+                     [(ngModel)]="programa.descricao" 
+                     [class.is-invalid] = "camposObrigatorios"
+                     class="form-control"
+              >
           </div>
           <!-- SIGLA -->
           <div class="form-group col-md-2 espaco">
-            <label for="inputSiglaPrograma" class="preenchimentoObrigatorio">Sigla</label>
-            <input type="text" id="inputSiglaPrograma" name="inputSiglaPrograma" required maxlength={{SIZE_SIGLA}} [(ngModel)]="programa.sigla" class="form-control">
+              <label for="inputSiglaPrograma" class="preenchimentoObrigatorio">Sigla</label>
+
+              <input type = "text" 
+                     id   = "inputSiglaPrograma" 
+                     name = "inputSiglaPrograma" 
+                     required 
+                     maxlength   = {{SIZE_SIGLA}} 
+                     [(ngModel)] = "programa.sigla" 
+                     [class.is-invalid] = "camposObrigatorios"
+                     class="form-control"
+              >
           </div>
           <!-- DATA VIGENCIA -->
           <div class="form-group col-md-2 espaco">
-            <label for="inputDataVigencia" class="preenchimentoObrigatorio">Data vigência</label>
-            <input type="date" id="inputDataVigencia" name="inputDataVigencia" required [(ngModel)]="programa.dataVigencia" class="form-control">
+              <label for="inputDataVigencia" class="preenchimentoObrigatorio">Data vigência</label>
+
+              <input type = "date" 
+                     id   = "inputDataVigencia" 
+                     name = "inputDataVigencia" 
+                     required 
+                     [(ngModel)]="programa.data_vigencia" 
+                     [class.is-invalid] = "camposObrigatorios"
+                     class="form-control"
+              >
           </div>
           <!-- DATA REVISAO -->
           <div class="form-group col-md-2 espaco">
-            <label for="inputDataRevisao">Data revisão</label>
-            <input type="date" id="inputDataRevisao" name="inputDataRevisao" [(ngModel)]="programa.dataRevisao" class="form-control">
+              <label for="inputDataRevisao">Data revisão</label>
+
+              <input type="date" 
+                    id="inputDataRevisao" 
+                    name="inputDataRevisao" 
+                    [(ngModel)]="programa.data_revisao"                
+                    class="form-control"
+              >
           </div>
           <!-- VERSAO -->
           <div class="form-group espaco">
-            <label for="inputVersao" class="preenchimentoObrigatorio">Versão</label>
-            <input type="text" id="inputVersao" name="inputVersao" required maxlength={{SIZE_VERSAO}} [(ngModel)]="programa.versao" class="form-control">
+              <label for="inputVersao" class="preenchimentoObrigatorio">Versão</label>
+
+              <input type = "text" 
+                     id   = "inputVersao" 
+                     name = "inputVersao" 
+                     required 
+                     maxlength   = {{SIZE_VERSAO}} 
+                     [(ngModel)] = "programa.versao" 
+                     [class.is-invalid] = "camposObrigatorios"
+                     class="form-control"
+              >
           </div>
           <!-- BLOQUEADO -->
           <div class="form-group espaco">
-            <label for="inputBloqueadoPrograma" class="preenchimentoObrigatorio">Bloqueado</label>
-            <select id="inputBloqueadoPrograma" name="inputBloqueadoPrograma" required [(ngModel)]="programa.bloqueado" class="form-control">
-              <option value=false>Não</option>
-              <option value=true>Sim</option>
-            </select>
+              <label for="inputBloqueadoPrograma" class="preenchimentoObrigatorio">Bloqueado</label>
+
+              <select id="inputBloqueadoPrograma" 
+                      name="inputBloqueadoPrograma" 
+                      required 
+                      [(ngModel)]="programa.bloqueado" 
+                      [class.is-invalid] = "camposObrigatorios"
+                      class="form-control"
+              >
+
+                <option value=false>Não</option>
+                <option value=true>Sim</option>
+              </select>
           </div>
           <!-- OFICIO CIRCULAR -->
           <div class="form-group espaco">
             <label for="inputOficio" class="preenchimentoObrigatorio">Legislação referência</label>
-            <textarea id="inputOficio" name="inputOficio" required rows="6" cols="50" [(ngModel)]="programa.oficio" class="form-control"></textarea>
+            
+            <textarea id   = "inputOficio" 
+                      name = "inputOficio" 
+                      required 
+                      rows = "6" 
+                      cols = "50" 
+                      [(ngModel)] = "programa.oficio" 
+                      [class.is-invalid] = "camposObrigatorios"
+                      class="form-control"
+            ></textarea>
           </div>
         </div>
       </div>
     </fieldset>
 
     <!-- BOTÕES P/ SALVAR OU CANCELAR CADASTRO -->
-    <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaPrograma($event) 
+    <app-botoes-salvar-fechar (botaoSalvarClicado)=salva($event) 
                               (botaoFecharClicado)=fechaTela($event)>
     </app-botoes-salvar-fechar>
-  </form>
+  </form> 
+  
+    <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+    <div *ngIf="errosApi">
+        <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
+    </div>
+
+    <!-- MENSAGEM DE ALERTA -->
+    <div *ngIf="mensagemAviso">
+        <tela-mensagem [mensagemAviso]="mensagemAviso"></tela-mensagem>
+    </div>
+
 </div>

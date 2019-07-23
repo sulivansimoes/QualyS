@@ -12,9 +12,21 @@ module.exports = function(application){
     });
 
 
-    application.delete("/api/programas", function(req, res){
+    application.delete("/api/programas/:id", function(req, res){
 
         application.app.controllers.programas.deletaPrograma(application, req, res );
     });
+
+
+    application.get("/api/programas", function(req, res){
+
+        application.app.controllers.programas.getAllProgramas(application, req, res );
+    });
+    
+
+    application.get("/api/programas/:descricao", function(req, res){
+
+        application.app.controllers.programas.getProgramasPorDescricao(application, req, res );
+    });    
     
 }

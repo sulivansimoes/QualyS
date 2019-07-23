@@ -3,6 +3,7 @@ const topConnection                    = require("./processosPG");
 const {msg_status_1_A, msg_status_2_A} = require("../libs/mensagens_padroes"); 
 const {msg_status_1_B, msg_status_2_B} = require("../libs/mensagens_padroes"); 
 const {msg_status_1_C, msg_status_2_C} = require("../libs/mensagens_padroes"); 
+const {msg_status_1_D, msg_status_2_D} = require("../libs/mensagens_padroes"); 
 
 class LocalDAO{
 
@@ -73,6 +74,36 @@ class LocalDAO{
          
         topConnection.executaQuery(cSql, aValues, response, msg_status_1_B, msg_status_2_B);     
     }
+    
+
+    /**
+     * @description Consulta todos os locais no banco de dados
+     * @param {response} response 
+     */
+    getAllLocais(response){
+
+        let cSql    =  "SELECT id, descricao, bloqueado FROM local"
+                    +  " ORDER BY id "
+
+        topConnection.executaQuery(cSql, [],  response, msg_status_1_D, msg_status_2_D);      
+    }
+
+
+    /**
+     * @description Consulta os locais no banco de dados por descrição
+     * @param {String  } descricao, descricao à ser pesquisada.
+     * @param {response} response 
+     */
+    getLocaisPorDescricao(descricao , response){
+
+        let cSql    =  "SELECT id, descricao, bloqueado FROM local "
+                    +  " WHERE descricao LIKE UPPER('%' || $1 || '%')"
+                    +  " ORDER BY id "
+                    
+        let aValues = [ descricao ];
+
+        topConnection.executaQuery(cSql, aValues,  response, msg_status_1_D, msg_status_2_D);      
+    }   
     
 }
 

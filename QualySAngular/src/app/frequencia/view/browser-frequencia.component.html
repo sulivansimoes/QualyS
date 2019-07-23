@@ -9,8 +9,21 @@
             <!-- PESQUISA REGISTRO-->
             <div class="form-group col-md-6">
                 <div class="input-group-append">
-                    <input type="text" id="inputPesquisaRegistroFrequencia" required maxlength="100" class="form-control" autocomplete="off">
-                    <input type="button" id="inputPesquisaRegistroFrequencia"  class="buttonPesquisa">
+
+                    <input type="text"
+                           id="inputPesquisaRegistroFrequencia" 
+                           required maxlength="100" 
+                           class="form-control"
+                           autocomplete="off" 
+                           [(ngModel)]="pesquisa"
+                           (keyup.enter)="getFrequenciasPorDescricao()"
+                    >
+                    
+                    <input type="button" 
+                           id="inputPesquisaRegistroFrequencia"  
+                           class="buttonPesquisa" 
+                           (click)="getFrequenciasPorDescricao()"
+                    >
                 </div>
             </div>
             <!-- BOTÃO DE INCLUSÃO DE REGISTRO -->

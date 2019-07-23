@@ -19,7 +19,7 @@ function salvaPrograma(application, request, response){
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    erros_aux = validator_interno.isObjectEmpty(dados, ["id"]);
+    erros_aux = validator_interno.isObjectEmpty(dados, ["id", "data_vigencia", "data_revisao","bloqueado"],);
     if( erros_aux ){
 
         erros.push(erros_aux);
@@ -100,7 +100,7 @@ function atualizaPrograma(application, request, response){
  */
 function deletaPrograma(application, request, response){
 
-    let idPrograma     = Number.parseInt(request.body.id);
+    let idPrograma     = Number.parseInt(request.params.id);
     let modelPrograma  = null;
     let erros          = null;
            
@@ -128,10 +128,66 @@ function deletaPrograma(application, request, response){
 
 
 /**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function getAllProgramas(application, request, response){
+
+    let modelPrograma = null;
+
+    modelPrograma = new application.app.models.programasDAO();   //Instanciando model do programa
+    modelPrograma.getAllProgramas(response);       
+
+}
+
+
+/**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function getProgramasPorDescricao(application, request, response){
+
+    let dados         = request.params;
+    let modelPrograma = null;
+    let erros_aux     = null;
+    let erros         = [];
+
+    //-----------------------------------------------------
+    // Validando informações 
+    //-----------------------------------------------------
+    erros_aux = validator_interno.isObjectEmpty({descricao:dados.descricao});
+    if( erros_aux ){
+
+        erros.push(erros_aux);
+        erros_aux = null;
+    }
+
+    if (erros.length > 0){
+
+        response.status(422).json({ 
+                                    status:3, 
+                                    mensagem: msg_status_3_A,
+                                    campos_invalidos: erros
+                                 });
+        return; 
+    }    
+
+    modelPrograma = new application.app.models.programasDAO();                 //Instanciando model de programas
+    modelPrograma.getProgramasPorDescricao(dados.descricao, response);       
+
+}
+
+/**
  * Exportando funções 
  */
 module.exports = {
     salvaPrograma   ,
     atualizaPrograma,
     deletaPrograma  ,
+    getAllProgramas ,
+    getProgramasPorDescricao
 }

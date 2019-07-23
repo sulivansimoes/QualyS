@@ -76,6 +76,23 @@ class FrequenciaDAO{
 
         topConnection.executaQuery(cSql, [],  response, msg_status_1_D, msg_status_2_D);      
     }
+
+
+    /**
+     * @description Consulta as frequencias no banco de dados por descrição
+     * @param {String  } descricao, descricao à ser pesquisada.
+     * @param {response} response 
+     */
+    getFrequenciasPorDescricao(descricao , response){
+
+        let cSql    =  "SELECT id, descricao FROM frequencia "
+                    +  " WHERE descricao LIKE UPPER('%' || $1 || '%')"
+                    +  " ORDER BY id "
+                    
+        let aValues = [ descricao ];
+
+        topConnection.executaQuery(cSql, aValues,  response, msg_status_1_D, msg_status_2_D);      
+    }    
 }
 
 

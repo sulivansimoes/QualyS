@@ -50,10 +50,5 @@ export class TelaMensagemComponent implements OnInit, OnChanges {
   private fechaModalMensagem(){
 
     $('#modalMensagem').modal('hide');
-
-    // this.titulo="";
-    // this.mensagemErro="";
-    // this.mensagemAviso="";
-    // this.mensagemSucesso="";
   }
 }

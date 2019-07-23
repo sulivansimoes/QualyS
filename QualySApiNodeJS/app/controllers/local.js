@@ -87,7 +87,7 @@ function atualizaLocal(application, request, response){
  */
 function deletaLocal(application, request, response){
 
-    let idLocal    = Number.parseInt(request.body.id);
+    let idLocal    = Number.parseInt(request.params.id);
     let modelLocal = null;
     let erros      = null;
            
@@ -115,11 +115,68 @@ function deletaLocal(application, request, response){
 
 
 /**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function getAllLocais(application, request, response){
+
+    let modelLocal = null;
+
+    modelLocal = new application.app.models.localDAO();   //Instanciando model da local
+    modelLocal.getAllLocais(response);       
+
+}
+
+
+/**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function getLocaisPorDescricao(application, request, response){
+
+    let dados      = request.params;
+    let modelLocal = null;
+    let erros_aux  = null;
+    let erros      = [];
+
+    //-----------------------------------------------------
+    // Validando informações 
+    //-----------------------------------------------------
+    erros_aux = validator_interno.isObjectEmpty({descricao:dados.descricao});
+    if( erros_aux ){
+
+        erros.push(erros_aux);
+        erros_aux = null;
+    }
+
+    if (erros.length > 0){
+
+        response.status(422).json({ 
+                                    status:3, 
+                                    mensagem: msg_status_3_A,
+                                    campos_invalidos: erros
+                                 });
+        return; 
+    }    
+
+    modelLocal = new application.app.models.localDAO();                 //Instanciando model da local
+    modelLocal.getLocaisPorDescricao(dados.descricao, response);       
+
+}
+
+
+/**
  * Exportando funções 
  */
 module.exports = {
     salvaLocal   ,
     atualizaLocal,
     deletaLocal  ,
+    getAllLocais ,
+    getLocaisPorDescricao,
 }
 

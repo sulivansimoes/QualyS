@@ -115,12 +115,57 @@ function deletaFrequencia(application, request, response){
 };
 
 
+/**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
 function getAllFrequencias(application, request, response){
 
-    modelFrequencia = null;
+    let modelFrequencia = null;
 
     modelFrequencia = new application.app.models.frequenciaDAO();   //Instanciando model da frequencia
     modelFrequencia.getAllFrequencias(response);       
+
+}
+
+
+/**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function getFrequenciasPorDescricao(application, request, response){
+
+    let dados           = request.params;
+    let modelFrequencia = null;
+    let erros_aux       = null;
+    let erros           = [];
+
+    //-----------------------------------------------------
+    // Validando informações 
+    //-----------------------------------------------------
+    erros_aux = validator_interno.isObjectEmpty({descricao:dados.descricao});
+    if( erros_aux ){
+
+        erros.push(erros_aux);
+        erros_aux = null;
+    }
+
+    if (erros.length > 0){
+
+        response.status(422).json({ 
+                                    status:3, 
+                                    mensagem: msg_status_3_A,
+                                    campos_invalidos: erros
+                                 });
+        return; 
+    }    
+
+    modelFrequencia = new application.app.models.frequenciaDAO();   //Instanciando model da frequencia
+    modelFrequencia.getFrequenciasPorDescricao(dados.descricao, response);       
 
 }
 
@@ -133,4 +178,5 @@ module.exports = {
     atualizaFrequencia,
     deletaFrequencia  ,
     getAllFrequencias , 
+    getFrequenciasPorDescricao ,
 }

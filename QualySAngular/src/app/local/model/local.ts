@@ -3,9 +3,9 @@
  */
 export class Local{
 
-    private id: number;
-    private descricao: string;
-    private bloqueado: boolean;
+    public id: number;
+    public descricao: string;
+    public bloqueado: boolean;
 
     /**  
     * @constructor

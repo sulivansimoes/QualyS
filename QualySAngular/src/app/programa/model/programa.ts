@@ -3,34 +3,34 @@
  */
 export class Programa{
 
-   private id           :number;
-   private descricao    :string;
-   private sigla        :string;
-   private dataVigencia :Date;
-   private dataRevisao  :Date;
-   private versao       :string;
-   private oficio       :string;
-   private bloqueado    :boolean;
+   public id           :number;
+   public descricao    :string;
+   public sigla        :string;
+   public data_vigencia :String;
+   public data_revisao  :String;
+   public versao       :string;
+   public oficio       :string;
+   public bloqueado    :boolean;
 
    /**
     * @constructor 
     * @param {number } id           - Código identificador do programa ( chave primária )
     * @param {string } descricao    - Descrição do programa
     * @param {string } sigla        - Sigla ( abreviação ) da descrição do programa
-    * @param {Date   } dataVigencia - Data da vigencia do programa do programa.
-    * @param {Date   } dataRevisao  - Data em que programa foi revisado.
+    * @param {String } data_vigencia- Data da vigencia do programa do programa.
+    * @param {String } data_revisao - Data em que programa foi revisado.
     * @param {string } versao       - Versão do programa.
     * @param {string } oficio       - Oficio circular do programa.
     * @param {boolean} bloqueado    - Flag do cadastro, indicando se está ou não bloqueado.
     */
-   constructor(id?:number        , descricao?:string , sigla?:string  , dataVigencia?:Date,
-               dataRevisao?:Date , versao?:string    , oficio?:string , bloqueado?:boolean){
+   constructor(id?:number        , descricao?:string , sigla?:string  , data_vigencia?:String,
+               data_revisao?:String, versao?:string    , oficio?:string , bloqueado?:boolean){
 
         this.id           = id;
         this.descricao    = descricao;
         this.sigla        = sigla;
-        this.dataVigencia = dataVigencia;
-        this.dataRevisao  = dataRevisao;
+        this.data_vigencia= data_vigencia;
+        this.data_revisao = data_revisao;
         this.versao       = versao;
         this.oficio       = oficio;
         this.bloqueado    = (bloqueado == null) ? false : bloqueado;
@@ -64,17 +64,17 @@ export class Programa{
     * @description: Retora data de vigecia do progrma.
     * @return {Date} ( dataVigencia ) - Data vigencia do programa.
     */
-   public getDataVigencia():Date{
-       return this.dataVigencia;
-   }
+//    public getDataVigencia():Date{
+//        return this.data_vigencia;
+//    }
 
    /**
     * @description: Retorna data em que programa foi revisado.
     * @return {Date} ( dataRevisao ) - Data em que programa foi revisado.
     */
-   public getDataRevisao():Date{
-       return this.dataRevisao;
-   }
+//    public getDataRevisao():Date{
+//        return this.data_revisao;
+//    }
 
    /**
     * @description: Retorna versão em que o progrma se encontra.
@@ -128,17 +128,17 @@ export class Programa{
     * @description: Seta conteudo da data de vigencia do programa.
     * @param {Date} dataVigencia - Data de vigencia do programa.
     */
-   public setDataVigencia(dataVigencia:Date):void{
-        this.dataVigencia = dataVigencia;
-   }
+//    public setDataVigencia(dataVigencia:Date):void{
+//         this.data_vigencia = dataVigencia;
+//    }
 
    /**
     * @description: Seta conteudo da data em que programa foi revisado.
     * @param {Date} dataRevisao - Data em que programa foi revisao.
     */
-   public setDataRevisao(dataRevisao:Date):void{
-       this.dataRevisao = dataRevisao;
-   }
+//    public setDataRevisao(dataRevisao:Date):void{
+//        this.data_revisao = dataRevisao;
+//    }
 
    /**
     * @description: Seta conteudo da versão do programa.
