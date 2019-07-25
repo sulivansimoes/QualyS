@@ -9,7 +9,7 @@ const {msg_status_3_A}  = require("../libs/mensagens_padroes");
  * @param : application, aplicação servidora do express.
  * @param : request, objeto do request.
  * @param : response, objeto do response.
- * @see   : https://nodejs.org/api/crypto.html#crypto_crypto
+ * @see   https://nodejs.org/api/crypto.html#crypto_crypto
  */
 function salvaUsuario(application, request, response){
 
@@ -107,7 +107,7 @@ function atualizaUsuario(application, request, response){
  */
 function deletaUsuario(application, request, response){
 
-    let cpf        = request.body.cpf;
+    let cpf        = request.params.cpf;
     let modelLocal = null;
     let erros       = [];
     
@@ -138,10 +138,67 @@ function deletaUsuario(application, request, response){
 
 
 /**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function getAllUsuarios(application, request, response){
+
+    let modelUsuario = null;
+
+    modelUsuario = new application.app.models.usuarioDAO();   //Instanciando model do usuario
+    modelUsuario.getAllUsuarios(response);       
+
+}
+
+
+/**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function getUsuariosPorNome(application, request, response){
+
+    let dados        = request.params;
+    let modelUsuario = null;
+    let erros_aux    = null;
+    let erros        = [];
+
+    //-----------------------------------------------------
+    // Validando informações 
+    //-----------------------------------------------------
+    erros_aux = validator_interno.isObjectEmpty({nome:dados.nome});
+    if( erros_aux ){
+
+        erros.push(erros_aux);
+        erros_aux = null;
+    }
+
+    if (erros.length > 0){
+
+        response.status(422).json({ 
+                                    status:3, 
+                                    mensagem: msg_status_3_A,
+                                    campos_invalidos: erros
+                                 });
+        return; 
+    }    
+
+    modelUsuario = new application.app.models.usuarioDAO();                 //Instanciando model do usuario
+    modelUsuario.getUsuariosPorNome(dados.nome, response);       
+
+}
+
+
+/**
  * Exportando funções 
  */
 module.exports = {
     salvaUsuario   ,
     atualizaUsuario,
     deletaUsuario  ,
+    getAllUsuarios ,
+    getUsuariosPorNome
 }

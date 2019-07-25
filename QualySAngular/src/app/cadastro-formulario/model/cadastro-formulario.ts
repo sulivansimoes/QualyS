@@ -12,6 +12,10 @@ import { ItemFormulario } from './item-formulario';
     private idFrequencia :number;
     private itens      : ItemFormulario[];
     private bloqueado  : boolean;
+
+    private descricaoFrequencia:String = "";
+    private descricaoLocal:String      = "";
+    private descricaoPrograma:String   = "";
     
     /**
      * @constructor
@@ -23,8 +27,9 @@ import { ItemFormulario } from './item-formulario';
      * @param {Array  } itens      - Itens que compõe o formulário de perguntas.
      * @param {boilean} bloqueado  - Flag do cadastro, indicando se item está ou não bloqueado. 
      */
-    constructor(id?:number              , descricao?:string      , idPrograma?:number, idLocal?:number,
-                idFrequencia?:number    ,itens?: ItemFormulario[], bloqueado?:boolean){
+    constructor(id?:number              ,descricao?:string       , idPrograma?:number, idLocal?:number,
+                idFrequencia?:number    ,itens?: ItemFormulario[], bloqueado?:boolean, descricaoFrequencia?:string, 
+                descricaoLocal?:string  ,descricaoPrograma?:string){
 
         this.id           = id;
         this.descricao    = descricao;
@@ -33,6 +38,10 @@ import { ItemFormulario } from './item-formulario';
         this.idFrequencia = idFrequencia;
         this.itens        = (itens == null) ? [] :itens;
         this.bloqueado    = (bloqueado == null) ? false : bloqueado;
+
+        this.descricaoFrequencia = descricaoFrequencia;
+        this.descricaoLocal      = descricaoLocal;
+        this.descricaoPrograma   = descricaoPrograma;
     }
 
     /**
@@ -148,6 +157,34 @@ import { ItemFormulario } from './item-formulario';
     public setBloqueado(status:boolean):void{
         this.bloqueado = status;
     }
+
+
+    /**
+     * @description: Seta descricaoFrequencia do cadastro do formulário. - campo é virtual
+     * @param {string} status - descrição da frequencia
+     */
+    public setDescricaoFrequencia(descricaoFrequencia:string):void{
+        this.descricaoFrequencia = descricaoFrequencia;
+    }
+
+
+    /**
+     * @description: Seta descricaoLocal do cadastro do formulário. - campo é virtual
+     * @param {string} descricaoLocal - descrição do local
+     */
+    public setDescricaoLocal(descricaoLocal:string):void{
+        this.descricaoLocal = descricaoLocal;
+    }
+
+
+    /**
+     * @description: Seta descricaoPrograma do cadastro do formulário. - campo é virtual
+     * @param {string} descricaoPrograma - descrição do programa
+     */
+    public setDescricaoPrograma(descricaoPrograma:string):void{
+        this.descricaoPrograma = descricaoPrograma;
+    }
+            
 
     /**
      * @description: Retorna a quantidade de itens que o formulario possui

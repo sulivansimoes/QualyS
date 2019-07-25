@@ -3,12 +3,12 @@
  */
 export class Usuario{
 
-    private cpf   :string;
-    private nome  :string;
-    private email :string;
-    private senha :string;
-    private assinatura :string;
-    private bloqueado  :boolean;
+    public cpf   :string;
+    public nome  :string;
+    public email :string;
+    public senha :string;
+    public assinatura :string;
+    public bloqueado  :boolean;
 
     /**
      * @constructor

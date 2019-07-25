@@ -9,32 +9,83 @@
                     <!-- CPF -->
                     <div class="form-group col-md-2 espaco">
                         <label for="inputCPF" class="preenchimentoObrigatorio">Cpf</label>
-                        <input type="text" id="inputCPF" name="inputCPF" required maxlength={{SIZE_CPF}} [(ngModel)]="usuario.cpf" class="form-control">
+
+                        <input type = "text" 
+                               id   = "inputCPF" 
+                               name = "inputCPF" 
+                               required 
+                               maxlength   = {{SIZE_CPF}} 
+                               [(ngModel)] = "usuario.cpf" 
+                               [class.is-invalid] = "camposObrigatorios"                               
+                               class="form-control"
+                        >
                     </div>
                     <!-- NOME -->
                     <div class="form-group col-md-6 espaco">
                         <label for="inputNome" class="preenchimentoObrigatorio">Nome</label>
-                        <input type="text" id="inputNome" name="inputNome" required maxlength={{SIZE_NOME}} [(ngModel)]="usuario.nome" class="form-control">
+
+                        <input type = "text" 
+                               id   = "inputNome" 
+                               name = "inputNome" 
+                               required 
+                               maxlength   = {{SIZE_NOME}} 
+                               [(ngModel)] = "usuario.nome" 
+                               [class.is-invalid] = "camposObrigatorios"
+                               class="form-control"
+                        >
                     </div>
                     <!-- SENHA -->
                     <div class="form-group col-md-4 espaco">
                         <label for="inputSenha" class="preenchimentoObrigatorio">Senha</label>
-                        <input type="password" id="inputSenha" name="inputSenha" required maxlength={{SIZE_SENHA}} [(ngModel)]="usuario.senha" class="form-control">
+
+                        <input type = "password" 
+                               id   = "inputSenha" 
+                               name = "inputSenha" 
+                               required 
+                               maxlength   = {{SIZE_SENHA}} 
+                               [(ngModel)] = "usuario.senha"
+                               [class.is-invalid] = "camposObrigatorios" 
+                               class="form-control"
+                        >
                     </div>
                     <!-- CONFIRMA SENHA -->
                     <div class="form-group col-md-4 espaco">
                         <label for="inputConfirmaSenha" class="preenchimentoObrigatorio">Confirma senha</label>
-                        <input type="password" id="inputConfirmaSenha" name="inputConfirmaSenha" required maxlength={{SIZE_SENHA}} [(ngModel)]="confirmaSenha" class="form-control">
+
+                        <input type = "password" 
+                               id   = "inputConfirmaSenha" 
+                               name = "inputConfirmaSenha" 
+                               required 
+                               maxlength   = {{SIZE_SENHA}} 
+                               [(ngModel)] = "confirmaSenha" 
+                               class="form-control"
+                        >
                     </div>
                     <!-- EMAIL -->
                     <div class="form-group col-md-6 espaco">
                         <label for="inputEmail">E-mail</label>
-                        <input type="email" id="inputEmail" name="inputEmail" required maxlength={{SIZE_EMAIL}} [(ngModel)]="usuario.email" class="form-control">
+
+                        <input type = "email" 
+                               id   = "inputEmail" 
+                               name = "inputEmail" 
+                               required 
+                               maxlength   = {{SIZE_EMAIL}} 
+                               [(ngModel)] = "usuario.email" 
+                               class="form-control"
+                        >
                     </div>
                     <!-- BLOQUEADO -->
                     <div class="form-group espaco">
                         <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
-                        <select id="inputBloqueado" name="inputBloqueado" required [(ngModel)]="usuario.bloqueado" class="form-control">
+
+                        <select id   = "inputBloqueado" 
+                                name = "inputBloqueado" 
+                                required 
+                                [(ngModel)]="usuario.bloqueado" 
+                                [class.is-invalid] = "camposObrigatorios"
+                                class="form-control"
+                        >
+
                             <option value=false>Não</option>
                             <option value=true>Sim</option>
                         </select>
@@ -42,11 +93,18 @@
                     <!-- ASSINATURA -->
                     <div class="form-group col-md-4 espaco">
                         <label for="inputAssinatura" class="preenchimentoObrigatorio">Assinatura</label>
-                        <input type="file" id="inputAssinatura" name="inputAssinatura" required  [(ngModel)]="usuario.assinatura" class="form-control">
+
+                        <input type="file" 
+                               id="inputAssinatura" 
+                               name="inputAssinatura" 
+                               required  
+                               [(ngModel)]="usuario.assinatura" 
+                               class="form-control"
+                        >
                         <!-- CASO TENHA UMA ASSINATURA EXIBE A IMAGEM -->
-                        <div>
+                        <!-- <div>
                             <input type="image">
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>
@@ -54,8 +112,18 @@
         </fieldset>
 
         <!-- BOTÕES P/ SALVAR OU CANCELAR CADASTRO -->
-        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaUsuario($event) 
+        <app-botoes-salvar-fechar (botaoSalvarClicado)=salva($event) 
                                 (botaoFecharClicado)=fechaTela($event)>
         </app-botoes-salvar-fechar>
+
+        <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+        <div *ngIf="errosApi">
+            <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
+        </div>
+
+        <!-- MENSAGEM DE ALERTA -->
+        <div *ngIf="mensagemAviso">
+            <tela-mensagem [mensagemAviso]="mensagemAviso"></tela-mensagem>
+        </div>        
     </form>
 </div>

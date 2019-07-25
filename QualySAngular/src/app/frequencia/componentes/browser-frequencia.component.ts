@@ -101,7 +101,6 @@ export class BrowserFrequenciaComponent implements OnInit {
                   this.setErrosApi(error);
                }
     );
-    
   }
 
 

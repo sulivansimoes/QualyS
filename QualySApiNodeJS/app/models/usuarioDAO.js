@@ -3,6 +3,7 @@ const topConnection                    = require("./processosPG");
 const {msg_status_1_A, msg_status_2_A} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_B, msg_status_2_B} = require("./../libs/mensagens_padroes"); 
 const {msg_status_1_C, msg_status_2_C} = require("./../libs/mensagens_padroes"); 
+const {msg_status_1_D, msg_status_2_D} = require("./../libs/mensagens_padroes"); 
 
 class usuarioDAO{
 
@@ -88,6 +89,46 @@ class usuarioDAO{
         
         topConnection.executaQuery(cSql, aValues, response, msg_status_1_B, msg_status_2_B);      
     }
+
+
+    /**
+     * @description Consulta todos os usuarios no banco de dados
+     * @param {response} response 
+     */
+    getAllUsuarios(response){
+
+        let cSql    =  "SELECT cpf, "
+                    +  "       nome," 
+                    +  "       email,"
+                    +  "       assinatura,"
+                    +  "       bloqueado "
+                    +  " FROM usuario "
+                    +  " ORDER BY nome "
+
+        topConnection.executaQuery(cSql, [],  response, msg_status_1_D, msg_status_2_D);      
+    }
+
+
+    /**
+     * @description Consulta os usuarios no banco de dados por descrição
+     * @param {String  } nome, nome à ser pesquisado.
+     * @param {response} response 
+     */
+    getUsuariosPorNome(nome , response){
+
+        let cSql    =  "SELECT cpf, "
+                    +  "       nome," 
+                    +  "       email,"
+                    +  "       assinatura,"
+                    +  "       bloqueado "
+                    +  " FROM usuario "
+                    +  " WHERE nome LIKE ('%' || $1 || '%')"
+                    +  " ORDER BY nome "
+                    
+        let aValues = [ nome ];
+
+        topConnection.executaQuery(cSql, aValues,  response, msg_status_1_D, msg_status_2_D);      
+    }       
 
 }
 

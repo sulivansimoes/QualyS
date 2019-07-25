@@ -9,41 +9,142 @@
                     <!-- ID DO FORMULARIO -->
                     <div class="form-group col-md-1 espaco">
                         <label for="inputID">ID</label>
-                        <input type="text" id="inputID" name="inputID" disabled maxlength={{SIZE_ID}} [(ngModel)]="formulario.id" class="form-control">
+
+                        <input type="text" 
+                               id="inputID" 
+                               name="inputID" 
+                               disabled 
+                               [(ngModel)]="formulario.id" 
+                               class="form-control"
+                        >
                     </div>
                     <!-- DESCRIÇÃO FORMULARIO -->
                     <div class="form-group col-md-4 espaco">
-                        <label for="inputDescricaoPrograma" class="preenchimentoObrigatorio">Descrição formulário</label>
-                        <input type="text" id="inputDescricaoPrograma" name="inputDescricaoPrograma" required maxlength={{SIZE_DESCRICAO}} [(ngModel)]="formulario.descricao" class="form-control">
+                        
+                        <label for="inputDescricaoFormulario" class="preenchimentoObrigatorio">Descrição formulário</label>
+
+                        <input type="text" 
+                               id="inputDescricaoFormulario" 
+                               name="inputDescricaoFormulario" 
+                               required 
+                               maxlength={{SIZE_DESCRICAO}} 
+                               [(ngModel)]="formulario.descricao" 
+                               class="form-control"
+                        >
                     </div>
                     <!-- ID PROGRAMA -->
                     <div class="form-group col-md-2">
                         <label for="inputPrograma" class="preenchimentoObrigatorio">Programa</label>
                         <div class="input-group-append">
-                            <input type="text" id="inputPrograma" name="inputPrograma" required maxlength={{SIZE_PROGRAMA}} [(ngModel)]="formulario.idPrograma" (keyup.F2)=acionaModalPesquisa() class="form-control">
-                            <input type="button" id="buttonPesquisa" (click)="acionaModalPesquisa()" class="buttonPesquisa espaco">
+
+                            <input type="text" 
+                                   id="inputPrograma" 
+                                   name="inputPrograma" 
+                                   required 
+                                   maxlength={{SIZE_PROGRAMA}}
+                                   [(ngModel)]="formulario.idPrograma" 
+                                   (keyup.F2)="pesquisa( 2 )"
+                                   class="form-control"
+                            >
+
+                            <input type="button" 
+                                   id="buttonPesquisa" 
+                                   (click)="pesquisa( 2 )"
+                                   class="buttonPesquisa espaco"
+                            >
                         </div>
+                    </div>
+                    <!-- DESCRIÇÃO DA PROGRAMA [CAMPO VIRTUAL] -->
+                    <div class="form-group col-md-3 espaco">
+                        <label for="inputDescricaoPrograma">Descrição programa</label>
+        
+                        <input type="text" 
+                               disabled
+                               id="inputDescricaoPrograma" 
+                               name="inputDescricaoPrograma" 
+                               class="form-control"
+                               [(ngModel)]="formulario.descricaoPrograma" 
+                        >
                     </div>
                     <!-- ID LOCAL -->
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-2 espaco">
                         <label for="inputLocal" class="preenchimentoObrigatorio">Local</label>
                         <div class="input-group-append">
-                            <input type="text" id="inputLocal" name="inputLocal" required maxlength={{SIZE_LOCAL}} [(ngModel)]="formulario.idLocal" (keyup.F2)=acionaModalPesquisa() class="form-control">
-                            <input type="button" id="buttonPesquisa" (click)="acionaModalPesquisa()" class="buttonPesquisa espaco">
+
+                            <input type="text" 
+                                   id="inputLocal" 
+                                   name="inputLocal" 
+                                   required 
+                                   maxlength={{SIZE_LOCAL}} 
+                                   [(ngModel)]="formulario.idLocal" 
+                                   (keyup.F2)="pesquisa( 1 )"
+                                   class="form-control"
+                            >
+
+                            <input type="button" 
+                                   id="buttonPesquisa" 
+                                   (click)="pesquisa( 1 )"
+                                   class="buttonPesquisa"
+                            >
                         </div>
                     </div>
+                    <!-- DESCRIÇÃO DO LOCAL [CAMPO VIRTUAL] -->
+                    <div class="form-group col-md-4 espaco">
+                        <label for="inputDescricaoLocal">Descrição local</label>
+    
+                        <input type="text" 
+                               disabled
+                               id="inputDescricaoLocal" 
+                               name="inputDescricaoLocal" 
+                               class="form-control"
+                               [(ngModel)]="formulario.descricaoLocal" 
+                        >
+                    </div>                                        
                     <!-- ID FREQUENCIA -->
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-2 espaco">
                         <label for="inputIdFrequencia" class="preenchimentoObrigatorio">Frequência</label>
                         <div class="input-group-append">
-                            <input type="text" id="inputIdFrequencia" name="inputIdFrequencia" required  maxlength={{SIZE_ID_FREQUENCIA}} [(ngModel)]="formulario.idFrequencia" (keyup.F2)=acionaModalPesquia() class="form-control">
-                            <input type="button" id="buttonPesquisa" name="buttonPesquisa" (click)=acionaModalPesquia()  class="buttonPesquisa">
+
+                            <input type="text" 
+                                   id="inputIdFrequencia" 
+                                   name="inputIdFrequencia" 
+                                   required  
+                                   maxlength={{SIZE_ID_FREQUENCIA}} 
+                                   [(ngModel)]="formulario.idFrequencia" 
+                                   (keyup.F2)="pesquisa( 3 )"
+                                   class="form-control"
+                            >
+
+                            <input type="button" 
+                                   id="buttonPesquisa" 
+                                   name="buttonPesquisa" 
+                                   (click)="pesquisa( 3 )" 
+                                   class="buttonPesquisa"
+                            >
                         </div>
                     </div>
+                    <!-- DESCRIÇÃO DA FREQUENCIA [CAMPO VIRTUAL] -->
+                    <div class="form-group col-md-2 espaco">
+                        <label for="inputDescricaoFrequencia">Descrição frequência</label>
+    
+                        <input type="text" 
+                               disabled
+                               id="inputDescricaoFrequencia" 
+                               name="inputDescricaoFrequencia" 
+                               class="form-control"
+                               [(ngModel)]="formulario.descricaoFrequencia" 
+                        >
+                    </div>                    
                     <!-- BLOQUEADO -->
                     <div class="form-group espaco">
                         <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
-                        <select id="inputBloqueado" name="inputBloqueado" required [(ngModel)]="formulario.bloqueado" class="form-control">
+
+                        <select id="inputBloqueado" 
+                                name="inputBloqueado" 
+                                required 
+                                [(ngModel)]="formulario.bloqueado" 
+                                class="form-control"
+                        >
                             <option value=false>Não</option>
                             <option value=true>Sim</option>
                         </select>
@@ -92,17 +193,44 @@
         </tbody>
     </table>
 
-    <!-- COMPONENTE DE PESQUISA -->
-    <app-tela-consulta-padrao
-        (botaoPesquisarClicado)="pesquisaPrograma($event)"
-        (itemSelecionadoClicado)="itemProgramaSelecionado($event)"
-        [cabecalhoTabela]="cabecalhoTabelaPrograma"
-        [tabelaDeDados]="programasFiltrados"
-    >
-    </app-tela-consulta-padrao>
+    <!-- COMPONENTE DE PESQUISA PROGRAMA-->
+    <div *ngIf="pesquisa_programa">
+        <app-tela-consulta-padrao
+            [idModalPesquisa]="idPesquisaPrograma"
+            (botaoPesquisarClicado)="pesquisaPrograma($event)"
+            (itemSelecionadoClicado)="itemProgramaSelecionado($event)"
+            [cabecalhoTabela]="cabecalhoConsulta"
+            [tabelaDeDados]="programasFiltrados"
+        >
+        </app-tela-consulta-padrao>
+    </div>
+
+    <!-- COMPOMENTE DE PESQUISA FREQUENCIA -->
+    <div *ngIf="pesquisa_frequencia">
+        <app-tela-consulta-padrao
+            [idModalPesquisa]="idPesquisaFrequencia"
+            (botaoPesquisarClicado)="pesquisaFrequencia($event)"
+            (itemSelecionadoClicado)="itemFrequenciaSelecionada($event)"
+            [cabecalhoTabela]="cabecalhoConsulta"
+            [tabelaDeDados]="frequenciasFiltradas"
+        >
+        </app-tela-consulta-padrao>
+    </div>
+
+    <!-- COMPONENTE DE PESQUISA LOCAL -->
+    <div *ngIf="pesquisa_local">
+        <app-tela-consulta-padrao
+            [idModalPesquisa]="idPesquisaLocal"
+            (botaoPesquisarClicado)="pesquisaLocal($event)"
+            (itemSelecionadoClicado)="itemLocalSelecionado($event)"
+            [cabecalhoTabela]="cabecalhoConsulta"
+            [tabelaDeDados]="locaisFiltrados"
+        >
+        </app-tela-consulta-padrao>
+    </div>
 
     <!-- BOTÕES PARA SALVAR FORMULÁRIO -->
     <app-botoes-salvar-fechar (botaoSalvarClicado)=salvarFormulario($event) 
-                            (botaoFecharClicado)=fechaTela($event)>
+                              (botaoFecharClicado)=fechaTela($event)>
     </app-botoes-salvar-fechar>
 </div>

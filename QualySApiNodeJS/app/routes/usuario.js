@@ -12,9 +12,21 @@ module.exports = function(application){
     });
 
 
-    application.delete("/api/usuario", function(req, res){
+    application.delete("/api/usuario/:cpf", function(req, res){
 
         application.app.controllers.usuario.deletaUsuario(application, req, res );
     });
+
+
+    application.get("/api/usuario", function(req, res){
+
+        application.app.controllers.usuario.getAllUsuarios(application, req, res );
+    });
+
+
+    application.get("/api/usuario/:nome", function(req, res){
+
+        application.app.controllers.usuario.getUsuariosPorNome(application, req, res );
+    });    
     
 }

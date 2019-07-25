@@ -10,7 +10,7 @@
 
 <body>
 
-    <div class="modal fade filtroModal" id="modalPesquisa" tabindex="-1" role="dialog" aria-labelledby="filtroModalLabel"
+    <div class="modal fade filtroModal" id={{idModalPesquisa}} tabindex="-1" role="dialog" aria-labelledby="filtroModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -53,7 +53,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" (click)="fechaModalPesquisa()">Cancelar</button>
                 </div>
             </div>
         </div>
