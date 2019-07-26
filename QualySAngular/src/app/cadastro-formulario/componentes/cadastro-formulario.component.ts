@@ -12,6 +12,7 @@ import { ItemFormulario     } from './../model/item-formulario';
 import { parseObjectsToArray} from 'src/app/global/funcoes/functionsComuns';
 import { ProgramaService    } from './../../programa/model/programa.service';
 import { LocalService       } from './../../local/model/local.service';
+import { CadastroFormularioService } from './../model/cadastro-formulario.service';
 
 
 @Component({
@@ -64,7 +65,8 @@ export class CadastroFormularioComponent implements OnInit {
   constructor(private router:Router,
               private localservice:LocalService,
               private programaService:ProgramaService,
-              private frequenciaService:FrequenciaService
+              private frequenciaService:FrequenciaService,
+              private formularioService:CadastroFormularioService
              ) { 
   }
 
@@ -98,9 +100,18 @@ export class CadastroFormularioComponent implements OnInit {
    */
   private salvarFormulario(){
 
-    /**
-     * @todo desenvolver...
-     */
+    this.formularioService.salvaFormulario(this.formulario).subscribe(
+
+          result => {
+                        this.resultadoApi    = result;
+                        // this.locais          = this.resultadoApi.registros;     
+                        // this.locais          = parseObjectsToArray ( this.locais );   
+                        // this.locaisFiltrados = this.locais;
+                    },
+          error => {
+                        this.setErrosApi(error);
+                    }
+    );
   }
 
    /**
@@ -148,6 +159,7 @@ export class CadastroFormularioComponent implements OnInit {
     return this.formulario;
   }
 
+  
   /**
    * @description Retorna instancia de ItemFormulario alocado
    * @return {ItemFormulario}  - instancia alocada em memória
@@ -378,20 +390,20 @@ export class CadastroFormularioComponent implements OnInit {
       this.programasFiltrados = parseObjectsToArray(this.programas);
     }
   } 
-
+  
 
   /**
-   * @description Preenche input do Programa de acordo com o clique que o usuário deu sobre determinado Programa.
-   * @param dado id do programa que foi seleciona (clicada) pelo usuário
+   * @description Preenche input do local de acordo com o clique que o usuário deu sobre determinado programa.
+   * @param dado id do local que foi seleciona (clicada) pelo usuário
    */
   private itemProgramaSelecionado(dado:any){
 
-    this.formulario.setIdPrograma(dado[0]);
+    this.formulario.setIdPrograma (dado[0]);
     this.formulario.setDescricaoPrograma(dado[1]);
     this.fechaModalPesquisa(this.idPesquisaPrograma);
-  }
+  } 
 
-  
+
   /**
    * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-mensagem

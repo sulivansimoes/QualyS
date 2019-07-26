@@ -25,14 +25,14 @@ function salvaFormulario(application, request, response){
      * @todo fazer uma livadação para ver se o schema é JSON antes de tentar fazer a
      * conversão
      */
-    dados.itens = eval(dados.itens);
     console.log(dados);
+    // dados.itens = eval(dados.itens);
 
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
     //validando cabecalho
-    erros_aux = validator_interno.isObjectEmpty(dados, ["id_programa","itens"]);
+    // erros_aux = validator_interno.isObjectEmpty(dados, ["id_programa","itens","bloqueado"]);
     if( erros_aux ){
 
         erros.push(erros_aux);
@@ -42,7 +42,7 @@ function salvaFormulario(application, request, response){
     //Validando itens
     for(let item in dados.itens){
 
-        erros_aux = validator_interno.isObjectEmpty(dados.itens[item], ["item_bloqueado"]);
+        // erros_aux = validator_interno.isObjectEmpty(dados.itens[item], ["bloqueado"]);
         if( erros_aux ){
     
             erros.push(erros_aux);

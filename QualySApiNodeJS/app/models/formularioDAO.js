@@ -52,7 +52,7 @@ class FormularioDAO{
                                         formulario.id_programa  ,        //[02]
                                         formulario.id_local     ,        //[03]
                                         formulario.id_frequencia,        //[04]
-                                        formulario.cabecalho_bloqueado   //[05]
+                                        formulario.bloqueado             //[05]
                                        ];
 
                 
@@ -78,7 +78,7 @@ class FormularioDAO{
                                         idCabecalho                     ,       //[01]
                                         idCabecalho                     ,       //[02]
                                         formulario.itens[item].pergunta ,       //[03]
-                                        formulario.itens[item].item_bloqueado   //[04]
+                                        formulario.itens[item].bloqueado        //[04]
                                        ];
                     
                      //salva intens

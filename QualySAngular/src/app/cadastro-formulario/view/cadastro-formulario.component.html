@@ -42,7 +42,7 @@
                                    name="inputPrograma" 
                                    required 
                                    maxlength={{SIZE_PROGRAMA}}
-                                   [(ngModel)]="formulario.idPrograma" 
+                                   [(ngModel)]="formulario.id_programa" 
                                    (keyup.F2)="pesquisa( 2 )"
                                    class="form-control"
                             >
@@ -76,7 +76,7 @@
                                    name="inputLocal" 
                                    required 
                                    maxlength={{SIZE_LOCAL}} 
-                                   [(ngModel)]="formulario.idLocal" 
+                                   [(ngModel)]="formulario.id_local" 
                                    (keyup.F2)="pesquisa( 1 )"
                                    class="form-control"
                             >
@@ -110,7 +110,7 @@
                                    name="inputIdFrequencia" 
                                    required  
                                    maxlength={{SIZE_ID_FREQUENCIA}} 
-                                   [(ngModel)]="formulario.idFrequencia" 
+                                   [(ngModel)]="formulario.id_frequencia" 
                                    (keyup.F2)="pesquisa( 3 )"
                                    class="form-control"
                             >
@@ -177,12 +177,21 @@
                 </td>
                 <!-- PERGUNTA -->
                 <td>
-                    <input type="text" id="inputPergunta" name="inputPergunta" [(ngModel)]="item.pergunta"
-                        class="form-control">
+                    <input type="text" 
+                           id="inputPergunta" 
+                           name="inputPergunta" 
+                           [(ngModel)]="item.pergunta"
+                           class="form-control"
+                    >
                 </td>
                 <!-- BLOQUEADO -->
                 <td>
-                    <select id="inputBloqueado" name="inputBloqueado" required class="form-control col-md-5">
+                    <select id="inputBloqueado" 
+                            name="inputBloqueado" 
+                            required 
+                            class="form-control col-md-5"
+                            [(ngModel)]="formulario.bloqueado" 
+                        >
                         <option value=false>Não</option>
                         <option value=true>Sim</option>
                     </select>
