@@ -33,6 +33,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
 }
 
+/* retira setas do campo number  */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
 /* CLASSES */
 .embrulho-principal{
     margin-top: 1.0rem;

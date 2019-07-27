@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule  } from '@angular/forms';
 // MÓDULOS PERSONALIZADOS
 import { ComponenteGlobalModule } from './../global/componente-global.module';
+// MÓDULOS DE TERCEIROS
+import { NgxPaginationModule    } from 'ngx-pagination'; // Módulo da dependência de paginação
 // COMPONENTES PERSONALIZADOS
 import { CadastroFormularioComponent        } from './componentes/cadastro-formulario.component';
 import { BrowserCadastroFormularioComponent } from './componentes/browser-cadastro-formulario.component';
@@ -21,6 +23,8 @@ const appRoutes = rotas;
     CommonModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
+
+    NgxPaginationModule,
 
     ComponenteGlobalModule
   ],

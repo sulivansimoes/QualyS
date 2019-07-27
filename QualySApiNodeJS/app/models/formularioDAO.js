@@ -1,7 +1,9 @@
 //Bibliotecas
+const topConnection                    = require("./processosPG");
 const {msg_status_1_A, msg_status_2_A} = require("../libs/mensagens_padroes"); 
 const {msg_status_1_B, msg_status_2_B} = require("../libs/mensagens_padroes"); 
 const {msg_status_1_C, msg_status_2_C} = require("../libs/mensagens_padroes"); 
+const {msg_status_1_D, msg_status_2_D} = require("../libs/mensagens_padroes"); 
 
 class FormularioDAO{
 
@@ -78,7 +80,7 @@ class FormularioDAO{
                                         idCabecalho                     ,       //[01]
                                         idCabecalho                     ,       //[02]
                                         formulario.itens[item].pergunta ,       //[03]
-                                        formulario.itens[item].bloqueado        //[04]
+                                        formulario.itens[item].item_bloqueado   //[04]
                                        ];
                     
                      //salva intens
@@ -163,6 +165,36 @@ class FormularioDAO{
             
         })().catch(e => console.error(e));               
     }
+
+
+
+    /**
+     * @description Consulta todos cabecalhos dos formularios no banco de dados
+     * @param {response} response 
+     */
+    getAllCabecalhoFormularios(response){
+
+        let cSql   = " SELECT * FROM cabecalho_formulario c "
+                 
+        topConnection.executaQuery(cSql, [],  response, msg_status_1_D, msg_status_2_D);      
+    } 
+    
+    
+    /**
+     * @description Consulta formulario especifico por ID no banco de dados
+     * @param {number  } id - id do formulario a ser localizado
+     * @param {response} response 
+     */
+    findFormularioPorId(id, response){
+
+       let cSql   = " SELECT * FROM cabecalho_formulario c "
+                  + " INNER JOIN item_formulario i ON i.id_cabecalho = c.id "
+                  + " WHERE c.id = $1 "
+       
+       let aValues= [ id ];
+
+       topConnection.executaQuery(cSql, aValues,  response, msg_status_1_D, msg_status_2_D);      
+    }      
     
 }
 

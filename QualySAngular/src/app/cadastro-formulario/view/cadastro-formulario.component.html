@@ -29,6 +29,7 @@
                                required 
                                maxlength={{SIZE_DESCRICAO}} 
                                [(ngModel)]="formulario.descricao" 
+                               [class.is-invalid] = "camposObrigatorios"
                                class="form-control"
                         >
                     </div>
@@ -37,13 +38,14 @@
                         <label for="inputPrograma" class="preenchimentoObrigatorio">Programa</label>
                         <div class="input-group-append">
 
-                            <input type="text" 
+                            <input type="number" 
                                    id="inputPrograma" 
                                    name="inputPrograma" 
                                    required 
                                    maxlength={{SIZE_PROGRAMA}}
                                    [(ngModel)]="formulario.id_programa" 
                                    (keyup.F2)="pesquisa( 2 )"
+                                   [class.is-invalid] = "camposObrigatorios"
                                    class="form-control"
                             >
 
@@ -71,13 +73,14 @@
                         <label for="inputLocal" class="preenchimentoObrigatorio">Local</label>
                         <div class="input-group-append">
 
-                            <input type="text" 
+                            <input type="number" 
                                    id="inputLocal" 
                                    name="inputLocal" 
                                    required 
                                    maxlength={{SIZE_LOCAL}} 
                                    [(ngModel)]="formulario.id_local" 
                                    (keyup.F2)="pesquisa( 1 )"
+                                   [class.is-invalid] = "camposObrigatorios"
                                    class="form-control"
                             >
 
@@ -105,13 +108,14 @@
                         <label for="inputIdFrequencia" class="preenchimentoObrigatorio">Frequência</label>
                         <div class="input-group-append">
 
-                            <input type="text" 
+                            <input type="number" 
                                    id="inputIdFrequencia" 
                                    name="inputIdFrequencia" 
                                    required  
                                    maxlength={{SIZE_ID_FREQUENCIA}} 
                                    [(ngModel)]="formulario.id_frequencia" 
                                    (keyup.F2)="pesquisa( 3 )"
+                                   [class.is-invalid] = "camposObrigatorios"
                                    class="form-control"
                             >
 
@@ -143,6 +147,7 @@
                                 name="inputBloqueado" 
                                 required 
                                 [(ngModel)]="formulario.bloqueado" 
+                                [class.is-invalid] = "camposObrigatorios"
                                 class="form-control"
                         >
                             <option value=false>Não</option>
@@ -172,8 +177,14 @@
             <tr *ngFor="let item of getCadastroFormulario().getItens()">
                 <!-- ITEM -->
                 <td class="largura-coluna-item">
-                    <input type="number" id="inputItem" name="inputItem" [(ngModel)]="item.item" disabled
-                        class="form-control col-md-2 largura-coluna-item">
+
+                    <input type="number" 
+                           id="inputItem" 
+                           name="inputItem" 
+                           [(ngModel)]="item.item" 
+                           disabled
+                           class="form-control col-md-2 largura-coluna-item"
+                    >
                 </td>
                 <!-- PERGUNTA -->
                 <td>
@@ -181,6 +192,7 @@
                            id="inputPergunta" 
                            name="inputPergunta" 
                            [(ngModel)]="item.pergunta"
+                           [class.is-invalid] = "camposObrigatorios"
                            class="form-control"
                     >
                 </td>
@@ -190,8 +202,9 @@
                             name="inputBloqueado" 
                             required 
                             class="form-control col-md-5"
-                            [(ngModel)]="formulario.bloqueado" 
-                        >
+                            [class.is-invalid] = "camposObrigatorios"
+                            [(ngModel)]="item.item_bloqueado" 
+                    >
                         <option value=false>Não</option>
                         <option value=true>Sim</option>
                     </select>
@@ -238,8 +251,18 @@
         </app-tela-consulta-padrao>
     </div>
 
+    <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+    <div *ngIf="errosApi">
+        <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
+    </div>
+    
+    <!-- MENSAGEM DE ALERTA -->
+    <div *ngIf="mensagemAviso">
+        <tela-mensagem [mensagemAviso]="mensagemAviso"></tela-mensagem>
+    </div>
+
     <!-- BOTÕES PARA SALVAR FORMULÁRIO -->
-    <app-botoes-salvar-fechar (botaoSalvarClicado)=salvarFormulario($event) 
+    <app-botoes-salvar-fechar (botaoSalvarClicado)=salva($event) 
                               (botaoFecharClicado)=fechaTela($event)>
     </app-botoes-salvar-fechar>
 </div>

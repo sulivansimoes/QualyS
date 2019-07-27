@@ -13,9 +13,20 @@ module.exports = function(application){
     });
 
 
-    application.delete("/api/formulario", function(req, res){
+    application.delete("/api/formulario/:id", function(req, res){
 
         application.app.controllers.formulario.deletaFormulario(application, req, res );
     });
     
+
+    application.get("/api/formulario", function(req, res){
+
+        application.app.controllers.formulario.getAllCabecalhoFormularios(application, req, res );
+    });
+
+
+    application.get("/api/formulario/:id", function(req, res){
+
+        application.app.controllers.formulario.findFormularioPorId(application, req, res );
+    });
 }

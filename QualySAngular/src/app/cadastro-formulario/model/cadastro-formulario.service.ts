@@ -1,6 +1,6 @@
 // MÓDULOS PADRÕES
 import { Injectable              } from '@angular/core';
-import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders , HttpErrorResponse } from '@angular/common/http';
 import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
@@ -37,9 +37,38 @@ export class CadastroFormularioService {
 
   //DELETAR
 
-  //PESQUISAR
+ /**
+  * @description envia solicitação para API consultar todas os formularios cadastrados 
+  *              na base de dados.
+  */
+ getAllCabecalhoFormularios() : Observable<CadastroFormulario[]>{
 
-  /**
+  return this.http.get<CadastroFormulario[]>(this.formularioApi)
+                  .pipe(
+                          catchError(
+                                      this.errorHandler
+                                    )
+                        );
+ }
+
+
+ /**
+  * @description envia solicitação para API localizar determinado formulario por id cadastrado
+  *              na base de dados.
+  * @param {number} id - id do formulario que deve ser localizado 
+  */
+ findFormularioPorId(id:number) : Observable<CadastroFormulario[]>{
+
+  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/" + id)
+                  .pipe(
+                          catchError(
+                                      this.errorHandler
+                                    )
+                        );
+ }
+
+
+ /**
   * @description Função intercepta e lança erros originados ao tentar fazer solicitações à API.
   * @param error erros gerados ao fazer solicitações à API
   * @returns retorna uma string contendo o erro que acontenceu. 

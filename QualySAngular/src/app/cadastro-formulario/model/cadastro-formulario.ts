@@ -9,9 +9,9 @@ import { ItemFormulario } from './item-formulario';
     private descricao  : string;
     private id_programa : number;
     private id_local    : number;
-    private id_frequencia :number;
-    private itens      : ItemFormulario[];
-    private bloqueado  : boolean;
+    private id_frequencia : number;
+    private itens         : ItemFormulario[];
+    private bloqueado     : boolean;
 
     private descricaoFrequencia:String = "";
     private descricaoLocal:String      = "";
@@ -31,8 +31,8 @@ import { ItemFormulario } from './item-formulario';
      * @param {string } descricaoPrograma   - descrição do programa
      */
     constructor(id?:number              ,descricao?:string       , id_programa?:number, id_local?:number,
-                id_frequencia?:number    ,itens?: ItemFormulario[], bloqueado?:boolean, descricaoFrequencia?:string, 
-                descricaoLocal?:string  ,descricaoPrograma?:string){
+                id_frequencia?:number    ,itens?: ItemFormulario[], bloqueado?:boolean, 
+                descricaoFrequencia?:string, descricaoLocal?:string, descricaoPrograma?:string){
 
         this.id           = id;
         this.descricao    = descricao;
@@ -75,7 +75,7 @@ import { ItemFormulario } from './item-formulario';
      * @description: Retorna código identificador do local, onde o formulário de perguntas será aplicado.
      * @return {number} ( idLocal ) - código identificador do local.
      */
-    public getLocal():number{
+    public getIdLocal():number{
         return this.id_local;
     }
 

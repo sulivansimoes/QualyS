@@ -9,8 +9,18 @@
             <!-- PESQUISA REGISTRO-->
             <div class="form-group col-md-6">
                 <div class="input-group-append">
-                    <input type="text" id="inputPesquisaRegistroFormulario" required maxlength="100" class="form-control" autocomplete="off">
-                    <input type="button" id="inputPesquisaRegistroFormulario"  class="buttonPesquisa">
+
+                    <input type="text" 
+                           id="inputPesquisaRegistroFormulario"                             
+                           maxlength="100" 
+                           class="form-control" 
+                           autocomplete="off"
+                    >
+                    
+                    <input type="button" 
+                           id="inputPesquisaRegistroFormulario"  
+                           class="buttonPesquisa"
+                    >
                 </div>
             </div>
             <!-- BOTÃO DE INCLUSÃO DE REGISTRO -->
@@ -30,69 +40,35 @@
                 <th>#</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>LINHA 01</td>
-                    <td>LINHA 01</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-                <tr>
-                    <td>LINHA 02</td>
-                    <td>LINHA 02</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-                <tr>
-                    <td>LINHA 03</td>
-                    <td>LINHA 03</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-                <tr>
-                    <td>LINHA 04</td>
-                    <td>LINHA 04</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-                <tr>
-                    <td>LINHA 05</td>
-                    <td>LINHA 05</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-                <tr>
-                    <td>LINHA 06</td>
-                    <td>LINHA 06</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
-                </tr>
-                <tr>
-                    <td>LINHA 07</td>
-                    <td>LINHA 07</td>
-                    <td> <input type="button" class="buttonExclui"> </td>
-                    <td> <input type="button" class="buttonEditar"> </td>
+                <tr *ngFor="let formulario of formularios | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;">
+                    <td> {{ formulario.id        }} </td>
+                    <td> {{ formulario.descricao }} </td>
+                    <td> <input type="button" class="buttonExclui" (click)="excluiFormulario(formulario)"> </td>
+                    <td> <input type="button" class="buttonEditar" routerLink="cadastro-formulario/"  [queryParams]="{id:formulario.id}"> </td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- PAGINAÇÃO DA TABELA -->
+        <pagination-controls
+                (pageChange)="paginaAtual = $event"
+                maxSize = "5"
+                directionLinks = "true"
+                autoHide = "true"
+                responsive = "true"
+                previousLabel = ""
+                nextLabel = ""
+                screenReaderPaginationLabel = "Paginação"
+                screenReaderPageLabel = "page"
+                screenReaderCurrentLabel = "Você está na página"
+                class=" posicao-centro-vertical " 
+        >
+        </pagination-controls>
+
+        <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+        <div *ngIf="errosApi">
+            <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
+        </div>         
     </div>
-    <!-- PAGINAÇÃO -->
-    <nav class="posicao-centro-vertical">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+
 </div>

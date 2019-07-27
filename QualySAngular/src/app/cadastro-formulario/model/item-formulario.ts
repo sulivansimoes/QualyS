@@ -6,21 +6,21 @@ export class ItemFormulario {
     private idCabecalho: number;
     private item: number;
     private pergunta: string;
-    private bloqueado: boolean;
+    private item_bloqueado: boolean;
 
     /**
      * @constructor 
      * @param {number } idCabecalho - Código identificador do cabecalho da pergunta ( chave primária/estrangeira )
      * @param {number } item        - Código idententificador do item da pergunta ( chave primária )
      * @param {string } pergunta    - Pergunta do formulário, que será respondida posteriormente.
-     * @param {boolean} bloqueado   - Flag do cadastro, indicando se item está ou não bloqueado. 
+     * @param {boolean} item_bloqueado   - Flag do cadastro, indicando se item está ou não bloqueado. 
      */
-    constructor(idCabecalho?: number, item?: number, pergunta?: string, bloqueado?: boolean) {
+    constructor(idCabecalho?: number, item?: number, pergunta?: string, item_bloqueado?: boolean) {
 
         this.idCabecalho = idCabecalho;
         this.item        = item;
         this.pergunta    = pergunta;
-        this.bloqueado   = (bloqueado == null) ? false : bloqueado;
+        this.item_bloqueado   = (item_bloqueado == null) ? false : item_bloqueado;
     }
 
     /**
@@ -52,7 +52,7 @@ export class ItemFormulario {
      * @return {boolean} ( status ) - status do item do formulário
      */
     public isBloqueado(): boolean{
-        return this.bloqueado;
+        return this.item_bloqueado;
     }
 
     /**
@@ -84,6 +84,6 @@ export class ItemFormulario {
     * @param {boolean} status - Flag do cadastro, indicando se está ou não bloqueado.
     */
    public setBloqueado(status:boolean):void{
-    this.bloqueado = status;
+    this.item_bloqueado = status;
    }
 }

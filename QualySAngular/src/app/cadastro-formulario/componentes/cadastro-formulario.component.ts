@@ -1,7 +1,7 @@
 // COMPONENTES PADRÕES
-import { Component, OnInit  } from '@angular/core';
-import { Subscription       } from 'rxjs';
-import { Router             } from '@angular/router';
+import { Component, OnInit      } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription           } from 'rxjs';
 // COMPONENTES PERSONALIZADOS
 import { Frequencia         } from './../../frequencia/model/frequencia';
 import { FrequenciaService  } from './../../frequencia/model/frequencia.service';
@@ -13,6 +13,7 @@ import { parseObjectsToArray} from 'src/app/global/funcoes/functionsComuns';
 import { ProgramaService    } from './../../programa/model/programa.service';
 import { LocalService       } from './../../local/model/local.service';
 import { CadastroFormularioService } from './../model/cadastro-formulario.service';
+import { msgCamposNaoPreenchidos   } from 'src/app/global/funcoes/mensagensPadroes';
 
 
 @Component({
@@ -53,16 +54,14 @@ export class CadastroFormularioComponent implements OnInit {
   private inscricao     = new Subscription;
   private resultadoApi  = null;
   private errosApi      = null;
-
+  private mensagemAviso = null;
+  private camposObrigatorios             = false;
   private formulario: CadastroFormulario = null;
-  private itemFormulario: ItemFormulario = null;
-  private formularios:[]=[];
-  private itens:ItemFormulario[]= [];
-
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere  
 
   constructor(private router:Router,
+              private route: ActivatedRoute,
               private localservice:LocalService,
               private programaService:ProgramaService,
               private frequenciaService:FrequenciaService,
@@ -70,11 +69,27 @@ export class CadastroFormularioComponent implements OnInit {
              ) { 
   }
 
+
   ngOnInit() { 
 
-    if(this.getCadastroFormulario().getQuantidadeItens() === 0){
-      this.adicionaItem();
-    }
+   
+      //Recupera o conteudo dos parametros e inicializa campos.
+      //Também resgata a instancia da inscrição.
+      this.inscricao = this.route.queryParams.subscribe(
+          (queryParams: any) => {
+
+              this.getCadastroFormulario().setId( queryParams['id'] );
+
+              //Se estiver alterando inicializa todos inputs
+              if( this.getCadastroFormulario().getId() ){
+                
+                  this.findFormularioPorId( queryParams['id'] );
+              }else{
+        
+                  this.adicionaItem();
+              }                
+         }
+      );
   }
 
 
@@ -95,8 +110,31 @@ export class CadastroFormularioComponent implements OnInit {
   }
 
 
+  private salva(){
+
+      if( this.isEmpty() ){
+
+        this.camposObrigatorios = true;
+        this.setMensagemAviso();
+        return;
+
+      }else{
+
+        this.camposObrigatorios = false;
+      }
+
+      if(this.getCadastroFormulario().getId()){
+        
+        // this.atualizaFrequencia();
+      }else{
+        
+        this.salvarFormulario()
+      }
+  }
+
+
  /**
-   * @description Envia solicitação para salvar programa no BD
+   * @description Envia solicitação para o service salvar o formulário.
    */
   private salvarFormulario(){
 
@@ -104,9 +142,8 @@ export class CadastroFormularioComponent implements OnInit {
 
           result => {
                         this.resultadoApi    = result;
-                        // this.locais          = this.resultadoApi.registros;     
-                        // this.locais          = parseObjectsToArray ( this.locais );   
-                        // this.locaisFiltrados = this.locais;
+                        this.formulario      = new CadastroFormulario();
+                        alert(this.resultadoApi.mensagem);
                     },
           error => {
                         this.setErrosApi(error);
@@ -114,30 +151,47 @@ export class CadastroFormularioComponent implements OnInit {
     );
   }
 
-   /**
-   * @description: fecha tela de inclusão e volta para a tela de browser.
-   * */
-  private fechaTela(){
-   
-    if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
-      this.router.navigateByUrl("browser-cadastro-formulario");
-    }
+
+
+  /**
+   * @description Envia solicitação para service localizar o formulario (itens e cabecalho) pelo id
+   * @param {number} id - id do formulario a ser localizado. 
+   */
+  private findFormularioPorId(id: number){
+
+    this.formularioService.findFormularioPorId(id).subscribe(
+
+        result => {
+                      this.resultadoApi    = result;
+                      
+                      // correndo em todos itens e adicionado ao formulario para aparecer na tela.
+                      for (let i = 0; i < this.resultadoApi.linhas_afetadas; i++){
+
+                        this.formulario.addItem(new ItemFormulario( null,
+                                                                    this.resultadoApi.registros[i].item,
+                                                                    this.resultadoApi.registros[i].pergunta,
+                                                                    this.resultadoApi.registros[i].bloqueado
+                                                                  ));
+                      }
+                  },
+        error => {
+                      this.setErrosApi(error);
+                  }
+    );
   }
+
 
   /**
    * @description Inclui uma nova linha ( vazia ) ao fomulário para que possa ser preenchida
    */
   private adicionaItem(){
 
-    let ultimoItem = this.getCadastroFormulario().getQuantidadeItens();
-
-    this.getCadastroFormulario().addItem(new ItemFormulario( null,            //IdCabeçalho
-                                                             ultimoItem  + 1, //Item
-                                                             null,            //Pergunta
-                                                             null) );         //Bloqueado
-
-    console.log(this.getCadastroFormulario().getItens());                                                             
+    this.getCadastroFormulario().addItem(new ItemFormulario( null,     //IdCabeçalho
+                                                             null,     //Item
+                                                             null,     //Pergunta
+                                                             null) );  //Bloqueado
   }
+
 
   /**
    * @description Deleta o item ( pergunta ) do fomulário
@@ -148,27 +202,19 @@ export class CadastroFormularioComponent implements OnInit {
     // this.getCadastroFormulario().removeItem(item);
   }
 
+
   /**
    * @description Retorna instancia de CadastroFormulário alocado.
-   * @return {CadastroFormulario} - instancia alocada em memória
+   * @return {CadastroFormulario} - Instância alocada em memória
    */
   private getCadastroFormulario()/*:CadastroFormulario*/{
+
     if( this.formulario == null ){
+
       this.formulario = new CadastroFormulario();
     }
-    return this.formulario;
-  }
 
-  
-  /**
-   * @description Retorna instancia de ItemFormulario alocado
-   * @return {ItemFormulario}  - instancia alocada em memória
-   */
-  private getItemFormulario()/*:ItemFormulario*/{
-    if( this.itemFormulario == null ){
-      this.itemFormulario = new ItemFormulario()
-    }
-    return this.itemFormulario;
+    return this.formulario;
   }
 
 
@@ -298,8 +344,8 @@ export class CadastroFormularioComponent implements OnInit {
    */
   private itemFrequenciaSelecionada(dado:any){
 
-    this.formulario.setIdFrequencia(dado[0]);
-    this.formulario.setDescricaoFrequencia(dado[1]);
+    this.getCadastroFormulario().setIdFrequencia(dado[0]);
+    this.getCadastroFormulario().setDescricaoFrequencia(dado[1]);
     this.fechaModalPesquisa(this.idPesquisaFrequencia);
   }
 
@@ -350,8 +396,8 @@ export class CadastroFormularioComponent implements OnInit {
    */
   private itemLocalSelecionado(dado:any){
 
-    this.formulario.setIdLocal(dado[0]);
-    this.formulario.setDescricaoLocal(dado[1]);
+    this.getCadastroFormulario().setIdLocal(dado[0]);
+    this.getCadastroFormulario().setDescricaoLocal(dado[1]);
     this.fechaModalPesquisa(this.idPesquisaLocal);
   }
 
@@ -398,10 +444,79 @@ export class CadastroFormularioComponent implements OnInit {
    */
   private itemProgramaSelecionado(dado:any){
 
-    this.formulario.setIdPrograma (dado[0]);
-    this.formulario.setDescricaoPrograma(dado[1]);
+    this.getCadastroFormulario().setIdPrograma (dado[0]);
+    this.getCadastroFormulario().setDescricaoPrograma(dado[1]);
     this.fechaModalPesquisa(this.idPesquisaPrograma);
   } 
+
+
+  /**
+   *@description  Valida se campos estão vazios.
+   *@returns true caso algum campo esteja vazio, false caso contrário.
+   */
+  private isEmpty(){
+
+    let itens        =  this.getCadastroFormulario().getItens();
+    let temCampoVazio = false;
+    
+    console.log( this.getCadastroFormulario().getIdFrequencia() )
+    //Validando cabeçalho
+    temCampoVazio = this.getCadastroFormulario().getDescricao()        == undefined ||                     
+                    this.getCadastroFormulario().getDescricao()        == null      ||
+                    this.getCadastroFormulario().getDescricao().trim() ==''         || 
+                        
+                    this.getCadastroFormulario().getIdFrequencia()     == undefined || 
+                    this.getCadastroFormulario().getIdFrequencia()     == null      ||
+
+                    this.getCadastroFormulario().getIdPrograma()       == undefined || 
+                    this.getCadastroFormulario().getIdPrograma()       == null      ||
+
+                    this.getCadastroFormulario().getIdLocal()          == undefined || 
+                    this.getCadastroFormulario().getIdLocal()          == null      ||
+
+                    this.getCadastroFormulario().isBloqueado()          == undefined || 
+                    this.getCadastroFormulario().isBloqueado()          == null       ? true : false;
+
+    //Validando itens   
+    // for(let i = 0; this.formulario.getQuantidadeItens(); i++){
+
+    //   if( itens[i].getPergunta() == null      ||
+    //       itens[i].getPergunta() == undefined ||
+          
+    //       itens[i].isBloqueado() == null      ||
+    //       itens[i].isBloqueado() == undefined
+    //      ){
+
+    //       temCampoVazio = true;
+    //       break;
+    //   }
+    // }
+
+    return temCampoVazio;
+  }
+
+
+  /**
+   * @description: fecha tela de inclusão e volta para a tela de browser.
+   */
+  private fechaTela(){
+   
+    if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
+      this.router.navigateByUrl("browser-cadastro-formulario");
+    }
+  }
+
+
+  /**
+   * @description função seta conteudo da variavel mensagemAviso, ela faz uso da varivel estática [ ela incrementa a countErros]
+   *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
+   */
+  setMensagemAviso(){
+
+    this.errosApi = null;
+    this.mensagemAviso = msgCamposNaoPreenchidos + " message: " + CadastroFormularioComponent.countErros++;
+    console.log(this.mensagemAviso);
+  }
 
 
   /**
