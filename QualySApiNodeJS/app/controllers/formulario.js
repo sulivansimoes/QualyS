@@ -128,12 +128,18 @@ function atualizaFormulario(application, request, response){
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    // erros_aux = validator_interno.isObjectEmpty(dados);
-    // if( erros_aux ){
+    erros_aux = validator_interno.isObjectEmpty({
+                                                  id : dados.id, 
+                                                  descricao : dados.descricao,
+                                                  id_local  : dados.id_local,
+                                                  id_programa : dados.id_programa,
+                                                  id_frequencia:dados.id_frequencia
+                                                });
+    if( erros_aux ){
 
-    //     erros.push(erros_aux);
-    //     erros_aux = null;
-    // }
+        erros.push(erros_aux);
+        erros_aux = null;
+    }
 
     if (erros.length > 0){
 

@@ -16,7 +16,8 @@
                                required 
                                maxlength   = {{SIZE_CPF}} 
                                [(ngModel)] = "usuario.cpf" 
-                               [class.is-invalid] = "camposObrigatorios"                               
+                               [class.is-invalid] = "camposObrigatorios"   
+                               [disabled] = "edita"  
                                class="form-control"
                         >
                     </div>

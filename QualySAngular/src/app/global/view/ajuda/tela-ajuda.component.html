@@ -40,6 +40,10 @@
               {{ textoObservacao01 }}
             </div>
 
+            <div *ngIf="mostraAjudaBloqueado" class="registro-bloqueado">
+               Todo cadastro com cor escura no browser está bloqueado para uso.
+            </div>
+
             <!-- APRESENTA CAMPOS COM SUA RESPECTIVA EXPLICAÇÃO -->
             <div *ngIf="campos.length >0 " class="embrulho-campos">
               <p><span>O cadastro é composto pelas seguintes informações:</span></p>

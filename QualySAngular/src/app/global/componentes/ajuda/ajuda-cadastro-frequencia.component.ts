@@ -26,7 +26,7 @@ export class AjudaCadastroFrequenciaComponent implements OnInit {
      this.textoDefinicao += "Nesta rotina são cadastradas todas as frequências utlizadas no sistema. "+
                             "Todo programa de autocontrole necessita ser respondido em períodos de tempo denomidados no sistema como frequência. ";
 
-    this.textoImportante01 += "IMPORTANTE: Todo programa cadastrado no sistema deve ser associado a uma frequência, "+
+    this.textoObservacao02 += "OBSERVAÇÃO: Todo programa cadastrado no sistema deve ser associado a uma frequência, "+
                               "caso contrário, o Cadastro de Programas não será concluído.";
      
      this.campos.push( ["ID"        , "Código identificador da frequência, este campo é preenchido automaticamente pelo sistema."]);

@@ -44,7 +44,9 @@
                 <th>#</th>
             </thead>
             <tbody>
-                <tr *ngFor="let formulario of formularios | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;">
+                <tr *ngFor="let formulario of formularios | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;"
+                    [class.registro-bloqueado]="formulario.bloqueado"
+                >
                     <td> {{ formulario.id        }} </td>
                     <td> {{ formulario.descricao }} </td>
                     <td> <input type="button" class="buttonExclui" (click)="excluiFormulario(formulario.id)"> </td>

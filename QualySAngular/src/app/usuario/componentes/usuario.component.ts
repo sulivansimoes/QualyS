@@ -21,7 +21,7 @@ export class UsuarioComponent implements OnInit {
   private SIZE_CPF    = 11;
   private SIZE_NOME   = 50;
   private SIZE_EMAIL  = 60;
-  private SIZE_SENHA  = 10;
+  private SIZE_SENHA  = 18;
 
   private inscricao          = new Subscription;
   private usuario:Usuario    = new Usuario();
@@ -29,6 +29,7 @@ export class UsuarioComponent implements OnInit {
   private mensagemAviso      = null;
   private errosApi           = null;
   private confirmaSenha:string;
+  private edita             = false;   // Variavel serve de flag pra ver se está iditando ou incluindo novo cadastro.
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -50,6 +51,8 @@ export class UsuarioComponent implements OnInit {
           this.usuario.nome      = queryParams['nome'     ];
           this.usuario.email     = queryParams['email'    ];
           this.usuario.bloqueado = queryParams['bloqueado'];
+
+          this.edita = this.usuario.cpf ? true : false;
         }
       );    
   }

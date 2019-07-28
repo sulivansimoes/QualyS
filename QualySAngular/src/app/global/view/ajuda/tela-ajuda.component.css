@@ -31,3 +31,8 @@ article > div{
     border-radius: 5px;
     padding: 20px;
 }
+
+.registro-bloqueado{
+    /* COR DEVE SER A MESMA DO CSS estilo-global-crud.css */
+    background-color: #d1d1d1 !important;
+} 

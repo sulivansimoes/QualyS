@@ -45,11 +45,15 @@
         <th>#</th>
       </thead>
       <tbody>
-        <tr *ngFor="let local of locais | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;">
+        <tr *ngFor="let local of locais | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;"
+            [class.registro-bloqueado]="local.bloqueado"
+        >
             <td> {{ local.id        }} </td>
             <td> {{ local.descricao }} </td>
             <td> <input type="button" class="buttonExclui" (click)="excluiLocal(local)"> </td>
-            <td> <input type="button" class="buttonEditar" routerLink="local/" [queryParams]="{id:local.id, descricao:local.descricao, bloqueado:local.bloqueado} "> </td>
+            <td> <input type="button" class="buttonEditar" routerLink="local/" [queryParams]="{id:local.id,
+                                                                                               descricao:local.descricao, 
+                                                                                               bloqueado:local.bloqueado} "> </td>
         <tr>    
       </tbody>
     </table>

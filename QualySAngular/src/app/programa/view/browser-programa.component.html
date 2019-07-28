@@ -45,7 +45,9 @@
                 <th>#</th>
             </thead>
             <tbody>
-                <tr *ngFor="let programa of programas | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;">
+                <tr *ngFor="let programa of programas | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;"
+                    [class.registro-bloqueado]="programa.bloqueado"
+                >
                     <td> {{ programa.id            }} </td>
                     <td> {{ programa.descricao     }} </td>
                     <td> {{ programa.sigla         }} </td>
