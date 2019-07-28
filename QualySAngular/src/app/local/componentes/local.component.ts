@@ -106,7 +106,7 @@ export class LocalComponent implements OnInit {
   }
 
 
- /**
+  /**
    * @description Se inscreve no serviço que envia solicitação para API atualizar frequência na base de dados.
    */
   private atualizaLocal(){

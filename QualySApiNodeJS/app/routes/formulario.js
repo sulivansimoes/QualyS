@@ -27,6 +27,12 @@ module.exports = function(application){
 
     application.get("/api/formulario/:id", function(req, res){
 
-        application.app.controllers.formulario.findFormularioPorId(application, req, res );
+        application.app.controllers.formulario.findItensFormularioPorId(application, req, res );
+    });
+
+
+    application.get("/api/formulario/descricao/:descricao", function(req, res){
+
+        application.app.controllers.formulario.getCabecalhoFormularioPorDescricao(application, req, res );
     });
 }

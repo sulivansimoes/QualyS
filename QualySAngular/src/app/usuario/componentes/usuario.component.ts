@@ -89,7 +89,7 @@ export class UsuarioComponent implements OnInit {
     //-----------------------------------------------------
     if(this.usuario.senha != this.confirmaSenha){
 
-      this.setMensagemAviso("As senhas não coencidem! Preencha os campos de senha corretamente.")
+      this.setMensagemAviso("As senhas não coincidem! Preencha os campos de senha corretamente.")
       return;
     }
 

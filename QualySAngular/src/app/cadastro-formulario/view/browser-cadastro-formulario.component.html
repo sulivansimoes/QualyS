@@ -15,11 +15,15 @@
                            maxlength="100" 
                            class="form-control" 
                            autocomplete="off"
+                           [(ngModel)]="pesquisa"
+                           (keyup.enter)="getFormulariosPorDescricao()"   
+                           placeholder="pesquise pela descrição"              
                     >
                     
                     <input type="button" 
                            id="inputPesquisaRegistroFormulario"  
-                           class="buttonPesquisa"
+                           class="buttonPesquisa"                           
+                           (click)="getFormulariosPorDescricao()"
                     >
                 </div>
             </div>
@@ -43,8 +47,17 @@
                 <tr *ngFor="let formulario of formularios | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;">
                     <td> {{ formulario.id        }} </td>
                     <td> {{ formulario.descricao }} </td>
-                    <td> <input type="button" class="buttonExclui" (click)="excluiFormulario(formulario)"> </td>
-                    <td> <input type="button" class="buttonEditar" routerLink="cadastro-formulario/"  [queryParams]="{id:formulario.id}"> </td>
+                    <td> <input type="button" class="buttonExclui" (click)="excluiFormulario(formulario.id)"> </td>
+                    <td> <input type="button" class="buttonEditar" routerLink="cadastro-formulario/"  [queryParams]="{id:formulario.id,
+                                                                                                                      descricao:formulario.descricao,
+                                                                                                                      id_programa:formulario.id_programa,
+                                                                                                                      descricao_programa:formulario.descricao_programa,
+                                                                                                                      id_local:formulario.id_local,
+                                                                                                                      descricao_local:formulario.descricao_local,
+                                                                                                                      id_frequencia:formulario.id_frequencia,
+                                                                                                                      descricao_frequencia:formulario.descricao_frequencia,
+                                                                                                                      bloqueado:formulario.bloqueado
+                                                                                                                     }"> </td>
                 </tr>
             </tbody>
         </table>

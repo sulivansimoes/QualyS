@@ -80,7 +80,7 @@ function salvaFormulario(application, request, response){
  */
 function deletaFormulario(application, request, response){
 
-    let idFormulario    = Number.parseInt(request.body.id);
+    let idFormulario    = Number.parseInt(request.params.id);
     let modelFormulario = null;
     let connection      = null;  
     let erros           = null;
@@ -113,6 +113,47 @@ function deletaFormulario(application, request, response){
 
 
 /**
+ * @description : Pega dados do request, valida, e envia para o model atualizar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function atualizaFormulario(application, request, response){
+
+    let dados            = request.body;
+    let modelFormulario  = null;
+    let erros_aux        = null;
+    let erros            = [];
+    
+    //-----------------------------------------------------
+    // Validando informações 
+    //-----------------------------------------------------
+    // erros_aux = validator_interno.isObjectEmpty(dados);
+    // if( erros_aux ){
+
+    //     erros.push(erros_aux);
+    //     erros_aux = null;
+    // }
+
+    if (erros.length > 0){
+
+        response.status(422).json({ 
+                                    status:3, 
+                                    mensagem: msg_status_3_A,
+                                    campos_invalidos: erros
+                                 });
+        return; 
+    }
+
+    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
+    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
+       
+    modelFormulario = new application.app.models.formularioDAO( connection );   //Instanciando model da formulario, passando a instancia de conexão com banco de dados.
+    modelFormulario.atualizaFormulario(dados, response);                        //Enviando formulario para o model para ser atualizado.          
+};
+
+
+/**
  * @description : Pega dados do request, valida, e envia para o model pesquisar.
  * @param : application, aplicação servidora do express.
  * @param : request, objeto do request.
@@ -133,7 +174,46 @@ function getAllCabecalhoFormularios(application, request, response){
  * @param : request, objeto do request.
  * @param : response, objeto do response.
  */
-function findFormularioPorId(application, request, response){
+function getCabecalhoFormularioPorDescricao(application, request, response){
+
+    let dados      = request.params;
+    let modelFormulario = null;
+    let erros_aux  = null;
+    let erros      = [];
+
+    //-----------------------------------------------------
+    // Validando informações 
+    //-----------------------------------------------------
+    erros_aux = validator_interno.isObjectEmpty({descricao:dados.descricao});
+    if( erros_aux ){
+
+        erros.push(erros_aux);
+        erros_aux = null;
+    }
+
+    if (erros.length > 0){
+
+        response.status(422).json({ 
+                                    status:3, 
+                                    mensagem: msg_status_3_A,
+                                    campos_invalidos: erros
+                                 });
+        return; 
+    }    
+
+    modelFormulario = new application.app.models.formularioDAO();                 //Instanciando model do formulario
+    modelFormulario.getCabecalhoFormularioPorDescricao(dados.descricao, response);       
+
+}
+
+
+/**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function findItensFormularioPorId(application, request, response){
 
     let dados           = request.params;
     let modelFormulario = null;
@@ -161,17 +241,19 @@ function findFormularioPorId(application, request, response){
     }    
 
     modelFormulario = new application.app.models.formularioDAO();   //Instanciando model do formulario
-    modelFormulario.findFormularioPorId(dados.id, response);       
+    modelFormulario.findItensFormularioPorId(dados.id, response);       
 
 }
+
 
 /**
  * Exportando funções 
  */
 module.exports = {
     salvaFormulario   ,
-  //  atualizaFormulario,
+    atualizaFormulario,
     deletaFormulario  ,
     getAllCabecalhoFormularios,
-    findFormularioPorId
+    findItensFormularioPorId  ,
+    getCabecalhoFormularioPorDescricao
 }

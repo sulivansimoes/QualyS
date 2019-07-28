@@ -5,17 +5,22 @@ import { ItemFormulario } from './item-formulario';
  */
  export class CadastroFormulario{
 
+    //Arrays auxiliares usados no processo de atualização.
+    public itens_atualizados : ItemFormulario[]= [];
+    public itens_inseridos   : ItemFormulario[]= [];
+    public itens_deletados   : ItemFormulario[]= [];
+
     private id         : number;
     private descricao  : string;
-    private id_programa : number;
-    private id_local    : number;
+    private id_programa: number;
+    private id_local   : number;
     private id_frequencia : number;
     private itens         : ItemFormulario[];
     private bloqueado     : boolean;
 
-    private descricaoFrequencia:String = "";
-    private descricaoLocal:String      = "";
-    private descricaoPrograma:String   = "";
+    private descricao_frequencia:String = "";
+    private descricao_local:String      = "";
+    private descricao_programa:String   = "";
     
     /**
      * @constructor
@@ -42,9 +47,9 @@ import { ItemFormulario } from './item-formulario';
         this.itens        = (itens == null) ? [] :itens;
         this.bloqueado    = (bloqueado == null) ? false : bloqueado;
 
-        this.descricaoFrequencia = descricaoFrequencia;
-        this.descricaoLocal      = descricaoLocal;
-        this.descricaoPrograma   = descricaoPrograma;
+        this.descricao_frequencia = descricaoFrequencia;
+        this.descricao_local      = descricaoLocal;
+        this.descricao_programa   = descricaoPrograma;
     }
 
     /**
@@ -167,7 +172,7 @@ import { ItemFormulario } from './item-formulario';
      * @param {string} status - descrição da frequencia
      */
     public setDescricaoFrequencia(descricaoFrequencia:string):void{
-        this.descricaoFrequencia = descricaoFrequencia;
+        this.descricao_frequencia = descricaoFrequencia;
     }
 
 
@@ -176,7 +181,7 @@ import { ItemFormulario } from './item-formulario';
      * @param {string} descricaoLocal - descrição do local
      */
     public setDescricaoLocal(descricaoLocal:string):void{
-        this.descricaoLocal = descricaoLocal;
+        this.descricao_local = descricaoLocal;
     }
 
 
@@ -185,7 +190,7 @@ import { ItemFormulario } from './item-formulario';
      * @param {string} descricaoPrograma - descrição do programa
      */
     public setDescricaoPrograma(descricaoPrograma:string):void{
-        this.descricaoPrograma = descricaoPrograma;
+        this.descricao_programa = descricaoPrograma;
     }
             
 

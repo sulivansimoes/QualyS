@@ -71,19 +71,27 @@ export class CadastroFormularioComponent implements OnInit {
 
 
   ngOnInit() { 
-
    
       //Recupera o conteudo dos parametros e inicializa campos.
       //Também resgata a instancia da inscrição.
       this.inscricao = this.route.queryParams.subscribe(
           (queryParams: any) => {
 
+              //Se estiver alterando inicializa todos inputs do cabecalho.
               this.getCadastroFormulario().setId( queryParams['id'] );
+              this.getCadastroFormulario().setIdLocal( queryParams['id_local'] );
+              this.getCadastroFormulario().setBloqueado( queryParams['bloqueado'] );
+              this.getCadastroFormulario().setDescricao( queryParams['descricao'] );
+              this.getCadastroFormulario().setIdPrograma( queryParams['id_programa'] );
+              this.getCadastroFormulario().setIdFrequencia( queryParams['id_frequencia'] );
+              this.getCadastroFormulario().setDescricaoLocal( queryParams['descricao_local'] );
+              this.getCadastroFormulario().setDescricaoPrograma( queryParams['descricao_programa'] );
+              this.getCadastroFormulario().setDescricaoFrequencia( queryParams['descricao_frequencia'] );
 
-              //Se estiver alterando inicializa todos inputs
+              //Se estiver alterando inicializa todos inputs dos itens.
               if( this.getCadastroFormulario().getId() ){
                 
-                  this.findFormularioPorId( queryParams['id'] );
+                  this.findItensFormularioPorId( queryParams['id'] );
               }else{
         
                   this.adicionaItem();
@@ -110,6 +118,10 @@ export class CadastroFormularioComponent implements OnInit {
   }
 
 
+  /**
+   * @description Função valida se informações do formulário estão corretas. Vê se o que está sendo feito
+   *              é atualização ou salvamento de um novo registro e chama a função responsável pela ação.
+   */
   private salva(){
 
       if( this.isEmpty() ){
@@ -125,7 +137,7 @@ export class CadastroFormularioComponent implements OnInit {
 
       if(this.getCadastroFormulario().getId()){
         
-        // this.atualizaFrequencia();
+        this.atualizaFormulario();
       }else{
         
         this.salvarFormulario()
@@ -133,7 +145,7 @@ export class CadastroFormularioComponent implements OnInit {
   }
 
 
- /**
+  /**
    * @description Envia solicitação para o service salvar o formulário.
    */
   private salvarFormulario(){
@@ -152,26 +164,57 @@ export class CadastroFormularioComponent implements OnInit {
   }
 
 
+  /**
+   * @description Se inscreve no serviço que envia solicitação para API atualizar formulario na base de dados.
+   */
+  private atualizaFormulario(){
+
+    for(let item in this.getCadastroFormulario().getItens() ){
+
+      //Se o item já estiver na base de dados. \ item não for null
+      if( this.getCadastroFormulario().getItens()[item].getItem() ){
+
+        this.getCadastroFormulario().itens_atualizados.push( this.getCadastroFormulario().getItens()[item] );
+      }else{
+
+        this.getCadastroFormulario().itens_inseridos.push( this.getCadastroFormulario().getItens()[item] );
+      }
+    }
+
+
+    //Envia solicitação para atualizar formulário
+    this.formularioService.atualizaFormulario(this.formulario)
+                          .subscribe( 
+                                      result =>{ 
+                                                  alert("deu certo atualização");
+                                                },
+                                      erros => { 
+                                                  this.setErrosApi(erros);
+                                                }
+                                    );
+                          // this.fechaTela();
+  } 
+
 
   /**
    * @description Envia solicitação para service localizar o formulario (itens e cabecalho) pelo id
    * @param {number} id - id do formulario a ser localizado. 
    */
-  private findFormularioPorId(id: number){
+  private findItensFormularioPorId(id: number){
 
-    this.formularioService.findFormularioPorId(id).subscribe(
+    this.formularioService.findItensFormularioPorId(id).subscribe(
 
         result => {
                       this.resultadoApi    = result;
-                      
+
                       // correndo em todos itens e adicionado ao formulario para aparecer na tela.
                       for (let i = 0; i < this.resultadoApi.linhas_afetadas; i++){
 
-                        this.formulario.addItem(new ItemFormulario( null,
-                                                                    this.resultadoApi.registros[i].item,
-                                                                    this.resultadoApi.registros[i].pergunta,
-                                                                    this.resultadoApi.registros[i].bloqueado
-                                                                  ));
+                        this.getCadastroFormulario().addItem(new ItemFormulario( this.resultadoApi.registros[i].id_cabecalho,
+                                                                                 this.resultadoApi.registros[i].item,
+                                                                                 this.resultadoApi.registros[i].pergunta,
+                                                                                 this.resultadoApi.registros[i].bloqueado
+                                                                                ));
                       }
                   },
         error => {
@@ -197,9 +240,17 @@ export class CadastroFormularioComponent implements OnInit {
    * @description Deleta o item ( pergunta ) do fomulário
    * @param {ItemFormulario} item - Item à ser excluído do formulário.
    */
-  private deletaItem(/*item:ItemFormulario*/){
-   
-    // this.getCadastroFormulario().removeItem(item);
+  private deletaItem(item:ItemFormulario){
+
+    //Se estiver editando e o item já estiver cadastrado na base de dados
+    if( this.getCadastroFormulario().getId() && item.getItem() ){
+       
+        //guardo o item para que seja deletado só quando salvar o formulario.
+        this.getCadastroFormulario().itens_deletados.push(item);
+    }
+
+    //removo o item da tela
+    this.getCadastroFormulario().removeItem(item);
   }
 
 
@@ -402,6 +453,10 @@ export class CadastroFormularioComponent implements OnInit {
   }
 
 
+  /**
+   * @description: Função monta o array programas, programasFiltrados e cabecalhoConsulta para inicializar
+   *               a tela de consulta quando a consulta de locais for acionada.
+   */
   private constroiConsultaPrograma(){
 
     this.cabecalhoConsulta= [["ID"],["DESCRIÇÃO"]];
@@ -474,8 +529,8 @@ export class CadastroFormularioComponent implements OnInit {
                     this.getCadastroFormulario().getIdLocal()          == undefined || 
                     this.getCadastroFormulario().getIdLocal()          == null      ||
 
-                    this.getCadastroFormulario().isBloqueado()          == undefined || 
-                    this.getCadastroFormulario().isBloqueado()          == null       ? true : false;
+                    this.getCadastroFormulario().isBloqueado()         == undefined || 
+                    this.getCadastroFormulario().isBloqueado()         == null       ? true : false;
 
     //Validando itens   
     // for(let i = 0; this.formulario.getQuantidadeItens(); i++){

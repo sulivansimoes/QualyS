@@ -23,7 +23,6 @@ export class CadastroFormularioService {
 
   salvaFormulario(formulario:CadastroFormulario): Observable<CadastroFormulario> {
 
-    console.log(formulario);
     return this.http.post<CadastroFormulario>(this.formularioApi, formulario, httpOption)
                     .pipe(
                             catchError(
@@ -33,9 +32,35 @@ export class CadastroFormularioService {
   }
 
 
-  //UPDATE
+  /**
+   * @description Envia solicitação para API atualizar o formulario da base de dados.
+   * @param {CadastroFormulario} formulario - formulario à ser atualizado
+   */
+  atualizaFormulario(formulario:CadastroFormulario): Observable<CadastroFormulario> {
+    
+    return this.http.put<CadastroFormulario>(this.formularioApi, formulario, httpOption)
+                    .pipe(
+                            catchError(
+                                        this.errorHandler
+                                      )
+                          ); 
+  }  
+  
 
-  //DELETAR
+  /**
+   * @description Envia solicitação para API deletar o formulario da base de dados.
+   * @param {number} id_formulario - id do formulario à ser deletado.
+   */
+  deletaFormulario(id_formulario:number): Observable<CadastroFormulario> {
+    
+    return this.http.delete<CadastroFormulario>(this.formularioApi + "/" + id_formulario )
+                    .pipe(
+                            catchError(
+                                        this.errorHandler
+                                      )
+                          ); 
+  }
+
 
  /**
   * @description envia solicitação para API consultar todas os formularios cadastrados 
@@ -57,7 +82,7 @@ export class CadastroFormularioService {
   *              na base de dados.
   * @param {number} id - id do formulario que deve ser localizado 
   */
- findFormularioPorId(id:number) : Observable<CadastroFormulario[]>{
+ findItensFormularioPorId(id:number) : Observable<CadastroFormulario[]>{
 
   return this.http.get<CadastroFormulario[]>(this.formularioApi + "/" + id)
                   .pipe(
@@ -65,6 +90,23 @@ export class CadastroFormularioService {
                                       this.errorHandler
                                     )
                         );
+ }
+
+
+ /**
+  * @description envia solicitação para API consultar os formularios pela descrição.
+  * @param {String} descricao, descricao dos formularios a serem localizados. 
+  * @returns Observable
+  */ 
+ getFormulariosPorDescricao(descricao:String) : Observable<CadastroFormulario[]>{
+
+  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/descricao/" + descricao )
+                  .pipe(
+                          catchError(
+                                      this.errorHandler
+                                    )
+                        );
+
  }
 
 

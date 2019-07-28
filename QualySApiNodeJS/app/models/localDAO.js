@@ -40,7 +40,7 @@ class LocalDAO{
 
     /**
      * @description: Atualiza local no banco de dados.
-     * @param {*} local, id da local que deve ser alterada.
+     * @param {*} local, local que deve ser alterado.
      * @param response, objeto de response da requisição.
      * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */

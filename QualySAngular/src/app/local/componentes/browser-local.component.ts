@@ -61,7 +61,7 @@ export class BrowserLocalComponent implements OnInit {
   }
 
 
-    /**
+  /**
    * @description: Se inscreve no serviço que envia solicitação para API resgatar todos locais 
    *               pela descricao na base de dados.
    */  

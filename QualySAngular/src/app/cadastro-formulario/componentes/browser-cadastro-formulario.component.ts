@@ -62,6 +62,51 @@ export class BrowserCadastroFormularioComponent implements OnInit {
   }  
 
 
+   /**
+   * @description: Se inscreve no serviço que envia solicitação para API resgatar todos locais 
+   *               pela descricao na base de dados.
+   */ 
+  private getFormulariosPorDescricao(){
+    
+      if(this.pesquisa.trim() == ""){
+
+        this.getAll();
+      }else{
+
+          this.cadastroFormularioService.getFormulariosPorDescricao(this.pesquisa).subscribe(
+
+                  result => {
+                              this.resultadoApi = result;
+                              this.formularios  = this.resultadoApi.registros;        
+                            },
+                  error => {
+                              this.setErrosApi(error);
+                            }
+          );
+      } 
+  }
+  
+
+  /**
+   * @description Envia solicitação para o service deletar o formulario.
+   * @param {number} id - id do formulario que deve ser excluido.
+   */
+  private excluiFormulario(id:number){
+
+      this.inscricao = this.cadastroFormularioService.deletaFormulario(id).subscribe(
+
+          result => {
+                      this.resultadoApi = result;
+                      this.getAll()
+                      alert(this.resultadoApi.mensagem);        
+                    },
+          error => {
+                      this.setErrosApi(error);
+                  }
+      );    
+  }
+
+
   /**
    * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-mensagem
