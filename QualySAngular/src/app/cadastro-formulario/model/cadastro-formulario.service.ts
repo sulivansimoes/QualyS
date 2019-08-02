@@ -78,13 +78,29 @@ export class CadastroFormularioService {
 
 
  /**
-  * @description envia solicitação para API localizar determinado formulario por id cadastrado
+  * @description envia solicitação para API localizar determinado formulario [somente os itens] por id cadastrado
   *              na base de dados.
   * @param {number} id - id do formulario que deve ser localizado 
   */
  findItensFormularioPorId(id:number) : Observable<CadastroFormulario[]>{
 
   return this.http.get<CadastroFormulario[]>(this.formularioApi + "/" + id)
+                  .pipe(
+                          catchError(
+                                      this.errorHandler
+                                    )
+                        );
+ }
+
+
+ /**
+  * @description envia solicitação para API localizar determinado formulario por id cadastrado
+  *              na base de dados.
+  * @param {number} id - id do formulario que deve ser localizado 
+  */
+ findFormularioPorId(id:number) : Observable<CadastroFormulario[]>{
+
+  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/id/" + id)
                   .pipe(
                           catchError(
                                       this.errorHandler

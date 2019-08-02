@@ -1,4 +1,4 @@
-import { Time } from "@angular/common";
+import { ItemFormulario } from './../../cadastro-formulario/model/item-formulario';
 
 /**
  * @description : Classe de Objeto de tranferecia ( TO ) de Resposta de formulario.
@@ -6,30 +6,30 @@ import { Time } from "@angular/common";
 export class RespostaFormulario{
 
     private idCabecalho :number;
-    private item        :number;
-    private dataEmissao :Date;
-    private horaEmissao :Time;
-    private cpfUsuario  :string;
+    private dataEmissao :String;
+    private horaEmissao :String;
+    private cpfUsuario  :String;
     private conforme    :boolean;
+    private itens       :ItemFormulario[] = [];
 
     /**
      * @constructor 
      * @param {number } idCabecalho  - Código identificador da resposta do formulário ( chave primária )
-     * @param {number } item         - Código identificador do item da resposta do formulário ( chave primária )
-     * @param {Date   } dataEmissao  - Data em que o formulário foi respondido ( chave primária )
-     * @param {Time   } horaEmissao  - Hora em que o formulário foi respondido ( chave primária )
+     * @param {String } dataEmissao  - Data em que o formulário foi respondido ( chave primária )
+     * @param {String } horaEmissao  - Hora em que o formulário foi respondido ( chave primária )
      * @param {string } cpfUsuario   - Cpf do usuário que respondeu o formulário ( chave estrangeira ) 
      * @param {boolean} conforme     - Resposta do formulário. 
+     * @param {ItemFormulario[]} itens  - Array de itens do formulário que devem ser respondidas
      */
-    constructor(idCabecalho?:number, item?:number      , dataEmissao?: Date,
-                horaEmissao?:Time  , cpfUsuario?:string, conforme?:boolean  ){
+    constructor(idCabecalho?:number, dataEmissao?: String, horaEmissao?:String,
+                cpfUsuario?:String , conforme?:boolean   ,itens?:ItemFormulario[]){
 
         this.idCabecalho = idCabecalho;
-        this.item        = item;
         this.dataEmissao = dataEmissao;
         this.horaEmissao = horaEmissao;
         this.cpfUsuario  = cpfUsuario;
         this.conforme    = conforme;
+        this.itens       = (itens ? itens : []);
     }
  
     /**
@@ -41,34 +41,34 @@ export class RespostaFormulario{
     }
 
     /**
-     * @description: Retorna código do item da resposta do formulário.
-     * @return {number} ( item ) - item da resposta do formulário.
+     * @description: Retorna itens das perguntas do formulario.
+     * @return {ItemFormulario} ( item ) - item da resposta do formulário.
      */
-    public getItem():number{
-        return this.item;
+    public getItens():ItemFormulario[]{
+        return this.itens;
     }
 
     /**
      * @description: Retorna data em que o formulário foi respondido
-     * @return {Date} ( dataEmissao ) - data em que o fomulário foi respondido.
+     * @return {String} ( dataEmissao ) - data em que o fomulário foi respondido.
      */
-    public getDataEmissao(): Date{
+    public getDataEmissao(): String{
         return this.dataEmissao;
     }
 
     /**
      * @description: Retorna hora em que o formulário foi respondido.
-     * @return {Hora} ( horaEmissao ) - hora em que formulário foi respondido.
+     * @return {String} ( horaEmissao ) - hora em que formulário foi respondido.
      */
-    public getHoraEmissao(): Time{
+    public getHoraEmissao(): String{
         return this.horaEmissao;
     }
 
     /**
      * @description: Retorna cpf do usuário que resondeu formulário.
-     * @return {string} ( cpfUsuario ) - cpf do usuário que resondeu formulário.
+     * @return {String} ( cpfUsuario ) - cpf do usuário que resondeu formulário.
      */
-    public getCpfUsuario():string{
+    public getCpfUsuario():String{
         return this.cpfUsuario
     }
 
@@ -90,25 +90,35 @@ export class RespostaFormulario{
     
     /**
      * @description: Seta código do item, referente a resposta do formulário.
-     * @param {number} item - código do item, referente a resposta do formulário.
+     * @param {number} item - item, referente a resposta do formulário.
      */
-    public setItem(item:number):void{
-        this.item = item;
+    public addItem(item:ItemFormulario):void{
+        this.itens.push( item );
     }
+
+
+    /**
+     * @description: Limpa array de itens, referente da resposta do formulário.
+     * @return {void} 
+     */
+    public clearItens():void{
+        this.itens = [];
+    }
+
 
     /**
      * @description: Seta data da emissao em que formulário foi respondido.
      * @param {Date} dataEmissao - data da emissao em que formulário foi respondido.
      */
-    public setDataEmissao(dataEmissao:Date):void{
+    public setDataEmissao(dataEmissao:String):void{
         this.dataEmissao = dataEmissao;
     }
 
     /**
      * @description: Seta hora da emissao em que formulário foi respondido.
-     * @param {Time} horaEmissao - hora da emissao em que formulário foi respondido.
+     * @param {String} horaEmissao - hora da emissao em que formulário foi respondido.
      */
-    public setHoraEmissao(horaEmissao:Time){
+    public setHoraEmissao(horaEmissao:String){
         this.horaEmissao = horaEmissao;
     }
 

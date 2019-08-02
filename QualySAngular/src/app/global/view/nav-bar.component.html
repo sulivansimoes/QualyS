@@ -36,11 +36,19 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Formulários</a>
                         <ul class="dropdown-menu">
-                            <!-- OS FORMULÁRIOS DEVEM VIR DO BANCO DE DADOS -->
-                            <li><a class="dropdown-item" routerLink="#">VISTORIA VESTIARIO MASCULINO</a></li>
-                            <li><a class="dropdown-item" routerLink="#">VISTORIA VESTIARIO FEMININO</a></li>
-                            <li><a class="dropdown-item" routerLink="resposta-formulario">VISTORIA DEPOSITO MANUTENÇÃO</a></li>
-                            <li><a class="dropdown-item" routerLink="#">VISTORIA DEPOSITO EMBALAGEM</a></li>
+
+                            <!-- OS FORMULÁRIOS VEM  DO BANCO DE DADOS -->
+                            <li *ngFor="let formulario of formularios">
+                                <a class="dropdown-item" 
+                                   id="{{formulario.id}}" 
+                                   routerLink="resposta-formulario/"
+                                   [queryParams]="{ id:formulario.id }"
+                                > 
+
+                                    {{ formulario.descricao }} 
+                                </a>
+                            </li>
+                         
                         </ul>
                     </li>
                     <a class="dropdown-item" routerLink="browser-inconforme">Inconforme</a>
@@ -62,5 +70,10 @@
         </ul>
 
         <button (click)="alternaAjuda()">Ajuda</button>
+
+        <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+        <!-- <div *ngIf="errosApi">
+            <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
+        </div> -->
     </div>
 </nav>

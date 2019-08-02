@@ -17,3 +17,5 @@ A pasta global contém todos componentes que podem ser reaproveitados em todo o 
 
    6. `tela-mensagem` : Contém um componente que fornece uma tela em modal para apresentar mensagens para                      o usuário.
 
+   7. `tela-box` : Contém um compomente que fornece um modal padrão com um text-area para capturar alguma informação especifica passada pelo usuário.
+

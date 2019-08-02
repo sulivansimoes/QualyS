@@ -7,6 +7,7 @@ export class ItemFormulario {
     private item: number;
     private pergunta: string;
     private item_bloqueado: boolean;
+    private conforme:boolean;
 
     /**
      * @constructor 
@@ -14,13 +15,15 @@ export class ItemFormulario {
      * @param {number } item        - Código idententificador do item da pergunta ( chave primária )
      * @param {string } pergunta    - Pergunta do formulário, que será respondida posteriormente.
      * @param {boolean} item_bloqueado   - Flag do cadastro, indicando se item está ou não bloqueado. 
+     * @param {boolean} conforme    - Resposta do formulario, true=conforme; false=inconforme
      */
-    constructor(idCabecalho?: number, item?: number, pergunta?: string, item_bloqueado?: boolean) {
+    constructor(idCabecalho?: number, item?: number, pergunta?: string, item_bloqueado?: boolean, conforme?:boolean) {
 
         this.idCabecalho = idCabecalho;
         this.item        = item;
         this.pergunta    = pergunta;
         this.item_bloqueado   = (item_bloqueado == null) ? false : item_bloqueado;
+        this.conforme    = conforme;
     }
 
     /**
@@ -55,6 +58,15 @@ export class ItemFormulario {
         return this.item_bloqueado;
     }
 
+
+    /**
+     * @description: Retorna se item está conforme ou não conforme [resposta do formulario]
+     * @param {boolean} conforme - [true=conforme, false=nãoconfome]
+     */  
+    public isConforme():boolean{
+      return this.conforme;
+    }   
+
     /**
      * @description: Seta código do id do cabecalho do formulário 
      * @param {number} idCabecalho - código do id do cabecalho do formulário
@@ -86,4 +98,15 @@ export class ItemFormulario {
    public setBloqueado(status:boolean):void{
     this.item_bloqueado = status;
    }
+
+
+   /**
+    * @description: Seta resposta do formulario
+    * @param {boolean} conforme - [true=conforme, false=não conforme]
+    */
+   public setConforme(conforme:boolean):void{
+    this.conforme = conforme;
+   }   
+
+
 }

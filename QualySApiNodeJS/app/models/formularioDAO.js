@@ -349,6 +349,35 @@ class FormularioDAO{
         
 
     /**
+     * @description Consulta um formulario [cabecalho e itens] especifico por ID no banco de dados
+     * @param {number  } id - id do formulario a ser localizado
+     * @param {response} response 
+     */    
+    findFormularioPorId(id, response){
+
+        let cSql   = " SELECT c.id           , "
+                   + "        c.descricao    , "
+                   + "        c.id_programa  , "
+                   + "        c.id_local     , "
+                   + "        c.id_frequencia, "
+                   + "        c.bloqueado    , "
+                   + "        p.sigla        , "
+                   + "        p.descricao    AS descricao_programa   , "
+                   + "        i.item         , "
+                   + "        i.pergunta       "
+                   + " FROM cabecalho_formulario  AS c "
+                   + " INNER JOIN item_formulario AS i ON i.id_cabecalho = c.id   "
+                   + " INNER JOIN programas  	  AS p ON p.id  = c.id_programa   "
+                   + " WHERE c.id = $1 "
+                   + "       AND i.bloqueado = false ";  //Não considera perguntas bloqueadas.
+        
+        let aValues = [id];        
+                  
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_D, msg_status_2_D);         
+    }
+
+
+    /**
      * @description Consulta itens de um formulario especifico por ID no banco de dados
      * @param {String  } descricao - descrição do formulario a ser localizado
      * @param {response} response 

@@ -174,7 +174,7 @@
             <th scope="col">#</th>
         </thead>
         <tbody>
-            <tr *ngFor="let item of getCadastroFormulario().getItens()">
+            <tr *ngFor="let item of getCadastroFormulario().getItens()" [class.registro-bloqueado]="item.item_bloqueado">
                 <!-- ITEM -->
                 <td class="largura-coluna-item">
 

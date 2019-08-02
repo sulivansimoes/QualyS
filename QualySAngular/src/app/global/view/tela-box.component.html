@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+
+  <div class="modal fade" id="modalTelaBox" tabindex="-1" role="dialog" aria-labelledby="modalTelaBoxLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTelaBoxLabel"> {{ titulo }}</h5>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <!-- CONTEUDO DO INCONFORME -->
+              <label for="message-text">{{ subTitulo }}</label>
+
+              <textarea class="form-control" 
+                        cols="30" 
+                        rows="10" 
+                        id="message-text"
+                        name="mensagemTelaBox"
+                        placeholder="{{ placeholder }}"
+                        [(ngModel)]="mensagemBox"                        
+                >
+                </textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="fechaModalTelaBox()">Abandonar</button>
+          <button type="button" class="btn btn-primary"  (click)="botaoConfirmarClicado.emit( {'subTitulo':subTitulo, 'mensagemBox':mensagemBox} )">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,6 +1,10 @@
 // COMPONENTES PADRÕES
-import { Router } from '@angular/router';
+import { Router            } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Subscription      } from 'rxjs';
+// COMPONENTES PERSONALIZADOS
+import { CadastroFormulario        } from './../../cadastro-formulario/model/cadastro-formulario';
+import { CadastroFormularioService } from './../../cadastro-formulario/model/cadastro-formulario.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,11 +15,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  private inscricao    = new Subscription;
+  private formularios:CadastroFormulario[] = [];
+  private resultadoApi = null;
+  private errosApi
+  
+  static countErros = 1;
+
+  constructor( private router: Router,
+               private cadadastroFormularioService: CadastroFormularioService
+              ) { 
+
+  }
 
   ngOnInit() {
+
     //#################################################################################
     //# BLOCO RESPONSAVEL POR GERENCIAR/FORNECER O DROPDOW ANINHADO
+    //# USA CLASSES DE nav-bar.css
     //#################################################################################
     $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
       if (!$(this).next().hasClass('show')) {
@@ -29,7 +46,23 @@ export class NavBarComponent implements OnInit {
       });
       return false;
     });
+
+
+    //#################################################################################
+    //# RECUPERA FORMULÁRIOS DO BANCO DE DADOS.
+    //#################################################################################
+    this.getAllFormularios();
   }
+
+
+  /**
+   * destruo a inscrição ao fechar.
+   */
+  ngOnDestroy(){
+    
+    this.inscricao.unsubscribe();
+  }
+
 
  /**
   * @description Método responsável por alterar qual modal de ajuda será chamado quando o botão 'Ajuda' for clicado.
@@ -83,5 +116,36 @@ export class NavBarComponent implements OnInit {
       break;
     }
   }
+
+
+  /**
+   * @description Envia solicitação ao service para pegar todos formulários cadastrados
+   */
+  private getAllFormularios(){
+
+    this.inscricao = this.cadadastroFormularioService.getAllCabecalhoFormularios().subscribe(
+        
+        result => {
+                    this.resultadoApi = result;
+                    this.formularios  = this.resultadoApi.registros;   
+                  },
+        error => {
+                    this.setErrosApi(error);
+                 }
+    );
+  }
+
+
+ /**
+   * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
+   *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
+   * @param error error ocasionado na aplicação. 
+   */
+  setErrosApi(error){
+
+    this.errosApi = error + " /countErros: " + NavBarComponent.countErros++  ;
+    console.log(this.errosApi);
+  }  
+
 
 }

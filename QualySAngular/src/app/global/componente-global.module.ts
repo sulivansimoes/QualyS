@@ -11,6 +11,7 @@ import { PageNotFoundComponent       } from './componentes/page-not-found.compon
 import { rotas                       } from './rotas/rotas';
 import { TelaMensagemComponent       } from './componentes/tela-mensagem.component';
 import { TelaAjudaComponent          } from './componentes/ajuda/tela-ajuda.component';
+import { TelaBoxComponent            } from './componentes/tela-box.component';
 import { AjudaMenuPrincipalComponent } from './componentes/ajuda/ajuda-menu-principal.component';
 import { AjudaInconformeComponent    } from './componentes/ajuda/ajuda-inconforme.component';
 import { AjudaCadastroLocalComponent } from './componentes/ajuda/ajuda-cadastro-local.component';
@@ -30,6 +31,7 @@ const appRoutes = rotas
     PageNotFoundComponent,
     TelaMensagemComponent,
     TelaAjudaComponent,
+    TelaBoxComponent,
     AjudaMenuPrincipalComponent,
     AjudaCadastroLocalComponent,
     AjudaCadastroFrequenciaComponent,
@@ -49,6 +51,7 @@ const appRoutes = rotas
     BotoesSalvarFecharComponent,
     TelaConsultaPadraoComponent,
     TelaMensagemComponent,
+    TelaBoxComponent,
     PageNotFoundComponent,
     AjudaMenuPrincipalComponent,
     AjudaCadastroLocalComponent,

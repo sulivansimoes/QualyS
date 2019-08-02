@@ -8,12 +8,28 @@
             <!-- DATA EMISSAO -->
             <div class="form-group col-md-2 espaco">
                 <label for="inputEmissao" class="preenchimentoObrigatorio">Data Emissão</label>
-                <input type="date" id="inputEmissao" required name="inputEmissao" [(ngModel)]="teste" class="form-control">
+
+                <input type="date" 
+                       id="inputEmissao" 
+                       required 
+                       name="inputEmissao" 
+                       [(ngModel)]="respostaFormulario.dataEmissao" 
+                       disabled
+                       class="form-control"
+                >
             </div>
             <!-- HORA EMISSAO -->
             <div class="form-group col-md-2">
                 <label for="inputHoraEmissao" class="preenchimentoObrigatorio">Hora Emissão</label>
-                <input type="time" id="inputHoraEmissao" required class="form-control">
+
+                <input type="time" 
+                       id="inputHoraEmissao" 
+                       required 
+                       name="inputHoraEmissao" 
+                       [(ngModel)]="respostaFormulario.horaEmissao" 
+                       disabled
+                       class="form-control"
+                >
             </div>
         </div>
         <!-- ITENS FORMULARIO -->
@@ -26,25 +42,32 @@
                     <th>Não Conforme</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>01</td>
-                        <td>Ha vestigios de pragas ?</td>
-                        <td><input type="radio" required name="resposta1" (click)="retirarInconforme()"></td>
-                        <td><input type="radio" required name="resposta1" (click)="geraInconforme()"></td>
-                    </tr>
-                    <tr>
-                        <td>02</td>
-                        <td>Lixeira ok?</td>
-                        <td><input type="radio" required name="resposta2"></td>
-                        <td><input type="radio" required name="resposta2"></td>
-                    </tr>
-                    <tr>
-                        <td>03</td>
-                        <td>Lampadas ok?</td>
-                        <td><input type="radio" required name="resposta3"></td>
-                        <td><input type="radio" required name="resposta3"></td>
-                    </tr>
+                    <tr *ngFor="let item of getRespostaFormulario().getItens()">
+                        
+                        <!-- A interrogação é uma diretiva do Angular para verificar se carregou o objeto, para depois fazer a iteração -->
 
+                        <td> {{ item?.getItem() }}       </td>
+                        <td> {{ item?.getPergunta() }} ? </td>
+
+                        <td>
+                            <input type="radio"
+                                   required 
+                                   name="{{ item.getItem() }}" 
+                                   [(ngModel)]="item.conforme"
+                                   value="true"
+                                   (click)="retirarInconforme()" 
+                            >
+                        </td>
+                        <td>
+                            <input type="radio" 
+                                   required 
+                                   name="{{ item.getItem() }}" 
+                                   [(ngModel)]="item.conforme"
+                                   value="false"
+                                   (click)="geraInconforme( item.getItem(), item.getPergunta() )"
+                            >
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -55,18 +78,20 @@
         <table>
             <thead></thead>
             <tbody>
-                <tr>
-                    <td>01 - Uma Lampada queimada</td>
-                    <td><input type="button" onclick="alert('teste no editar')" class="buttonEditar"></td>
-                </tr>
-                <tr>
-                    <td>03 - Há Vestigio de pragas</td>
+                <tr *ngFor="let inconforme of inconformes">
+                            <!-- Item -->      <!-- Não conforme -->
+                    <td> {{ inconforme[00] }} - {{ inconforme[01] }} </td>
                     <td><input type="button" onclick="alert('teste no editar')" class="buttonEditar"></td>
                 </tr>
                 <tr>
             </tbody>
         </table>
-        <!-- <div class="font-green">Nenhuma inconformidade lançada. </div> -->
+
+        <div *ngIf="inconformes.length == 0" 
+              class="font-green">
+              Nenhuma inconformidade lançada. 
+        </div>
+
     </fieldset>
     <!--  BOTOES -->
     <app-botoes-salvar-fechar 
@@ -75,3 +100,14 @@
     </app-botoes-salvar-fechar>
 
 </form>
+
+<div *ngIf="subTitulo">
+    <tela-box [titulo]="'Descrição do não conforme!'"
+              [subTitulo]="subTitulo"
+              [mensagemBox]=""
+              [controleChamada]="chamaInconforme"
+              [placeholder]="'descreva aqui a não conformidade'"
+              (botaoConfirmarClicado)="confirmaNaoConforme($event)"
+    >
+    </tela-box>
+</div>
