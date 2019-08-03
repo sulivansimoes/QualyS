@@ -55,7 +55,7 @@
                                    name="{{ item.getItem() }}" 
                                    [(ngModel)]="item.conforme"
                                    value="true"
-                                   (click)="retirarInconforme()" 
+                                   (click)="retirarInconforme(item.item)" 
                             >
                         </td>
                         <td>
@@ -78,21 +78,28 @@
         <table>
             <thead></thead>
             <tbody>
-                <tr *ngFor="let inconforme of inconformes">
-                            <!-- Item -->      <!-- Não conforme -->
-                    <td> {{ inconforme[00] }} - {{ inconforme[01] }} </td>
-                    <td><input type="button" onclick="alert('teste no editar')" class="buttonEditar"></td>
+                <tr *ngFor="let inconforme of getRespostaFormulario().inconformes">
+                                      <!-- Item -->              <!-- Não conforme -->
+                    <td> Pergunta {{ inconforme.item }} - {{ inconforme.descricao_inconforme }} </td>
+                    <td>
+                        <input type="button" 
+                               class="buttonEditar"
+                               (click)="editaInconforme(inconforme)" 
+                        >
+                    </td>
                 </tr>
                 <tr>
             </tbody>
         </table>
 
-        <div *ngIf="inconformes.length == 0" 
-              class="font-green">
-              Nenhuma inconformidade lançada. 
+        <div *ngIf="getRespostaFormulario().inconformes.length == 0" 
+              class="font-green"
+        >
+            Nenhuma inconformidade lançada. 
         </div>
 
     </fieldset>
+    
     <!--  BOTOES -->
     <app-botoes-salvar-fechar 
                             (botaoSalvarClicado)=salvaRespostaFormulario($event)
@@ -101,13 +108,19 @@
 
 </form>
 
+<!-- MODAL PARA INSERIR AS NÃO CONFORMIDADES -->
 <div *ngIf="subTitulo">
     <tela-box [titulo]="'Descrição do não conforme!'"
               [subTitulo]="subTitulo"
-              [mensagemBox]=""
+              [mensagemBox]="mensagemInconfome"
               [controleChamada]="chamaInconforme"
               [placeholder]="'descreva aqui a não conformidade'"
               (botaoConfirmarClicado)="confirmaNaoConforme($event)"
     >
     </tela-box>
+</div>
+
+<!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+<div *ngIf="errosApi">
+    <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
 </div>

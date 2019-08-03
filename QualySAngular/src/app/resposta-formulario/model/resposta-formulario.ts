@@ -5,12 +5,15 @@ import { ItemFormulario } from './../../cadastro-formulario/model/item-formulari
  */
 export class RespostaFormulario{
 
+    public inconformes = [];
+
     private idCabecalho :number;
     private dataEmissao :String;
     private horaEmissao :String;
     private cpfUsuario  :String;
     private conforme    :boolean;
     private itens       :ItemFormulario[] = [];
+
 
     /**
      * @constructor 

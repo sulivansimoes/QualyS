@@ -40,6 +40,14 @@ export class TelaBoxComponent implements OnInit, OnChanges {
   //caso encontre. Aciona o modal 
   ngOnChanges(  changes: SimpleChanges ){
 
+    //Se a mensagem não foi alterada 
+    //então garanto que seu conteudo seja apresentado
+    //sem informação no text-area
+    if( ! changes.mensagemBox ){
+
+      this.mensagemBox = "";
+    }
+
     this.acionaModalTelaBox();
   }
 
@@ -50,7 +58,6 @@ export class TelaBoxComponent implements OnInit, OnChanges {
    */
   private acionaModalTelaBox(){
     $("#modalTelaBox").modal();
-    this.mensagemBox="";
   }
 
 
@@ -61,8 +68,7 @@ export class TelaBoxComponent implements OnInit, OnChanges {
   private fechaModalTelaBox(){
 
     $('#modalTelaBox').modal('hide');
+    this.mensagemBox = "";
   }  
-
-
 
 }
