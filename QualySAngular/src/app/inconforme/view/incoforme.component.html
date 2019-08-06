@@ -6,47 +6,122 @@
                 
                 <p>Campos em azul são de preenchimento obrigatório</p>
                 <div class="form-row">
-                    <!-- ID -->
+                    <!-- ID FORMULÁRIO-->
                     <div class="form-group col-md-1 espaco">
-                        <label for="inputIdIncoforme">Programa</label>
-                        <input type="number" id="inputIdIncoforme" name="inputIdIncoforme" [(ngModel)]="inconforme.id" disabled class="form-control">                            
+                        <label for="inputIdIncoforme">Formulário</label>
+
+                        <input type="number" 
+                               id="inputIdIncoforme" 
+                               name="inputIdIncoforme" 
+                               [(ngModel)]="inconforme.id_cadastro_formulario" 
+                               disabled 
+                               class="form-control"
+                        >                            
                     </div>
-                    <!-- ITEM -->
-                    <div class="form-group col-md-1 espaco">
-                        <label for="inputItem">Item</label>
-                        <input type="number" id="inputItem" name="inputItem" [(ngModel)]="inconforme.item" disabled class="form-control">
-                    </div>
+                    <!-- DESCRIÇÃO FORMULÁRIO-->
+                    <div class="form-group col-md-5 espaco">
+                        <label for="inputDescricaoIncoforme">Descrição Formulário</label>
+
+                        <input type="text" 
+                               id="inputDescricaoIncoforme" 
+                               name="inputDescricaoIncoforme" 
+                               [(ngModel)]="inconforme.descricao_formulario" 
+                               disabled 
+                               class="form-control"
+                        >                            
+                    </div>                
                     <!-- DATA EMISSAO DA INCONFORMIDADE -->
                     <div class="form-group col-md-2 espaco">
                       <label for="inputDataEmissao">Emissao Inconformidade</label>
-                      <input type="date" name="inputDataEmissao" id="inputDataEmissao" [(ngModel)]="inconforme.dataEmissao" disabled class="form-control">
+
+                      <input type="date" 
+                             name="inputDataEmissao" 
+                             id="inputDataEmissao" 
+                             [(ngModel)]="inconforme.emissao" 
+                             disabled 
+                             class="form-control"
+                      >
                     </div>
                     <!-- HORA EMISSAO DA INCONFORMIDADE -->
                     <div class="form-group col-md-2 espaco">
                       <label for="inputHoraEmissao">Hora Inconformidade</label>
-                      <input type="time" name="inputHoraEmissao" id="inputHoraEmissao" [(ngModel)]="inconforme.horaEmissao" disabled class="form-control">
+
+                      <input type="time" 
+                             name="inputHoraEmissao" 
+                             id="inputHoraEmissao" 
+                             [(ngModel)]="inconforme.hora" 
+                             disabled 
+                             class="form-control"
+                      >
                     </div>
+                    <!-- ITEM -->
+                    <div class="form-group col-md-1 espaco">
+                        <label for="inputItem">Item</label>
+                        
+                        <input type="number" 
+                               id="inputItem" 
+                               name="inputItem" 
+                               [(ngModel)]="inconforme.item" 
+                               disabled 
+                               class="form-control"
+                        >
+                    </div> 
+                    <!-- PERGUNTA FORMULÁRIO-->
+                    <div class="form-group col-md-5 espaco">
+                        <label for="inputPergunta">Pergunta</label>
+
+                        <input type="text" 
+                               id="inputPergunta" 
+                               name="inputPergunta" 
+                               [(ngModel)]="inconforme.pergunta" 
+                               disabled 
+                               class="form-control"
+                        >                            
+                    </div>  
                     <!-- DATA CORRECAO -->
                     <div class="form-group col-md-2 espaco">
                       <label for="inputDataCorrecao" class="preenchimentoObrigatorio">Data correção</label>
-                      <input type="date" id="inputDataCorrecao" name="inputDataCorrecao" class="form-control">
+
+                      <input type="date" 
+                             id="inputDataCorrecao" 
+                             name="inputDataCorrecao" 
+                             [(ngModel)]="inconforme.data_correcao" 
+                             class="form-control"
+                      >
                     </div>
                     <!-- DESCRICAO DO INCONFORME -->
                     <div class="form-group espaco">
                       <label for="inputDescricaoInconforme">Inconformidade</label>
-                      <textarea id="inputDescricaoInconforme" name="inputDescricaoInconforme" rows="6" cols="50" disabled [(ngModel)]="inconforme.descInconforme" class="form-control" ></textarea>
+                      
+                      <textarea id="inputDescricaoInconforme" 
+                                name="inputDescricaoInconforme" 
+                                rows="6" 
+                                cols="50" 
+                                disabled 
+                                [(ngModel)]="inconforme.descricao_inconforme" 
+                                class="form-control" 
+                      >
+                      </textarea>
                     </div>
                     <!-- CORRECAO INCONFORME -->
-                    <div class="form-group">
+                    <div class="form-group espaco">
                         <label for="inputCorrecaoInconforme" class="preenchimentoObrigatorio">Ação corretiva</label>
-                        <textarea id="inputCorrecaoInconforme" name="inputCorrecaoInconforme" rows="6" cols="50" [(ngModel)]="inconforme.acaoCorretiva" class="form-control" ></textarea>
+
+                        <textarea id="inputCorrecaoInconforme" 
+                                  name="inputCorrecaoInconforme" 
+                                  rows="6" 
+                                  cols="50" 
+                                  [(ngModel)]="inconforme.acao_corretiva" 
+                                  class="form-control" 
+                        >
+                        </textarea>
                     </div>                  
                 </div>
             </div>
         </fieldset>
 
         <!-- BOTÕES P/ SALVAR OU CANCELAR ACAO CORRETIVA DA INCONFORMIDADE -->
-        <app-botoes-salvar-fechar (botaoSalvarClicado)=salvaFrequencia($event)
+        <app-botoes-salvar-fechar (botaoSalvarClicado)="corrigeInconforme()"
                                   (botaoFecharClicado)=fechaTela($event) ></app-botoes-salvar-fechar>
     </form>
 </div>

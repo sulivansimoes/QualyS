@@ -1,4 +1,9 @@
+// COMPONENTES PADRÕES
 import { Component, OnInit } from '@angular/core';
+import { Subscription      } from 'rxjs';
+// COMPONENTES PERSONALIZADOS
+import { Inconforme        } from '../model/inconforme';
+import { InconformeService } from './../model/inconforme.service';
 
 @Component({
   selector: 'app-browser-inconforme',
@@ -11,9 +16,105 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrowserInconformeComponent implements OnInit {
 
-  constructor() { }
+  public inscricao     = new Subscription;
+  public resultadoApi  = null;
+  public errosApi      = null;
+  public paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
+  public inconformes:Inconforme[] = []; 
+  public pesquisa:String = "";
 
+  static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
+
+  constructor(private inconformeService : InconformeService) {
+
+  }
+  
+  
   ngOnInit() {
+    
+    this.getAll() ;
+  }
+
+
+  /**
+   * destruo a inscrição ao fechar.
+   */
+  ngOnDestroy(){
+    
+    this.inscricao.unsubscribe();
+  }
+
+
+  /**
+   * @description: Se inscreve no serviço que envia solicitação para API resgatar todas frequências na base de dados.
+   */
+  getAll(){
+
+    this.inscricao = this.inconformeService.getAllInconformes().subscribe(
+
+        result => {
+                    this.resultadoApi = result;
+                    this.inconformes  = this.resultadoApi.registros;        
+                  },
+        error => {
+                    this.setErrosApi(error);
+                 }
+    );
+  }
+
+  
+  /**
+   * @description: Se inscreve no serviço que envia solicitação para API resgatar todas frequências 
+   *               pela descricao na base de dados.
+   */  
+  // getFrequenciasPorDescricao(){
+
+  //   if(this.pesquisa.trim() == ""){
+
+  //       this.getAll();
+  //   }else{
+
+  //       this.frequenciaService.getFrequenciasPorDescricao(this.pesquisa).subscribe(
+
+  //               result => {
+  //                           this.resultadoApi = result;
+  //                           this.frequencias  = this.resultadoApi.registros;        
+  //                         },
+  //               error => {
+  //                           this.setErrosApi(error);
+  //                        }
+  //       );
+  //   }
+  // }
+
+
+  /**
+   * @description: Se inscreve no serviço que envia solicitação para API excluir frequência na base de dados.
+   * @param frequencia, frequencia à ser salva na base de dados.
+   */
+  // excluiFrequencia(frequencia : Frequencia){
+
+  //   this.inscricao = this.frequenciaService.deletaFrequencia(frequencia).subscribe(
+
+  //     result => {
+  //                 this.getAll();
+  //               },
+  //     error => {
+  //                 this.setErrosApi(error);
+  //              }
+  //   );
+  // }
+
+
+  /**
+   * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
+   *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-mensagem
+   * @param error error ocasionado na aplicação. 
+   */
+  setErrosApi(error){
+
+    this.errosApi = error + " /countErros: " + BrowserInconformeComponent.countErros;
+    console.log(this.errosApi);
   }
 
 }

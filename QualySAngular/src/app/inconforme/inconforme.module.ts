@@ -1,10 +1,13 @@
 //MODULOS PADROES
-import { RouterModule } from '@angular/router';
-import { NgModule     } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule  } from '@angular/forms';
-import { ComponenteGlobalModule } from './../global/componente-global.module';
+import { RouterModule     } from '@angular/router';
+import { NgModule         } from '@angular/core';
+import { CommonModule     } from '@angular/common';
+import { FormsModule      } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+// MÓDULOS DE TERCEIROS
+import { NgxPaginationModule    } from 'ngx-pagination'; // Módulo da dependência de paginação
 //MODULOS PERSONALILZADOS
+import { ComponenteGlobalModule } from './../global/componente-global.module';
 
 //COMPONENTES PERSONALIZADOS
 import { InconformeComponent        } from './componentes/inconforme.component';
@@ -21,6 +24,9 @@ const appRoutes = rotas;
     CommonModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
+    HttpClientModule,
+
+    NgxPaginationModule,
 
     ComponenteGlobalModule
   ],
