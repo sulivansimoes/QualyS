@@ -17,12 +17,12 @@ import { LocalService      } from './../model/local.service';
 })
 export class BrowserLocalComponent implements OnInit {
 
-  public inscricao     = new Subscription;
-  public resultadoApi  = null;
-  public errosApi      = null;
-  public paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
-  public locais:Local [] = []; 
-  public pesquisa:String = "";
+  private inscricao     = new Subscription;
+  private resultadoApi  = null;
+  private errosApi      = null;
+  private paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
+  private locais:Local [] = []; 
+  private pesquisa:String = "";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere  
   
@@ -88,11 +88,11 @@ export class BrowserLocalComponent implements OnInit {
 
   /**
    * @description: Se inscreve no serviço que envia solicitação para API excluir local na base de dados.
-   * @param local, local à ser exluida na base de dados.
+   * @param idLocal, id do local à ser exluida na base de dados.
    */
-  excluiLocal(local : Local){
+  excluiLocal(idLocal : number){
 
-    this.inscricao = this.localservice.deletaLocal(local).subscribe(
+    this.inscricao = this.localservice.deletaLocal(idLocal).subscribe(
 
       result => {
                   this.getAll();

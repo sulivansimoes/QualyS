@@ -55,12 +55,12 @@ export class LocalService {
 
  /**
   * @description envia solicitação para API deletar local da base de dados.
-  * @param local objeto da local que deve ser deletada
+  * @param idLocal id do local que deve ser deletado
   * @returns Observable
   */
-  deletaLocal(local : Local) {
+  deletaLocal(idLocal : number) {
 
-    return this.http.delete<Local>( this.localApi + "/" + local.id )
+    return this.http.delete<Local>( this.localApi + "/" + idLocal )
                     .pipe(
                             catchError(
                                         this.errorHandler

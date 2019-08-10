@@ -33,7 +33,7 @@ export class FrequenciaComponent implements OnInit {
                private frequenciaService:FrequenciaService,
                private route: ActivatedRoute ) {
       
-      this.frequencia = new Frequencia();
+      // this.frequencia = new Frequencia();
   }
   
 
@@ -44,8 +44,10 @@ export class FrequenciaComponent implements OnInit {
       this.inscricao = this.route.queryParams.subscribe(
                           (queryParams: any) => {
 
-                            this.frequencia.id        = queryParams['id'];
-                            this.frequencia.descricao = queryParams['descricao'];
+                            // this.frequencia.id        = queryParams['id'];
+                            // this.frequencia.descricao = queryParams['descricao'];
+                            this.getFrequencia().setId( queryParams['id'] );
+                            this.getFrequencia().setDescricao( queryParams['descricao'] );
                           }
                        );
   }
@@ -77,7 +79,7 @@ export class FrequenciaComponent implements OnInit {
       this.camposObrigatorios = false;
     }
 
-    if(this.frequencia.id){
+    if( this.getFrequencia().getId() ){
       
       this.atualizaFrequencia();
     }else{
@@ -112,7 +114,7 @@ export class FrequenciaComponent implements OnInit {
   */
   private atualizaFrequencia(){
 
-    this.frequenciaService.atualizaFrequencia(this.frequencia)
+    this.frequenciaService.atualizaFrequencia(this.getFrequencia())
                           .subscribe( 
                                         result =>{ 
                                                     alert("deu certo salvamento");
@@ -142,9 +144,13 @@ export class FrequenciaComponent implements OnInit {
    */
   private isEmpty(){
 
-    return this.frequencia.descricao == undefined || 
-           this.frequencia.descricao.trim() ==''  || 
-           this.frequencia.descricao == null      ? true : false;
+    // return this.frequencia.descricao == undefined || 
+    //        this.frequencia.descricao.trim() ==''  || 
+    //        this.frequencia.descricao == null      ? true : false;
+
+    return this.getFrequencia().getDescricao() == undefined || 
+           this.getFrequencia().getDescricao().trim() ==''  || 
+           this.getFrequencia().getDescricao() == null      ? true : false;
   }
 
 
@@ -169,6 +175,19 @@ export class FrequenciaComponent implements OnInit {
     this.errosApi = null;
     this.mensagemAviso = msgCamposNaoPreenchidos + " message: " + FrequenciaComponent.countErros++;
     console.log(this.mensagemAviso);
+  }
+
+
+  /**
+   * @description: Retorna instancia de frequencia alocada em memória.
+   * @return {Frequencia} - frequencia alocada em memoria.
+   */
+  private getFrequencia():Frequencia{
+
+    if(this.frequencia == null){
+      this.frequencia = new Frequencia();
+    }
+    return this.frequencia;
   }
 
 }

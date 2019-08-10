@@ -55,12 +55,12 @@ export class FrequenciaService {
 
  /**
   * @description envia solicitação para API deletar frequencia da base de dados.
-  * @param frequencia objeto da frequencia que deve ser deletada
+  * @param idFrequencia id da frequencia que deve ser deletada
   * @returns Observable
   */
-  deletaFrequencia(frequencia : Frequencia) {
+  deletaFrequencia(idFrequencia : Frequencia) {
 
-    return this.http.delete<Frequencia>( this.frequenciaApi + "/" + frequencia.id )
+    return this.http.delete<Frequencia>( this.frequenciaApi + "/" + idFrequencia )
                     .pipe(
                             catchError(
                                         this.errorHandler

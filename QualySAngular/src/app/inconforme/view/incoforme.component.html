@@ -86,6 +86,7 @@
                              id="inputDataCorrecao" 
                              name="inputDataCorrecao" 
                              [(ngModel)]="inconforme.data_correcao" 
+                             [disabled] = "edita"
                              class="form-control"
                       >
                     </div>
@@ -98,7 +99,7 @@
                                 rows="6" 
                                 cols="50" 
                                 disabled 
-                                [(ngModel)]="inconforme.descricao_inconforme" 
+                                [(ngModel)]="inconforme.descricao_inconforme"                                 
                                 class="form-control" 
                       >
                       </textarea>
@@ -111,7 +112,9 @@
                                   name="inputCorrecaoInconforme" 
                                   rows="6" 
                                   cols="50" 
+                                  maxlength="250"
                                   [(ngModel)]="inconforme.acao_corretiva" 
+                                  [disabled] = "edita"                                  
                                   class="form-control" 
                         >
                         </textarea>
@@ -124,4 +127,9 @@
         <app-botoes-salvar-fechar (botaoSalvarClicado)="corrigeInconforme()"
                                   (botaoFecharClicado)=fechaTela($event) ></app-botoes-salvar-fechar>
     </form>
+
+    <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+    <div *ngIf="errosApi">
+        <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
+    </div>
 </div>

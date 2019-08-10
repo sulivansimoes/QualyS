@@ -4,6 +4,7 @@ import { Subscription      } from 'rxjs';
 // COMPONENTES PERSONALIZADOS
 import { Inconforme        } from '../model/inconforme';
 import { InconformeService } from './../model/inconforme.service';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-browser-inconforme',
@@ -16,12 +17,13 @@ import { InconformeService } from './../model/inconforme.service';
 })
 export class BrowserInconformeComponent implements OnInit {
 
-  public inscricao     = new Subscription;
-  public resultadoApi  = null;
-  public errosApi      = null;
-  public paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
-  public inconformes:Inconforme[] = []; 
-  public pesquisa:String = "";
+  private inscricao     = new Subscription;
+  private resultadoApi  = null;
+  private errosApi      = null;
+  private mensagemAviso = null;
+  private paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
+  private inconformes:Inconforme[] = []; 
+  private pesquisa:String = "";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -61,6 +63,48 @@ export class BrowserInconformeComponent implements OnInit {
                  }
     );
   }
+
+
+  /**
+   * @description: Envia solicitação para o service estornar ação corretiva do inconforme.
+   * @param {number} id      - id do inconforme
+   * @param {number} item    - item do inconforme
+   * @param {String} emissao - data que inconfrme foi gerado
+   * @param {Time  } hora    - hora que inconfrme foi gerado
+   * @param {String} acao_corretiva - ação corretiva do inconfome
+   * @param {String} data_correcao - dataque inconforme foi corrigido
+   */
+  estornaAcaoCorretiva(id:number, item:number, emissao:String, hora:Time, acao_corretiva:string, data_correcao:String){
+
+    //Alocando em memória o inconforme recebido.
+    let inconforme = new Inconforme( id, 
+                                     null,
+                                     item, 
+                                     null,                                 
+                                     emissao, 
+                                     hora, 
+                                     null, 
+                                     data_correcao,
+                                     acao_corretiva
+                                    );
+
+    if ( !( inconforme.getAcaoCorretiva() && inconforme.getDataCorrecao() ) ){
+
+      this.setMensagemAviso("Inconforme não foi corrigido, sendo assim não pode ser feito estorno.")
+      return;
+    }
+
+    this.inscricao = this.inconformeService.estornaAcaoCorretiva(inconforme)
+                                           .subscribe( 
+                                                        result =>{ 
+                                                                    alert("deu certo estorno");
+                                                                    this.getAll();
+                                                                  },
+                                                        erros => { 
+                                                                    this.setErrosApi(erros);
+                                                                  }
+                                                      );      
+  }  
 
   
   /**
@@ -113,8 +157,20 @@ export class BrowserInconformeComponent implements OnInit {
    */
   setErrosApi(error){
 
-    this.errosApi = error + " /countErros: " + BrowserInconformeComponent.countErros;
+    this.mensagemAviso = null;
+    this.errosApi = error + " /countErros: " + BrowserInconformeComponent.countErros++;
     console.log(this.errosApi);
+  }
+
+  /**
+   * @description - Aciona modal para apresentar mensagem de aviso para usuário.
+   * @param mensagem mensgem que deve ser apresentada.
+   */
+  setMensagemAviso(mensagem:string){
+
+    this.errosApi = null;
+    this.mensagemAviso = mensagem +  " /message: " + BrowserInconformeComponent.countErros++;
+    console.log(this.mensagemAviso);
   }
 
 }

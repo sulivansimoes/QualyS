@@ -16,12 +16,12 @@ import { FrequenciaService } from './../model/frequencia.service';
 })
 export class BrowserFrequenciaComponent implements OnInit {
   
-  public inscricao     = new Subscription;
-  public resultadoApi  = null;
-  public errosApi      = null;
-  public paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
-  public frequencias:Frequencia[] = []; 
-  public pesquisa:String = "";
+  private inscricao     = new Subscription;
+  private resultadoApi  = null;
+  private errosApi      = null;
+  private paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
+  private frequencias:Frequencia[] = []; 
+  private pesquisa:String = "";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -88,11 +88,11 @@ export class BrowserFrequenciaComponent implements OnInit {
 
   /**
    * @description: Se inscreve no serviço que envia solicitação para API excluir frequência na base de dados.
-   * @param frequencia, frequencia à ser salva na base de dados.
+   * @param idFrequencia, id da frequencia à ser salva na base de dados.
    */
-  excluiFrequencia(frequencia : Frequencia){
+  excluiFrequencia(idFrequencia : Frequencia){
 
-    this.inscricao = this.frequenciaService.deletaFrequencia(frequencia).subscribe(
+    this.inscricao = this.frequenciaService.deletaFrequencia(idFrequencia).subscribe(
 
       result => {
                   this.getAll();

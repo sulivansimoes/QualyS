@@ -20,9 +20,36 @@ export class InconformeService {
 
   constructor(private http : HttpClient) { }
 
-  // Salvar
 
-  // Editar
+ /**
+  * @description envia solicitação para API para efetivar correção do inconforme na base de dados.
+  * @param inconforme objeto do inconforme que deve ser atualizado.
+  * @returns Observable
+  */
+ corrigeInconforme(inconforme : Inconforme): Observable<Inconforme>{
+
+    return this.http.put<Inconforme>(this.inconformeApi+"/correcao", inconforme, httpOption)
+                    .pipe(
+                          catchError(
+                                      this.errorHandler
+                                    )
+                          );    
+ }
+
+ /**
+  * @description envia solicitação para API para efetivar o estorno da correção do inconforme na base de dados.
+  * @param inconforme objeto do inconforme que deve ser atualizado.
+  * @returns Observable
+  */
+ estornaAcaoCorretiva(inconforme : Inconforme): Observable<Inconforme>{
+
+  return this.http.put<Inconforme>(this.inconformeApi+"/estorno", inconforme, httpOption)
+                  .pipe(
+                        catchError(
+                                    this.errorHandler
+                                  )
+                        );    
+ }
 
   // Deletar
 

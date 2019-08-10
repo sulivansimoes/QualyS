@@ -50,7 +50,7 @@
         >
             <td> {{ local.id        }} </td>
             <td> {{ local.descricao }} </td>
-            <td> <input type="button" class="buttonExclui" (click)="excluiLocal(local)"> </td>
+            <td> <input type="button" class="buttonExclui" (click)="excluiLocal(local.id)"> </td>
             <td> <input type="button" class="buttonEditar" routerLink="local/" [queryParams]="{id:local.id,
                                                                                                descricao:local.descricao, 
                                                                                                bloqueado:local.bloqueado} "> </td>

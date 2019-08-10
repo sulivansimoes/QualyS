@@ -47,7 +47,7 @@
                 <tr *ngFor="let frequencia of frequencias | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;">
                     <td> {{ frequencia.id        }} </td>
                     <td> {{ frequencia.descricao }} </td>
-                    <td> <input type="button" class="buttonExclui" (click)="excluiFrequencia(frequencia)"> </td>
+                    <td> <input type="button" class="buttonExclui" (click)="excluiFrequencia(frequencia.id)"> </td>
                     <td> <input type="button" class="buttonEditar" routerLink="frequencia/" [queryParams]="{id:frequencia.id, descricao:frequencia.descricao} "> </td>
                 </tr>
             </tbody>            

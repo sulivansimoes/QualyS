@@ -27,7 +27,8 @@
                         id="message-text"
                         name="mensagemTelaBox"
                         placeholder="{{ placeholder }}"
-                        [(ngModel)]="mensagemBox"                        
+                        [(ngModel)]="mensagemBox"    
+                        maxlength="{{ tamanhoTexto }}"                    
                 >
                 </textarea>
             </div>

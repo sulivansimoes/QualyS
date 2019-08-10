@@ -16,12 +16,12 @@ import { ProgramaService   } from './../model/programa.service';
 })
 export class BrowserProgramaComponent implements OnInit {
 
-  public inscricao     = new Subscription;
-  public resultadoApi  = null;
-  public errosApi      = null;
-  public paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
-  public programas:Programa[] = []; 
-  public pesquisa:String = "";
+  private inscricao     = new Subscription;
+  private resultadoApi  = null;
+  private errosApi      = null;
+  private paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
+  private programas:Programa[] = []; 
+  private pesquisa:String = "";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere  
 

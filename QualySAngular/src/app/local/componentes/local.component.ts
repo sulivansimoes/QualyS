@@ -21,7 +21,7 @@ export class LocalComponent implements OnInit {
   private SIZE_DESCRICAO = 25;
 
   private inscricao          = new Subscription;
-  private local:Local        = new Local();
+  private local:Local        = null;
   private camposObrigatorios = false;
   private mensagemAviso      = null;
   private errosApi           = null;
@@ -43,9 +43,9 @@ export class LocalComponent implements OnInit {
       this.inscricao = this.route.queryParams.subscribe(
         (queryParams: any) => {
 
-          this.local.id        = queryParams['id'];
-          this.local.descricao = queryParams['descricao'];
-          this.local.bloqueado = queryParams['bloqueado'];
+          this.getLocal().setId( queryParams['id'] );
+          this.getLocal().setDescricao( queryParams['descricao'] );
+          this.getLocal().setBloqueado( queryParams['bloqueado'] );
         }
      );
   }
@@ -77,7 +77,7 @@ export class LocalComponent implements OnInit {
       this.camposObrigatorios = false;
     }
 
-    if(this.local.id){
+    if(this.getLocal().getId()){
       
       this.atualizaLocal();
     }else{
@@ -102,7 +102,6 @@ export class LocalComponent implements OnInit {
                                               this.setErrosApi(erros);
                                             }
                                 );
-    
   }
 
 
@@ -111,7 +110,7 @@ export class LocalComponent implements OnInit {
    */
   private atualizaLocal(){
 
-      this.localService.atualizaLocal(this.local)
+      this.localService.atualizaLocal( this.local )
                        .subscribe( 
                                     result =>{ 
                                                 alert("deu certo atualização");
@@ -141,11 +140,11 @@ export class LocalComponent implements OnInit {
    */
   private isEmpty(){
 
-    return this.local.descricao == undefined || 
-           this.local.descricao.trim() ==''  || 
-           this.local.descricao == null      ||
-           this.local.bloqueado == undefined ||
-           this.local.bloqueado == null      ? true : false;
+    return this.getLocal().getDescricao() == undefined || 
+           this.getLocal().getDescricao().trim() ==''  || 
+           this.getLocal().getDescricao() == null      ||
+           this.getLocal().isBloqueado()  == undefined ||
+           this.getLocal().isBloqueado()  == null      ? true : false;
   }
 
 
@@ -154,7 +153,7 @@ export class LocalComponent implements OnInit {
    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
    * @param error error ocasionado na aplicação. 
    */
-  setErrosApi(error){
+  private setErrosApi(error){
 
     this.mensagemAviso = null;
     this.errosApi = error + " /countErros: " + LocalComponent.countErros++  ;
@@ -166,11 +165,23 @@ export class LocalComponent implements OnInit {
    * @description função seta conteudo da variavel mensagemAviso, ela faz uso da varivel estática [ ela incrementa a countErros]
    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
    */
-  setMensagemAviso(){
+  private setMensagemAviso(){
 
     this.errosApi = null;
     this.mensagemAviso = msgCamposNaoPreenchidos + " message: " + LocalComponent.countErros++;
     console.log(this.mensagemAviso);
-  }  
+  } 
+  
+  /**
+   * @description: Retorna uma instancia de local alocada em memória.
+   * @return {Local} local alocado em memória.
+   */
+  private getLocal():Local {
+    
+    if(this.local == null){
+      this.local = new Local();
+    }
+    return this.local;
+  }
 
 }

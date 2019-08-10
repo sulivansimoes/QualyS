@@ -10,6 +10,7 @@ import { Input, Output, EventEmitter } from '@angular/core';
  * @Input  {String} ( subTitulo ) - String contendo subTitulo do modal.
  * @Input  {String} ( mensagemBox ) - Array contendo todos os dados que irão compor a tabela para pesquisar.   
  * @Input  {String} ( placeholder ) - String contendo o placeholder do text-area da tela.
+ * @Input  {number} ( tamanhoTexto ) - Tamanho maximo que o box irá permitir que seja escrito. Default é 30.
  * @Input  {Boolean} ( controleChamada ) - BooleanVariavel de controle para chamar a tela (modal), basta ficar negando a mesma para que o modal seja chamado, conteudo default é false.
  * @Output {EventEmitter<any>} ( botaoConfirmarClicado ) - Recebe um evento (Função) que será acionado quando clicar no botão Confirmar. 
  */
@@ -27,6 +28,7 @@ export class TelaBoxComponent implements OnInit, OnChanges {
   @Input() subTitulo:String  = "" ;
   @Input() mensagemBox:String= "" ; 
   @Input() placeholder:String= "" ;
+  @Input() tamanhoTexto:number= 30;
   @Input() controleChamada:Boolean=false; //usada como um flag, ele é negado toda hora para ser observado na alteração e dessa forma ser chamado.
   @Output() botaoConfirmarClicado :EventEmitter<any> = new EventEmitter();
 

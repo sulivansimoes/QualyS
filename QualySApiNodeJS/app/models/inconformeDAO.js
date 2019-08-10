@@ -17,7 +17,7 @@ class inconformeDAO{
 
     /**
      * @description Consulta todos os inconformes no banco de dados
-     * @param {response} response 
+     * @param response, objeto de response da requisição.
      */
     getAllInconformes(response){
 
@@ -41,6 +41,69 @@ class inconformeDAO{
         topConnection.executaQuery(cSql, [],  response, msg_status_1_D, msg_status_2_D);      
     }
     
+
+    /**
+     * @description Atualiza inconforme fazendo atualização necessária para que o mesmo fique na situação de CORRIGIDO.
+     * @param {response} response, objeto de response da requisição.
+     * @param {number  } idInconforme, id do inconforme que foi corrigido.
+     * @param {number  } itemIconforme, item do inconforme que foi corrigido.
+     * @param {date    } emissao, data em que não conformidade foi gerada.
+     * @param {date    } hora, hora em que não conformidade foi gerada. 
+     * @param {string  } acaoCorretiva, ação que foi feita para corrigir a não conformidade
+     * @param {date    } dataCorrecao, data em que não conformidade foi corrigida.
+     */
+    corrigeInconforme(response, idInconforme, itemIconforme, emissao, hora, acaoCorretiva, dataCorrecao){
+
+        let cSql = "UPDATE inconformes SET "
+                 + "  acao_corretiva = ( UPPER( TRIM($1) ) ) , "
+                 + "  data_correcao  = $2                      "
+                 + " WHERE id_cadastro_formulario   = $3       "
+                 + "   AND item_cadastro_formulario = $4       "
+                 + "   AND emissao = $5                        "
+                 + "   AND hora    = $6                        "
+        
+        let aValues = [
+                        acaoCorretiva,  //[01]
+                        dataCorrecao ,  //[02]
+                        idInconforme ,  //[03]
+                        itemIconforme,  //[04]
+                        emissao      ,  //[05]
+                        hora         ,  //[06]
+                      ];
+
+
+        topConnection.executaQuery(cSql, aValues,  response, msg_status_1_C, msg_status_2_C);      
+    }
+
+
+    /**
+     * @description Atualiza inconforme fazendo atualização necessária para que a ação corretiva do inconforme seja estornada.
+     * @param {response} response, objeto de response da requisição.
+     * @param {number  } idInconforme, id do inconforme que foi estonado.
+     * @param {number  } itemIconforme, item do inconforme que foi estornado.
+     * @param {date    } emissao, data em que não conformidade foi estornado.
+     * @param {date    } hora, hora em que não conformidade foi estornado. 
+     */
+    estornaAcaoCorretiva(response, idInconforme, itemIconforme, emissao, hora){
+
+        let cSql = "UPDATE inconformes SET  "
+                 + "  acao_corretiva = '' , "
+                 + "  data_correcao  = null                "
+                 + " WHERE id_cadastro_formulario   = $1   "
+                 + "   AND item_cadastro_formulario = $2   "
+                 + "   AND emissao = $3                    "
+                 + "   AND hora    = $4                    "
+        
+        let aValues = [
+                        idInconforme ,  //[01]
+                        itemIconforme,  //[02]
+                        emissao      ,  //[03]
+                        hora         ,  //[04]
+                      ];
+
+
+        topConnection.executaQuery(cSql, aValues,  response, msg_status_1_C, msg_status_2_C);      
+    }
 }
 
 
