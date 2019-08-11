@@ -20,6 +20,8 @@ import { AjudaCadastroUsuarioComponent    } from './componentes/ajuda/ajuda-cada
 import { AjudaCadastroProgramaComponent   } from './componentes/ajuda/ajuda-cadastro-programa.component';
 import { AjudaCadastroFormularioComponent } from './componentes/ajuda/ajuda-cadastro-formulario.component';
 import { AjudaRespostaFormularioComponent } from './componentes/ajuda/ajuda-resposta-formulario.component';
+// PIPE
+import { CpfPipe } from './pipe/cpf.pipe';
 
 const appRoutes = rotas
 
@@ -40,6 +42,7 @@ const appRoutes = rotas
     AjudaCadastroFormularioComponent,
     AjudaRespostaFormularioComponent,
     AjudaInconformeComponent,
+    CpfPipe,
   ],
   imports: [
     CommonModule,
@@ -60,7 +63,8 @@ const appRoutes = rotas
     AjudaCadastroProgramaComponent,
     AjudaCadastroFormularioComponent,
     AjudaRespostaFormularioComponent,
-    AjudaInconformeComponent
+    AjudaInconformeComponent,
+    CpfPipe
   ]
 })
 export class ComponenteGlobalModule { }

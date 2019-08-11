@@ -96,7 +96,7 @@ export class UsuarioComponent implements OnInit {
       return;
     }
 
-    if(this.usuario.cpf){
+    if(this.edita){
       
       this.atualizaUsuario();
     }else{

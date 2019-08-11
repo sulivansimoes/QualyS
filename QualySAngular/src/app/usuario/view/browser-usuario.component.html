@@ -48,7 +48,7 @@
                     <tr *ngFor="let usuario of usuarios | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;" 
                         [class.registro-bloqueado]="usuario.bloqueado"
                     >
-                    <td>{{ usuario.cpf  }}</td>
+                    <td>{{ usuario.cpf | cpf }}</td>
                     <td>{{ usuario.nome }}</td>
                     <td> <input type="button" class="buttonExclui" (click)="excluiUsuario(usuario)" > </td>
                     <td> 
