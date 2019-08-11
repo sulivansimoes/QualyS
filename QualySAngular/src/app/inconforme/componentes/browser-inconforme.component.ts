@@ -108,28 +108,30 @@ export class BrowserInconformeComponent implements OnInit {
 
   
   /**
-   * @description: Se inscreve no serviço que envia solicitação para API resgatar todas frequências 
-   *               pela descricao na base de dados.
+   * @description: Se inscreve no serviço que envia solicitação para API resgatar todos inconformes 
+   *               pela data de emissão na base de dados.
    */  
-  // getFrequenciasPorDescricao(){
+  getInconformesPorEmissao(){
 
-  //   if(this.pesquisa.trim() == ""){
+    if(this.pesquisa.trim() == ""){
 
-  //       this.getAll();
-  //   }else{
+        this.getAll();
+    }else{
+                                             
+        let dataEmissao = this.pesquisa.substring(0,2) + "-" + this.pesquisa.substring(3,5) +"-" + this.pesquisa.substring(6,10);
 
-  //       this.frequenciaService.getFrequenciasPorDescricao(this.pesquisa).subscribe(
+        this.inconformeService.getInconformesPorEmissao(dataEmissao).subscribe(
 
-  //               result => {
-  //                           this.resultadoApi = result;
-  //                           this.frequencias  = this.resultadoApi.registros;        
-  //                         },
-  //               error => {
-  //                           this.setErrosApi(error);
-  //                        }
-  //       );
-  //   }
-  // }
+                result => {
+                            this.resultadoApi = result;
+                            this.inconformes  = this.resultadoApi.registros;        
+                          },
+                error => {
+                            this.setErrosApi(error);
+                         }
+        );
+    }
+  }
 
 
   /**

@@ -15,11 +15,15 @@
                  maxlength="100" 
                  class="form-control"
                  autocomplete="off"
+                 [(ngModel)]="pesquisa"
+                 (keyup.enter)="getInconformesPorEmissao()"    
+                 placeholder="pesquise pela data que o inconforme foi gerado. Formato dd/mm/aaaa"
           >
           
           <input type="button" 
                  id="inputPesquisaRegistroInconforme" 
                  class="buttonPesquisa"
+                 (click)="getInconformesPorEmissao()"
           >
         </div>
       </div>

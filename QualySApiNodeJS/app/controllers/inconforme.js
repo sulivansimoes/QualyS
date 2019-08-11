@@ -1,5 +1,6 @@
 //Bibliotecas
 const validator_interno = require("../libs/validators");
+const validator_externo = require("validator");
 const {msg_status_3_A}  = require("../libs/mensagens_padroes");
 
 
@@ -15,6 +16,23 @@ function getAllInconformes(application, request, response){
 
     modelInconforme = new application.app.models.inconformeDAO();   //Instanciando model da inconforme
     modelInconforme.getAllInconformes(response);       
+
+}
+
+
+/**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function getInconformesPorDataDeEmissao(application, request, response){
+
+    let dataEmissaoInconforme =  request.params.dataEmissao;
+    let modelInconforme       = null;
+
+    modelInconforme = new application.app.models.inconformeDAO();   //Instanciando model da inconforme
+    modelInconforme.getInconformesPorDataDeEmissao(response, dataEmissaoInconforme);       
 
 }
 
@@ -118,8 +136,5 @@ module.exports = {
     getAllInconformes   ,
     corrigeInconforme   ,
     estornaAcaoCorretiva,
-    // atualizaLocal,
-    // deletaLocal  ,
-    // getAllLocais ,
-    // getLocaisPorDescricao,
+    getInconformesPorDataDeEmissao
 }

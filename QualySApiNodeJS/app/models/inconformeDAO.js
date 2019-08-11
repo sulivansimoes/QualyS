@@ -37,10 +37,42 @@ class inconformeDAO{
                     + "                                     AND r.item_cadastro_formulario = i.item_cadastro_formulario "
                     + "                                     AND r.emissao = i.emissao "
                     + "                                     AND r.hora    = i.hora    "
+                    + " ORDER BY i.emissao DESC "
 
         topConnection.executaQuery(cSql, [],  response, msg_status_1_D, msg_status_2_D);      
     }
     
+
+    /**
+     * @description Consulta os inconformes pela data que foram gerados
+     * @param {Response} response, objeto de response da requisição.
+     * @param {Date    } dataInconforme, data que inconformidade foi gerada no sistema. 
+     */
+    getInconformesPorDataDeEmissao(response, dataInconforme){
+
+        let cSql    = "SELECT i.id_cadastro_formulario  , "
+                    + "       i.item_cadastro_formulario, "
+                    + "       i.emissao                 , "
+                    + "       i.hora                    , "
+                    + "       i.descricao_inconforme    , "
+                    + "       i.data_correcao           , "
+                    + "       i.acao_corretiva          , "
+                    + "       i.cpf_usuario             , "
+                    + "       r.pergunta_respondida     , "
+                    + "       f.descricao AS descricao_formulario "
+                    + " FROM inconformes AS i             "
+                    + " INNER JOIN cabecalho_formulario AS f ON f.id = i.id_cadastro_formulario                         "
+                    + " INNER JOIN resposta_formulario  AS r ON r.id_cadastro_formulario   = i.id_cadastro_formulario   "
+                    + "                                     AND r.item_cadastro_formulario = i.item_cadastro_formulario "
+                    + "                                     AND r.emissao = i.emissao "
+                    + "                                     AND r.hora    = i.hora    "
+                    + " WHERE i.emissao = $1    "
+                    + " ORDER BY i.emissao DESC ";
+        
+        let aValues = [ dataInconforme ];
+
+        topConnection.executaQuery(cSql, aValues,  response, msg_status_1_D, msg_status_2_D);      
+    }
 
     /**
      * @description Atualiza inconforme fazendo atualização necessária para que o mesmo fique na situação de CORRIGIDO.

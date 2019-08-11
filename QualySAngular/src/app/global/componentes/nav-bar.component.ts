@@ -69,7 +69,7 @@ export class NavBarComponent implements OnInit {
   */
   private alternaAjuda(): void {
 
-    switch (this.router.url) {
+    switch (this.router.url.split("?")[0] ) {
 
       case "/browser-local" : case "/browser-local/local" :      
 

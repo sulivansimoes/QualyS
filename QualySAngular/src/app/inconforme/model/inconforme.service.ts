@@ -51,9 +51,22 @@ export class InconformeService {
                         );    
  }
 
-  // Deletar
+ 
+  /**
+   * @description envia solicitação para API consultar todos inconformes cadastrados 
+   *              na base de dados pela da de emissão que foram gerados.
+   * @param dataEmissao data de emissão do inconforme
+   */
+  getInconformesPorEmissao(dataEmissao) : Observable<Inconforme[]>{
 
-  // Pesquisar
+    return this.http.get<Inconforme[]>(this.inconformeApi + "/" + dataEmissao )
+                    .pipe(
+                            catchError(
+                                        this.errorHandler
+                                      )
+                          );
+  }
+
 
   /**
    * @description envia solicitação para API consultar todos inconformes cadastrados 
