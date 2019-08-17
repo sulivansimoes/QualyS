@@ -397,7 +397,7 @@ class FormularioDAO{
                    + " INNER JOIN programas  	 AS p ON p.id  = c.id_programa   "
                    + " INNER JOIN frequencia 	 AS f ON f.id  = c.id_frequencia "
                    + " INNER JOIN local			 AS l ON l.id  = c.id_local "
-                   + " WHERE c.descricao LIKE UPPER('%' || $1 || '%') ";
+                   + " WHERE c.descricao LIKE UPPER('%' || $1 || '%') "
                  
         let aValues = [ descricao ];        
                    

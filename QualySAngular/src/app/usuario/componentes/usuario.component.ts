@@ -30,6 +30,7 @@ export class UsuarioComponent implements OnInit {
   private errosApi           = null;
   private confirmaSenha:string;
   private edita             = false;   // Variavel serve de flag pra ver se está iditando ou incluindo novo cadastro.
+  private senhaNoModoEditar = "************";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -53,6 +54,12 @@ export class UsuarioComponent implements OnInit {
           this.usuario.bloqueado = queryParams['bloqueado'];
 
           this.edita = this.usuario.cpf ? true : false;
+
+          //Caso esteja editando eu preencho com asteriscos só pra não ficar vazio.
+          if(this.edita){
+            this.usuario.senha = this.senhaNoModoEditar;
+            this.confirmaSenha = this.senhaNoModoEditar;
+          }
         }
       );    
   }
@@ -97,7 +104,13 @@ export class UsuarioComponent implements OnInit {
     }
 
     if(this.edita){
-      
+
+      //Faço uma verificação rápida para ver se alterou a senha ou não.
+      //Caso não editou mudo pra null antes de mandar atualizar 
+      if(this.usuario.senha == this.senhaNoModoEditar){
+        this.usuario.senha = null;
+      }
+
       this.atualizaUsuario();
     }else{
       

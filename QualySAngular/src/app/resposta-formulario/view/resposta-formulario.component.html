@@ -19,7 +19,7 @@
                 >
             </div>
             <!-- HORA EMISSAO -->
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-2 espaco">
                 <label for="inputHoraEmissao" class="preenchimentoObrigatorio">Hora Emissão</label>
 
                 <input type="time" 
@@ -31,15 +31,28 @@
                        class="form-control"
                 >
             </div>
+            <!-- RESPONSÁVEL POR RESPONDER -->
+            <div class="form-group col-md-5">
+                <label for="inputResponsavel" class="preenchimentoObrigatorio">Responsável</label>
+
+                <input type="text" 
+                       id="inputResponsavel" 
+                       required 
+                       name="inputResponsavel" 
+                       [(ngModel)]="respostaFormulario.responsavel" 
+                       disabled
+                       class="form-control"
+                >
+            </div>
         </div>
         <!-- ITENS FORMULARIO -->
         <div>
-            <table>
-                <thead>
-                    <th>Item</th>
-                    <th>Pergunta</th>
-                    <th>Conforme</th>
-                    <th>Não Conforme</th>
+            <table class="table">
+                <thead class="thead-dark">
+                    <th scope="col">Item</th>
+                    <th scope="col">Pergunta</th>
+                    <th scope="col">Conforme</th>
+                    <th scope="col">Não Conforme</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of getRespostaFormulario().getItens()">
@@ -47,7 +60,7 @@
                         <!-- A interrogação é uma diretiva do Angular para verificar se carregou o objeto, para depois fazer a iteração -->
 
                         <td> {{ item?.getItem() }}       </td>
-                        <td> {{ item?.getPergunta() }} ? </td>
+                        <td class="coluna-pergunta"> {{ item?.getPergunta() }} ? </td>
 
                         <td>
                             <input type="radio"
@@ -93,7 +106,7 @@
         </table>
 
         <div *ngIf="getRespostaFormulario().inconformes.length == 0" 
-              class="font-green"
+              class="font-blue"
         >
             Nenhuma inconformidade lançada. 
         </div>

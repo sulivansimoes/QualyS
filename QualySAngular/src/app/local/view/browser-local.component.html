@@ -71,13 +71,13 @@
             screenReaderPageLabel = "page"
             screenReaderCurrentLabel = "Você está na página"
             class=" posicao-centro-vertical " 
-     >
-     </pagination-controls>
+    >
+    </pagination-controls>
 
-      <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
-      <div *ngIf="errosApi">
-          <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
-      </div> 
+    <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+    <div *ngIf="errosApi">
+        <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
+    </div> 
   </div>  
 
 </div>

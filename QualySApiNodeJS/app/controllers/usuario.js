@@ -68,7 +68,7 @@ function atualizaUsuario(application, request, response){
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    erros_aux = validator_interno.isObjectEmpty(dados,["email"]);
+    erros_aux = validator_interno.isObjectEmpty(dados,["email","senha"]);
     if( erros_aux ){
 
         erros.push(erros_aux);
@@ -88,10 +88,12 @@ function atualizaUsuario(application, request, response){
     
     //-----------------------------------------------------
     // Criptografando senha.
-    //-----------------------------------------------------
-    dados.senha = crypto.createHash('MD5')
-                         .update(dados.senha)
-                         .digest('hex');
+    //----------------------------------------------------
+    if(dados.senha){
+        dados.senha = crypto.createHash('MD5')
+                            .update(dados.senha)
+                            .digest('hex');
+    }
 
     modelUsuario = new application.app.models.usuarioDAO();   //Instanciando model do usuario
     modelUsuario.atualizaUsuario(dados, response);                        //Enviando usuario para o model para ser salva.

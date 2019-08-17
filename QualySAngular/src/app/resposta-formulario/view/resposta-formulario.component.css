@@ -1,3 +1,4 @@
+/* COMPONENTES PADRÕES */
 body,form{
     margin: 1.8rem;
 }
@@ -11,6 +12,10 @@ table,td,th{
 
 table{
     width: 100%;
+}
+
+table th {
+    padding: .4rem !important;
 }
 
 /* CLASSES */
@@ -44,11 +49,16 @@ table{
     padding-bottom: 20px;
 }
 
-.font-green{
-    color:#3CB371; 
+.font-blue{
+    
+    color:#007bff;
     font-size:1.3rem;
-    /* font-size: 20px; */
 }
+
+.coluna-pergunta{
+    width: 56.25rem;
+}
+
 
 
 

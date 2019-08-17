@@ -56,21 +56,26 @@ class usuarioDAO{
        
         let cSql    = "UPDATE usuario SET "
                     + " nome       = TRIM($1)         , "   //[01]-nome                              
-                    + " email      = LOWER( TRIM($2) ), "   //[02]-email      
-                    + " senha      = TRIM($3)         , "   //[03]-senha        
-                    + " assinatura = TRIM($4)         , "   //[04]-assinatura (diretório contendo imagem)       
-                    + " bloqueado  = $5                 "   //[05]-bloqueado      
-                    + " WHERE cpf  = TRIM($6)           "   //[06]-cpf
+                    + " email      = LOWER( TRIM($2) ), "   //[02]-email                      
+                    + " assinatura = TRIM($3)         , "   //[03]-assinatura (diretório contendo imagem)       
+                    + " bloqueado  = $4                 "   //[04]-bloqueado
+                    if(usuario.senha){   
+                        cSql += " senha  = TRIM($6)         , "   //[05]-senha        
+                    }      
+                    cSql += " WHERE cpf  = TRIM($5)           "   //[06]-cpf
                     
 
         let aValues = [ 
                         usuario.nome        ,   //[01]
-                        usuario.email       ,   //[02]
-                        usuario.senha       ,   //[03]
-                        usuario.assinatura  ,   //[04]
-                        usuario.bloqueado   ,   //[05]
-                        usuario.cpf         ,   //[06]
+                        usuario.email       ,   //[02]                        
+                        usuario.assinatura  ,   //[03]
+                        usuario.bloqueado   ,   //[04]
+                        usuario.cpf         ,   //[05]
                       ];
+
+        if(usuario.senha){
+            aValues.push(usuario.senha)             //[06])
+        }              
 
         topConnection.executaQuery(cSql, aValues, response, msg_status_1_C, msg_status_2_C);
     }

@@ -1,219 +1,224 @@
 <div class="embrulho-principal">
-    <form action="#" method="POST" autocomplete="off">
-        <fieldset>
-            <legend>Cadastro Formulário</legend>
-            <div class="embrulho-campos-mod2">
-                <p>Campos em azul são de preenchimento obrigatório</p>
-                <div class="form-row">
+    <div class="embrulho-campos-cabecalho">
+        <form action="#" method="POST" autocomplete="off">
+            <fieldset>
+                <legend>Cadastro Formulário</legend>
+                <div class="embrulho-campos-mod2">
+                    <p>Campos em azul são de preenchimento obrigatório</p>
+                    <div class="form-row">
 
-                    <!-- ID DO FORMULARIO -->
-                    <div class="form-group col-md-1 espaco">
-                        <label for="inputID">ID</label>
+                        <!-- ID DO FORMULARIO -->
+                        <div class="form-group col-md-1 espaco">
+                            <label for="inputID">ID</label>
 
-                        <input type="text" 
-                               id="inputID" 
-                               name="inputID" 
-                               disabled 
-                               [(ngModel)]="formulario.id" 
-                               class="form-control"
-                        >
-                    </div>
-                    <!-- DESCRIÇÃO FORMULARIO -->
-                    <div class="form-group col-md-4 espaco">
-                        
-                        <label for="inputDescricaoFormulario" class="preenchimentoObrigatorio">Descrição formulário</label>
-
-                        <input type="text" 
-                               id="inputDescricaoFormulario" 
-                               name="inputDescricaoFormulario" 
-                               required 
-                               maxlength={{SIZE_DESCRICAO}} 
-                               [(ngModel)]="formulario.descricao" 
-                               [class.is-invalid] = "camposObrigatorios"
-                               class="form-control"
-                        >
-                    </div>
-                    <!-- ID PROGRAMA -->
-                    <div class="form-group col-md-2">
-                        <label for="inputPrograma" class="preenchimentoObrigatorio">Programa</label>
-                        <div class="input-group-append">
-
-                            <input type="number" 
-                                   id="inputPrograma" 
-                                   name="inputPrograma" 
-                                   required 
-                                   maxlength={{SIZE_PROGRAMA}}
-                                   [(ngModel)]="formulario.id_programa" 
-                                   (keyup.F2)="pesquisa( 2 )"
-                                   [class.is-invalid] = "camposObrigatorios"
-                                   class="form-control"
-                            >
-
-                            <input type="button" 
-                                   id="buttonPesquisa" 
-                                   (click)="pesquisa( 2 )"
-                                   class="buttonPesquisa espaco"
+                            <input type="text" 
+                                id="inputID" 
+                                name="inputID" 
+                                disabled 
+                                [(ngModel)]="formulario.id" 
+                                class="form-control"
                             >
                         </div>
-                    </div>
-                    <!-- DESCRIÇÃO DA PROGRAMA [CAMPO VIRTUAL] -->
-                    <div class="form-group col-md-3 espaco">
-                        <label for="inputDescricaoPrograma">Descrição programa</label>
-        
-                        <input type="text" 
-                               disabled
-                               id="inputDescricaoPrograma" 
-                               name="inputDescricaoPrograma" 
-                               class="form-control"
-                               [(ngModel)]="formulario.descricao_programa" 
-                        >
-                    </div>
-                    <!-- ID LOCAL -->
-                    <div class="form-group col-md-2 espaco">
-                        <label for="inputLocal" class="preenchimentoObrigatorio">Local</label>
-                        <div class="input-group-append">
+                        <!-- DESCRIÇÃO FORMULARIO -->
+                        <div class="form-group col-md-4 espaco">
+                            
+                            <label for="inputDescricaoFormulario" class="preenchimentoObrigatorio">Descrição formulário</label>
 
-                            <input type="number" 
-                                   id="inputLocal" 
-                                   name="inputLocal" 
-                                   required 
-                                   maxlength={{SIZE_LOCAL}} 
-                                   [(ngModel)]="formulario.id_local" 
-                                   (keyup.F2)="pesquisa( 1 )"
-                                   [class.is-invalid] = "camposObrigatorios"
-                                   class="form-control"
-                            >
-
-                            <input type="button" 
-                                   id="buttonPesquisa" 
-                                   (click)="pesquisa( 1 )"
-                                   class="buttonPesquisa"
-                            >
-                        </div>
-                    </div>
-                    <!-- DESCRIÇÃO DO LOCAL [CAMPO VIRTUAL] -->
-                    <div class="form-group col-md-4 espaco">
-                        <label for="inputDescricaoLocal">Descrição local</label>
-    
-                        <input type="text" 
-                               disabled
-                               id="inputDescricaoLocal" 
-                               name="inputDescricaoLocal" 
-                               class="form-control"
-                               [(ngModel)]="formulario.descricao_local" 
-                        >
-                    </div>                                        
-                    <!-- ID FREQUENCIA -->
-                    <div class="form-group col-md-2 espaco">
-                        <label for="inputIdFrequencia" class="preenchimentoObrigatorio">Frequência</label>
-                        <div class="input-group-append">
-
-                            <input type="number" 
-                                   id="inputIdFrequencia" 
-                                   name="inputIdFrequencia" 
-                                   required  
-                                   maxlength={{SIZE_ID_FREQUENCIA}} 
-                                   [(ngModel)]="formulario.id_frequencia" 
-                                   (keyup.F2)="pesquisa( 3 )"
-                                   [class.is-invalid] = "camposObrigatorios"
-                                   class="form-control"
-                            >
-
-                            <input type="button" 
-                                   id="buttonPesquisa" 
-                                   name="buttonPesquisa" 
-                                   (click)="pesquisa( 3 )" 
-                                   class="buttonPesquisa"
-                            >
-                        </div>
-                    </div>
-                    <!-- DESCRIÇÃO DA FREQUENCIA [CAMPO VIRTUAL] -->
-                    <div class="form-group col-md-2 espaco">
-                        <label for="inputDescricaoFrequencia">Descrição frequência</label>
-    
-                        <input type="text" 
-                               disabled
-                               id="inputDescricaoFrequencia" 
-                               name="inputDescricaoFrequencia" 
-                               class="form-control"
-                               [(ngModel)]="formulario.descricao_frequencia" 
-                        >
-                    </div>                    
-                    <!-- BLOQUEADO -->
-                    <div class="form-group espaco">
-                        <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
-
-                        <select id="inputBloqueado" 
-                                name="inputBloqueado" 
+                            <input type="text" 
+                                id="inputDescricaoFormulario" 
+                                name="inputDescricaoFormulario" 
                                 required 
-                                [(ngModel)]="formulario.bloqueado" 
+                                maxlength={{SIZE_DESCRICAO}} 
+                                [(ngModel)]="formulario.descricao" 
                                 [class.is-invalid] = "camposObrigatorios"
                                 class="form-control"
-                        >
-                            <option value=false>Não</option>
-                            <option value=true>Sim</option>
-                        </select>
+                            >
+                        </div>
+                        <!-- ID PROGRAMA -->
+                        <div class="form-group col-md-2">
+                            <label for="inputPrograma" class="preenchimentoObrigatorio">Programa</label>
+                            <div class="input-group-append">
+
+                                <input type="number" 
+                                    id="inputPrograma" 
+                                    name="inputPrograma" 
+                                    required 
+                                    maxlength={{SIZE_PROGRAMA}}
+                                    [(ngModel)]="formulario.id_programa" 
+                                    (keyup.F2)="pesquisa( 2 )"
+                                    [class.is-invalid] = "camposObrigatorios"
+                                    class="form-control"
+                                >
+
+                                <input type="button" 
+                                    id="buttonPesquisa" 
+                                    (click)="pesquisa( 2 )"
+                                    class="buttonPesquisa espaco"
+                                >
+                            </div>
+                        </div>
+                        <!-- DESCRIÇÃO DA PROGRAMA [CAMPO VIRTUAL] -->
+                        <div class="form-group col-md-3 espaco">
+                            <label for="inputDescricaoPrograma">Descrição programa</label>
+            
+                            <input type="text" 
+                                disabled
+                                id="inputDescricaoPrograma" 
+                                name="inputDescricaoPrograma" 
+                                class="form-control"
+                                [(ngModel)]="formulario.descricao_programa" 
+                            >
+                        </div>
+                        <!-- ID LOCAL -->
+                        <div class="form-group col-md-2 espaco">
+                            <label for="inputLocal" class="preenchimentoObrigatorio">Local</label>
+                            <div class="input-group-append">
+
+                                <input type="number" 
+                                    id="inputLocal" 
+                                    name="inputLocal" 
+                                    required 
+                                    maxlength={{SIZE_LOCAL}} 
+                                    [(ngModel)]="formulario.id_local" 
+                                    (keyup.F2)="pesquisa( 1 )"
+                                    [class.is-invalid] = "camposObrigatorios"
+                                    class="form-control"
+                                >
+
+                                <input type="button" 
+                                    id="buttonPesquisa" 
+                                    (click)="pesquisa( 1 )"
+                                    class="buttonPesquisa"
+                                >
+                            </div>
+                        </div>
+                        <!-- DESCRIÇÃO DO LOCAL [CAMPO VIRTUAL] -->
+                        <div class="form-group col-md-4 espaco">
+                            <label for="inputDescricaoLocal">Descrição local</label>
+        
+                            <input type="text" 
+                                disabled
+                                id="inputDescricaoLocal" 
+                                name="inputDescricaoLocal" 
+                                class="form-control"
+                                [(ngModel)]="formulario.descricao_local" 
+                            >
+                        </div>                                        
+                        <!-- ID FREQUENCIA -->
+                        <div class="form-group col-md-2 espaco">
+                            <label for="inputIdFrequencia" class="preenchimentoObrigatorio">Frequência</label>
+                            <div class="input-group-append">
+
+                                <input type="number" 
+                                    id="inputIdFrequencia" 
+                                    name="inputIdFrequencia" 
+                                    required  
+                                    maxlength={{SIZE_ID_FREQUENCIA}} 
+                                    [(ngModel)]="formulario.id_frequencia" 
+                                    (keyup.F2)="pesquisa( 3 )"
+                                    [class.is-invalid] = "camposObrigatorios"
+                                    class="form-control"
+                                >
+
+                                <input type="button" 
+                                    id="buttonPesquisa" 
+                                    name="buttonPesquisa" 
+                                    (click)="pesquisa( 3 )" 
+                                    class="buttonPesquisa"
+                                >
+                            </div>
+                        </div>
+                        <!-- DESCRIÇÃO DA FREQUENCIA [CAMPO VIRTUAL] -->
+                        <div class="form-group col-md-2 espaco">
+                            <label for="inputDescricaoFrequencia">Descrição frequência</label>
+        
+                            <input type="text" 
+                                disabled
+                                id="inputDescricaoFrequencia" 
+                                name="inputDescricaoFrequencia" 
+                                class="form-control"
+                                [(ngModel)]="formulario.descricao_frequencia" 
+                            >
+                        </div>                    
+                        <!-- BLOQUEADO -->
+                        <div class="form-group espaco">
+                            <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
+
+                            <select id="inputBloqueado" 
+                                    name="inputBloqueado" 
+                                    required 
+                                    [(ngModel)]="formulario.bloqueado" 
+                                    [class.is-invalid] = "camposObrigatorios"
+                                    class="form-control"
+                            >
+                                <option value=false>Não</option>
+                                <option value=true>Sim</option>
+                            </select>
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
-        </fieldset>
-        <!-- SE TABLE FICAR DENTRO DO FORM DA PROBLEMA NA ADIÇÃO DE ITENS. -->
+            </fieldset>
+            <!-- SE TABLE FICAR DENTRO DO FORM DA PROBLEMA NA ADIÇÃO DE ITENS. -->
 
-    </form>
+        </form>
 
-    <!-- BOTÃO P/ ADIÇÃO DE ITEM -->
-    <input type="button" class="buttonAdicao" (click)="adicionaItem()">
+        <!-- BOTÃO P/ ADIÇÃO DE ITEM -->
+        <input type="button" class="buttonAdicao tamanho-botao-adicao" (click)="adicionaItem()">
 
-    <!-- TABELA COM PERGUNTAS DO FOMULÁRIO -->
-    <table class="table table-sm bordas-tabela">
-        <thead class="thead-dark">
-            <th scope="col" class="largura-coluna-item">Item</th>
-            <th scope="col">Pergunta</th>
-            <th scope="col">Bloqueado</th>
-            <th scope="col">#</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of getCadastroFormulario().getItens()" [class.registro-bloqueado]="item.item_bloqueado">
-                <!-- ITEM -->
-                <td class="largura-coluna-item">
+        <!-- TABELA COM PERGUNTAS DO FOMULÁRIO -->
+        <div class="embrulho-tabela">
+            <table class="table table-sm bordas-tabela">
+                <thead class="thead-dark">
+                    <th scope="col">Item</th>
+                    <th scope="col">Pergunta</th>
+                    <th scope="col">Bloqueado</th>
+                    <th scope="col">#</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of getCadastroFormulario().getItens()" [class.registro-bloqueado]="item.item_bloqueado">
+                        <!-- ITEM -->
+                        <td class="coluna-item">
 
-                    <input type="number" 
-                           id="inputItem" 
-                           name="inputItem" 
-                           [(ngModel)]="item.item" 
-                           disabled
-                           class="form-control col-md-2 largura-coluna-item"
-                    >
-                </td>
-                <!-- PERGUNTA -->
-                <td>
-                    <input type="text" 
-                           id="inputPergunta" 
-                           name="inputPergunta" 
-                           [(ngModel)]="item.pergunta"
-                           [class.is-invalid] = "camposObrigatorios"
-                           class="form-control"
-                    >
-                </td>
-                <!-- BLOQUEADO -->
-                <td>
-                    <select id="inputBloqueado" 
-                            name="inputBloqueado" 
-                            required 
-                            class="form-control col-md-5"
-                            [class.is-invalid] = "camposObrigatorios"
-                            [(ngModel)]="item.item_bloqueado" 
-                    >
-                        <option value=false>Não</option>
-                        <option value=true>Sim</option>
-                    </select>
-                </td>
-                <!-- BOTÃO P/ REMOÇÃO DE ITENS -->
-                <td><input type="button" class="buttonExclui" (click)="deletaItem(item)"></td>
-            </tr>
-        </tbody>
-    </table>
+                            <input type="number" 
+                                id="inputItem" 
+                                name="inputItem" 
+                                [(ngModel)]="item.item" 
+                                disabled
+                                class="form-control input-item"
+                            >
+                        </td>
+                        <!-- PERGUNTA -->
+                        <td class="coluna-pergunta">
+                            <input type="text" 
+                                id="inputPergunta" 
+                                name="inputPergunta" 
+                                [(ngModel)]="item.pergunta"
+                                [class.is-invalid] = "camposObrigatorios"
+                                class="form-control input-pergunta"
+                                autocomplete="off"
+                            >
+                        </td>
+                        <!-- BLOQUEADO -->
+                        <td class="coluna-bloqueado">
+                            <select id="inputBloqueado" 
+                                    name="inputBloqueado" 
+                                    required 
+                                    [class.is-invalid] = "camposObrigatorios"
+                                    [(ngModel)]="item.item_bloqueado" 
+                                    class="form-control input-bloqueado"
+                            >
+                                <option value=false>Não</option>
+                                <option value=true>Sim</option>
+                            </select>
+                        </td>
+                        <!-- BOTÃO P/ REMOÇÃO DE ITENS -->
+                        <td><input type="button" class="buttonExclui" (click)="deletaItem(item)"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <!-- COMPONENTE DE PESQUISA PROGRAMA-->
     <div *ngIf="pesquisa_programa">
@@ -262,7 +267,10 @@
     </div>
 
     <!-- BOTÕES PARA SALVAR FORMULÁRIO -->
-    <app-botoes-salvar-fechar (botaoSalvarClicado)=salva($event) 
-                              (botaoFecharClicado)=fechaTela($event)>
+    <app-botoes-salvar-fechar 
+            (botaoSalvarClicado)=salva($event) 
+            (botaoFecharClicado)=fechaTela($event)
+            class="tamanho-botoes-salvar-fechar"
+    >
     </app-botoes-salvar-fechar>
 </div>

@@ -32,15 +32,16 @@ export class AjudaInconformeComponent implements OnInit {
     this.textoImportante01 += "Uma inconformidade não pode ser excluída devido ter sido originada de uma vistoria. Caso a mesma for originada "+
                               "indevidamente deverá ser feito o apontamento da correção da mesma colocando o motivo no campo 'Ação corretiva'."; 
 
-
-    this.campos.push(["Programa", "Código do Programa que foi orginado a inconformidade ( este campo já vem preenchido )"]);
-    this.campos.push(["Item"    , "Item ( pergunta ) do formulário  que foi originado a inconformidade ( este campo já vem preenchido )"]);
+    
+    this.campos.push(["Formulário","Código do formulário que originou a inconformidade."]);
+    this.campos.push(["Descrição Formulário","Descrição do formulário."]);
     this.campos.push(["Emissão Inconformidade", "Data em que inconformidade foi originada ( este campo já vem preenchido )"]);
     this.campos.push(["Hora Inconformidade"   , "Hora em que inconformidade foi originada ( este campo já vem preenchido )"]);
+    this.campos.push(["Item"    , "Item ( pergunta ) do formulário  que foi originado a inconformidade ( este campo já vem preenchido )"]);
+    this.campos.push(["Pergunta", "Pergunta que foi respondida e originou a inconformidade. ( este campo já vem preenchido )"]);
     this.campos.push(["Data correção" , "Data em que a inconformidade foi corrigida."]);
     this.campos.push(["Inconformidade", "Descrição da inconfomidade descrita pelo usuário resonsável pela vistoria ( este campo já vem preenchido )"]);
     this.campos.push(["Ação corretiva", "Descrição da ação corretiva que foi tomada para corrigir inconformidade."]);
-
   }
 
   ngOnInit() { }
