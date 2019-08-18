@@ -5,7 +5,7 @@ import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
 import { Programa                } from './programa';
-
+import { host, port              } from './../../rootHost';
 
 const httpOption = {
   headers: new HttpHeaders({"Content-Type":"application/json"})
@@ -16,7 +16,7 @@ const httpOption = {
 })
 export class ProgramaService {
 
-  private programaApi : string = "http://localhost:3000/api/programas"
+  private programaApi : string = host+port+"/api/programas"
 
   constructor(private http : HttpClient) { }
 

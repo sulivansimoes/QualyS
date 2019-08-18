@@ -63,22 +63,29 @@
                         <td class="coluna-pergunta"> {{ item?.getPergunta() }} ? </td>
 
                         <td>
-                            <input type="radio"
-                                   required 
-                                   name="{{ item.getItem() }}" 
-                                   [(ngModel)]="item.conforme"
-                                   value="true"
-                                   (click)="retirarInconforme(item.item)" 
-                            >
+                            <label class="container">
+                                <input type="radio"
+                                       required 
+                                       name="{{ item.getItem() }}" 
+                                       [(ngModel)]="item.conforme"
+                                       value="true"
+                                       (click)="retirarInconforme(item.item)" 
+                                >
+                                <span class="checkmark-conforme"></span>
+                            </label>
                         </td>
+
                         <td>
-                            <input type="radio" 
-                                   required 
-                                   name="{{ item.getItem() }}" 
-                                   [(ngModel)]="item.conforme"
-                                   value="false"
-                                   (click)="geraInconforme( item.getItem(), item.getPergunta() )"
-                            >
+                            <label class="container">
+                                <input type="radio" 
+                                       required 
+                                       name="{{ item.getItem() }}" 
+                                       [(ngModel)]="item.conforme"
+                                       value="false"
+                                       (click)="geraInconforme( item.getItem(), item.getPergunta() )"
+                                >
+                                <span class="checkmark-inconforme"></span>
+                            </label>
                         </td>
                     </tr>
                 </tbody>

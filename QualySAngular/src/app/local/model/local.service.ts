@@ -5,7 +5,7 @@ import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
 import { Local                   } from './local';
-
+import { host, port              } from './../../rootHost';
 
 const httpOption = {
   headers: new HttpHeaders({"Content-Type":"application/json"})
@@ -16,7 +16,7 @@ const httpOption = {
 })
 export class LocalService {
 
-  private localApi : string = "http://localhost:3000/api/local"
+  private localApi : string = host+port+"/api/local"
 
   constructor(private http : HttpClient) { }
 

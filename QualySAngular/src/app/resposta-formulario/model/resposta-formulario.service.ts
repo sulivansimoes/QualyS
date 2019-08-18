@@ -5,7 +5,7 @@ import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
 import { RespostaFormulario } from './resposta-formulario';
-
+import { host, port         } from './../../rootHost';
 
 const httpOption = {
   headers: new HttpHeaders({"Content-Type":"application/json"})
@@ -16,7 +16,7 @@ const httpOption = {
 })
 export class RespostaFormularioService {
 
-  private respostaFormularioApi : string = "http://localhost:3000/api/resposta-formulario"
+  private respostaFormularioApi : string = host+port+"/api/resposta-formulario"
 
   constructor(private http : HttpClient) { }
 

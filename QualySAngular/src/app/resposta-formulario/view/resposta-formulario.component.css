@@ -20,24 +20,14 @@ table th {
 
 /* CLASSES */
 .embrulho-cabecalho-formulario{
-    /* margin-top: 5px;
-    border-color: black;
-    border-style: dashed ;
-    border-radius: 10px ;
-    border-width: 0.5px;
-    padding: 30px; */
+   
     border: 1px solid #eee;
     padding: 20px;
     border-radius: 4px;
 }
 
 .embrulho-item-formulario{
-    /* margin-top: 5px;
-    border-color: black;
-    border-style: dashed ;
-    border-radius: 10px ;
-    border-width: 0.5px;
-    padding: 20px; */
+  
     border: 1px solid #eee;
     padding: 20px;
     border-radius: 4px;
@@ -60,5 +50,115 @@ table th {
 }
 
 
+/* ESTILIZAÇÃO DO RADIO BUTTON  CONFORME*/
+/* Customize the label (the container) */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default radio button */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark-conforme {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #ccc;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark-conforme {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark-conforme {
+    background-color: #2196F3;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark-conforme:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark-conforme:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .container .checkmark-conforme:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+  }
+
+/* ESTILIZAÇÃO DO RADIO BUTTON NÃO CONFORME*/
+  /* Create a custom radio button */
+  .checkmark-inconforme {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #ccc;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark-inconforme {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark-inconforme {
+    background-color: #da0000;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark-inconforme:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark-inconforme:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .container .checkmark-inconforme:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+  }
 
 

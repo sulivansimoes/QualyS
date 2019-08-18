@@ -5,7 +5,7 @@ import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
 import { Frequencia              } from './frequencia';
-
+import { host, port              } from './../../rootHost';
 
 const httpOption = {
   headers: new HttpHeaders({"Content-Type":"application/json"})
@@ -16,7 +16,7 @@ const httpOption = {
 })
 export class FrequenciaService {
 
-  private frequenciaApi : string = "http://localhost:3000/api/frequencia"
+  private frequenciaApi : string =  host+port+"/api/frequencia"
 
   constructor(private http : HttpClient) { }
 
