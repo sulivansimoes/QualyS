@@ -9,6 +9,7 @@
   "author": "Súlivan Simões",
   "license": "ISC",
   "dependencies": {
+    "base64-to-image": "^1.0.2",
     "connect-multiparty": "^2.2.0",
     "consign": "^0.1.6",
     "express": "^4.17.1",

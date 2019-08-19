@@ -100,6 +100,7 @@
                                name="inputAssinatura" 
                                required  
                                [(ngModel)]="usuario.assinatura" 
+                               (change)="fileSelected($event)"                               
                                class="form-control"
                         >
                         <!-- CASO TENHA UMA ASSINATURA EXIBE A IMAGEM -->

@@ -60,9 +60,9 @@ class usuarioDAO{
                     + " assinatura = TRIM($3)         , "   //[03]-assinatura (diretório contendo imagem)       
                     + " bloqueado  = $4                 "   //[04]-bloqueado
                     if(usuario.senha){   
-                        cSql += " senha  = TRIM($6)         , "   //[05]-senha        
+                        cSql += " senha  = TRIM($6)         , "   //[06]-senha        
                     }      
-                    cSql += " WHERE cpf  = TRIM($5)           "   //[06]-cpf
+                    cSql += " WHERE cpf  = TRIM($5)           "   //[05]-cpf
                     
 
         let aValues = [ 

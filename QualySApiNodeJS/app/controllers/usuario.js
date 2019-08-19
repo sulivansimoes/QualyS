@@ -1,5 +1,6 @@
 //Bibliotecas
 const crypto            = require("crypto");
+const base64ToImage     = require("base64-to-image");
 const validator_interno = require("../libs/validators");
 const {msg_status_3_A}  = require("../libs/mensagens_padroes");
 
@@ -37,7 +38,21 @@ function salvaUsuario(application, request, response){
                                  });
         return; 
     }
-        
+
+    //-----------------------------------------------------
+    // Desencriptando imagem da assinatura que veio 
+    // em base64 e salvando no diretório.
+    //-----------------------------------------------------
+    // var base64Str = "data:image/png;base64,"+"iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAACFSURBVChTY/z56/d/BiDY2JAAohi+swmB6bj6SWAaBpigNEHAxPL7KwMIh3obg/G/N3fBGB0QbSILExc/mHF53WIwLehUD6bRAdEmMu45ew3s66WnPoAFTNQFwLSUtCaYDlADUySYePvBI7CJl3/JgAUuHD0ApnWNrcF0iOY/ME2kiQwMAOHcJyk5DlsSAAAAAElFTkSuQmCC";
+    let base64Str   = "data:image/png;base64,"+dados.assinatura;
+    let path        = "./app/imagens_assinaturas/";
+    let optionalObj = {'fileName': dados.cpf, 'type':'png'};
+    
+    base64ToImage(base64Str,path,optionalObj);
+    
+    console.log(dados.assinatura);
+    dados.assinatura = './imagens_assinaturas';
+    
 
     //-----------------------------------------------------
     // Criptografando senha.
@@ -64,11 +79,11 @@ function atualizaUsuario(application, request, response){
     let modelUsuario= null;
     let erros_aux   = null;
     let erros       = [];
-    
+    console.log(request);
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    erros_aux = validator_interno.isObjectEmpty(dados,["email","senha"]);
+    erros_aux = validator_interno.isObjectEmpty(dados,["email","senha","assinatura"]);
     if( erros_aux ){
 
         erros.push(erros_aux);

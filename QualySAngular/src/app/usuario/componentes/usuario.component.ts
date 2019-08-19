@@ -6,6 +6,8 @@ import { Subscription          } from 'rxjs';
 import { Usuario                 }  from './../model/usuario';
 import { UsuarioService          } from './../model/usuario.service';
 import { msgCamposNaoPreenchidos } from 'src/app/global/funcoes/mensagensPadroes';
+// COMPONENTES DE TERCEIROS
+import * as fileUpload from 'fuctbase64';
 
 @Component({
   selector: 'app-usuario',
@@ -30,7 +32,8 @@ export class UsuarioComponent implements OnInit {
   private errosApi           = null;
   private confirmaSenha:string;
   private edita             = false;   // Variavel serve de flag pra ver se está iditando ou incluindo novo cadastro.
-  private senhaNoModoEditar = "************";
+  private senhaNoModoEditar = "******************";
+  private imagemAssinatura:any = null;
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -73,13 +76,26 @@ export class UsuarioComponent implements OnInit {
     this.inscricao.unsubscribe();
   }  
 
+  
+  /**
+   * @description Pega imagem que foi selecionada no campo encriptada em base64 e guarda.
+   * @param event imagem da assinatura.
+   */
+  private fileSelected(event:any){
 
-   /**
+    let result = fileUpload(event);
+    this.imagemAssinatura = result;
+  }
+
+
+  /**
    * @description Função valida se informações do formulário estão corretas. Vê se o que está sendo feito
    *              é atualização ou salvamento de um novo registro e chama a função responsável pela ação.
    */
   private salva(){
 
+    let  imagemAssinatura:FormData;
+    
     //-----------------------------------------------------
     // Validando campos vazios 
     //-----------------------------------------------------
@@ -102,6 +118,12 @@ export class UsuarioComponent implements OnInit {
       this.setMensagemAviso("As senhas não coincidem! Preencha os campos de senha corretamente.")
       return;
     }
+
+    //-----------------------------------------------------
+    // Adicionando arquivo de imagem no objeto de Usuário 
+    //----------------------------------------------------- 
+    this.usuario.setAssinatura(this.imagemAssinatura.__zone_symbol__value.base64);
+    console.log(this.usuario.assinatura);
 
     if(this.edita){
 

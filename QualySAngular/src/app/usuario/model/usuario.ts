@@ -7,7 +7,7 @@ export class Usuario{
     public nome  :string;
     public email :string;
     public senha :string;
-    public assinatura :string;
+    public assinatura :String;
     public bloqueado  :boolean;
 
     /**
@@ -16,11 +16,11 @@ export class Usuario{
      * @param {string } nome  - Nome do usuário
      * @param {string } email - E-mail do usuário
      * @param {string } senha - Senha do usuário
-     * @param {string } assinatura - Diretório onde se encontra a imagem contendo assinatura do usuário.
+     * @param {String } assinatura - Imagem encriptada em base64 da assinatura do usuário.
      * @param {boolean} bloqueado  - Flag do cadastro, indicando se está ou não bloqueado.
      */
-    constructor(cpf?:string  , nome?:string      , email?:string,
-                senha?:string, assinatura?:string, bloqueado?:boolean,){
+    constructor(cpf?:string  , nome?:string        , email?:string,
+                senha?:string, assinatura?:String, bloqueado?:boolean,){
         
         this.cpf   = cpf;
         this.nome  = nome;
@@ -63,10 +63,10 @@ export class Usuario{
     }
 
     /**
-     * @description Retorna diretório onde está assinatura do usuário.
-     * @return {string} ( assinatura ) - Diretório onde está assinatura do usuário.
+     * @description Retorna Imagem de assinatura do usuário.
+     * @return {String} ( assinatura ) - Imagem de assinatura do usuário encriptada em base64.
      */
-    public getAssinatura():string{
+    public getAssinatura():String{
         return this.assinatura;
     }
 
@@ -111,10 +111,10 @@ export class Usuario{
     }
 
     /**
-     * @description Seta diretório onde se encontra imagem com assinatura do usuário.
-     * @param assinatura - Diretório onde se encontra imagem com assinatura do usuário.
+     * @description Seta Imagem com assinatura do usuário encriptada em base64.
+     * @param assinatura - String da Imagem encriptada em base64 com assinatura do usuário.
      */
-    public setAssinatura(assinatura:string):void{
+    public setAssinatura(assinatura:String):void{
         this.assinatura = assinatura;
     }
 

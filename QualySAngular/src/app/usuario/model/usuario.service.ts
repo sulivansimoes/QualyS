@@ -8,7 +8,7 @@ import { Usuario                 } from './usuario';
 import { host, port         } from './../../rootHost';
 
 const httpOption = {
-  headers: new HttpHeaders({"Content-Type":"application/json"})
+  headers: new HttpHeaders({"Content-Type":"application/json"}),
 }
 
 @Injectable({

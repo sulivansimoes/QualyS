@@ -23,6 +23,7 @@
     "bootstrap": "^4.3.1",
     "core-js": "^3.1.4",
     "dateformat": "^3.0.3",
+    "fuctbase64": "^1.4.0",
     "jquery": "^3.4.1",
     "ngx-pagination": "^4.1.0",
     "popper.js": "^1.15.0",
