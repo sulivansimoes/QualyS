@@ -1,4 +1,6 @@
 /* CLASSES */
+
+/* Estilização de cada coluna da tabela */
 .coluna-item{
 
     width: 4.35rem;
@@ -35,35 +37,50 @@
     margin-left: 0.9375rem;
 }
 
+
+/* Estilização de cada campo do cabeçalho */
+.idFormulario {
+    width: 4.5rem;
+    /* margin-left: 0.3125rem; */
+    margin-left: 5px;
+}
+
+
+/* Estilizações Gerais da tela */
+.tabela{
+
+    /* width: 12.375rem; */
+    width: 198px;
+}
+
 .embrulho-tabela{
 
-    height: 15.625rem;
     width: 80rem;
+    /* height: 11.6875rem; */
+    height: 187px;
     overflow-y: auto;  /*só aparece o scroll quando necessário*/
 }
 
-.embrulho-campos-cabecalho{
-    
-    padding: 0.8125rem;
-    border: 1 solid #eee;
-    border-radius: 4px;
-    height: 28rem;
+.embrulho-forms{
+
+    /* height: 14.875rem; */
+    height: 238px;
 }
+
+.embrulho-campos-formulario{
+    
+    padding: 13px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    height: 30.25rem;
+}
+
 
 /* CLASSES DE MODIFICAÇÃO DO TAMANHO DOS COMPONENTES PADRÕES*/
 .tamanho-botao-adicao{
 
-    background-size: 35px !important;
-    width : 50px !important;
-    height: 40px !important;
-}
-
-.tamanho-botoes-salvar-fechar{
-
-    height: 2.5rem !important;
-    padding-left: 0px  !important;
-    padding-right: 0px !important;
-    padding-bottom: 0px !important;
-    padding-top: 0px !important; 
+    background-size: 30px !important;
+    width : 40px !important;
+    height: 30px !important;
 }
 

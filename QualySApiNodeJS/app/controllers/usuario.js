@@ -8,7 +8,7 @@ const {msg_status_3_A}  = require("../libs/mensagens_padroes");
 /**
  * @description : Pega dados do request, valida, e envia para o model salvar.
  * @param : application, aplicação servidora do express.
- * @param : request, objeto do request.
+ * @param : request, objeto do request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
  * @param : response, objeto do response.
  * @see   https://nodejs.org/api/crypto.html#crypto_crypto
  */
@@ -19,6 +19,8 @@ function salvaUsuario(application, request, response){
     let erros_aux   = null;
     let erros       = [];
     
+    console.log(dados)
+
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
@@ -50,7 +52,7 @@ function salvaUsuario(application, request, response){
     
     base64ToImage(base64Str,path,optionalObj);
     
-    console.log(dados.assinatura);
+    // console.log(dados.assinatura);
     dados.assinatura = './imagens_assinaturas';
     
 

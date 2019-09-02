@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "085d2c8a-01cd-4b81-91c7-bfcc32e7dc39",
+		"name": "Usuarios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/api/usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "cpf",
+							"value": "42687294618",
+							"type": "text"
+						},
+						{
+							"key": "nome",
+							"value": "Guilherme Luan",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "senha",
+							"value": "everton",
+							"type": "text"
+						},
+						{
+							"key": "assinatura",
+							"value": "c:/imagens/guilherme.png",
+							"type": "text"
+						},
+						{
+							"key": "bloqueado",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/usuario",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "cpf",
+							"value": "45687294612",
+							"type": "text"
+						},
+						{
+							"key": "nome",
+							"value": "Everton Luiz",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "everton@hotmail.cOM",
+							"type": "text"
+						},
+						{
+							"key": "senha",
+							"value": "everton",
+							"type": "text"
+						},
+						{
+							"key": "assinatura",
+							"value": "c:/imagens/everton.png",
+							"type": "text"
+						},
+						{
+							"key": "bloqueado",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/usuario",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "cpf",
+							"value": "45687234612",
+							"type": "text"
+						},
+						{
+							"key": "nome",
+							"value": "Everton Luiz",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "everton@hotmail.cOM",
+							"type": "text"
+						},
+						{
+							"key": "senha",
+							"value": "everton",
+							"type": "text"
+						},
+						{
+							"key": "assinatura",
+							"value": "c:/imagens/everton.png",
+							"type": "text"
+						},
+						{
+							"key": "bloqueado",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/usuario",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "cpf",
+							"value": "45687234612",
+							"type": "text"
+						},
+						{
+							"key": "nome",
+							"value": "Anny Melo",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "anny@hotmail.cOM",
+							"type": "text"
+						},
+						{
+							"key": "senha",
+							"value": "anny",
+							"type": "text"
+						},
+						{
+							"key": "assinatura",
+							"value": "c:/imagens/anny.png",
+							"type": "text"
+						},
+						{
+							"key": "bloqueado",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/usuario",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "cpf",
+							"value": "12524569622",
+							"type": "text"
+						},
+						{
+							"key": "nome",
+							"value": "Rafaela Tavares",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "RAFA@GMAIL.COM",
+							"type": "text"
+						},
+						{
+							"key": "senha",
+							"value": "rafa",
+							"type": "text"
+						},
+						{
+							"key": "assinatura",
+							"value": "c:/imagens/rafaela.png",
+							"type": "text"
+						},
+						{
+							"key": "bloqueado",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/usuario",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "cpf",
+							"value": "13826536622",
+							"type": "text"
+						},
+						{
+							"key": "nome",
+							"value": "Súlivan Simões",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "s@GMAIL.COM",
+							"type": "text"
+						},
+						{
+							"key": "senha",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "assinatura",
+							"value": "c:/imagens/suliva.png",
+							"type": "text"
+						},
+						{
+							"key": "bloqueado",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/usuario",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "cpf",
+							"value": "13826536622",
+							"type": "text"
+						},
+						{
+							"key": "nome",
+							"value": "Súlivan Simões",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "s@GMAIL.COM",
+							"type": "text"
+						},
+						{
+							"key": "senha",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "assinatura",
+							"value": "c:/imagens/suliva.png",
+							"type": "text"
+						},
+						{
+							"key": "bloqueado",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/usuario",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

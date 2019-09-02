@@ -67,8 +67,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 .embrulho-botoes{
     border: 1px solid #eee;
-    padding: 20px;
+    padding: 8px;
     border-radius: 4px;
+    margin-top: 2px;
 }
 
 .espaco{
@@ -94,8 +95,16 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .botoesCrud{
+ /* width: 8rem;
+    margin-left: 1rem; */
     width: 8rem;
+    height: 2.5rem;
     margin-left: 1rem;
+
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 
 .botaoBrowser{
@@ -107,13 +116,23 @@ input[type=number]::-webkit-outer-spin-button {
 .bordas-tabela{
     border-collapse: collapse !important;
     border-style: solid !important;
-    border-color: black !important;
-    border-width: 0.03px !important;
-    margin-bottom: 0.4rem !important;
+    border-color: #eee !important;
+    border-width: 0.02px !important;
+    margin-bottom: 0.3rem !important;
 }
 
 .registro-bloqueado{
     
     background-color: #d1d1d1 !important;
 } 
+
+thead {
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.02px;
+    margin-block: 0.03rem;
+
+    text-align: center;
+}
 

@@ -1,14 +1,14 @@
 <div class="embrulho-principal">
-    <div class="embrulho-campos-cabecalho">
-        <form action="#" method="POST" autocomplete="off">
+    <legend>Cadastro Formulário</legend>
+    <div class="embrulho-campos-formulario">
+        <form action="#" method="POST" autocomplete="off" class="embrulho-forms">
             <fieldset>
-                <legend>Cadastro Formulário</legend>
-                <div class="embrulho-campos-mod2">
+                <div>
                     <p>Campos em azul são de preenchimento obrigatório</p>
                     <div class="form-row">
 
                         <!-- ID DO FORMULARIO -->
-                        <div class="form-group col-md-1 espaco">
+                        <div class="form-group idFormulario espaco">
                             <label for="inputID">ID</label>
 
                             <input type="text" 
@@ -20,7 +20,7 @@
                             >
                         </div>
                         <!-- DESCRIÇÃO FORMULARIO -->
-                        <div class="form-group col-md-4 espaco">
+                        <div class="form-group col-md-2 espaco">
                             
                             <label for="inputDescricaoFormulario" class="preenchimentoObrigatorio">Descrição formulário</label>
 
@@ -57,8 +57,8 @@
                                 >
                             </div>
                         </div>
-                        <!-- DESCRIÇÃO DA PROGRAMA [CAMPO VIRTUAL] -->
-                        <div class="form-group col-md-3 espaco">
+                        <!-- DESCRIÇÃO DO PROGRAMA [CAMPO VIRTUAL] -->
+                        <div class="form-group col-md-2 espaco">
                             <label for="inputDescricaoPrograma">Descrição programa</label>
             
                             <input type="text" 
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <!-- DESCRIÇÃO DO LOCAL [CAMPO VIRTUAL] -->
-                        <div class="form-group col-md-4 espaco">
+                        <div class="form-group col-md-2 espaco">
                             <label for="inputDescricaoLocal">Descrição local</label>
         
                             <input type="text" 
@@ -168,14 +168,14 @@
 
         <!-- TABELA COM PERGUNTAS DO FOMULÁRIO -->
         <div class="embrulho-tabela">
-            <table class="table table-sm bordas-tabela">
-                <thead class="thead-dark">
+            <table class="table table-sm">
+                <thead class="thead-dark tabela">
                     <th scope="col">Item</th>
                     <th scope="col">Pergunta</th>
                     <th scope="col">Bloqueado</th>
                     <th scope="col">#</th>
                 </thead>
-                <tbody>
+                <tbody class="bordas-tabela">
                     <tr *ngFor="let item of getCadastroFormulario().getItens()" [class.registro-bloqueado]="item.item_bloqueado">
                         <!-- ITEM -->
                         <td class="coluna-item">
