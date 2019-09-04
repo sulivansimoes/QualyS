@@ -20,6 +20,7 @@
  * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/values
  * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/eval
  * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+ * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/typeof
  */
  function isObjectEmpty(valida, naoValida){
 
@@ -61,9 +62,13 @@
     //------------------------------------------
     for(let i = 0; i < chaves.length; i++){
 
-        if( valores[i].trim() == "" ){
-
-            camposVazios.push(chaves[i]);
+        //verifico se é uma string
+        if(typeof valores[i] === 'string' ){
+            
+            if( valores[i].trim() == "" ){
+    
+                camposVazios.push(chaves[i]);
+            }
         }
     } 
 

@@ -60,7 +60,7 @@ class usuarioDAO{
                     + " assinatura = TRIM($3)         , "   //[03]-assinatura (diretório contendo imagem)       
                     + " bloqueado  = $4                 "   //[04]-bloqueado
                     if(usuario.senha){   
-                        cSql += " senha  = TRIM($6)         , "   //[06]-senha        
+                        cSql += ", senha  = TRIM($6)          "   //[06]-senha        
                     }      
                     cSql += " WHERE cpf  = TRIM($5)           "   //[05]-cpf
                     
@@ -99,6 +99,7 @@ class usuarioDAO{
     /**
      * @description Consulta todos os usuarios no banco de dados
      * @param {response} response 
+     * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
     getAllUsuarios(response){
 
@@ -118,6 +119,7 @@ class usuarioDAO{
      * @description Consulta os usuarios no banco de dados por descrição
      * @param {String  } nome, nome à ser pesquisado.
      * @param {response} response 
+     * @obs : o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
     getUsuariosPorNome(nome , response){
 
@@ -134,6 +136,29 @@ class usuarioDAO{
 
         topConnection.executaQuery(cSql, aValues,  response, msg_status_1_D, msg_status_2_D);      
     }       
+
+    /**
+     * @description Consulta o usuário no banco de dados pelo cpf e senha.
+     * @param {String  } cpf, cpf do usuário
+     * @param {String  } senha, senha do usuário
+     */
+    async findUserForLogin(cpf , senha){
+
+        let cSql    =  "SELECT cpf, "
+                    +  "       nome " 
+                    +  " FROM usuario "
+                    +  " WHERE cpf   = TRIM( $1 ) "
+                    +  "   AND senha = TRIM( $2 ) "
+                    +  "   AND bloqueado = false  ";
+                    
+        let aValues = [ 
+                        cpf  ,
+                        senha
+                      ];
+
+       //Executa a query e ja retorna o usuário               
+       return topConnection.executaQueryAsync(cSql, aValues, msg_status_1_D, msg_status_2_D);            
+    }   
 
 }
 

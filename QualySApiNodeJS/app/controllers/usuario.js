@@ -19,7 +19,7 @@ function salvaUsuario(application, request, response){
     let erros_aux   = null;
     let erros       = [];
     
-    console.log(dados)
+    // console.log(dados);
 
     //-----------------------------------------------------
     // Validando informações 
@@ -81,7 +81,9 @@ function atualizaUsuario(application, request, response){
     let modelUsuario= null;
     let erros_aux   = null;
     let erros       = [];
-    console.log(request);
+
+    // console.log(request);
+
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
@@ -102,6 +104,12 @@ function atualizaUsuario(application, request, response){
         return; 
     }
         
+    /**
+     * @todo
+     * teste temporario com assinatura na atualizacao
+     */
+    dados.assinatura = "c:/"
+
     
     //-----------------------------------------------------
     // Criptografando senha.

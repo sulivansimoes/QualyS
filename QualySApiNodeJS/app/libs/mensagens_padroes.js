@@ -14,6 +14,7 @@ const msg_status_2_C = "Ocorreu um erro ao tentar atualizar o registro. ";
 const msg_status_2_D = "Ocorreu um erro ao tentar realizar consulta. ";
 //Operações realizadas com problemas oriundos de Parametros enviados na API de forma inválida
 const msg_status_3_A = "Conteúdo dos campos inválidos e/ou não preenchidos.";
+const msg_status_3_B = "Usuário ou senha inválidos!"
 
 /**
  * Exportando mensagens 
@@ -30,4 +31,5 @@ module.exports = {
     msg_status_2_D,
 
     msg_status_3_A,
+    msg_status_3_B
 }
