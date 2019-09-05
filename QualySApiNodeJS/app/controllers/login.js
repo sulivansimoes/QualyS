@@ -50,12 +50,11 @@ function login(application, request, response){
     modelUsuario = new application.app.models.usuarioDAO();   
     
     (async() => {
-        console.log(usuario)
 
         //Recupera o usuario do banco se ele existir e a senha for válida e ele não estiver bloqueado.
         usuario =  await modelUsuario.findUserForLogin(dados.cpf, dados.senha) ;   
         
-        console.log("usuario autenticado - " , usuario)
+        console.log("usuario autenticado - " , usuario);
 
         //Caso o usuário exista e a senha estiver Ok
         if(usuario.length > 0 ){
@@ -82,8 +81,32 @@ function login(application, request, response){
 }
 
 /**
+ * @description : Pega os dados do request e válida se existe o token necessário para poder prosseguir com a aplicação.
+ * @param {Reqest  } request request da requisção 
+ * @param {Response} response response do request
+ * @param {*} next função para que o NodeJS siga o fluxo e não fique esperando.
+ */
+function verifyJWT(request, response, next){
+
+    let token = request.headers['x-access-token'];
+
+    if (!token) return response.status(401).json({ auth: false, message: 'Nenhum token fornecido.' });
+     
+    jwt.verify(token, process.env.SECRET, function(err, decoded) {
+
+        if (err) return response.status(500).json({ auth: false, message: 'Falha ao autenticar o token.' });
+        
+        // Se tudo estiver ok, salva no request para uso posterior
+        request.cpf = decoded.cpf;
+        next();
+    });
+}
+
+
+/**
  * Exportando funções 
  */
 module.exports = {
     login   ,
+    verifyJWT
 }

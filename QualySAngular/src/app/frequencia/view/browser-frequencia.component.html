@@ -17,7 +17,7 @@
                            autocomplete="off" 
                            [(ngModel)]="pesquisa"
                            (keyup.enter)="getFrequenciasPorDescricao()"
-                           placeholder="pesquise pela descrição"              
+                           placeholder="Pesquise pela descrição"              
                     >
                     
                     <input type="button" 
@@ -39,16 +39,32 @@
         <table class="table table-sm bordas-tabela">
             <thead class="thead-dark">
                 <th scope="col">ID</th>
-                <th scope="col">DESCRIÇÃO</th>
-                <th>#</th>
-                <th>#</th>
+                <th scope="col" class="th-descricao">Descrição</th>
+                <th>Editar </th>
+                <th>Excluir</th>
             </thead>
             <tbody>
-                <tr *ngFor="let frequencia of frequencias | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;">
+                <tr *ngFor="let frequencia of frequencias | paginate: {itemsPerPage:10, currentPage: paginaAtual }; let i = index;">
                     <td> {{ frequencia.id        }} </td>
                     <td> {{ frequencia.descricao }} </td>
-                    <td> <input type="button" class="buttonExclui" (click)="excluiFrequencia(frequencia.id)"> </td>
-                    <td> <input type="button" class="buttonEditar" routerLink="frequencia/" [queryParams]="{id:frequencia.id, descricao:frequencia.descricao} "> </td>
+                    <!-- BOTÃO EXCLUIR -->
+                    <td class="align-components-browser-center"> 
+                            <input type="button" 
+                                   class="buttonEditar" 
+                                   routerLink="frequencia/" 
+                                   [queryParams]="{
+                                                    id:frequencia.id, 
+                                                    descricao:frequencia.descricao
+                                                   }"
+                            > 
+                    </td>      
+                    <!-- BOTÃO EDITAR -->
+                    <td class="align-components-browser-center"> 
+                            <input type="button" 
+                                   class="buttonExclui" 
+                                   (click)="excluiFrequencia(frequencia.id)"
+                            > 
+                    </td>
                 </tr>
             </tbody>            
         </table>

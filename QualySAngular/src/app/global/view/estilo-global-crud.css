@@ -9,6 +9,16 @@ legend{
     font-weight: bold;
 }
 
+thead {
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.02px;
+    margin-block: 0.03rem;
+
+    text-align: center;
+}
+
 tr:hover{
     background-color: #f0f0f0;
 }
@@ -126,13 +136,19 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #d1d1d1 !important;
 } 
 
-thead {
-    border-collapse: collapse;
-    border-style: solid;
-    border-color: black;
-    border-width: 0.02px;
-    margin-block: 0.03rem;
-
-    text-align: center;
+.posicao-botao-browser{
+    padding-top: 7px !important;
+    padding-bottom: 0px !important;
 }
+
+.align-components-browser-center{
+    text-align: center !important;
+}
+
+.th-descricao{
+    width: 966.6px !important;
+}
+
+
+
 

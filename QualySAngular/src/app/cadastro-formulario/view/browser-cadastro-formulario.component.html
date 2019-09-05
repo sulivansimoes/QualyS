@@ -17,7 +17,7 @@
                            autocomplete="off"
                            [(ngModel)]="pesquisa"
                            (keyup.enter)="getFormulariosPorDescricao()"   
-                           placeholder="pesquise pela descrição"              
+                           placeholder="Pesquise pela descrição"              
                     >
                     
                     <input type="button" 
@@ -39,27 +39,41 @@
         <table class="table table-sm bordas-tabela">
             <thead class="thead-dark">
                 <th scope="col">ID</th>
-                <th scope="col">DESCRIÇÃO</th>
-                <th>#</th>
-                <th>#</th>
+                <th scope="col" class="th-descricao">Descrição</th>
+                <th>Excluir</th>
+                <th>Editar</th>
             </thead>
             <tbody>
                 <tr *ngFor="let formulario of formularios | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;"
                     [class.registro-bloqueado]="formulario.bloqueado"
                 >
-                    <td> {{ formulario.id        }} </td>
+                    <td class="align-components-browser-center"> {{ formulario.id  }} </td>
                     <td> {{ formulario.descricao }} </td>
-                    <td> <input type="button" class="buttonExclui" (click)="excluiFormulario(formulario.id)"> </td>
-                    <td> <input type="button" class="buttonEditar" routerLink="cadastro-formulario/"  [queryParams]="{id:formulario.id,
-                                                                                                                      descricao:formulario.descricao,
-                                                                                                                      id_programa:formulario.id_programa,
-                                                                                                                      descricao_programa:formulario.descricao_programa,
-                                                                                                                      id_local:formulario.id_local,
-                                                                                                                      descricao_local:formulario.descricao_local,
-                                                                                                                      id_frequencia:formulario.id_frequencia,
-                                                                                                                      descricao_frequencia:formulario.descricao_frequencia,
-                                                                                                                      bloqueado:formulario.bloqueado
-                                                                                                                     }"> </td>
+                    <!-- BOTÃO EDITAR -->
+                    <td class="align-components-browser-center"> 
+                        <input type="button" 
+                               class="buttonEditar" 
+                               routerLink="cadastro-formulario/"  
+                               [queryParams]="{
+                                                id:formulario.id,
+                                                descricao:formulario.descricao,
+                                                id_programa:formulario.id_programa,
+                                                descricao_programa:formulario.descricao_programa,
+                                                id_local:formulario.id_local,
+                                                descricao_local:formulario.descricao_local,
+                                                id_frequencia:formulario.id_frequencia,
+                                                descricao_frequencia:formulario.descricao_frequencia,
+                                                bloqueado:formulario.bloqueado
+                                              }"
+                        > 
+                    </td>
+                    <!-- BOTÃO EXCLUIR -->
+                    <td class="align-components-browser-center"> 
+                        <input type="button" 
+                               class="buttonExclui" 
+                               (click)="excluiFormulario(formulario.id)"
+                        > 
+                    </td>
                 </tr>
             </tbody>
         </table>

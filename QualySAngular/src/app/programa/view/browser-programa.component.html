@@ -17,7 +17,7 @@
                            autocomplete="off"
                            [(ngModel)]="pesquisa"
                            (keyup.enter)="getFrequenciasPorDescricao()"   
-                           placeholder="pesquise pela descrição"                                      
+                           placeholder="Pesquise pela descrição"                                      
                     >
 
                     <input type="button" 
@@ -39,29 +39,42 @@
         <table class="table table-sm bordas-tabela">
             <thead class="thead-dark">
                 <th scope="col">ID</th>
-                <th scope="col">DESCRIÇÃO</th>
-                <th scope="col">SIGLA</th>
-                <th>#</th>
-                <th>#</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Sigla</th>
+                <th>Editar</th>
+                <th>Excluir</th>
             </thead>
             <tbody>
-                <tr *ngFor="let programa of programas | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;"
+                <tr *ngFor="let programa of programas | paginate: {itemsPerPage:10, currentPage: paginaAtual }; let i = index;"
                     [class.registro-bloqueado]="programa.bloqueado"
                 >
                     <td> {{ programa.id            }} </td>
                     <td> {{ programa.descricao     }} </td>
                     <td> {{ programa.sigla         }} </td>
-                    <td> <input type="button" class="buttonExclui" (click)="excluiPrograma(programa)"> </td>
-                    <td> 
-                        <input type="button" class="buttonEditar" routerLink="programa/" [queryParams]="{id:programa.id, 
-                                                                                                         descricao:programa.descricao,
-                                                                                                         sigla:programa.sigla,
-                                                                                                         versao:programa.versao,
-                                                                                                         data_vigencia:programa.data_vigencia,
-                                                                                                         data_revisao:programa.data_revisao,
-                                                                                                         versao:programa.versao,
-                                                                                                         oficio:programa.oficio,
-                                                                                                         bloqueado:programa.bloqueado} "> 
+                    <!-- EDITAR -->
+                    <td class="align-components-browser-center"> 
+                        <input type="button" 
+                               class="buttonEditar" 
+                               routerLink="programa/" 
+                               [queryParams]="{
+                                                id:programa.id, 
+                                                descricao:programa.descricao,
+                                                sigla:programa.sigla,
+                                                versao:programa.versao,
+                                                data_vigencia:programa.data_vigencia,
+                                                data_revisao:programa.data_revisao,
+                                                versao:programa.versao,
+                                                oficio:programa.oficio,
+                                                bloqueado:programa.bloqueado
+                                              }"
+                        > 
+                    </td>
+                    <!-- EXCLUIR -->
+                    <td class="align-components-browser-center"> 
+                        <input type="button" 
+                               class="buttonExclui" 
+                               (click)="excluiPrograma(programa)"
+                        >
                     </td>
                 </tr>
             </tbody>

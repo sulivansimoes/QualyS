@@ -18,7 +18,7 @@
                            autocomplete="off"
                            [(ngModel)]="pesquisa"
                            (keyup.enter)="getUsuariosPorNome()"
-                           placeholder="pesquise pelo nome"              
+                           placeholder="Pesquise pelo nome"              
                     >
 
                     <input type="button" 
@@ -40,23 +40,37 @@
         <table class="table table-sm bordas-tabela">
             <thead class="thead-dark">
                 <th scope="col">CPF</th>
-                <th scope="col">NOME</th>
-                <th>#</th>
-                <th>#</th>
+                <th scope="col">Nome</th>
+                <th>Editar</th>
+                <th>Excluir</th>
             </thead>
             <tbody>
                     <tr *ngFor="let usuario of usuarios | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;" 
                         [class.registro-bloqueado]="usuario.bloqueado"
                     >
-                    <td>{{ usuario.cpf | cpf }}</td>
-                    <td>{{ usuario.nome }}</td>
-                    <td> <input type="button" class="buttonExclui" (click)="excluiUsuario(usuario)" > </td>
-                    <td> 
-                        <input type="button" class="buttonEditar" routerLink="usuario/" [queryParams]="{cpf:usuario.cpf, 
-                                                                                                        nome:usuario.nome, 
-                                                                                                        email:usuario.email,
-                                                                                                        bloqueado:usuario.bloqueado} " > 
-                    </td>
+
+                        <td>{{ usuario.cpf | cpf }}</td>
+                        <td>{{ usuario.nome      }}</td>
+                        <!-- EDITAR -->
+                        <td class="align-components-browser-center"> 
+                            <input type="button" 
+                                    class="buttonEditar" 
+                                    routerLink="usuario/" 
+                                    [queryParams]="{
+                                                     cpf:usuario.cpf, 
+                                                     nome:usuario.nome, 
+                                                     email:usuario.email,
+                                                     bloqueado:usuario.bloqueado
+                                                    }" 
+                            > 
+                        </td>
+                        <!-- EXCLUIR -->
+                        <td class="align-components-browser-center"> 
+                            <input type="button" 
+                                   class="buttonExclui" 
+                                   (click)="excluiUsuario(usuario)" 
+                            > 
+                        </td>                                                                                                            
                 </tr>
             </tbody>
         </table>

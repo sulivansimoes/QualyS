@@ -20,7 +20,7 @@
                             >
                         </div>
                         <!-- DESCRIÇÃO FORMULARIO -->
-                        <div class="form-group col-md-2 espaco">
+                        <div class="form-group col-md-4 espaco">
                             
                             <label for="inputDescricaoFormulario" class="preenchimentoObrigatorio">Descrição formulário</label>
 
@@ -35,7 +35,7 @@
                             >
                         </div>
                         <!-- ID PROGRAMA -->
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-2 idFormulario">
                             <label for="inputPrograma" class="preenchimentoObrigatorio">Programa</label>
                             <div class="input-group-append">
 
@@ -213,12 +213,25 @@
                             </select>
                         </td>
                         <!-- BOTÃO P/ REMOÇÃO DE ITENS -->
-                        <td><input type="button" class="buttonExclui" (click)="deletaItem(item)"></td>
+                        <td class="align-components-browser-center">
+                            <input type="button" 
+                                   class="buttonExclui tamanho-botao-lixeira" 
+                                   (click)="deletaItem(item)"
+                            >
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    
+    <!-- BOTÕES PARA SALVAR FORMULÁRIO -->
+    <app-botoes-salvar-fechar 
+            (botaoSalvarClicado)=salva($event) 
+            (botaoFecharClicado)=fechaTela($event)
+            class="tamanho-botoes-salvar-fechar"
+    >
+    </app-botoes-salvar-fechar>
 
     <!-- COMPONENTE DE PESQUISA PROGRAMA-->
     <div *ngIf="pesquisa_programa">
@@ -265,12 +278,4 @@
     <div *ngIf="mensagemAviso">
         <tela-mensagem [mensagemAviso]="mensagemAviso"></tela-mensagem>
     </div>
-
-    <!-- BOTÕES PARA SALVAR FORMULÁRIO -->
-    <app-botoes-salvar-fechar 
-            (botaoSalvarClicado)=salva($event) 
-            (botaoFecharClicado)=fechaTela($event)
-            class="tamanho-botoes-salvar-fechar"
-    >
-    </app-botoes-salvar-fechar>
 </div>

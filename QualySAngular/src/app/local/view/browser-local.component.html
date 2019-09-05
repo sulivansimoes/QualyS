@@ -18,7 +18,7 @@
                  autocomplete="off" 
                  [(ngModel)]="pesquisa"
                  (keyup.enter)="getLocaisPorDescricao()"    
-                 placeholder="pesquise pela descrição"                           
+                 placeholder="Pesquise pela descrição"                           
           >
 
           <input type="button" 
@@ -40,20 +40,35 @@
    <table class="table table-sm bordas-tabela">
       <thead class="thead-dark">
         <th scope="col">ID</th>
-        <th scope="col">DESCRIÇÃO</th>
-        <th>#</th>
-        <th>#</th>
+        <th scope="col" class="th-descricao">Descrição</th>
+        <th>Editar</th>
+        <th>Excluir</th>
       </thead>
       <tbody>
-        <tr *ngFor="let local of locais | paginate: {itemsPerPage:7, currentPage: paginaAtual }; let i = index;"
+        <tr *ngFor="let local of locais | paginate: {itemsPerPage:10, currentPage: paginaAtual }; let i = index;"
             [class.registro-bloqueado]="local.bloqueado"
         >
             <td> {{ local.id        }} </td>
             <td> {{ local.descricao }} </td>
-            <td> <input type="button" class="buttonExclui" (click)="excluiLocal(local.id)"> </td>
-            <td> <input type="button" class="buttonEditar" routerLink="local/" [queryParams]="{id:local.id,
-                                                                                               descricao:local.descricao, 
-                                                                                               bloqueado:local.bloqueado} "> </td>
+            <!-- BOTÃO EDITAR -->
+            <td class="align-components-browser-center">
+                <input type="button" 
+                       class="buttonEditar" 
+                       routerLink="local/" 
+                       [queryParams]="{
+                                        id:local.id,
+                                        descricao:local.descricao, 
+                                        bloqueado:local.bloqueado
+                                      }"
+                > 
+            </td>
+            <!-- BOTÃO EXCLUIR -->
+            <td class="align-components-browser-center"> 
+                <input type="button" 
+                       class="buttonExclui" 
+                       (click)="excluiLocal(local.id)"
+                > 
+            </td>
         <tr>    
       </tbody>
     </table>
@@ -61,7 +76,7 @@
     <!-- PAGINAÇÃO DA TABELA -->
     <pagination-controls
             (pageChange)="paginaAtual = $event"
-            maxSize = "5"
+            maxSize = "10"
             directionLinks = "true"
             autoHide = "true"
             responsive = "true"

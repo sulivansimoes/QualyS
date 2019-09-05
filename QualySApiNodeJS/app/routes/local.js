@@ -1,3 +1,5 @@
+const auth = require('./../controllers/login');
+
 module.exports = function(application){
 
     application.post("/api/local", function(req, res){
@@ -18,7 +20,7 @@ module.exports = function(application){
     });
 
     
-    application.get("/api/local", function(req, res){
+    application.get("/api/local" /*, auth.verifyJWT*/, function(req, res){
 
         application.app.controllers.local.getAllLocais(application, req, res );
     });

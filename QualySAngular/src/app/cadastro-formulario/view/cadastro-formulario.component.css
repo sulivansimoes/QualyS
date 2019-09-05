@@ -77,6 +77,13 @@
 
 
 /* CLASSES DE MODIFICAÇÃO DO TAMANHO DOS COMPONENTES PADRÕES*/
+.tamanho-botao-lixeira{
+
+    background-size: 30px !important;
+    width : 40px !important;
+    height: 40px !important;
+}
+
 .tamanho-botao-adicao{
 
     background-size: 30px !important;

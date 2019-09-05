@@ -49,11 +49,12 @@ function executaQuery(cSql, aValues, response, cMensagemSucesso, cMensagemErro){
  * @param {Array   } aValues array contendo valores a serem substituidos nos parametros [ $ ]
  * @param {String  } cMensagemSucesso mensagem que deve ser escrita no console caso a execução da query obtenha exito
  * @param {String  } cMensagemErro mensagem que deve ser escrita no console caso a execução da query gere erros
+ * @return {Array  } irá ser retornado um array contendo todas as linhas rows que a query obteve.
  * @see https://node-postgres.com/features/queries
  * @see https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/funcoes_assincronas
  * 
  * @example
- * executaQueryAsync("INSERT INTO frequencia(descricao) VALUES ( $1 )", ['mensal'], response, 'insert deu certo', 'insert deu errado', false); 
+ * executaQueryAsync("SELECT * usuarios WHERE cpf = TRIM( $1 ), ['00000000000'], response, 'select deu certo', 'select deu errado'); 
  */
 async function executaQueryAsync(cSql, aValues, cMensagemSucesso, cMensagemErro){
          
@@ -69,7 +70,7 @@ async function executaQueryAsync(cSql, aValues, cMensagemSucesso, cMensagemErro)
                                           return  result.rows;
                                       })
                      .catch(erros => {     
-                                          console.log(cMensagemErro, erros);
+                                          console.log(cMensagemErro + " / ", erros);
                                       })
                      .finally(()  => {
                                            // console.log("Fechada conexão com banco de dados.");
