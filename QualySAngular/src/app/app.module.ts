@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule     } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 // MÓDULOS PERSONALIZADOS
+import { RelatorioModule  } from './relatorio/relatorio.module';
 import { LocalModule      } from './local/local.module';
 import { ProgramaModule   } from './programa/programa.module';
 import { FrequenciaModule } from './frequencia/frequencia.module';
@@ -39,7 +40,8 @@ const appRoutes = rotas
     InconformeModule,
     UsuarioModule,
     CadastroFormularioModule,
-    RespostaFormularioModule
+    RespostaFormularioModule,
+    RelatorioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

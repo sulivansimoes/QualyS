@@ -16,9 +16,11 @@ import { BrowserUsuarioComponent     } from './../../usuario/componentes/browser
 import { BrowserInconformeComponent  } from './../../inconforme/componentes/browser-inconforme.component';
 import { RespostaFormularioComponent } from './../../resposta-formulario/componentes/resposta-formulario.component';
 import { BrowserCadastroFormularioComponent } from './../../cadastro-formulario/componentes/browser-cadastro-formulario.component';
+import { VistoriaRealizadaComponent  } from './../../relatorio/componentes/vistoria-realizada.component';
 
 export const rotas : Routes = [
 
+    // TELAS DE CADASTROS 
     { path: "login"                         , component: LoginComponent                     },
     { path: "browser-frequencia"            , component: BrowserFrequenciaComponent         },
     { path: "browser-cadastro-formulario"   , component: BrowserCadastroFormularioComponent },
@@ -33,6 +35,9 @@ export const rotas : Routes = [
     { path: "browser-usuario/usuario"       , component: UsuarioComponent                   },
     { path: "browser-cadastro-formulario/cadastro-formulario", component: CadastroFormularioComponent        },
     { path: "resposta-formulario"           , component: RespostaFormularioComponent        },
+    // RELATÓRIOS
+    { path: "relatorio-vistoria-realizada"  , component: VistoriaRealizadaComponent         }, 
+    // OUTROS
     { path: '', redirectTo :  ''            , pathMatch: 'full'                             },
     { path: '**'                            , component: PageNotFoundComponent              }
 ];
