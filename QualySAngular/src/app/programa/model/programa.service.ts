@@ -54,12 +54,12 @@ export class ProgramaService {
  
  /**
   * @description envia solicitação para API deletar programa da base de dados.
-  * @param   {Programa  } programa - objeto da programa que deve ser deletada
+  * @param   {Number  } idPrograma - id do programa que deve ser deletado
   * @returns {Observable} Observable
   */
-  deletaPrograma(programa : Programa) {
+  deletaPrograma(idPrograma : Number) {
  
-    return this.http.delete<Programa>( this.programaApi + "/" + programa.id )
+    return this.http.delete<Programa>( this.programaApi + "/" + idPrograma )
                     .pipe(
                             catchError(
                                         this.errorHandler

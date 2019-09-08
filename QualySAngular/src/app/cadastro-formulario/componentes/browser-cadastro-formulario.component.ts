@@ -4,6 +4,7 @@ import { Subscription       } from 'rxjs';
 //COMPONENTES PERSONALIZADOS
 import { CadastroFormulario        } from './../model/cadastro-formulario';
 import { CadastroFormularioService } from './../model/cadastro-formulario.service';
+import { msgConfirmaExclusao  } from 'src/app/global/funcoes/mensagensPadroes';
 
 @Component({
   selector: 'app-browser-cadastro-formulario',
@@ -16,12 +17,16 @@ import { CadastroFormularioService } from './../model/cadastro-formulario.servic
 })
 export class BrowserCadastroFormularioComponent implements OnInit {
 
-  public inscricao     = new Subscription;
-  public resultadoApi  = null;
-  public errosApi      = null;
-  public paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
-  public formularios:CadastroFormulario[] = []; 
-  public pesquisa:String = "";
+  private inscricao     = new Subscription;
+  private resultadoApi  = null;
+  private errosApi      = null;
+  private paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
+  private formularios:CadastroFormulario[] = []; 
+  private idFormulario    = null;  // captura id da frequencia que será excluida.
+  private pesquisa:String = "";
+  private exclui          = false;
+  private mensagemExclui  = msgConfirmaExclusao;
+  private idModal         = "idMsgExcluiFrequencia";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere  
 
@@ -89,11 +94,10 @@ export class BrowserCadastroFormularioComponent implements OnInit {
 
   /**
    * @description Envia solicitação para o service deletar o formulario.
-   * @param {number} id - id do formulario que deve ser excluido.
    */
-  private excluiFormulario(id:number){
+  private excluiFormulario(){
 
-      this.inscricao = this.cadastroFormularioService.deletaFormulario(id).subscribe(
+      this.inscricao = this.cadastroFormularioService.deletaFormulario(this.idFormulario).subscribe(
 
           result => {
                       this.resultadoApi = result;
@@ -104,6 +108,35 @@ export class BrowserCadastroFormularioComponent implements OnInit {
                       this.setErrosApi(error);
                   }
       );    
+
+      this.fechaModalExclusao();
+  }
+
+  /**
+   * @description: Apresenta o modal para usuário confirmar a exclusão.
+   * @param {Number} idFormulario id do formulario que deverá ser excluido 
+   */
+  confirmaExclusao(idFormulario:Number){
+    
+    this.exclui = !this.exclui;
+    this.idFormulario = idFormulario;
+    console.log("Id formulario = " + idFormulario);
+  }
+
+
+  /**
+   * @description Cancela a exclusão
+   */
+  cancelaExclusao(){
+
+    this.fechaModalExclusao();
+  } 
+
+  /**
+   *@description Fecha modal de  exclusão 
+   */
+  fechaModalExclusao(){
+    $( '#'+this.idModal ).modal('hide');
   }
 
 

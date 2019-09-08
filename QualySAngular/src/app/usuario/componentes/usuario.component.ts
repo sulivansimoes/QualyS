@@ -6,6 +6,7 @@ import { Subscription          } from 'rxjs';
 import { Usuario                 }  from './../model/usuario';
 import { UsuarioService          } from './../model/usuario.service';
 import { msgCamposNaoPreenchidos } from 'src/app/global/funcoes/mensagensPadroes';
+import { msgConfirmaCancelamento } from 'src/app/global/funcoes/mensagensPadroes';
 // COMPONENTES DE TERCEIROS
 import * as fileUpload from 'fuctbase64';
 
@@ -34,6 +35,10 @@ export class UsuarioComponent implements OnInit {
   private edita             = false;   // Variavel serve de flag pra ver se está iditando ou incluindo novo cadastro.
   private senhaNoModoEditar = "******************";
   private imagemAssinatura:any = null;
+  // Variaveis usadas no modal de cancelamento
+  private mensagemCancelamento    = msgConfirmaCancelamento;
+  private cancela                 = false; 
+  private idModal                 = "idCancelaUsuario"
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -178,13 +183,29 @@ export class UsuarioComponent implements OnInit {
 
 
   /**
-   * @description: fecha tela de inclusão e volta para a tela de browser.
+   * @description: Aciona modal para confirmar cancelamento
    * */
+  private botaoCancelaClicado(){
+    this.cancela = !this.cancela;
+  }
+
+
+  /**
+   * @description: Fecha modal e Volta para a tela do browser
+   */
   private fechaTela(){
-   
-    if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
-      this.router.navigateByUrl("browser-usuario");
-    }
+
+    this.fechaModalCancelar();
+    this.router.navigateByUrl("browser-usuario");
+  }
+  
+
+  /**
+   * @description: Fecha modal de cancelamento
+   */
+  private fechaModalCancelar(){
+
+    $( '#'+this.idModal ).modal('hide');
   }
 
   

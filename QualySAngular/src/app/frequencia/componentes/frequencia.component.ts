@@ -6,6 +6,8 @@ import { Subscription           } from 'rxjs';
 import { Frequencia              } from './../model/frequencia';
 import { FrequenciaService       } from './../model/frequencia.service';
 import { msgCamposNaoPreenchidos } from 'src/app/global/funcoes/mensagensPadroes';
+import { msgConfirmaCancelamento } from 'src/app/global/funcoes/mensagensPadroes';
+
 
 @Component({
   selector: 'app-frequencia',
@@ -26,14 +28,16 @@ export class FrequenciaComponent implements OnInit {
   private camposObrigatorios      = false;
   private mensagemAviso           = null;
   private errosApi                = null;
-
+  // Variaveis usadas no modal de cancelamento
+  private mensagemCancelamento    = msgConfirmaCancelamento;
+  private cancela                 = false; 
+  private idModal                 = "idCancelaFrequencia"
+  
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
   constructor( private router:Router , 
                private frequenciaService:FrequenciaService,
                private route: ActivatedRoute ) {
-      
-      // this.frequencia = new Frequencia();
   }
   
 
@@ -41,20 +45,21 @@ export class FrequenciaComponent implements OnInit {
     
       //Recupera o conteudo dos parametros e inicializa campos.
       //Também resgata a instancia da inscrição.
-      this.inscricao = this.route.queryParams.subscribe(
-                          (queryParams: any) => {
+      this.inscricao.add( this.route.queryParams.subscribe(
+                            (queryParams: any) => {
 
-                            // this.frequencia.id        = queryParams['id'];
-                            // this.frequencia.descricao = queryParams['descricao'];
-                            this.getFrequencia().setId( queryParams['id'] );
-                            this.getFrequencia().setDescricao( queryParams['descricao'] );
-                          }
-                       );
+                              // this.frequencia.id        = queryParams['id'];
+                              // this.frequencia.descricao = queryParams['descricao'];
+                              this.getFrequencia().setId( queryParams['id'] );
+                              this.getFrequencia().setDescricao( queryParams['descricao'] );
+                            }
+                        )
+      );
   }
 
   
   /**
-   * Destruo a inscrição ao finalizar
+   * Destruo as incrições ao finalizar
    */
   ngOnDestroy(){
 
@@ -94,18 +99,17 @@ export class FrequenciaComponent implements OnInit {
    */
   private salvaFrequencia(){
    
-    this.frequenciaService.salvaFrequencia(this.frequencia)
-                          .subscribe( 
-                                        result =>{ 
-                                                    alert("deu certo salvamento");
-                                                    this.frequencia = new Frequencia();
-                                                 },
-                                        erros => { 
-                                                    this.setErrosApi(erros);
-                                                 }
-                                     );
-
-    
+    this.inscricao.add( this.frequenciaService.salvaFrequencia(this.frequencia)
+                            .subscribe( 
+                                          result =>{ 
+                                                      alert("deu certo salvamento");
+                                                      this.frequencia = new Frequencia();
+                                                  },
+                                          erros => { 
+                                                      this.setErrosApi(erros);
+                                                  }
+                                      )
+    );    
   }
 
 
@@ -114,39 +118,53 @@ export class FrequenciaComponent implements OnInit {
   */
   private atualizaFrequencia(){
 
-    this.frequenciaService.atualizaFrequencia(this.getFrequencia())
-                          .subscribe( 
-                                        result =>{ 
-                                                    alert("deu certo salvamento");
-                                                 },
-                                                    erros => { 
-                                                    this.setErrosApi(erros);
-                                                 }
-                                     );
-    // this.fechaTela();
+    /*this.inscricao.add( */this.frequenciaService.atualizaFrequencia(this.getFrequencia())
+                                .subscribe( 
+                                            result =>{ 
+                                                        alert("deu certo salvamento");
+                                                    },
+                                                        erros => { 
+                                                        this.setErrosApi(erros);
+                                                    }
+                                          )
+    /*);*/
+    console.log(this.inscricao)
+    this.fechaTela();
   }
 
 
   /**
-   * @description: fecha tela de inclusão e volta para a tela de browser.
+   * @description: Aciona modal para confirmar cancelamento
    * */
-  private fechaTela(){
-   
-    if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
-      this.router.navigateByUrl("browser-frequencia");
-    }
+  private botaoCancelaClicado(){
+    this.cancela = !this.cancela;
   }
 
 
   /**
-   *@description  Valida se campos estão vazios.
-   *@returns true caso algum campo esteja vazio, false caso contrário.
+   * @description: Fecha modal e Volta para a tela do browser
+   */
+  private fechaTela(){
+
+    this.fechaModalCancelar();
+    this.router.navigateByUrl("browser-frequencia");
+  }
+  
+
+  /**
+   * @description: Fecha modal de cancelamento
+   */
+  private fechaModalCancelar(){
+
+    $( '#'+this.idModal ).modal('hide');
+  }
+
+
+  /**
+   * @description  Valida se campos estão vazios.
+   * @returns true caso algum campo esteja vazio, false caso contrário.
    */
   private isEmpty(){
-
-    // return this.frequencia.descricao == undefined || 
-    //        this.frequencia.descricao.trim() ==''  || 
-    //        this.frequencia.descricao == null      ? true : false;
 
     return this.getFrequencia().getDescricao() == undefined || 
            this.getFrequencia().getDescricao().trim() ==''  || 
@@ -159,7 +177,7 @@ export class FrequenciaComponent implements OnInit {
    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
    * @param error error ocasionado na aplicação. 
    */
-  setErrosApi(error){
+  private setErrosApi(error){
 
     this.mensagemAviso = null;
     this.errosApi = error + " /countErros: " + FrequenciaComponent.countErros++  ;
@@ -171,7 +189,8 @@ export class FrequenciaComponent implements OnInit {
    * @description função seta conteudo da variavel mensagemAviso, ela faz uso da varivel estática [ ela incrementa a countErros]
    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
    */
-  setMensagemAviso(){
+  private setMensagemAviso(){
+
     this.errosApi = null;
     this.mensagemAviso = msgCamposNaoPreenchidos + " message: " + FrequenciaComponent.countErros++;
     console.log(this.mensagemAviso);

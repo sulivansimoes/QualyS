@@ -68,7 +68,7 @@
                         <td class="align-components-browser-center"> 
                             <input type="button" 
                                    class="buttonExclui" 
-                                   (click)="excluiUsuario(usuario)" 
+                                   (click)="confirmaExclusao(usuario.cpf)" 
                             > 
                         </td>                                                                                                            
                 </tr>
@@ -95,6 +95,18 @@
         <div *ngIf="errosApi">
             <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
         </div>
-        
-    </div>     
+    </div>    
+    
+    <!-- MENSAGEM DE CONFIRMAÇÃO DE EXCLUSÃO DE REGISTRO -->
+    <tela-dois-botoes
+            [idModal]="idModal"
+            [tituloModal]="'Aviso'"
+            [mensagemModal]="mensagemExclui"
+            [nomeBotao01]="'Não'"
+            [nomeBotao02]="'Sim'"
+            [controleChamada]="exclui"
+            (botao01Clicado)="cancelaExclusao()"
+            (botao02Clicado)="excluiUsuario()"
+    >
+    </tela-dois-botoes>    
 </div>

@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 // COMPONENTES PERSONALIZADOS
 import { Inconforme             } from '../model/inconforme';
 import { InconformeService      } from './../model/inconforme.service';
+import { msgConfirmaCancelamento } from 'src/app/global/funcoes/mensagensPadroes';
 
 @Component({
   selector: 'app-inconforme',
@@ -21,7 +22,10 @@ export class InconformeComponent implements OnInit {
   private inscricao = new Subscription;
   private errosApi  = null;
   private edita     = null; //flag de alteração.
-  
+  // Variaveis usadas no modal de cancelamento
+  private mensagemCancelamento    = msgConfirmaCancelamento;
+  private cancela                 = false; 
+  private idModal                 = "idCancelainconforme"  
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
   constructor(private router:Router,
@@ -87,17 +91,33 @@ export class InconformeComponent implements OnInit {
 
 
   /**
-   * @description: fecha tela de inconforme e volta para a tela de browser.
+   * @description: Aciona modal para confirmar cancelamento
    * */
-  fechaTela(){
-   
-    if(window.confirm("As informações não foram salvas, deseja realmente cancelar?")){
-      this.router.navigateByUrl("browser-inconforme");
-    }
-  }  
+  private botaoCancelaClicado(){
+    this.cancela = !this.cancela;
+  }
 
 
- /**
+  /**
+   * @description: Fecha modal e Volta para a tela do browser
+   */
+  private fechaTela(){
+
+    this.fechaModalCancelar();
+    this.router.navigateByUrl("browser-inconforme");
+  }
+  
+
+  /**
+   * @description: Fecha modal de cancelamento
+   */
+  private fechaModalCancelar(){
+
+    $( '#'+this.idModal ).modal('hide');
+  }
+
+
+  /**
    * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
    * @param error error ocasionado na aplicação. 

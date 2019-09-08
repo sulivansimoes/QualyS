@@ -39,9 +39,22 @@
 
         <!-- BOTÕES P/ SALVAR OU CANCELAR CADASTRO -->
         <app-botoes-salvar-fechar (botaoSalvarClicado)=salva($event) 
-                                  (botaoFecharClicado)=fechaTela($event)>
+                                  (botaoFecharClicado)=botaoCancelaClicado($event)>
         </app-botoes-salvar-fechar>
     </form>
+
+    <!-- MODAL QUANDO O BOTÃO CANCELAR É CLICADO -->
+    <tela-dois-botoes
+                [idModal]="idModal"
+                [tituloModal]="'Aviso'"
+                [mensagemModal]="mensagemCancelamento"
+                [nomeBotao01]="'Não'"
+                [nomeBotao02]="'Sim'"
+                [controleChamada]="cancela"
+                (botao01Clicado)="fechaModalCancelar()"
+                (botao02Clicado)="fechaTela()"
+    >
+    </tela-dois-botoes>
 
     <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
     <div *ngIf="errosApi">

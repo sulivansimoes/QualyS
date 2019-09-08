@@ -71,7 +71,7 @@
                     <td class="align-components-browser-center"> 
                         <input type="button" 
                                class="buttonExclui" 
-                               (click)="excluiFormulario(formulario.id)"
+                               (click)="confirmaExclusao(formulario.id)"
                         > 
                     </td>
                 </tr>
@@ -99,5 +99,18 @@
             <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
         </div>         
     </div>
+
+    <!-- MENSAGEM DE CONFIRMAÇÃO DE EXCLUSÃO DE REGISTRO -->
+    <tela-dois-botoes
+            [idModal]="idModal"
+            [tituloModal]="'Aviso'"
+            [mensagemModal]="mensagemExclui"
+            [nomeBotao01]="'Não'"
+            [nomeBotao02]="'Sim'"
+            [controleChamada]="exclui"
+            (botao01Clicado)="cancelaExclusao()"
+            (botao02Clicado)="excluiFormulario()"
+    >
+    </tela-dois-botoes>
 
 </div>

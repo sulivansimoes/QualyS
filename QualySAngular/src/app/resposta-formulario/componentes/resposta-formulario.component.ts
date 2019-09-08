@@ -7,7 +7,7 @@ import { RespostaFormulario } from '../model/resposta-formulario';
 import { ItemFormulario     } from 'src/app/cadastro-formulario/model/item-formulario';
 import { RespostaFormularioService } from './../model/resposta-formulario.service';
 import { CadastroFormularioService } from './../../cadastro-formulario/model/cadastro-formulario.service';
-
+import { msgConfirmaCancelamento   } from 'src/app/global/funcoes/mensagensPadroes';
 
 @Component({
   selector: 'app-resposta-formulario',
@@ -26,8 +26,11 @@ export class RespostaFormularioComponent implements OnInit {
   private respostaFormulario:RespostaFormulario = null;
   private nomeFormulario:String = "";
   private mensagemInconfome = null;
-  private subTitulo         = null;
-  private chamaInconforme   = false;
+  private subTitulo       = null;
+  private chamaInconforme = false;
+  private cancelaRespota  = false;
+  private mensagemCancelamento  = msgConfirmaCancelamento;
+  private idModal         = "idMsgCancelaResposta";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
  
@@ -89,12 +92,29 @@ export class RespostaFormularioComponent implements OnInit {
 
 
   /**
-   * @description: Fecha a tela do formulário e volta para tela inicial. 
+   * @description: Fecha a tela da resposta do formulário e volta para tela inicial. 
    */
   private fechaTela(){
+    this.fechaModalCancelar();
     this.router.navigateByUrl("/");
   }
 
+  
+  /**
+   * @description: Fecha o modal de cancelamento
+   */
+  private fechaModalCancelar(){
+    
+    $( '#'+this.idModal ).modal('hide');
+  }
+
+
+  /**
+   * @description aciona o modal para confirmar o cancelamento
+   */
+  private confirmaCancelamento(){
+    this.cancelaRespota = !this.cancelaRespota;
+  }
 
   /**
    * @description: Popula formulario com suas respectivas pergutas, o qual o usuario deverá responde-lo.
@@ -193,7 +213,7 @@ export class RespostaFormularioComponent implements OnInit {
   /**
    * @description: Fecha tela (modal) de não conformidade
    */
-  fechaTelaInconformidade(){
+  private fechaTelaInconformidade(){
 
     $('#modalTelaBox').modal('hide');
   }
@@ -218,7 +238,7 @@ export class RespostaFormularioComponent implements OnInit {
    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
    * @param error error ocasionado na aplicação. 
    */
-  setErrosApi(error){
+  private setErrosApi(error){
 
     this.errosApi = error + " /countErros: " + RespostaFormularioComponent.countErros++  ;
     console.log(this.errosApi);

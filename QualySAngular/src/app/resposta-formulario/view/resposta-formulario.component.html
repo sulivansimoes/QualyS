@@ -122,8 +122,9 @@
     
     <!--  BOTOES -->
     <app-botoes-salvar-fechar 
-                            (botaoSalvarClicado)=salvaRespostaFormulario($event)
-                            (botaoFecharClicado)=fechaTela($event)>
+                (botaoSalvarClicado)=salvaRespostaFormulario($event)
+                (botaoFecharClicado)=confirmaCancelamento($event)
+    >
     </app-botoes-salvar-fechar>
 
 </form>
@@ -140,6 +141,19 @@
     >
     </tela-box>
 </div>
+
+<!-- MODAL QUANDO O BOTÃO CANCELAR É CLICADO -->
+<tela-dois-botoes
+        [idModal]="idModal"
+        [tituloModal]="'Aviso'"
+        [mensagemModal]="mensagemCancelamento"
+        [nomeBotao01]="'Não'"
+        [nomeBotao02]="'Sim'"
+        [controleChamada]="cancelaRespota"
+        (botao01Clicado)="fechaModalCancelar()"
+        (botao02Clicado)="fechaTela()"
+>
+</tela-dois-botoes>
 
 <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
 <div *ngIf="errosApi">

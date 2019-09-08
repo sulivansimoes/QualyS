@@ -14,7 +14,7 @@ import { ProgramaService    } from './../../programa/model/programa.service';
 import { LocalService       } from './../../local/model/local.service';
 import { CadastroFormularioService } from './../model/cadastro-formulario.service';
 import { msgCamposNaoPreenchidos   } from 'src/app/global/funcoes/mensagensPadroes';
-
+import { msgConfirmaCancelamento   } from 'src/app/global/funcoes/mensagensPadroes';
 
 @Component({
   selector: 'app-cadastro-formulario',
@@ -55,6 +55,10 @@ export class CadastroFormularioComponent implements OnInit {
   private resultadoApi  = null;
   private errosApi      = null;
   private mensagemAviso = null;
+  // Variaveis usadas no modal de cancelamento
+  private mensagemCancelamento    = msgConfirmaCancelamento;
+  private cancela                 = false; 
+  private idModal                 = "idCancelaFormulario"
   private camposObrigatorios             = false;
   private formulario: CadastroFormulario = null;
 
@@ -552,14 +556,31 @@ export class CadastroFormularioComponent implements OnInit {
 
 
   /**
-   * @description: fecha tela de inclusão e volta para a tela de browser.
+   * @description: Aciona modal para confirmar cancelamento
+   * */
+  private botaoCancelaClicado(){
+    this.cancela = !this.cancela;
+  }
+
+
+  /**
+   * @description: Fecha modal e Volta para a tela do browser
    */
   private fechaTela(){
-   
-    if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
-      this.router.navigateByUrl("browser-cadastro-formulario");
-    }
+
+    this.fechaModalCancelar();
+    this.router.navigateByUrl("browser-cadastro-formulario");
   }
+  
+
+  /**
+   * @description: Fecha modal de cancelamento
+   */
+  private fechaModalCancelar(){
+
+    $( '#'+this.idModal ).modal('hide');
+  }
+
 
 
   /**

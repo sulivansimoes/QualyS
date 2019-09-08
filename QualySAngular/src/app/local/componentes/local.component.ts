@@ -6,6 +6,7 @@ import { Subscription           } from 'rxjs';
 import { Local                   } from './../Model/local';
 import { LocalService            } from './../model/local.service';
 import { msgCamposNaoPreenchidos } from 'src/app/global/funcoes/mensagensPadroes';
+import { msgConfirmaCancelamento } from 'src/app/global/funcoes/mensagensPadroes';
 
 @Component({
   selector: 'app-local',
@@ -25,6 +26,10 @@ export class LocalComponent implements OnInit {
   private camposObrigatorios = false;
   private mensagemAviso      = null;
   private errosApi           = null;
+  // Variaveis usadas no modal de cancelamento
+  private mensagemCancelamento    = msgConfirmaCancelamento;
+  private cancela                 = false; 
+  private idModal                 = "idCancelaLocal"  
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -123,14 +128,30 @@ export class LocalComponent implements OnInit {
   }  
 
   
-/**
-  * @description: fecha tela de inclusão e volta para a tela de browser.
-  */
+  /**
+   * @description: Aciona modal para confirmar cancelamento
+   */
+  private botaoCancelaClicado(){
+    this.cancela = !this.cancela;
+  }
+
+
+  /**
+   * @description: Fecha modal e Volta para a tela do browser
+   */
   private fechaTela(){
-   
-    if(window.confirm("Se fechar as informações serão perdidas, deseja realmente fechar ? ")){
-      this.router.navigateByUrl("browser-local");
-    }
+
+    this.fechaModalCancelar();
+    this.router.navigateByUrl("browser-local");
+  }
+  
+
+  /**
+   * @description: Fecha modal de cancelamento
+   */
+  private fechaModalCancelar(){
+
+    $( '#'+this.idModal ).modal('hide');
   }
 
 

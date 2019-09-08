@@ -2,8 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription      } from 'rxjs';
 //COMPONENTES PERSONALIZADOS
-import { Programa          } from './../model/programa';
-import { ProgramaService   } from './../model/programa.service';
+import { Programa            } from './../model/programa';
+import { ProgramaService     } from './../model/programa.service';
+import { msgConfirmaExclusao } from 'src/app/global/funcoes/mensagensPadroes';
 
 @Component({
   selector: 'app-browser-programa',
@@ -21,17 +22,22 @@ export class BrowserProgramaComponent implements OnInit {
   private errosApi      = null;
   private paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
   private programas:Programa[] = []; 
+  private idPrograma      = null;  // captura id da frequencia que será excluida.
   private pesquisa:String = "";
+  private exclui          = false;
+  private mensagemExclui  = msgConfirmaExclusao;
+  private idModal         = "idMsgExcluiPrograma";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere  
 
   constructor(private programaService : ProgramaService) { 
-
-    this.getAll();
   }
+  
+  
+  ngOnInit() {
 
-
-  ngOnInit() { }
+    this.getAll();  
+  }
 
 
   /**
@@ -85,14 +91,40 @@ export class BrowserProgramaComponent implements OnInit {
     }
   }
 
+ /**
+   * @description: Apresenta o modal para usuário confirmar a exclusão.
+   */
+  confirmaExclusao(idPrograma:Number){
+    
+    this.exclui = !this.exclui;
+    this.idPrograma = idPrograma;
+    console.log("Id programa = " + idPrograma);
+  }
+
+
+  /**
+   * @description Cancela a exclusão
+   */
+  cancelaExclusao(){
+
+    this.fechaModalExclusao();
+  } 
+
+
+  /**
+   *@description Fecha modal de  exclusão 
+   */
+  fechaModalExclusao(){
+    $( '#'+this.idModal ).modal('hide');
+  }
+
 
   /**
    * @description: Se inscreve no serviço que envia solicitação para API excluir programa na base de dados.
-   * @param programa, programa à ser salvo na base de dados.
    */
-  excluiPrograma(programa : Programa){
+  excluiPrograma(){
 
-    this.inscricao = this.programaService.deletaPrograma(programa).subscribe(
+    this.inscricao = this.programaService.deletaPrograma(this.idPrograma).subscribe(
 
       result => {
                   this.getAll();
@@ -101,6 +133,8 @@ export class BrowserProgramaComponent implements OnInit {
                   this.setErrosApi(error);
                }
     ); 
+    
+    this.fechaModalExclusao();
   }
 
 

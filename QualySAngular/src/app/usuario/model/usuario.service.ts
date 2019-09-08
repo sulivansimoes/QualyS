@@ -55,12 +55,12 @@ export class UsuarioService {
 
   /**
     * @description envia solicitação para API deletar usuario da base de dados.
-    * @param usuario objeto da usuario que deve ser deletada
+    * @param cpfUsuario cpf do usuario que deve ser deletada
     * @returns Observable
     */
-  deletaUsuario(usuario : Usuario) {
+  deletaUsuario(cpfUsuario : String) {
 
-      return this.http.delete<Usuario>( this.usuarioApi + "/" + usuario.cpf )
+      return this.http.delete<Usuario>( this.usuarioApi + "/" + cpfUsuario )
                       .pipe(
                               catchError(
                                           this.errorHandler

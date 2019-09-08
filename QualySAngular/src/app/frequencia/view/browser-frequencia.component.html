@@ -45,26 +45,27 @@
             </thead>
             <tbody>
                 <tr *ngFor="let frequencia of frequencias | paginate: {itemsPerPage:10, currentPage: paginaAtual }; let i = index;">
+
                     <td> {{ frequencia.id        }} </td>
                     <td> {{ frequencia.descricao }} </td>
+                    <!-- BOTÃO EDITAR -->
+                    <td class="align-components-browser-center"> 
+                        <input type="button" 
+                            class="buttonEditar" 
+                            routerLink="frequencia/" 
+                            [queryParams]="{
+                                              id:frequencia.id, 
+                                              descricao:frequencia.descricao
+                                            }"
+                        > 
+                    </td>      
                     <!-- BOTÃO EXCLUIR -->
                     <td class="align-components-browser-center"> 
                             <input type="button" 
-                                   class="buttonEditar" 
-                                   routerLink="frequencia/" 
-                                   [queryParams]="{
-                                                    id:frequencia.id, 
-                                                    descricao:frequencia.descricao
-                                                   }"
-                            > 
-                    </td>      
-                    <!-- BOTÃO EDITAR -->
-                    <td class="align-components-browser-center"> 
-                            <input type="button" 
                                    class="buttonExclui" 
-                                   (click)="excluiFrequencia(frequencia.id)"
+                                   (click)="confirmaExclusao(frequencia.id)"
                             > 
-                    </td>
+                    </td>   
                 </tr>
             </tbody>            
         </table>
@@ -89,6 +90,19 @@
         <div *ngIf="errosApi">
             <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
         </div> 
-    </div>
+    </div> 
+
+    <!-- MENSAGEM DE CONFIRMAÇÃO DE EXCLUSÃO DE REGISTRO -->
+    <tela-dois-botoes
+            [idModal]="idModal"
+            [tituloModal]="'Aviso'"
+            [mensagemModal]="mensagemExclui"
+            [nomeBotao01]="'Não'"
+            [nomeBotao02]="'Sim'"
+            [controleChamada]="exclui"
+            (botao01Clicado)="cancelaExclusao()"
+            (botao02Clicado)="excluiFrequencia()"
+     >
+     </tela-dois-botoes>
 
 </div>

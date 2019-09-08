@@ -4,6 +4,7 @@ import { Subscription      } from 'rxjs';
 //COMPONENTES PERSONALIZADOS
 import { Frequencia        } from './../model/frequencia';
 import { FrequenciaService } from './../model/frequencia.service';
+import { msgConfirmaExclusao  } from 'src/app/global/funcoes/mensagensPadroes';
 
 @Component({
   selector: 'app-browser-frequencia',
@@ -21,17 +22,22 @@ export class BrowserFrequenciaComponent implements OnInit {
   private errosApi      = null;
   private paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
   private frequencias:Frequencia[] = []; 
+  private idFrequencia    = null;  // captura id da frequencia que será excluida.
   private pesquisa:String = "";
+  private exclui          = false;
+  private mensagemExclui  = msgConfirmaExclusao;
+  private idModal         = "idMsgExcluiFrequencia";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
-  constructor(private frequenciaService : FrequenciaService) {
-
-     this.getAll() ;
+  constructor(private frequenciaService : FrequenciaService) {     
   }
 
 
-  ngOnInit() { }
+  ngOnInit() {
+
+    this.getAll();
+  }
 
 
   /**
@@ -87,12 +93,39 @@ export class BrowserFrequenciaComponent implements OnInit {
 
 
   /**
+   * @description: Apresenta o modal para usuário confirmar a exclusão.
+   */
+  confirmaExclusao(idFrequencia:Number){
+    
+    this.exclui = !this.exclui;
+    this.idFrequencia = idFrequencia;
+    console.log("Id frequencia = " + idFrequencia);
+  }
+
+
+  /**
+   * @description Cancela a exclusão
+   */
+  cancelaExclusao(){
+
+    this.fechaModalExclusao();
+  } 
+
+  /**
+   *@description Fecha modal de  exclusão 
+   */
+  fechaModalExclusao(){
+    $( '#'+this.idModal ).modal('hide');
+  }
+
+
+  /**
    * @description: Se inscreve no serviço que envia solicitação para API excluir frequência na base de dados.
    * @param idFrequencia, id da frequencia à ser salva na base de dados.
    */
-  excluiFrequencia(idFrequencia : Frequencia){
-
-    this.inscricao = this.frequenciaService.deletaFrequencia(idFrequencia).subscribe(
+  excluiFrequencia(){
+    
+    this.inscricao = this.frequenciaService.deletaFrequencia(this.idFrequencia).subscribe(
 
       result => {
                   this.getAll();
@@ -101,6 +134,8 @@ export class BrowserFrequenciaComponent implements OnInit {
                   this.setErrosApi(error);
                }
     );
+
+    this.fechaModalExclusao();
   }
 
 
@@ -114,4 +149,6 @@ export class BrowserFrequenciaComponent implements OnInit {
     this.errosApi = error + " /countErros: " + BrowserFrequenciaComponent.countErros++  ;
     console.log(this.errosApi);
   }
+
+
 }

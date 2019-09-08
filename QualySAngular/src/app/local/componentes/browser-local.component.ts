@@ -4,6 +4,7 @@ import { Subscription      } from 'rxjs';
 //COMPONENTES PERSONALIZADOS
 import { Local             } from './../model/local';
 import { LocalService      } from './../model/local.service';
+import { msgConfirmaExclusao } from 'src/app/global/funcoes/mensagensPadroes';
 
 
 @Component({
@@ -22,7 +23,11 @@ export class BrowserLocalComponent implements OnInit {
   private errosApi      = null;
   private paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
   private locais:Local [] = []; 
+  private idLocal         = null;  // captura id do local que será excluido.
   private pesquisa:String = "";
+  private exclui          = false;
+  private mensagemExclui  = msgConfirmaExclusao;
+  private idModal         = "idMsgExcluiLocal";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere  
   
@@ -85,14 +90,42 @@ export class BrowserLocalComponent implements OnInit {
     }
   }
 
+  
+  /**
+   * @description: Apresenta o modal para usuário confirmar a exclusão.
+   */
+  confirmaExclusao(idLocal:Number){
+    
+    this.exclui = !this.exclui;
+    this.idLocal = idLocal;
+    console.log("Id Local = " + idLocal);
+  }
+
+
+  /**
+   * @description Cancela a exclusão
+   */
+  cancelaExclusao(){
+
+    this.fechaModalExclusao();
+  } 
+
+
+  /**
+   *@description Fecha modal de  exclusão 
+   */
+  fechaModalExclusao(){
+    $( '#'+this.idModal ).modal('hide');
+  }
+
 
   /**
    * @description: Se inscreve no serviço que envia solicitação para API excluir local na base de dados.
    * @param idLocal, id do local à ser exluida na base de dados.
    */
-  excluiLocal(idLocal : number){
+  excluiLocal(){
 
-    this.inscricao = this.localservice.deletaLocal(idLocal).subscribe(
+    this.inscricao = this.localservice.deletaLocal(this.idLocal).subscribe(
 
       result => {
                   this.getAll();
@@ -101,6 +134,8 @@ export class BrowserLocalComponent implements OnInit {
                   this.setErrosApi(error);
                }
     );    
+
+    this.fechaModalExclusao();
   }
 
 

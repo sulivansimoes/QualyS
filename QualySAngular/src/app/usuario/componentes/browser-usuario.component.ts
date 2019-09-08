@@ -4,7 +4,7 @@ import { Subscription      } from 'rxjs';
 //COMPONENTES PERSONALIZADOS
 import { Usuario           } from './../model/usuario';
 import { UsuarioService    } from './../model/usuario.service';
-
+import { msgConfirmaExclusao  } from 'src/app/global/funcoes/mensagensPadroes';
 
 @Component({
   selector: 'app-browser-usuario',
@@ -17,12 +17,16 @@ import { UsuarioService    } from './../model/usuario.service';
 })
 export class BrowserUsuarioComponent implements OnInit {
 
-  public inscricao     = new Subscription;
-  public resultadoApi  = null;
-  public errosApi      = null;
-  public paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
-  public usuarios:Usuario[] = []; 
-  public pesquisa:String = "";
+  private inscricao     = new Subscription;
+  private resultadoApi  = null;
+  private errosApi      = null;
+  private paginaAtual   = 1;     // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
+  private cpfUsuario    = null;  // captura id da frequencia que será excluida.
+  private usuarios:Usuario[] = []; 
+  private pesquisa:String = "";
+  private exclui          = false;
+  private mensagemExclui  = msgConfirmaExclusao;
+  private idModal         = "idMsgExcluiFrequencia";
 
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere
 
@@ -88,12 +92,41 @@ export class BrowserUsuarioComponent implements OnInit {
 
 
   /**
+   * @description: Apresenta o modal para usuário confirmar a exclusão.
+   * @param {String} cpfUsuario cpf do usário que deverá ser excluido
+   */
+  confirmaExclusao(cpfUsuario:String){
+    
+    this.exclui = !this.exclui;
+    this.cpfUsuario = cpfUsuario;
+    console.log("Cpf usuário = " + cpfUsuario);
+  }
+
+
+  /**
+   * @description Cancela a exclusão
+   */
+  cancelaExclusao(){
+
+    this.fechaModalExclusao();
+  } 
+
+
+  /**
+   *@description Fecha modal de  exclusão 
+   */
+  fechaModalExclusao(){
+    $( '#'+this.idModal ).modal('hide');
+  }
+
+
+  /**
    * @description: Se inscreve no serviço que envia solicitação para API excluir usuario na base de dados.
    * @param usuario, usuarios à ser salva na base de dados.
    */
-  excluiUsuario(usuario : Usuario){
+  excluiUsuario(){
 
-    this.inscricao = this.usuarioService.deletaUsuario(usuario).subscribe(
+    this.inscricao = this.usuarioService.deletaUsuario(this.cpfUsuario).subscribe(
 
       result => {
                   this.getAll();
@@ -102,6 +135,7 @@ export class BrowserUsuarioComponent implements OnInit {
                   this.setErrosApi(error);
                }
     );
+    this.fechaModalExclusao();
   } 
   
   

@@ -1,0 +1,24 @@
+<div class="modal fade" id="{{idModal}}" tabindex="-1" role="dialog" aria-labelledby="modalTeladoisBotoes"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTeladoisBotoes"> {{ tituloModal }} </h5>
+                <!-- Botão X do canto direito do modal -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <div *ngIf="mensagemModal">
+                    {{ mensagemModal }}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"   (click)="botao01Clicado.emit()">{{nomeBotao01}}</button>
+                <button type="button" class="btn btn-secondary" (click)="botao02Clicado.emit()">{{nomeBotao02}}</button>
+            </div>
+        </div>
+    </div>
+</div>

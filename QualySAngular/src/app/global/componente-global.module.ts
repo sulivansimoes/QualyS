@@ -15,6 +15,7 @@ import { TelaBoxComponent            } from './componentes/tela-box.component';
 import { AjudaMenuPrincipalComponent } from './componentes/ajuda/ajuda-menu-principal.component';
 import { AjudaInconformeComponent    } from './componentes/ajuda/ajuda-inconforme.component';
 import { AjudaCadastroLocalComponent } from './componentes/ajuda/ajuda-cadastro-local.component';
+import { TelaDoisBotoesComponent     } from './componentes/tela-dois-botoes.component';
 import { AjudaCadastroFrequenciaComponent } from './componentes/ajuda/ajuda-cadastro-frequencia.component';
 import { AjudaCadastroUsuarioComponent    } from './componentes/ajuda/ajuda-cadastro-usuario.component';
 import { AjudaCadastroProgramaComponent   } from './componentes/ajuda/ajuda-cadastro-programa.component';
@@ -34,6 +35,7 @@ const appRoutes = rotas
     TelaMensagemComponent,
     TelaAjudaComponent,
     TelaBoxComponent,
+    TelaDoisBotoesComponent,
     AjudaMenuPrincipalComponent,
     AjudaCadastroLocalComponent,
     AjudaCadastroFrequenciaComponent,
@@ -55,6 +57,7 @@ const appRoutes = rotas
     TelaConsultaPadraoComponent,
     TelaMensagemComponent,
     TelaBoxComponent,
+    TelaDoisBotoesComponent,
     PageNotFoundComponent,
     AjudaMenuPrincipalComponent,
     AjudaCadastroLocalComponent,
