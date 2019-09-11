@@ -23,18 +23,18 @@ export class AjudaInconformeComponent implements OnInit {
 
   constructor() {
     
-    this.textoDefinicao += "Nesta rotina são apresentadas todas as inconformidades geradas, de acordo com as repostas dos formulários " +
+    this.textoDefinicao += "Nesta rotina são apresentadas todas as inconformidades geradas no sistema, de acordo com as repostas dos formulários " +
                            " respondidas pelos responsáveis das vistorias"; 
 
-    this.textoAdicional += "Para apontar a correção de uma inconformidade, localize a mesma e clique no botão de 'Prancheta' da mesma. "+
+    this.textoAdicional += "Para apontar a correção de uma inconformidade, localize a mesma e clique no botão de 'Prancheta' dela. "+
                            "Caso o apontamento seja feito de forma errada a mesma pode ser estornada clicando no botão de 'X'  da mesma. ";
                            
     this.textoImportante01 += "Uma inconformidade não pode ser excluída devido ter sido originada de uma vistoria. Caso a mesma for originada "+
                               "indevidamente deverá ser feito o apontamento da correção da mesma colocando o motivo no campo 'Ação corretiva'."; 
 
     
-    this.campos.push(["Formulário","Código do formulário que originou a inconformidade."]);
-    this.campos.push(["Descrição Formulário","Descrição do formulário."]);
+    this.campos.push(["Formulário","Código do formulário que originou a inconformidade. ( este campo já vem preenchido )"]);
+    this.campos.push(["Descrição Formulário","Descrição do formulário. ( este campo já vem preenchido )"]);
     this.campos.push(["Emissão Inconformidade", "Data em que inconformidade foi originada ( este campo já vem preenchido )"]);
     this.campos.push(["Hora Inconformidade"   , "Hora em que inconformidade foi originada ( este campo já vem preenchido )"]);
     this.campos.push(["Item"    , "Item ( pergunta ) do formulário  que foi originado a inconformidade ( este campo já vem preenchido )"]);

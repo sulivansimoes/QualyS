@@ -95,6 +95,11 @@ h1{
     left: calc(50% - 50px);    
 }
 
+.alerta-login-invalido{
+    text-align: center;
+    font-weight: bold;
+}
+
 
 /* Efeito degrade da página  */
 .fundo-degrade{

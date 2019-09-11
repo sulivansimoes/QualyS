@@ -9,6 +9,7 @@ import { msgCamposNaoPreenchidos } from 'src/app/global/funcoes/mensagensPadroes
 import { msgConfirmaCancelamento } from 'src/app/global/funcoes/mensagensPadroes';
 // COMPONENTES DE TERCEIROS
 import * as fileUpload from 'fuctbase64';
+import * as validarCpf from 'validar-cpf';
 
 @Component({
   selector: 'app-usuario',
@@ -115,6 +116,11 @@ export class UsuarioComponent implements OnInit {
       this.camposObrigatorios = false;
     }
 
+    if(  ! validarCpf( this.usuario.cpf ) ){
+      this.setMensagemAviso("CPF inválido");
+      return;
+    }
+
     //-----------------------------------------------------
     // Validando senha 
     //-----------------------------------------------------
@@ -147,7 +153,7 @@ export class UsuarioComponent implements OnInit {
 
 
   /**
-   * Resumo: Salva novo usuario.
+   * @description: Envia solicitação para o service salvar usuário
    */
   private salvaUsuario(){
 
@@ -156,6 +162,7 @@ export class UsuarioComponent implements OnInit {
                                     result =>{ 
                                                 alert("deu certo salvamento");
                                                 this.usuario = new Usuario();
+                                                this.senhaNoModoEditar = "";
                                               },
                                     erros => { 
                                                 this.setErrosApi(erros);
@@ -250,7 +257,7 @@ export class UsuarioComponent implements OnInit {
   setMensagemAviso(mensagem:String){
 
     this.errosApi = null;
-    this.mensagemAviso = mensagem + " message: " + UsuarioComponent.countErros++;
+    this.mensagemAviso = mensagem + " /message: " + UsuarioComponent.countErros++;
     console.log(this.mensagemAviso);
   }   
 }

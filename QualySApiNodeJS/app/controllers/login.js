@@ -3,6 +3,7 @@ const validator_interno  = require("./../libs/validators");
 const { msg_status_3_A } = require("./../libs/mensagens_padroes");
 const { msg_status_3_B } = require("./../libs/mensagens_padroes");
 const jwt                = require('jsonwebtoken');
+const crypto             = require("crypto");
 
 // carrega arquivos .env & .env.exemple que estão na raiz do projeto.
 require("dotenv-safe").config();
@@ -44,7 +45,11 @@ function login(application, request, response){
         return; 
     }
 
-    //Criptografo a senha oriunda da requisição antes de validar
+    
+    // Criptografo a senha oriunda da requisição antes de validar
+    dados.senha = crypto.createHash('MD5')
+                        .update(dados.senha)
+                        .digest('hex');
 
     //Instanciando model do usuario
     modelUsuario = new application.app.models.usuarioDAO();   

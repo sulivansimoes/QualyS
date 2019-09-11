@@ -25,8 +25,9 @@ export class AjudaRespostaFormularioComponent implements OnInit {
 
     this.textoDefinicao += "O usuário deverá responder o formulário de acordo com a vistoria feita.";
       
-    this.campos.push(["Data Emissão", "Data em que a vistoria foi feita."]);
-    this.campos.push(["Hora Emissão", "Hora em que a vistoria foi feita."]);
+    this.campos.push(["Data Emissão", "Data em que a vistoria foi feita. (preenchido automaticamente)"]);
+    this.campos.push(["Hora Emissão", "Hora em que a vistoria foi feita. (preenchido automaticamente)"]);
+    this.campos.push(["Responsável", "Usuário que está realizando a vistoria. (preenchido automaticamente)"]);
     this.campos.push(["Conforme / Não Conforme", "Deverá ser respondido se a situação da vistoria referente a pergunta está em conformidade ou não."]);
     this.campos.push(["Inconformidade", "Caso a pergunta seja marcada como 'Não conforme' será apresentado uma tela para descrever a inconformidade."]);
 

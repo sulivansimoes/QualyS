@@ -11,7 +11,7 @@ import { Input, Output, EventEmitter } from '@angular/core';
  * @Input  {String} ( nomeBotao02 )   - String contendo o nome do botão que o desenvolvedor irá implementar
  * @Input  {Boolean} ( controleChamada ) - Boolean Variavel de controle para chamar a tela (modal), basta ficar negando a mesma para que o modal seja chamado, conteudo default é false.
  * @Output {EventEmitter<any>} ( botao01Clicado ) - Recebe um evento (Função) que será acionado quando clicar no botão que o desenvolvedor implementou. 
- * @Output {EventEmitter<any>} ( botao01Clicado ) - Recebe um evento (Função) que será acionado quando clicar no botão que o desenvolvedor implementou. 
+ * @Output {EventEmitter<any>} ( botao02Clicado ) - Recebe um evento (Função) que será acionado quando clicar no botão que o desenvolvedor implementou. 
  */
 @Component({  
   selector: 'tela-dois-botoes',

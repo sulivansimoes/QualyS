@@ -1,7 +1,7 @@
 // COMPONENTES PADRÕES
 import { Component, OnInit  } from '@angular/core';
 import { Subscription       } from 'rxjs';
-import { ActivatedRoute, Router     } from '@angular/router';
+import { ActivatedRoute, Router    } from '@angular/router';
 // COMPONENTES PERSONALIZADOS
 import { RespostaFormulario } from '../model/resposta-formulario';
 import { ItemFormulario     } from 'src/app/cadastro-formulario/model/item-formulario';

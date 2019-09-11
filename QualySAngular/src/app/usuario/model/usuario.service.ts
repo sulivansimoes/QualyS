@@ -17,8 +17,26 @@ const httpOption = {
 export class UsuarioService {
 
   private usuarioApi : string = host+port+"/api/usuario"
+  private loginApi : string = host+port+"/api/login"
 
   constructor(private http : HttpClient) { }
+
+
+  /**
+   * @description Submete os dados do usuário para o login. 
+   * @param cpf cpf do usuário que está tentando efetuar o login
+   * @param senha senha do usuário que está tentando efetuar o login
+   */
+  login(cpf:String, senha:String) : Observable<Usuario>{
+
+    return this.http.post<Usuario>(this.loginApi, {cpf, senha} , httpOption)
+                      .pipe(
+                              catchError(
+                                          this.errorHandler
+                                        )
+                            ); 
+  }
+
 
  
   /**
