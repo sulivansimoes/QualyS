@@ -96,8 +96,7 @@ export class BrowserInconformeComponent implements OnInit {
 
     this.inscricao = this.inconformeService.estornaAcaoCorretiva(inconforme)
                                            .subscribe( 
-                                                        result =>{ 
-                                                                    alert("deu certo estorno");
+                                                        result =>{                                                                     
                                                                     this.getAll();
                                                                   },
                                                         erros => { 

@@ -49,7 +49,7 @@ class RespostaFormularioDAO{
                                    + " VALUES(                    " 
                                    + "         $1               , "    //[01]-id_cadastro_formulario                      
                                    + "         $2               , "    //[02]-item_cadastro_formulario
-                                   + "         UPPER( TRIM($3) ), "    //[03]-pergunta_respondida
+                                   + "         TRIM($3)         , "    //[03]-pergunta_respondida
                                    + "         $4               , "    //[04]-emissao
                                    + "         $5               , "    //[05]-hora
                                    + "         $6               , "    //[06]-cpf_usuario [usuario que respondeu o formulario]
@@ -136,6 +136,46 @@ class RespostaFormularioDAO{
             }    
             
         })().catch(e => console.error(e));                                                 
+    }
+
+
+    /**
+     * @description : Localiza as vistorias realizadas dentro de um periodo e de um formulario especifico.
+     * @param response, objeto de response da requisição.
+     * @obs   o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
+     */    
+    getVistoriasRealizadas( response ){
+
+        let cSql = " SELECT r.id_cadastro_formulario       ,"
+                 + "        r.item_cadastro_formulario     ," 
+                 + "        c.descricao AS nome_formulario ,"
+                 + "        r.pergunta_respondida          ," 
+                 + "        r.emissao                      ," 
+                 + "        r.hora                         ," 
+                 + "        u.nome AS colaborador          ,"
+                 + "        r.conforme                     ,"
+                 + "        l.descricao AS local           ,"
+                 + "        f.descricao AS frequencia      ,"
+                 + "        p.oficio                       ,"
+                 + "        p.data_revisao                 ,"
+                 + "        p.data_vigencia                ,"
+                 + "        p.versao                        "
+                 + " FROM RESPOSTA_FORMULARIO 		 AS r   "
+                 + " INNER JOIN cabecalho_formulario AS c ON c.id = r.id_cadastro_formulario "
+                 + " INNER JOIN item_formulario		 AS i ON id_cabecalho = id_cadastro_formulario AND item = item_cadastro_formulario "
+                 + " INNER JOIN programas 			 AS p ON p.id = c.id_programa   "
+                 + " INNER JOIN local			     AS l ON l.id = c.id_local      "
+                 + " INNER JOIN frequencia 			 AS f ON f.id = c.id_frequencia "
+                 + " INNER JOIN usuario 		  	 AS u ON r.cpf_usuario = u.cpf  "
+                //  + " WHERE r.id_cadastro_formulario =  $1 "
+                //  + "   AND r.emissao BETWEEN '2019-07-01' AND '2019-09-02' "
+                 + " ORDER BY r.emissao, r.hora, r.item_cadastro_formulario ";
+
+        let aValues =  [
+                        //  17
+                       ];
+
+        topConnection.executaQuery(cSql, [], response, msg_status_1_D, msg_status_2_D);
     }
 
 }

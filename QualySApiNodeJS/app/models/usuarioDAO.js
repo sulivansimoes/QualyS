@@ -9,40 +9,94 @@ class usuarioDAO{
 
     /**
      * @constructor
+     * @param {*} connection, instancia de uma conexão do PostgreSQL. 
      */
-    constructor(){
-                 
+    constructor(connection){
+     
+        this._connection = connection;
     }
 
 
     /**
      * @description : Salva novo usuario no banco de dados.
-     * @param programa, objeto contendo informações do novo usuario que deverá ser salvo.
+     * @param usuario, objeto contendo informações do novo usuario que deverá ser salvo.
      * @param response, objeto de response da requisição.
      * @obs   o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */
     salvaUsuario(usuario, response){
 
-        let cSql    = "INSERT INTO usuario(cpf, nome, email, senha, assinatura, bloqueado) "
-                    + " VALUES(                    " 
-                    + "         TRIM($1)         , "   //[01]-cpf                          
-                    + "         TRIM($2)         , "   //[02]-nome
-                    + "         LOWER( TRIM($3) ), "   //[03]-email
-                    + "         TRIM($4)         , "   //[04]-senha
-                    + "         TRIM($5)         , "   //[05]-assinatura (diretório contendo imagem)
-                    + "         $6                 "   //[06]-bloqueado
-                    + "        )                   "
+        let idImagem = null;
 
-        let aValues = [ 
-                        usuario.cpf         ,   //[01]
-                        usuario.nome        ,   //[02]
-                        usuario.email       ,   //[03]
-                        usuario.senha       ,   //[04]
-                        usuario.assinatura  ,   //[05]
-                        usuario.bloqueado   ,   //[06]
-                      ];
+        (async () => {
 
-        topConnection.executaQuery(cSql, aValues, response, msg_status_1_A, msg_status_2_A);
+            this._connection = await this._connection.openPoolConnection();
+
+            try {
+
+                    //Inicia toda transação
+                    await this._connection.query('BEGIN');    
+
+                    //----------------------------------------------------------------
+                    // Query para  salvar imagem no banco de dados
+                    //----------------------------------------------------------------
+                    let cSqlImagem    = " INSERT INTO imagem( imgbase64 ) "
+                                      + " VALUES ( TRIM($1) ) "
+                                      + " RETURNING id  ";
+
+                    let aValuesImagem = [ usuario.assinatura ];
+
+                    //Salva imagem e recupera id                                    
+                    idImagem = await this._connection.query(cSqlImagem, aValuesImagem);                                  
+                    idImagem = idImagem.rows[0].id;
+
+                    //----------------------------------------------------------------
+                    // Query para  salvar usuario no banco de dados
+                    //----------------------------------------------------------------
+                    let cSqlUsuario  = "INSERT INTO usuario(cpf, nome, email, senha, id_imagem_assinatura, bloqueado) "
+                                     + " VALUES(                    " 
+                                     + "         TRIM($1)         , "   //[01]-cpf                          
+                                     + "         TRIM($2)         , "   //[02]-nome
+                                     + "         LOWER( TRIM($3) ), "   //[03]-email
+                                     + "         TRIM($4)         , "   //[04]-senha
+                                     + "         $5               , "   //[05]-assinatura código da imagem
+                                     + "         $6                 "   //[06]-bloqueado
+                                     + "        )                   "
+                                                         
+                    let aValuesUsuario = [ 
+                                            usuario.cpf         ,   //[01]
+                                            usuario.nome        ,   //[02]
+                                            usuario.email       ,   //[03]
+                                            usuario.senha       ,   //[04]
+                                            idImagem            ,   //[05] 
+                                            usuario.bloqueado   ,   //[06]
+                                         ];
+                
+                    //Salva o usuário
+                    await this._connection.query(cSqlUsuario, aValuesUsuario);                                  
+
+                    //finaliza transação com Banco
+                    await this._connection.query('COMMIT');
+
+                    //Se der tudo certo
+                    response.status(200).json({ 
+                        status:1, 
+                        mensagem:msg_status_1_A 
+                    });
+
+            } catch (erros) {
+                        
+                await this._connection.query('ROLLBACK');
+                
+                response.status(500).json({ 
+                    status:2, 
+                    mensagem:msg_status_2_A + erros 
+                });
+                
+            } finally {
+                
+                this._connection.end();
+            } 
+        })().catch(e => console.error(e));
     }
 
 
@@ -89,10 +143,60 @@ class usuarioDAO{
      */
     deletaUsuario(cpf, response){
 
-        let cSql    = "DELETE FROM usuario WHERE cpf = TRIM($1)";
-        let aValues = [ cpf ];
+        let idImagem = null;
+
+        (async () => {
+
+            this._connection = await this._connection.openPoolConnection();
+
+            try {
+
+                    //Inicia toda transação
+                    await this._connection.query('BEGIN');    
+
+                    //----------------------------------------------------------------
+                    // Query para  deletar usuario no banco de dados
+                    //----------------------------------------------------------------        
+                    let cSqlUsuario    = "DELETE FROM usuario WHERE cpf = TRIM($1)"
+                                       + " RETURNING id_imagem_assinatura  ";
+                    let aValuesUsuario = [ cpf ];
         
-        topConnection.executaQuery(cSql, aValues, response, msg_status_1_B, msg_status_2_B);      
+                    idImagem = await this._connection.query(cSqlUsuario, aValuesUsuario);                                  
+                    idImagem = idImagem.rows[0].id_imagem_assinatura;                                  
+
+                    
+                    //----------------------------------------------------------------  
+                    // Query para  deletar usuario no banco de dados
+                    //----------------------------------------------------------------                      
+                    let cSqlImagem    = "DELETE FROM imagem WHERE id = $1";
+                    let aValuesImagem = [ idImagem ];
+
+                    //deleta imagem do banco
+                    await this._connection.query(cSqlImagem, aValuesImagem);  
+
+                    //finaliza transação com Banco
+                    await this._connection.query('COMMIT');
+
+                    //Se der tudo certo
+                    response.status(200).json({ 
+                        status:1, 
+                        mensagem:msg_status_1_A 
+                    });
+
+            } catch (erros) {
+                        
+                await this._connection.query('ROLLBACK');
+                
+                response.status(500).json({ 
+                    status:2, 
+                    mensagem:msg_status_2_A + erros 
+                });
+                
+            } finally {
+                
+                this._connection.end();
+            } 
+        })().catch(e => console.error(e));
     }
 
 
@@ -106,7 +210,7 @@ class usuarioDAO{
         let cSql    =  "SELECT cpf, "
                     +  "       nome," 
                     +  "       email,"
-                    +  "       assinatura,"
+                    // +  "       assinatura,"
                     +  "       bloqueado "
                     +  " FROM usuario "
                     +  " ORDER BY nome "
@@ -136,6 +240,7 @@ class usuarioDAO{
 
         topConnection.executaQuery(cSql, aValues,  response, msg_status_1_D, msg_status_2_D);      
     }       
+
 
     /**
      * @description Consulta o usuário no banco de dados pelo cpf e senha.

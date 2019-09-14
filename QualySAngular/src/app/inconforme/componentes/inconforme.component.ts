@@ -81,7 +81,7 @@ export class InconformeComponent implements OnInit {
     this.inscricao = this.inconformeService.corrigeInconforme(this.getInconforme())
                                            .subscribe( 
                                                         result =>{ 
-                                                                    alert("deu certo correção");
+                                                                    this.fechaTela();
                                                                   },
                                                         erros => { 
                                                                     this.setErrosApi(erros);

@@ -133,8 +133,9 @@ export class UsuarioComponent implements OnInit {
     //-----------------------------------------------------
     // Adicionando arquivo de imagem no objeto de Usuário 
     //----------------------------------------------------- 
-    this.usuario.setAssinatura(this.imagemAssinatura.__zone_symbol__value.base64);
-    console.log(this.usuario.assinatura);
+    //erro tá dando por conta do tamanho da string
+    this.usuario.setAssinatura( this.imagemAssinatura.__zone_symbol__value.base64 );
+    console.log( this.usuario.assinatura );
 
     if(this.edita){
 
@@ -156,7 +157,7 @@ export class UsuarioComponent implements OnInit {
    * @description: Envia solicitação para o service salvar usuário
    */
   private salvaUsuario(){
-
+console.log(this.usuario)
     this.usuarioService.salvaUsuario(this.usuario)
                        .subscribe( 
                                     result =>{ 

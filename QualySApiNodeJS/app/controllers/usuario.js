@@ -1,6 +1,5 @@
 //Bibliotecas
 const crypto            = require("crypto");
-const base64ToImage     = require("base64-to-image");
 const validator_interno = require("../libs/validators");
 const {msg_status_3_A}  = require("../libs/mensagens_padroes");
 
@@ -16,11 +15,10 @@ function salvaUsuario(application, request, response){
 
     let dados       = request.body;
     let modelUsuario= null;
+    let connection  = null;
     let erros_aux   = null;
     let erros       = [];
     
-    // console.log(dados);
-
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
@@ -41,21 +39,9 @@ function salvaUsuario(application, request, response){
         return; 
     }
 
-    //-----------------------------------------------------
-    // Desencriptando imagem da assinatura que veio 
-    // em base64 e salvando no diretório.
-    //-----------------------------------------------------
-    // var base64Str = "data:image/png;base64,"+"iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAACFSURBVChTY/z56/d/BiDY2JAAohi+swmB6bj6SWAaBpigNEHAxPL7KwMIh3obg/G/N3fBGB0QbSILExc/mHF53WIwLehUD6bRAdEmMu45ew3s66WnPoAFTNQFwLSUtCaYDlADUySYePvBI7CJl3/JgAUuHD0ApnWNrcF0iOY/ME2kiQwMAOHcJyk5DlsSAAAAAElFTkSuQmCC";
-    let base64Str   = "data:image/png;base64,"+dados.assinatura;
-    let path        = "./app/imagens_assinaturas/";
-    let optionalObj = {'fileName': dados.cpf, 'type':'png'};
+    //Formata para base64
+    dados.assinatura = "data:image/png;base64,"+dados.assinatura
     
-    base64ToImage(base64Str,path,optionalObj);
-    
-    // console.log(dados.assinatura);
-    dados.assinatura = './imagens_assinaturas';
-    
-
     //-----------------------------------------------------
     // Criptografando senha.
     //-----------------------------------------------------
@@ -63,8 +49,12 @@ function salvaUsuario(application, request, response){
                         .update(dados.senha)
                         .digest('hex');
 
-    modelUsuario = new application.app.models.usuarioDAO();   //Instanciando model do usuario
-    modelUsuario.salvaUsuario(dados, response);               //Enviando usuario para o model para ser salva.
+    
+    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
+    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada                        
+
+    modelUsuario = new application.app.models.usuarioDAO( connection );   //Instanciando model do usuario
+    modelUsuario.salvaUsuario(dados, response);                           //Enviando usuario para o model para ser salva.
     
 };
 
@@ -136,7 +126,8 @@ function deletaUsuario(application, request, response){
 
     let cpf        = request.params.cpf;
     let modelLocal = null;
-    let erros       = [];
+    let connection = null;
+    let erros      = [];
     
     //-----------------------------------------------------
     // Validando informações 
@@ -158,7 +149,10 @@ function deletaUsuario(application, request, response){
         return; 
     }
 
-    modelLocal = new application.app.models.usuarioDAO();   //Instanciando model do usuario
+    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
+    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada    
+
+    modelLocal = new application.app.models.usuarioDAO( connection );   //Instanciando model do usuario
     modelLocal.deletaUsuario(cpf, response);                //Enviando usuario para o model para ser salva.
     
 };

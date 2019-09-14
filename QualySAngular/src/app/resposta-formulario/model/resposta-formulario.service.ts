@@ -37,6 +37,22 @@ export class RespostaFormularioService {
   }
 
 
+ /**
+  * @description envia solicitação para API recuperar as vistorias realizadas na base de dados.
+  * @returns Observable 
+  */
+ getVistoriasRealizadas() : Observable<RespostaFormulario[]> {
+ 
+  return this.http.get<RespostaFormulario[]>(this.respostaFormularioApi + "/vistorias-realizadas")
+                  .pipe(
+                          catchError(
+                                      this.errorHandler
+                                    )
+                        ); 
+ }
+
+
+
  
   
  /**

@@ -83,7 +83,7 @@ class FormularioDAO{
                                         formulario.itens[item].item_bloqueado   //[04]
                                        ];
                     
-                    //salva intens
+                    //salva itens
                     await this._connection.query(cSql_itens, aItensValues);
                 }
 

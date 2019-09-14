@@ -1,22 +1,22 @@
 //Bibliotecas
 const express    =  require("express");
 const bodyParser =  require("body-parser");
-const multiParty =  require("connect-multiparty");
 const consign    =  require("consign");
+const compression = require("compression");
 
 //Executando objeto do express
 var app = express();
 
 //Configurações dos middlewares da aplicação
+app.use(compression() );                                //Comprime todas as respostas em gzip / aumenta desempenho da aplicação
 app.use(bodyParser.urlencoded( {extended :true} ) );
 app.use(bodyParser.json() );
-app.use(multiParty()      );        //para receber arquivos
 
 //Configuração de requisições
 app.use(function(req, res, next){
     res.setHeader("Access-Control-Allow-Origin"       ,"*");                        //Autorizando os métodos da API responderem para qualquer ORIGEM.
     res.setHeader("Access-Control-Allow-Methods"      ,"GET, POST, PUT, DELETE");   //Pré conifigura quais os métodos que a ORIGEM pode requisitar.
-    res.setHeader("Access-Control-Allow-Headers"      ,"content-type");             //Habilita que as requisições feitas pela ORIGEM tenham cabeçalhos reescritos.
+    res.setHeader("Access-Control-Allow-Headers"      ,"Content-Type");             //Habilita que as requisições feitas pela ORIGEM tenham cabeçalhos reescritos.
     res.setHeader("Access-Control-Allow-Credentials"  ,true);      
     next();
 });

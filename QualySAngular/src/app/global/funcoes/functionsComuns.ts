@@ -15,4 +15,21 @@ export function parseObjectsToArray( objeto:any ){
 }
 
 
+/**
+ * @description Formata data para o formato dd/mm/aaaa
+ * @param {String} date data a ser formatada no formato dd/mm/aaaa
+ * @returns String  dataFormatada
+ */
+export function formataData (date:String){
+
+
+    let dia = date.substr(8,2);
+    let mes = date.substr(5,2);
+    let ano = date.substr(0,4);
+    var dataFormatada = dia+"/"+mes+"/"+ano;
+
+    return dataFormatada;
+}
+
+
     
