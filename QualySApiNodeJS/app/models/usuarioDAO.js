@@ -162,7 +162,7 @@ class usuarioDAO{
                                               idImagem 
                                             ];
 
-                        //Altera imagem e recupera id                                    
+                        //Altera imagem                                     
                         await this._connection.query(cSqlImagem, aValuesImagem);                                  
                     }                    
 
@@ -227,7 +227,7 @@ class usuarioDAO{
 
                     
                     //----------------------------------------------------------------  
-                    // Query para  deletar usuario no banco de dados
+                    // Query para  deletar imagem de assinatura do banco de dados
                     //----------------------------------------------------------------                      
                     let cSqlImagem    = "DELETE FROM imagem WHERE id = $1";
                     let aValuesImagem = [ idImagem ];
@@ -257,7 +257,10 @@ class usuarioDAO{
                 
                 this._connection.end();
             } 
-        })().catch(e => console.error(e));
+        })().catch(e => response.status(500).json({ 
+            status:2, 
+            mensagem:msg_status_2_B + e 
+        }));
     }
 
 
