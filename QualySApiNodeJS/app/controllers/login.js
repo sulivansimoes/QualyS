@@ -81,7 +81,9 @@ function login(application, request, response){
                                       });
         }
 
-    })().catch(e => console.error(e));
+    })().catch(e => response.status(500).json({
+        mensagem: e
+    }));
 
 }
 

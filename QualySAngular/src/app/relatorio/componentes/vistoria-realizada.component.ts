@@ -116,7 +116,7 @@ export class VistoriaRealizadaComponent implements OnInit {
       this.imprimeCabecalho(documento, vistorias_aux[index][0]);
       this.imprimeCabecalhoItens(documento);
       this.imprimeItens(documento, vistorias_aux[index]);
-      this.imprimeRodape(documento);
+      this.imprimeRodape(documento, vistorias_aux[index][0]);
 
       if(Number.parseInt(index+1) < vistorias_aux.length){
         documento.addPage();
@@ -264,11 +264,9 @@ export class VistoriaRealizadaComponent implements OnInit {
    * @description Imprime o rodapé do relatório
    * @param documento, intancia do pdf a qual será trabalhada.
    */
-  imprimeRodape(documento) {
+  imprimeRodape(documento, vistoria) {
 
-    let imagemAss = this.getImagem();
-
-    documento.addImage(imagemAss, 'JPEG', 12, 266, 85, 18);
+    documento.addImage(vistoria.imgbase64, 'JPEG', 12, 266, 85, 18);
 
     documento.line(10, 285, 100, 285, 'S');
     documento.text("Assinatura colaborador ", 30, 292);

@@ -70,9 +70,8 @@ function atualizaUsuario(application, request, response){
     let dados       = request.body;
     let modelUsuario= null;
     let erros_aux   = null;
+    let connection  = null;
     let erros       = [];
-
-    // console.log(request);
 
     //-----------------------------------------------------
     // Validando informações 
@@ -94,13 +93,6 @@ function atualizaUsuario(application, request, response){
         return; 
     }
         
-    /**
-     * @todo
-     * teste temporario com assinatura na atualizacao
-     */
-    dados.assinatura = "c:/"
-
-    
     //-----------------------------------------------------
     // Criptografando senha.
     //----------------------------------------------------
@@ -110,7 +102,10 @@ function atualizaUsuario(application, request, response){
                             .digest('hex');
     }
 
-    modelUsuario = new application.app.models.usuarioDAO();   //Instanciando model do usuario
+    connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
+    connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada  
+
+    modelUsuario = new application.app.models.usuarioDAO(connection);     //Instanciando model do usuario
     modelUsuario.atualizaUsuario(dados, response);                        //Enviando usuario para o model para ser salva.
     
 };

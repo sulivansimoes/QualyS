@@ -131,11 +131,13 @@ class RespostaFormularioDAO{
                 
             } finally {
                 
-                console.log("fechou conexão");
                 this._connection.end();
             }    
             
-        })().catch(e => console.error(e));                                                 
+        })().catch(e =>  response.status(500).json({ 
+            status:2, 
+            mensagem:msg_status_2_A + e 
+        }));                                                 
     }
 
 
@@ -159,7 +161,8 @@ class RespostaFormularioDAO{
                  + "        p.oficio                       ,"
                  + "        p.data_revisao                 ,"
                  + "        p.data_vigencia                ,"
-                 + "        p.versao                        "
+                 + "        p.versao                       ,"
+                 + "        img.imgbase64                   "
                  + " FROM RESPOSTA_FORMULARIO 		 AS r   "
                  + " INNER JOIN cabecalho_formulario AS c ON c.id = r.id_cadastro_formulario "
                  + " INNER JOIN item_formulario		 AS i ON id_cabecalho = id_cadastro_formulario AND item = item_cadastro_formulario "
@@ -167,6 +170,7 @@ class RespostaFormularioDAO{
                  + " INNER JOIN local			     AS l ON l.id = c.id_local      "
                  + " INNER JOIN frequencia 			 AS f ON f.id = c.id_frequencia "
                  + " INNER JOIN usuario 		  	 AS u ON r.cpf_usuario = u.cpf  "
+                 + " INNER JOIN imagem               as img ON u.id_imagem_assinatura = img.id "
                 //  + " WHERE r.id_cadastro_formulario =  $1 "
                 //  + "   AND r.emissao BETWEEN '2019-07-01' AND '2019-09-02' "
                  + " ORDER BY r.emissao, r.hora, r.item_cadastro_formulario ";

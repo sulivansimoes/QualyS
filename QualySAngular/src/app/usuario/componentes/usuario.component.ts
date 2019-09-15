@@ -99,11 +99,9 @@ export class UsuarioComponent implements OnInit {
    *              é atualização ou salvamento de um novo registro e chama a função responsável pela ação.
    */
   private salva(){
-
-    let  imagemAssinatura:FormData;
     
     //-----------------------------------------------------
-    // Validando campos vazios 
+    // Validando campos  
     //-----------------------------------------------------
     if( this.isEmpty() ){
 
@@ -117,7 +115,7 @@ export class UsuarioComponent implements OnInit {
     }
 
     if(  ! validarCpf( this.usuario.cpf ) ){
-      this.setMensagemAviso("CPF inválido");
+      this.setMensagemAviso("CPF inválido!");
       return;
     }
 
@@ -134,7 +132,9 @@ export class UsuarioComponent implements OnInit {
     // Adicionando arquivo de imagem no objeto de Usuário 
     //----------------------------------------------------- 
     //erro tá dando por conta do tamanho da string
-    this.usuario.setAssinatura( this.imagemAssinatura.__zone_symbol__value.base64 );
+    if( this.imagemAssinatura ){
+      this.usuario.setAssinatura( this.imagemAssinatura.__zone_symbol__value.base64 );
+    }
     console.log( this.usuario.assinatura );
 
     if(this.edita){
@@ -157,11 +157,11 @@ export class UsuarioComponent implements OnInit {
    * @description: Envia solicitação para o service salvar usuário
    */
   private salvaUsuario(){
-console.log(this.usuario)
+    console.log(this.usuario)
     this.usuarioService.salvaUsuario(this.usuario)
                        .subscribe( 
                                     result =>{ 
-                                                alert("deu certo salvamento");
+                                                // alert("deu certo salvamento");
                                                 this.usuario = new Usuario();
                                                 this.senhaNoModoEditar = "";
                                               },
@@ -242,7 +242,7 @@ console.log(this.usuario)
    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
    * @param error error ocasionado na aplicação. 
    */
-  setErrosApi(error){
+  private setErrosApi(error){
 
     this.mensagemAviso = null;
     this.errosApi = error + " /countErros: " + UsuarioComponent.countErros++  ;
@@ -255,7 +255,7 @@ console.log(this.usuario)
    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
    * @param {String} mensagem mensagem de aviso que deverá ser apresentada
    */
-  setMensagemAviso(mensagem:String){
+  private setMensagemAviso(mensagem:String){
 
     this.errosApi = null;
     this.mensagemAviso = mensagem + " /message: " + UsuarioComponent.countErros++;

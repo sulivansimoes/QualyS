@@ -48,7 +48,7 @@ export class RespostaFormularioComponent implements OnInit {
      * @todo
      * esse trecho é provisório até implementar o LOGIN corretamente.
      */
-    this.getRespostaFormulario().setCpfUsuario("42687294618");
+    this.getRespostaFormulario().setCpfUsuario("63090174030");
     
     //Recupera o conteudo dos parametros e inicializa campos.
     //Também resgata a instancia da inscrição.

@@ -96,7 +96,10 @@ class usuarioDAO{
                 
                 this._connection.end();
             } 
-        })().catch(e => console.error(e));
+        })().catch(e => response.status(500).json({ 
+            status:2, 
+            mensagem:msg_status_2_A + e 
+        }));
     }
 
 
@@ -108,30 +111,88 @@ class usuarioDAO{
      */
     atualizaUsuario(usuario, response){
        
-        let cSql    = "UPDATE usuario SET "
-                    + " nome       = TRIM($1)         , "   //[01]-nome                              
-                    + " email      = LOWER( TRIM($2) ), "   //[02]-email                      
-                    + " assinatura = TRIM($3)         , "   //[03]-assinatura (diretório contendo imagem)       
-                    + " bloqueado  = $4                 "   //[04]-bloqueado
-                    if(usuario.senha){   
-                        cSql += ", senha  = TRIM($6)          "   //[06]-senha        
-                    }      
-                    cSql += " WHERE cpf  = TRIM($5)           "   //[05]-cpf
+        let idImagem = null;
+
+        (async () => {
+
+            this._connection = await this._connection.openPoolConnection();
+
+            try {
+
+                    //Inicia toda transação
+                    await this._connection.query('BEGIN');    
+
+                    //----------------------------------------------------------------
+                    // Query para  alterar usuario no banco de dados
+                    //----------------------------------------------------------------
+                    let cSqlUsuario = "UPDATE usuario SET "
+                                    + " nome       = TRIM($1)         , "                //[01]-nome                              
+                                    + " email      = LOWER( TRIM($2) ), "                //[02]-email                      
+                                    + " bloqueado  = $3                 "                //[03]-bloqueado
+                        cSqlUsuario += (usuario.senha) ? ", senha  = TRIM($5) " : "";    //[05]-senha     
+                        cSqlUsuario += " WHERE cpf  = TRIM($4)           "               //[04]-cpf
+                        cSqlUsuario += " RETURNING id_imagem_assinatura  ";
+
+                    let aValuesUsuario = [ 
+                                            usuario.nome        ,   //[01]
+                                            usuario.email       ,   //[02]                        
+                                            usuario.bloqueado   ,   //[03]
+                                            usuario.cpf         ,   //[04]
+                                         ];
                     
+                    if(usuario.senha){
+                        aValuesUsuario.push(usuario.senha);                //[05]
+                    } 
+                
+                    //Altera o usuário e pega o id da Imagem
+                    idImagem = await this._connection.query(cSqlUsuario, aValuesUsuario);     
+                    idImagem = idImagem.rows[0].id_imagem_assinatura;
 
-        let aValues = [ 
-                        usuario.nome        ,   //[01]
-                        usuario.email       ,   //[02]                        
-                        usuario.assinatura  ,   //[03]
-                        usuario.bloqueado   ,   //[04]
-                        usuario.cpf         ,   //[05]
-                      ];
+                    if(usuario.assinatura){
 
-        if(usuario.senha){
-            aValues.push(usuario.senha)             //[06])
-        }              
+                        //----------------------------------------------------------------
+                        // Query para  alterar imagem no banco de dados
+                        //----------------------------------------------------------------
+                        let cSqlImagem = " UPDATE imagem SET "
+                                       + " imgbase64 = TRIM($1) "
+                                       + " WHERE id = $2 ";
 
-        topConnection.executaQuery(cSql, aValues, response, msg_status_1_C, msg_status_2_C);
+                        let aValuesImagem = [
+                                              usuario.assinatura, 
+                                              idImagem 
+                                            ];
+
+                        //Altera imagem e recupera id                                    
+                        await this._connection.query(cSqlImagem, aValuesImagem);                                  
+                    }                    
+
+                    //finaliza transação com Banco
+                    await this._connection.query('COMMIT');
+
+                    //Se der tudo certo
+                    response.status(200).json({ 
+                        status:1, 
+                        mensagem:msg_status_1_C
+                    });
+
+            } catch (erros) {
+                        
+                await this._connection.query('ROLLBACK');
+                
+                response.status(500).json({ 
+                    status:2, 
+                    mensagem:msg_status_2_C + erros 
+                });
+                
+            } finally {
+                
+                this._connection.end();
+            } 
+        })().catch(e => response.status(500).json({ 
+            status:2, 
+            mensagem:msg_status_2_C + e 
+        }));
+
     }
     
 
@@ -180,7 +241,7 @@ class usuarioDAO{
                     //Se der tudo certo
                     response.status(200).json({ 
                         status:1, 
-                        mensagem:msg_status_1_A 
+                        mensagem:msg_status_1_B 
                     });
 
             } catch (erros) {
@@ -189,7 +250,7 @@ class usuarioDAO{
                 
                 response.status(500).json({ 
                     status:2, 
-                    mensagem:msg_status_2_A + erros 
+                    mensagem:msg_status_2_B + erros 
                 });
                 
             } finally {
@@ -210,7 +271,6 @@ class usuarioDAO{
         let cSql    =  "SELECT cpf, "
                     +  "       nome," 
                     +  "       email,"
-                    // +  "       assinatura,"
                     +  "       bloqueado "
                     +  " FROM usuario "
                     +  " ORDER BY nome "
@@ -230,7 +290,6 @@ class usuarioDAO{
         let cSql    =  "SELECT cpf, "
                     +  "       nome," 
                     +  "       email,"
-                    +  "       assinatura,"
                     +  "       bloqueado "
                     +  " FROM usuario "
                     +  " WHERE nome LIKE ('%' || $1 || '%')"
@@ -246,6 +305,7 @@ class usuarioDAO{
      * @description Consulta o usuário no banco de dados pelo cpf e senha.
      * @param {String  } cpf, cpf do usuário
      * @param {String  } senha, senha do usuário
+     * @returns  usuário cadastrado no banco de dados.
      */
     async findUserForLogin(cpf , senha){
 
