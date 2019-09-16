@@ -1,8 +1,6 @@
 //Bibliotecas
 const topConnection                    = require("./processosPG");
 const {msg_status_1_A, msg_status_2_A} = require("../libs/mensagens_padroes"); 
-const {msg_status_1_B, msg_status_2_B} = require("../libs/mensagens_padroes"); 
-const {msg_status_1_C, msg_status_2_C} = require("../libs/mensagens_padroes"); 
 const {msg_status_1_D, msg_status_2_D} = require("../libs/mensagens_padroes"); 
 
 class RespostaFormularioDAO{
@@ -143,10 +141,13 @@ class RespostaFormularioDAO{
 
     /**
      * @description : Localiza as vistorias realizadas dentro de um periodo e de um formulario especifico.
+     * @param daEmissao data de emissao da vistoria inicial que a consulta deverá considerar
+     * @param ateEmissao data de emissao da vistoria final que a consulta deverá considerar 
+     * @param formulario código do formulario que a consulta deverá considerar.
      * @param response, objeto de response da requisição.
      * @obs   o response vem para o model em vez de ser tratado no controller por conta da forma assíncrona que o nodeJS trabalha.
      */    
-    getVistoriasRealizadas( response ){
+    getVistoriasRealizadas(daEmissao, ateEmissao, formulario, response){
 
         let cSql = " SELECT r.id_cadastro_formulario       ,"
                  + "        r.item_cadastro_formulario     ," 
@@ -163,23 +164,25 @@ class RespostaFormularioDAO{
                  + "        p.data_vigencia                ,"
                  + "        p.versao                       ,"
                  + "        img.imgbase64                   "
-                 + " FROM RESPOSTA_FORMULARIO 		 AS r   "
+                 + " FROM resposta_formulario  		 AS r   "
                  + " INNER JOIN cabecalho_formulario AS c ON c.id = r.id_cadastro_formulario "
                  + " INNER JOIN item_formulario		 AS i ON id_cabecalho = id_cadastro_formulario AND item = item_cadastro_formulario "
                  + " INNER JOIN programas 			 AS p ON p.id = c.id_programa   "
                  + " INNER JOIN local			     AS l ON l.id = c.id_local      "
                  + " INNER JOIN frequencia 			 AS f ON f.id = c.id_frequencia "
                  + " INNER JOIN usuario 		  	 AS u ON r.cpf_usuario = u.cpf  "
-                 + " INNER JOIN imagem               as img ON u.id_imagem_assinatura = img.id "
-                //  + " WHERE r.id_cadastro_formulario =  $1 "
-                //  + "   AND r.emissao BETWEEN '2019-07-01' AND '2019-09-02' "
+                 + " INNER JOIN imagem               AS img ON u.id_imagem_assinatura = img.id "
+                 + " WHERE r.id_cadastro_formulario =  $1 "
+                 + "   AND r.emissao BETWEEN $2 AND $3 "
                  + " ORDER BY r.emissao, r.hora, r.item_cadastro_formulario ";
 
         let aValues =  [
-                        //  17
+                         formulario,
+                         daEmissao,
+                         ateEmissao
                        ];
 
-        topConnection.executaQuery(cSql, [], response, msg_status_1_D, msg_status_2_D);
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_D, msg_status_2_D);
     }
 
 }

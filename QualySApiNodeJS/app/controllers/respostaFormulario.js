@@ -78,33 +78,39 @@ function salvaRespostaFormulario(application, request, response){
  */
 function getVistoriasRealizadas(application, request, response){
   
-    let dados                     = request.body;
+    let daEmissao                 = request.params.daEmissao;
+    let ateEmissao                = request.params.ateEmissao;
+    let formulario                = request.params.formulario;
     let modelRespostasFormulario  = null;
     let erros_aux                 = null;
     let erros                     = [];
-    
+
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
-    // erros_aux = validator_interno.isObjectEmpty(dados);
-    // if( erros_aux ){
+    erros_aux = validator_interno.isObjectEmpty({
+                                                    daEmissao:daEmissao, 
+                                                    ateEmissao:ateEmissao, 
+                                                    formulario:formulario
+                                                });
+    if( erros_aux ){
 
-    //     erros.push(erros_aux);
-    //     erros_aux = null;
-    // }
+        erros.push(erros_aux);
+        erros_aux = null;
+    }
 
-    // if (erros.length > 0){
+    if (erros.length > 0){
 
-    //     response.status(422).json({ 
-    //                                 status:3, 
-    //                                 mensagem: msg_status_3_A,
-    //                                 campos_invalidos: erros
-    //                              });
-    //     return; 
-    // }
+        response.status(422).json({ 
+                                    status:3, 
+                                    mensagem: msg_status_3_A,
+                                    campos_invalidos: erros
+                                 });
+        return; 
+    }
           
     modelRespostasFormulario = new application.app.models.respostaFormularioDAO();   
-    modelRespostasFormulario.getVistoriasRealizadas(response);         
+    modelRespostasFormulario.getVistoriasRealizadas(daEmissao, ateEmissao, formulario, response);         
 }
 
 

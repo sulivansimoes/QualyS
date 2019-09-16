@@ -394,8 +394,8 @@ export class CadastroFormularioComponent implements OnInit {
 
 
   /**
-   * @description Preenche input do local de acordo com o clique que o usuário deu sobre determinada frequencia.
-   * @param dado id do local que foi seleciona (clicada) pelo usuário
+   * @description Preenche input da frequencia de acordo com o clique que o usuário deu sobre determinada frequencia.
+   * @param dado id da frequencia que foi seleciona (clicada) pelo usuário
    */
   private itemFrequenciaSelecionada(dado:any){
 

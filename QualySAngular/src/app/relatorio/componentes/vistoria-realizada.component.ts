@@ -1,8 +1,13 @@
 // COMPONENTES PADRÕES
 import { Component, OnInit } from '@angular/core';
 // COMPONENTES PERSONALIZADOS
-import { formataData } from 'src/app/global/funcoes/functionsComuns';
-import { RespostaFormularioService } from './../../resposta-formulario/model/resposta-formulario.service';
+import { formataData, parseObjectsToArray } from 'src/app/global/funcoes/functionsComuns';
+import { CadastroFormulario               } from './../../cadastro-formulario/model/cadastro-formulario';
+import { RespostaFormularioService        } from './../../resposta-formulario/model/resposta-formulario.service';
+import { CadastroFormularioService        } from './../../cadastro-formulario/model/cadastro-formulario.service';
+import { msgFiltrosNaoPreenchidos         } from 'src/app/global/funcoes/mensagensPadroes';
+import { msgNaoHaInformacoes              } from 'src/app/global/funcoes/mensagensPadroes';
+import { msgDataInicialMenorqueFinal      } from 'src/app/global/funcoes/mensagensPadroes';
 // COMPONENTES DE TERCEIROS
 import * as jsPDF from 'jspdf'
 
@@ -23,13 +28,28 @@ import * as jsPDF from 'jspdf'
 })
 export class VistoriaRealizadaComponent implements OnInit {
 
-  constructor(private respostaFormularioService: RespostaFormularioService) { }
+  private formularios:CadastroFormulario[] = [];
+  private formulariosFiltrados:any[]       = []; 
+  private cabecalhoConsulta                = null;
+  private errosApi                         = null;
+  private mensagemAviso                    = null;
+  private mensagemInfo                     = null;
+  private idPesquisaFormulario             = 'idPesquisaFormularioEmVistoriasRealizadas';
+  private daEmissao                        = null;
+  private ateEmissao                       = null;
+  private formulario                       = null;
+  static countErros                        = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere  
+
+
+  constructor(private respostaFormularioService: RespostaFormularioService,
+              private cadastroFormularioService : CadastroFormularioService
+             ) { }
 
   ngOnInit() {
   }
 
 
-  geraRelatorio() {
+  private geraRelatorio() {
 
     let resultadoApi = null;
 
@@ -41,20 +61,43 @@ export class VistoriaRealizadaComponent implements OnInit {
       format: 'a4',
     });
 
+
+    //------------------------------------------------------
+    // VALIDANDO INFORMAÇÕES
+    //------------------------------------------------------
+    if( !this.daEmissao  ||
+        !this.ateEmissao ||
+        !this.formulario ){ 
+
+       this.setMensagemAviso(msgFiltrosNaoPreenchidos);
+       return;
+    }
+
+    if(this.daEmissao > this.ateEmissao){
+      this.setMensagemAviso(msgDataInicialMenorqueFinal);
+      return;
+    }
+
     // se increve no serviço e recupera vistorias realizadas
-    this.respostaFormularioService.getVistoriasRealizadas()
+    this.respostaFormularioService.getVistoriasRealizadas(this.daEmissao,this.ateEmissao,this.formulario)
         .subscribe(
                     result => {
                                 resultadoApi = result;
-                                this.processaInformacoes(documento, resultadoApi.registros);
-                                documento.output("dataurlnewwindow")
+                                if(resultadoApi.linhas_afetadas > 0){
+
+                                  this.processaInformacoesRelatorio(documento, resultadoApi.registros);
+                                  documento.output("dataurlnewwindow");
+                                }else{
+                                  this.setMensagemInfo(msgNaoHaInformacoes)
+                                }
                             },
                     erros => {
-                                console.log(erros);
+                                this.setErrosApi(erros);
                                 return null;
                               }
         );
   }
+
 
 
   /**
@@ -62,11 +105,11 @@ export class VistoriaRealizadaComponent implements OnInit {
    * @param {jsPDF} documento, intancia do pdf a qual será trabalhada.
    * @param {*} vistorias, resultset da consulta realizada no banco de dados com as vistorias
    */
-  processaInformacoes(documento, vistorias) {
+  private processaInformacoesRelatorio(documento, vistorias) {
 
     let vistorias_aux = [];
     let vistoria      = [];
-    let umaVistoria = true;
+    let umaVistoria   = true;
 
     // Percorre todas as vistorias
     for (let index in vistorias) {
@@ -107,7 +150,7 @@ export class VistoriaRealizadaComponent implements OnInit {
       // Se não tiver somente um vistoria, eu pego a ultima que não entrou no if de verifica se mudou vistoria
       vistorias_aux.push(vistoria);
     }
-    console.log("vistorias_aux", vistorias_aux)
+    console.log("vistorias_aux", vistorias_aux);
 
 
     // Inicia impressão relatorio
@@ -118,14 +161,11 @@ export class VistoriaRealizadaComponent implements OnInit {
       this.imprimeItens(documento, vistorias_aux[index]);
       this.imprimeRodape(documento, vistorias_aux[index][0]);
 
-      if(Number.parseInt(index+1) < vistorias_aux.length){
+      if(Number.parseInt(index)+1 < vistorias_aux.length){
         documento.addPage();
       }
     }
-
-
     console.log("vistorias_aux = ", vistorias_aux);
-
   }
 
 
@@ -134,7 +174,7 @@ export class VistoriaRealizadaComponent implements OnInit {
    * @param {jsPDF} documento, intancia do pdf a qual será trabalhada.
    * @param {*} vistoria, resultset da consulta realizada no banco de dados com as vistorias, contendo somente a primeira linha da vistoria
    */
-  imprimeCabecalho(documento, vistoria) {
+  private imprimeCabecalho(documento, vistoria) {
 
     let imagemLogo = this.getImagem();
 
@@ -196,7 +236,7 @@ export class VistoriaRealizadaComponent implements OnInit {
    * @description: Imprime o cabeçalho dos itens do relatório.
    * @param documento, intancia do pdf a qual será trabalhada.
    */
-  imprimeCabecalhoItens(documento) {
+  private imprimeCabecalhoItens(documento) {
 
     // linha cabeçalho de itens    
     documento.setFillColor("#c9c9c9");
@@ -217,7 +257,7 @@ export class VistoriaRealizadaComponent implements OnInit {
    * @param documento, intancia do pdf a qual será trabalhada.
    * @param vistoria,resultset da consulta realizada no banco de dados com os itens da vistoria realizada, 
    */
-  imprimeItens(documento, vistoria) {
+  private imprimeItens(documento, vistoria) {
 
     // Coordenadas p/impressão
     let x1_line = 0;
@@ -264,7 +304,7 @@ export class VistoriaRealizadaComponent implements OnInit {
    * @description Imprime o rodapé do relatório
    * @param documento, intancia do pdf a qual será trabalhada.
    */
-  imprimeRodape(documento, vistoria) {
+  private imprimeRodape(documento, vistoria) {
 
     documento.addImage(vistoria.imgbase64, 'JPEG', 12, 266, 85, 18);
 
@@ -278,4 +318,110 @@ export class VistoriaRealizadaComponent implements OnInit {
   }
 
 
+  /**
+   * @description Aciona o modal de pesquisa de formulario
+   */
+  private acionaPesquisaFormulario(){
+    this.constroiConsultaFormulario();
+    $("#"+this.idPesquisaFormulario).modal();
+  }
+
+
+  /**
+   * @description: Pesquisa/Filtra registros de acordo com conteúdo informado pelo usuário e os prove no modal de pesquisa.
+   * @param {string} filtro - conteudo a ser pesquisado 
+   */ 
+  private pesquisaFormulario(filtro:string){
+
+    if(filtro && filtro.trim() != ""){
+
+      this.formulariosFiltrados  = this.formulariosFiltrados.filter( f => f[0] == filtro                  ||  //Código
+                                                                     f[1].startsWith(filtro.toUpperCase() )); //Descrição
+    }else{
+      
+      this.formulariosFiltrados = parseObjectsToArray(this.formularios);
+    }
+  }  
+  
+  
+  /**
+   * @description Preenche input do formulario de acordo com o clique que o usuário deu sobre determinada frequencia.
+   * @param dado id do formulario que foi seleciona (clicada) pelo usuário
+   */
+  private itemFormularioSelecionado(dado:any){
+
+    this.formulario = dado[0];
+    this.fechaModalPesquisa();
+  }
+
+
+  /**
+   * @description: Função monta o array locais, locaisFiltrados e cabecalhoTabelaLocal para inicializar
+   *               a tela de consulta quando a consulta de locais for acionada.
+   */
+  private constroiConsultaFormulario(){
+
+    let resultadoApi
+    this.cabecalhoConsulta = [["ID"],["DESCRIÇÃO"]];
+
+    this.cadastroFormularioService.getAllCabecalhoFormularios().subscribe(
+
+        result => {
+                    resultadoApi        = result;
+                    this.formularios    = resultadoApi.registros;     
+                    this.formularios    = parseObjectsToArray ( this.formularios );   
+                    this.formulariosFiltrados = this.formularios;
+                  },
+        error => {
+                    this.setErrosApi(error);
+                }
+      );
+  }
+
+  /**
+   * @description: Fecha o modal de pesquisa via javascript ( faz uso de JQuery do bootstrap ).
+   * @param {String} - idModal, id do modal que será fechado.
+   * @see https://getbootstrap.com/docs/4.0/components/modal/
+   */
+  private fechaModalPesquisa():void {
+
+    $("#"+this.idPesquisaFormulario).modal('hide');
+  }
+
+
+  /**
+   * @description Seta mensagem para apresentar para usuário.
+   * @param mensagem mensagem de aviso
+   */
+  private setMensagemAviso(mensagem:String){
+    this.errosApi     = null;
+    this.mensagemInfo = null;
+    this.mensagemAviso = mensagem + " /message "+ VistoriaRealizadaComponent.countErros++;
+    console.log(this.mensagemAviso);
+  }
+
+
+  /**
+   * @description função seta conteudo da variavel erroApi, ela faz uso da varivel estática [ ela incrementa a countErros]
+   *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-mensagem
+   * @param error error ocasionado na aplicação. 
+   */
+  private setErrosApi(error:any){
+    this.mensagemAviso = null;
+    this.mensagemInfo  = null;
+    this.errosApi = error + " /countErros: " + VistoriaRealizadaComponent.countErros++  ;
+    console.log(this.errosApi);
+  }
+
+ 
+  /**
+   * @description Seta mensagem para apresentar para usuário.
+   * @param mensagem mensagem de aviso
+   */  
+  private setMensagemInfo(mensagem:String){
+    this.errosApi      = null;
+    this.mensagemAviso = null;
+    this.mensagemInfo = mensagem + " /message: " + VistoriaRealizadaComponent.countErros++  ;
+    console.log(this.mensagemInfo);
+  }
 }

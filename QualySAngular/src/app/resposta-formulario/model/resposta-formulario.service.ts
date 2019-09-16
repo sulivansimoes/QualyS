@@ -1,6 +1,6 @@
 // MÓDULOS PADRÕES
 import { Injectable              } from '@angular/core';
-import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
@@ -39,11 +39,14 @@ export class RespostaFormularioService {
 
  /**
   * @description envia solicitação para API recuperar as vistorias realizadas na base de dados.
+  * @param daEmissao, data inicial que a vistoria foi realizada
+  * @param ateEmissao, data final que a vistoria foi realizada
+  * @param formulario código do formulario que a consulta deverá considerar
   * @returns Observable 
   */
- getVistoriasRealizadas() : Observable<RespostaFormulario[]> {
- 
-  return this.http.get<RespostaFormulario[]>(this.respostaFormularioApi + "/vistorias-realizadas")
+ getVistoriasRealizadas(daEmissao, ateEmissao, formulario) : Observable<RespostaFormulario[]> {
+   
+  return this.http.get<RespostaFormulario[]>(this.respostaFormularioApi + "/vistorias-realizadas/"+daEmissao+"/"+ateEmissao+"/"+formulario)
                   .pipe(
                           catchError(
                                       this.errorHandler

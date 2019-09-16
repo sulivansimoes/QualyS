@@ -7,6 +7,7 @@
                      <input type="date"
                             id="inputDataDaEmissao"
                             class="form-control"
+                            [(ngModel)]="daEmissao"
                      >
               </div>
 
@@ -16,6 +17,7 @@
                      <input type="date"
                             id="inputDataDaEmissao"
                             class="form-control"
+                            [(ngModel)]="ateEmissao"
                      >
               </div>
 
@@ -29,11 +31,14 @@
                             name="inputPrograma" 
                             required 
                             class="form-control"
+                            [(ngModel)]="formulario"
+                            (keyup.F2)="acionaPesquisaFormulario()"
                      >
 
                      <input type="button" 
                             id="buttonPesquisa" 
                             class="buttonPesquisa"
+                            (click)="acionaPesquisaFormulario()"
                      >
                      </div>
               </div>
@@ -43,5 +48,30 @@
        <div>
               <input type="button" value="Gerar" (click)="geraRelatorio()">
               <input type="button" value="Cancelar">
+       </div>
+
+        <!-- COMPONENTE DE PESQUISA FORMULARIO -->
+        <app-tela-consulta-padrao
+              [idModalPesquisa]="idPesquisaFormulario"
+              (botaoPesquisarClicado)="pesquisaFormulario($event)"
+              (itemSelecionadoClicado)="itemFormularioSelecionado($event)"
+              [cabecalhoTabela]="cabecalhoConsulta"
+              [tabelaDeDados]="formulariosFiltrados"
+       >
+       </app-tela-consulta-padrao>
+
+       <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+       <div *ngIf="errosApi">
+              <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
+       </div> 
+   
+       <!-- MENSAGEM DE ALERTA -->
+       <div *ngIf="mensagemAviso">
+             <tela-mensagem [mensagemAviso]="mensagemAviso"></tela-mensagem>
+       </div>
+
+       <!-- MENSAGEM DE INFORMATIVA -->
+       <div *ngIf="mensagemInfo">
+             <tela-mensagem [mensagemSucesso]="mensagemInfo"></tela-mensagem>
        </div>
 </div>

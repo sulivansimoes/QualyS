@@ -74,45 +74,45 @@ export class NavBarComponent implements OnInit {
       case "/browser-local" : case "/browser-local/local" :      
 
         $("#modalAjudaCadastroLocal").modal();        
-        console.log("Modal ajuda local");
+        console.log("[nav-bar.component.ts]","Modal ajuda local");
       break;
       case "/browser-frequencia" :  case "/browser-frequencia/frequencia" :
 
         $("#modalAjudaCadastroFrequencia").modal();        
-        console.log("Modal ajuda frequencia");
+        console.log("[nav-bar.component.ts]","Modal ajuda frequencia");
       break;
       case "/browser-programa" : case "/browser-programa/programa" :
       
         $("#modalAjudaCadastroPrograma").modal();   
-        console.log("Modal ajuda programa");
+        console.log("[nav-bar.component.ts]","Modal ajuda programa");
       break;
       case "/browser-cadastro-formulario" : case "/browser-cadastro-formulario/cadastro-formulario" :
       
         $("#modalAjudaCadastroFormulario").modal();   
-        console.log("Modal ajuda formulário");
+        console.log("[nav-bar.component.ts]","Modal ajuda formulário");
       break;
       case "/browser-usuario" : case "/browser-usuario/usuario" :
 
         $("#modalAjudaCadastroUsuario").modal();   
-        console.log("Modal ajuda usuário");
+        console.log("[nav-bar.component.ts]","Modal ajuda usuário");
       break;
       case "/browser-inconforme": case "/browser-inconforme/inconforme":
       
         $("#modalAjudaCadastroInconformes").modal();   
-        console.log("Modal ajuda inconformes");
+        console.log("[nav-bar.component.ts]","Modal ajuda inconformes");
       break;
       case  "/resposta-formulario":
         
         $("#modalAjudaCadastroRespostaFormulario").modal();   
-        console.log("Modal ajuda resposta formulário");
+        console.log("nav-bar.component.ts","Modal ajuda resposta formulário");
       break;
       case "/" :
 
         $("#modalAjudaMenuPrincial").modal();   
-        console.log("Modal ajuda menu principal");
+        console.log("[nav-bar.component.ts]","Modal ajuda menu principal");
       break;
       default :
-        console.log("[botão 'Ajuda' clicado]: Ajuda para rota: "+this.router.url+" não encontrada.");
+        console.log("[nav-bar.component.ts]","[botão 'Ajuda' clicado]: Ajuda para rota: "+this.router.url+" não encontrada.");
       break;
     }
   }
