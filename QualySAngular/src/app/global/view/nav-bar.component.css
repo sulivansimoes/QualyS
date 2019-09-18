@@ -2,12 +2,19 @@
 button{
     background:none;
     border:none;
-    color: blue;
+    color: #007bff;
     cursor:pointer;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* CLASSES */
+.nome-usuario{
+    color: aliceblue;
+    margin-right: 1.5rem;
+}
+
+
+/* Sub-menu aninhado */
 .dropdown-submenu {
     position: relative;
 }

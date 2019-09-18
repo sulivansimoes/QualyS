@@ -3,6 +3,7 @@ import { Router            } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription      } from 'rxjs';
 // COMPONENTES PERSONALIZADOS
+import { UsuarioService            } from './../../usuario/model/usuario.service';
 import { CadastroFormulario        } from './../../cadastro-formulario/model/cadastro-formulario';
 import { CadastroFormularioService } from './../../cadastro-formulario/model/cadastro-formulario.service';
 
@@ -18,12 +19,14 @@ export class NavBarComponent implements OnInit {
   private inscricao    = new Subscription;
   private formularios:CadastroFormulario[] = [];
   private resultadoApi = null;
-  private errosApi
+  private errosApi     = null;
+  private nomeUsuario  = null;
   
   static countErros = 1;
 
   constructor( private router: Router,
-               private cadadastroFormularioService: CadastroFormularioService
+               private cadadastroFormularioService: CadastroFormularioService,
+               private usuario:UsuarioService
               ) { 
 
   }
@@ -47,6 +50,11 @@ export class NavBarComponent implements OnInit {
       return false;
     });
 
+
+    //#################################################################################
+    //# RECUPERA USUÁRIO LOGADO NO SISTEMA
+    //#################################################################################
+    this.nomeUsuario = this.usuario.getUsuario().nome;
 
     //#################################################################################
     //# RECUPERA FORMULÁRIOS DO BANCO DE DADOS.
