@@ -54,13 +54,7 @@ function salvaRespostaFormulario(application, request, response){
         return; 
     }
  
-
-   //-----------------------------------------------------
-    // Conversão do tipo de dados.
-    //-----------------------------------------------------
-    dados.dataEmissao = new Date( dados.dataEmissao );
-
-
+    
     connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
     connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
         

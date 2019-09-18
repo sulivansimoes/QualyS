@@ -70,8 +70,6 @@ export class LoginComponent implements OnInit {
                                                     if(resultApi.auth){
                                                       console.log("usuario "+cpf+" logado");
                                                       this.usuario.getAuth().salvaToken(resultApi.token);
-
-                                                      this.usuario.getAuth().decodificaToken()
                                                     }
                                                   },
                                         erros => { 
