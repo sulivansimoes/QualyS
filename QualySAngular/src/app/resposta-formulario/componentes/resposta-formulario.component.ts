@@ -1,3 +1,4 @@
+import { UsuarioService } from './../../usuario/model/usuario.service';
 // COMPONENTES PADRÕES
 import { Component, OnInit  } from '@angular/core';
 import { Subscription       } from 'rxjs';
@@ -37,19 +38,13 @@ export class RespostaFormularioComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router:Router,
               private cadastroFormularioService : CadastroFormularioService,
-              private respostaFormularioService : RespostaFormularioService) { 
+              private respostaFormularioService : RespostaFormularioService,
+              private usuario : UsuarioService) { 
   }
 
 
   ngOnInit() {
-
-    
-    /***
-     * @todo
-     * esse trecho é provisório até implementar o LOGIN corretamente.
-     */
-    this.getRespostaFormulario().setCpfUsuario("63090174030");
-    
+   
     //Recupera o conteudo dos parametros e inicializa campos.
     //Também resgata a instancia da inscrição.
     this.inscricao = this.route.queryParams.subscribe(
@@ -60,11 +55,17 @@ export class RespostaFormularioComponent implements OnInit {
           this.getRespostaFormulario().clearItens();
           this.getRespostaFormulario().inconformes = [];
 
+          //pegando usuário logado no momento
+          let usuarioLogado = this.usuario.getUsuario()
+          console.log("usuario logado = ",this.usuario.getUsuario());
+
           //Montando formulário para responde-lo
           this.getRespostaFormulario().setIdCabecalho( Number.parseInt(queryParams['id']) );
           this.getRespostaFormulario().setDataEmissao( agora.toISOString().substring(0,10) );
           this.getRespostaFormulario().setHoraEmissao( agora.getHours() + ":" + ( agora.getMinutes() <= 9 ? "0"+agora.getMinutes() : agora.getMinutes() ) );
-          
+          this.getRespostaFormulario().setCpfUsuario ( usuarioLogado.cpf  );
+          this.getRespostaFormulario().setNomeUsuario( usuarioLogado.nome );
+
           this.populaFormulario();
         }
      );    

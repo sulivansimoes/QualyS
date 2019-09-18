@@ -1,6 +1,7 @@
 // COMPONENTES PADRÕES
 import { Component, OnInit } from '@angular/core';
 // COMPONENTES PERSONALIZADOS
+// import { AuthService } from './../model/auth.service';
 import { UsuarioService } from './../model/usuario.service';
 
 @Component({
@@ -11,13 +12,14 @@ import { UsuarioService } from './../model/usuario.service';
       './../../global/view/icones.css'
     ]
 })
+
 export class LoginComponent implements OnInit {
 
   private user:String  = "";
   private senha:String = "";
   private erro:String  = null;
 
-  constructor(private usuarioservice : UsuarioService) { }
+  constructor(private usuario:UsuarioService) { }
 
   ngOnInit() {  }
 
@@ -51,6 +53,7 @@ export class LoginComponent implements OnInit {
   private login(){
 
     let cpf:String;
+    let resultApi = null;
 
     //retira os caracteres especiais
     cpf = this.user.substring(0,3) 
@@ -58,17 +61,23 @@ export class LoginComponent implements OnInit {
         + this.user.substring(8,11) 
         + this.user.substring(12,14);
 
-    this.usuarioservice.login(cpf, this.senha)
-                       .subscribe(
-                                    result =>{ 
-                                                alert("deu certo");
-                                                console.log(result)
-                                                this.erro = null;
-                                              },
-                                    erros => { 
-                                                this.erro = erros;
-                                              }
-                                  );
+    this.usuario.getAuth().login(cpf, this.senha)
+                          .subscribe(
+                                        result =>{ 
+                                                    this.erro = null;
+                                                    resultApi = result;
+
+                                                    if(resultApi.auth){
+                                                      console.log("usuario "+cpf+" logado");
+                                                      this.usuario.getAuth().salvaToken(resultApi.token);
+
+                                                      this.usuario.getAuth().decodificaToken()
+                                                    }
+                                                  },
+                                        erros => { 
+                                                    this.erro = erros;
+                                                  }
+                                      );
     
   }
 }

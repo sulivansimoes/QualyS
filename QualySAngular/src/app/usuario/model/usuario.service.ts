@@ -5,7 +5,8 @@ import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
 import { Usuario                 } from './usuario';
-import { host, port         } from './../../rootHost';
+import { host, port              } from './../../rootHost';
+import { AuthService             } from './auth.service';
 
 const httpOption = {
   headers: new HttpHeaders({"Content-Type":"application/json"}),
@@ -16,35 +17,39 @@ const httpOption = {
 })
 export class UsuarioService {
 
-  private usuarioApi : string = host+port+"/api/usuario"
-  private loginApi : string = host+port+"/api/login"
+  private usuarioApi : string = host+port+"/api/usuario";
+  private auth:AuthService    = null;
 
   constructor(private http : HttpClient) { }
 
 
   /**
-   * @description Submete os dados do usuário para o login. 
-   * @param cpf cpf do usuário que está tentando efetuar o login
-   * @param senha senha do usuário que está tentando efetuar o login
+   * @description Retorna a classe de autorização do usuário.
+   * @returns {AuthService} instância do AuthService do usuário em questão
    */
-  login(cpf:String, senha:String) : Observable<Usuario>{
+  public getAuth():AuthService{
 
-    return this.http.post<Usuario>(this.loginApi, {cpf, senha} , httpOption)
-                      .pipe(
-                              catchError(
-                                          this.errorHandler
-                                        )
-                            ); 
+    if(this.auth == null){
+      this.auth = new AuthService(this.http);
+    }
+    return this.auth;
   }
 
 
- 
+  /**
+   * @description retorna usuário logado de acordo com informações do token
+   */
+  public getUsuario(){
+    return this.getAuth().decodificaToken();
+  }
+  
+
   /**
     * @description envia solicitação para API salvar usuario na base de dados.
     * @param usuario objeto da usuario que deve ser salva.
     * @returns Observable 
     */
-  salvaUsuario(usuario : Usuario) : Observable<Usuario> {
+  public salvaUsuario(usuario : Usuario) : Observable<Usuario> {
  
       return this.http.post<Usuario>(this.usuarioApi, usuario, httpOption)
                       .pipe(
@@ -60,7 +65,7 @@ export class UsuarioService {
     * @param usuario objeto da usuario que deve ser atualizada.
     * @returns Observable
     */
-  atualizaUsuario(usuario : Usuario): Observable<Usuario>{
+  public atualizaUsuario(usuario : Usuario): Observable<Usuario>{
   
       return this.http.put<Usuario>(this.usuarioApi, usuario, httpOption)
                       .pipe(
@@ -76,7 +81,7 @@ export class UsuarioService {
     * @param cpfUsuario cpf do usuario que deve ser deletada
     * @returns Observable
     */
-  deletaUsuario(cpfUsuario : String) {
+  public deletaUsuario(cpfUsuario : String) {
 
       return this.http.delete<Usuario>( this.usuarioApi + "/" + cpfUsuario )
                       .pipe(
@@ -91,7 +96,7 @@ export class UsuarioService {
     * @description envia solicitação para API consultar todas as Usuarios cadastradas 
     *              na base de dados.
     */
-  getAllUsuarios() : Observable<Usuario[]>{
+  public getAllUsuarios() : Observable<Usuario[]>{
 
       return this.http.get<Usuario[]>(this.usuarioApi)
                       .pipe(
@@ -107,7 +112,7 @@ export class UsuarioService {
     * @param nome, nome dos usuarios a serem localizadas. 
     * @returns Observable
     */
-  getUsuariosPorNome(nome:String) : Observable<Usuario[]>{
+  public getUsuariosPorNome(nome:String) : Observable<Usuario[]>{
 
       return this.http.get<Usuario[]>(this.usuarioApi + "/" + nome )
                       .pipe(
@@ -123,7 +128,7 @@ export class UsuarioService {
     * @param error erros gerados ao fazer solicitações à API
     * @returns retorna uma string contendo o erro que acontenceu. 
     */
-  errorHandler(error : HttpErrorResponse){
+  private errorHandler(error : HttpErrorResponse){
 
     return throwError( error.error.mensagem || "Servidor com Erro! "+ error.message);
   } 

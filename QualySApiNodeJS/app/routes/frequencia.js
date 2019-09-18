@@ -1,3 +1,4 @@
+const auth = require('./../controllers/login');
 
 module.exports = function(application){
 
@@ -19,7 +20,7 @@ module.exports = function(application){
     });
 
 
-    application.get("/api/frequencia", function(req, res){
+    application.get("/api/frequencia", auth.verifyJWT, function(req, res){
 
         application.app.controllers.frequencia.getAllFrequencias(application, req, res);
     });

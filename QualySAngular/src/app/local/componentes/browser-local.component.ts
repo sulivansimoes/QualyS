@@ -32,13 +32,13 @@ export class BrowserLocalComponent implements OnInit {
   static countErros = 1;        // Variavel de controle usada para forçar que a msgm de erros sempre altere  
   
   constructor(private localservice:LocalService) { 
-      
+  }
+
+  ngOnInit() {
     this.getAll();
   }
 
-  ngOnInit() {}
-
-
+  
   /**
    * destruo a inscrição ao fechar.
    */

@@ -1,3 +1,4 @@
+import { AuthGuardService as AuthGuard } from './../../usuario/model/auth-guard.service';
 // COMPONENTES PADRÕES
 import { Routes } from '@angular/router';
 // COMPONENTES PERSONALIZADOS
@@ -21,23 +22,23 @@ import { VistoriaRealizadaComponent  } from './../../relatorio/componentes/visto
 export const rotas : Routes = [
 
     // TELAS DE CADASTROS 
-    { path: "login"                         , component: LoginComponent                     },
-    { path: "browser-frequencia"            , component: BrowserFrequenciaComponent         },
-    { path: "browser-cadastro-formulario"   , component: BrowserCadastroFormularioComponent },
-    { path: "browser-local"                 , component: BrowserLocalComponent              },
-    { path: "browser-programa"              , component: BrowserProgramaComponent           },
-    { path: "browser-usuario"               , component: BrowserUsuarioComponent            },
-    { path: "browser-inconforme"            , component: BrowserInconformeComponent         },
-    { path: "browser-local/local"           , component: LocalComponent                     },
-    { path: "browser-programa/programa"     , component: ProgramaComponent                  },
-    { path: "browser-frequencia/frequencia" , component: FrequenciaComponent                },
-    { path: "browser-inconforme/inconforme" , component: InconformeComponent                },
-    { path: "browser-usuario/usuario"       , component: UsuarioComponent                   },
-    { path: "browser-cadastro-formulario/cadastro-formulario", component: CadastroFormularioComponent        },
-    { path: "resposta-formulario"           , component: RespostaFormularioComponent        },
+    { path: "login"                         , component: LoginComponent                                               },
+    { path: "browser-frequencia"            , component: BrowserFrequenciaComponent        /*, canActivate: [AuthGuard]*/ },
+    { path: "browser-cadastro-formulario"   , component: BrowserCadastroFormularioComponent, canActivate: [AuthGuard] },
+    { path: "browser-local"                 , component: BrowserLocalComponent             , canActivate: [AuthGuard] },
+    { path: "browser-programa"              , component: BrowserProgramaComponent          , canActivate: [AuthGuard] },
+    { path: "browser-usuario"               , component: BrowserUsuarioComponent           , canActivate: [AuthGuard] },
+    { path: "browser-inconforme"            , component: BrowserInconformeComponent        , canActivate: [AuthGuard] },
+    { path: "browser-local/local"           , component: LocalComponent                    , canActivate: [AuthGuard] },
+    { path: "browser-programa/programa"     , component: ProgramaComponent                 , canActivate: [AuthGuard] },
+    { path: "browser-frequencia/frequencia" , component: FrequenciaComponent               , canActivate: [AuthGuard] },
+    { path: "browser-inconforme/inconforme" , component: InconformeComponent               , canActivate: [AuthGuard] },
+    { path: "browser-usuario/usuario"       , component: UsuarioComponent                  , canActivate: [AuthGuard] },
+    { path: "browser-cadastro-formulario/cadastro-formulario", component: CadastroFormularioComponent   , canActivate: [AuthGuard] },
+    { path: "resposta-formulario"           , component: RespostaFormularioComponent       , canActivate: [AuthGuard] },
     // RELATÓRIOS
-    { path: "relatorio-vistoria-realizada"  , component: VistoriaRealizadaComponent         }, 
+    { path: "relatorio-vistoria-realizada"  , component: VistoriaRealizadaComponent        , canActivate: [AuthGuard] }, 
     // OUTROS
-    { path: '', redirectTo :  ''            , pathMatch: 'full'                             },
-    { path: '**'                            , component: PageNotFoundComponent              }
+    { path: '', redirectTo :  ''            , pathMatch: 'full'                                                       },
+    { path: '**'                            , component: PageNotFoundComponent             , canActivate: [AuthGuard] }
 ];

@@ -14,6 +14,8 @@ export class RespostaFormulario{
     private conforme    :boolean;
     private itens       :ItemFormulario[] = [];
 
+    private nomeUsuario :String;
+
 
     /**
      * @constructor 
@@ -75,6 +77,15 @@ export class RespostaFormulario{
         return this.cpfUsuario
     }
 
+
+    /**
+     * @description: Retorna nome do usuário que resondeu formulário.
+     * @return {String} ( nomeUsuario ) - nome do usuário que resondeu formulário.
+     */
+    public getNomeusuario():String{
+        return this.nomeUsuario
+    }
+
     /**
      * @description: Retorna resposta do formulário (true) caso reposta for conforme, (false) caso contrário.
      * @return {boolean} ( conforme ) - resposta do formulário
@@ -134,10 +145,21 @@ export class RespostaFormulario{
     }
 
     /**
+     * @description Seta nome do usuário que respondeu o formulário.
+     * @param {string} nomeUsuario - Nome do usuário que respondeu o formulário.
+     */
+    public setNomeUsuario(nomeUsuario:String){
+        this.nomeUsuario = nomeUsuario;
+    }    
+
+    /**
      * @description: Seta reposta da pergunta do formulário.
      * @param {boolean} conforme - resposta da pergunta do formulário.
      */
     public setConforme(conforme:boolean):void{
         this.conforme = conforme;
     }
+
+
+
 }

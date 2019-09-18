@@ -69,7 +69,7 @@ function login(application, request, response){
             let nome  = usuario[0].nome;
             
             let token = jwt.sign({ cpf, nome }, process.env.SECRET, {
-                expiresIn: "10h" // expires in 10 horas
+                expiresIn: "4h" // expires in 4h horas
             });
             response.status(200).json({ auth: true, token: token });
 
