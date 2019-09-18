@@ -1,8 +1,8 @@
 // COMPONENTES PADRÕES
 import { Component, OnInit } from '@angular/core';
+import { Router            } from '@angular/router';
 // COMPONENTES PERSONALIZADOS
-// import { AuthService } from './../model/auth.service';
-import { UsuarioService } from './../model/usuario.service';
+import { UsuarioService    } from './../model/usuario.service';
 
 @Component({
   selector: 'login',
@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
   private senha:String = "";
   private erro:String  = null;
 
-  constructor(private usuario:UsuarioService) { }
+  constructor(private usuario:UsuarioService,
+    private router: Router) { }
 
   ngOnInit() {  }
 
@@ -68,8 +69,10 @@ export class LoginComponent implements OnInit {
                                                     resultApi = result;
 
                                                     if(resultApi.auth){
+
                                                       console.log("usuario "+cpf+" logado");
                                                       this.usuario.getAuth().salvaToken(resultApi.token);
+                                                      this.router.navigate(['/']);
                                                     }
                                                   },
                                         erros => { 

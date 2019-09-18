@@ -54,7 +54,6 @@ function salvaRespostaFormulario(application, request, response){
         return; 
     }
  
-    
     connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
     connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada.
         

@@ -39,6 +39,6 @@ export const rotas : Routes = [
     // RELATÓRIOS
     { path: "relatorio-vistoria-realizada"  , component: VistoriaRealizadaComponent        , canActivate: [AuthGuard] }, 
     // OUTROS
-    { path: '', redirectTo :  ''            , pathMatch: 'full'                                                       },
+    { path: '', redirectTo :  ''            , pathMatch: 'full'                             , canActivate: [AuthGuard]},
     { path: '**'                            , component: PageNotFoundComponent             , canActivate: [AuthGuard] }
 ];

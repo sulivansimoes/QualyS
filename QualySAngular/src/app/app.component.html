@@ -1,8 +1,8 @@
 <!-- MENU NAVEGAÇÃO -->
-<app-nav-bar></app-nav-bar>
+<div *ngIf="isLogado()">
+    <app-nav-bar></app-nav-bar>
+</div>
 
-<!-- LOGIN -->
-<!-- <login></login> -->
 
 <!-- GERENCIADOR DE ROTAS -->
 <router-outlet></router-outlet>
@@ -26,13 +26,12 @@
 <!-- <app-inconforme></app-inconforme> -->
 <!-- <app-cadastro-formulario></app-cadastro-formulario> -->
 <!-- <app-resposta-formulario></app-resposta-formulario> -->
-
 <!-- <app-browser-frequencia></app-browser-frequencia> -->
-
 <!-- <tela-mensagem></tela-mensagem> -->
-
 <!-- <tela-box></tela-box> -->
-    
+
+<!-- LOGIN -->
+<!-- <login></login> -->
 
 
 
