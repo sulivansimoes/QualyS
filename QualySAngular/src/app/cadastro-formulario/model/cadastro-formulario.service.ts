@@ -1,14 +1,17 @@
-// MÓDULOS PADRÕES
+// COMPONENTES PADRÕES
 import { Injectable              } from '@angular/core';
 import { HttpClient, HttpHeaders , HttpErrorResponse } from '@angular/common/http';
 import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
-// MÓDULOS PERSONALIZADOS
+// COMPONENTES PERSONALIZADOS
+import { UsuarioService } from './../../usuario/model/usuario.service';
 import { CadastroFormulario } from './cadastro-formulario';
 import { host, port         } from './../../rootHost';
 
 const httpOption = {
-  headers: new HttpHeaders({"Content-Type":"application/json"})
+  headers: new HttpHeaders()
+                           .append("Content-Type","application/json")
+                           .append("x-access-token","")
 }
 
 @Injectable({
@@ -18,9 +21,17 @@ export class CadastroFormularioService {
 
   private formularioApi : string = host+port+"/api/formulario"
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,
+              private usuario:UsuarioService) {
+                
+    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
+  }
 
 
+  /**
+   * @description Envia solicitação para API salvar o formulario na base de dados
+   * @param {CadastroFormulario} formulario formulario a ser salvo na base de dados.
+   */
   salvaFormulario(formulario:CadastroFormulario): Observable<CadastroFormulario> {
 
     return this.http.post<CadastroFormulario>(this.formularioApi, formulario, httpOption)
@@ -53,7 +64,7 @@ export class CadastroFormularioService {
    */
   deletaFormulario(id_formulario:number): Observable<CadastroFormulario> {
     
-    return this.http.delete<CadastroFormulario>(this.formularioApi + "/" + id_formulario )
+    return this.http.delete<CadastroFormulario>(this.formularioApi + "/" + id_formulario, httpOption )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -68,7 +79,7 @@ export class CadastroFormularioService {
   */
  getAllCabecalhoFormularios() : Observable<CadastroFormulario[]>{
 
-  return this.http.get<CadastroFormulario[]>(this.formularioApi)
+  return this.http.get<CadastroFormulario[]>(this.formularioApi, httpOption)
                   .pipe(
                           catchError(
                                       this.errorHandler
@@ -84,7 +95,7 @@ export class CadastroFormularioService {
   */
  findItensFormularioPorId(id:number) : Observable<CadastroFormulario[]>{
 
-  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/" + id)
+  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/" + id, httpOption)
                   .pipe(
                           catchError(
                                       this.errorHandler
@@ -100,7 +111,7 @@ export class CadastroFormularioService {
   */
  findFormularioPorId(id:number) : Observable<CadastroFormulario[]>{
 
-  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/id/" + id)
+  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/id/" + id, httpOption)
                   .pipe(
                           catchError(
                                       this.errorHandler
@@ -116,7 +127,7 @@ export class CadastroFormularioService {
   */ 
  getFormulariosPorDescricao(descricao:String) : Observable<CadastroFormulario[]>{
 
-  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/descricao/" + descricao )
+  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/descricao/" + descricao, httpOption )
                   .pipe(
                           catchError(
                                       this.errorHandler
