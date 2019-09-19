@@ -1,14 +1,17 @@
-// MÓDULOS PADRÕES
+// COMPONENTES PADRÕES
 import { Injectable              } from '@angular/core';
-import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders , HttpErrorResponse } from '@angular/common/http';
 import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
-// MÓDULOS PERSONALIZADOS
+// COMPONENTES PERSONALIZADOS
+import { UsuarioService          } from './../../usuario/model/usuario.service';
 import { Local                   } from './local';
 import { host, port              } from './../../rootHost';
 
 const httpOption = {
-  headers: new HttpHeaders({"Content-Type":"application/json"})
+  headers: new HttpHeaders()
+                           .append("Content-Type","application/json")
+                           .append("x-access-token","")
 }
 
 @Injectable({
@@ -18,7 +21,11 @@ export class LocalService {
 
   private localApi : string = host+port+"/api/local"
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,
+              private usuario:UsuarioService) { 
+
+    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
+  }
 
   
  /**
@@ -60,7 +67,7 @@ export class LocalService {
   */
   deletaLocal(idLocal : number) {
 
-    return this.http.delete<Local>( this.localApi + "/" + idLocal )
+    return this.http.delete<Local>( this.localApi + "/" + idLocal, httpOption )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -75,7 +82,7 @@ export class LocalService {
   */
   getAllLocais() : Observable<Local[]>{
 
-    return this.http.get<Local[]>(this.localApi)
+    return this.http.get<Local[]>(this.localApi, httpOption)
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -91,7 +98,7 @@ export class LocalService {
   */
   getLocaisPorDescricao(descricao:String) : Observable<Local[]>{
 
-    return this.http.get<Local[]>(this.localApi + "/" + descricao )
+    return this.http.get<Local[]>(this.localApi + "/" + descricao, httpOption )
                     .pipe(
                             catchError(
                                         this.errorHandler

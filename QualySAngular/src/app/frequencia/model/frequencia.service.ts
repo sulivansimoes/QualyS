@@ -11,7 +11,7 @@ import { host, port              } from './../../rootHost';
 const httpOption = {
   headers: new HttpHeaders()
                            .append("Content-Type","application/json")
-                           .append("x-access-token","beluga")
+                           .append("x-access-token","")
 }
 
 @Injectable({
