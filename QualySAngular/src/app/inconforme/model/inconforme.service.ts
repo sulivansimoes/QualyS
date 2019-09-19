@@ -1,14 +1,17 @@
-// MÓDULOS PADRÕES
+// COMPONENTES PADRÕES
 import { Injectable              } from '@angular/core';
 import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
-// MÓDULOS PERSONALIZADOS
-import { Inconforme } from './inconforme';
-import { host, port } from './../../rootHost';
+// COMPONENTES PERSONALIZADOS
+import { UsuarioService          } from './../../usuario/model/usuario.service';
+import { Inconforme              } from './inconforme';
+import { host, port              } from './../../rootHost';
 
 const httpOption = {
-  headers: new HttpHeaders({"Content-Type":"application/json"})
+  headers: new HttpHeaders()
+                           .append("Content-Type","application/json")
+                           .append("x-access-token","")
 }
 
 @Injectable({
@@ -18,7 +21,11 @@ export class InconformeService {
 
   private inconformeApi : string = host+port+"/api/inconforme"
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,
+              private usuario:UsuarioService) {
+
+    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
+  }
 
 
  /**
@@ -59,7 +66,7 @@ export class InconformeService {
    */
   getInconformesPorEmissao(dataEmissao) : Observable<Inconforme[]>{
 
-    return this.http.get<Inconforme[]>(this.inconformeApi + "/" + dataEmissao )
+    return this.http.get<Inconforme[]>(this.inconformeApi + "/" + dataEmissao, httpOption )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -74,7 +81,7 @@ export class InconformeService {
    */
   getAllInconformes() : Observable<Inconforme[]>{
 
-    return this.http.get<Inconforme[]>(this.inconformeApi)
+    return this.http.get<Inconforme[]>(this.inconformeApi, httpOption)
                     .pipe(
                             catchError(
                                         this.errorHandler

@@ -9,7 +9,9 @@ import { host, port              } from './../../rootHost';
 import { AuthService             } from './auth.service';
 
 const httpOption = {
-  headers: new HttpHeaders({"Content-Type":"application/json"}),
+  headers: new HttpHeaders()
+                           .append("Content-Type","application/json")
+                           .append("x-access-token","")
 }
 
 @Injectable({

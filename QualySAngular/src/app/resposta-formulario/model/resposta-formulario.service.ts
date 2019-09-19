@@ -1,14 +1,17 @@
-// MÓDULOS PADRÕES
+// COMPONENTES PADRÕES
 import { Injectable              } from '@angular/core';
-import { HttpClient, HttpHeaders,HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
-// MÓDULOS PERSONALIZADOS
+// COMPONENTES PERSONALIZADOS
+import { UsuarioService     } from './../../usuario/model/usuario.service';
 import { RespostaFormulario } from './resposta-formulario';
 import { host, port         } from './../../rootHost';
 
 const httpOption = {
-  headers: new HttpHeaders({"Content-Type":"application/json"})
+  headers: new HttpHeaders()
+                           .append("Content-Type","application/json")
+                           .append("x-access-token","")
 }
 
 @Injectable({
@@ -18,7 +21,11 @@ export class RespostaFormularioService {
 
   private respostaFormularioApi : string = host+port+"/api/resposta-formulario"
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,
+              private usuario:UsuarioService) {
+                
+    httpOption.headers = httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
+  }
 
   
  /**
@@ -46,7 +53,7 @@ export class RespostaFormularioService {
   */
  getVistoriasRealizadas(daEmissao, ateEmissao, formulario) : Observable<RespostaFormulario[]> {
    
-  return this.http.get<RespostaFormulario[]>(this.respostaFormularioApi + "/vistorias-realizadas/"+daEmissao+"/"+ateEmissao+"/"+formulario)
+  return this.http.get<RespostaFormulario[]>(this.respostaFormularioApi + "/vistorias-realizadas/"+daEmissao+"/"+ateEmissao+"/"+formulario, httpOption)
                   .pipe(
                           catchError(
                                       this.errorHandler
