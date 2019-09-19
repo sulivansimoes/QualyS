@@ -1,14 +1,17 @@
-// MÓDULOS PADRÕES
+// COMPONENTES PADRÕES
 import { Injectable              } from '@angular/core';
 import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
-// MÓDULOS PERSONALIZADOS
+// COMPONENTES PERSONALIZADOS
+import { UsuarioService          } from './../../usuario/model/usuario.service';
 import { Frequencia              } from './frequencia';
 import { host, port              } from './../../rootHost';
 
 const httpOption = {
-  headers: new HttpHeaders({"Content-Type":"application/json"})
+  headers: new HttpHeaders()
+                           .append("Content-Type","application/json")
+                           .append("x-access-token","beluga")
 }
 
 @Injectable({
@@ -18,7 +21,14 @@ export class FrequenciaService {
 
   private frequenciaApi : string =  host+port+"/api/frequencia"
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,
+              private usuario : UsuarioService) { 
+
+    //seto cabeçalho com o token para poder fazer as operações com a API
+    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
+    console.log("Frequencia / httpOption.headers = ", httpOption.headers.keys() );
+    console.log("Frequencia / x-access-token = ", httpOption.headers.get("x-access-token") );
+  }
 
 
  /**
@@ -75,7 +85,7 @@ export class FrequenciaService {
   */
   getAllFrequencias() : Observable<Frequencia[]>{
 
-    return this.http.get<Frequencia[]>(this.frequenciaApi)
+    return this.http.get<Frequencia[]>(this.frequenciaApi, httpOption)
                     .pipe(
                             catchError(
                                         this.errorHandler

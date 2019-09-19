@@ -95,7 +95,7 @@ export class AuthService {
    * @description Retorna o token salvo no localstorage independente de estar válido ou não.
    * @returns {string} token salvo no localstorage
    */
-  private getToken():string{
+  public getToken():string{
     return window.localStorage.getItem(KEY);
   }
 

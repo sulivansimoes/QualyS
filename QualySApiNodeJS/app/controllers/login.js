@@ -96,12 +96,13 @@ function login(application, request, response){
 function verifyJWT(request, response, next){
 
     let token = request.headers['x-access-token'];
+    console.log("token recebido =  ",token);
 
-    if (!token) return response.status(401).json({ auth: false, message: 'Nenhum token fornecido.' });
+    if (!token) return response.status(401).json({ auth: false, mensagem: 'Nenhum token fornecido. Erro 401 - Não autorizado.' });
      
     jwt.verify(token, process.env.SECRET, function(err, decoded) {
 
-        if (err) return response.status(500).json({ auth: false, message: 'Falha ao autenticar o token.' });
+        if (err) return response.status(500).json({ auth: false, mensagem: 'Falha ao autenticar o token.' });
         
         // Se tudo estiver ok, salva no request para uso posterior
         request.cpf = decoded.cpf;
