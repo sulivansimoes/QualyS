@@ -96,7 +96,7 @@ function login(application, request, response){
 function verifyJWT(request, response, next){
 
     let token = request.headers['x-access-token'];
-    console.log("token recebido =  ",token);
+    // console.log("token recebido =  ",token);
 
     if (!token) return response.status(401).json({ auth: false, mensagem: 'Nenhum token fornecido. Erro 401 - Não autorizado.' });
      

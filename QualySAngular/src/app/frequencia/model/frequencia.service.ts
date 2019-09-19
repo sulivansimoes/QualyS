@@ -26,8 +26,9 @@ export class FrequenciaService {
 
     //seto cabeçalho com o token para poder fazer as operações com a API
     httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
-    console.log("Frequencia / httpOption.headers = ", httpOption.headers.keys() );
-    console.log("Frequencia / x-access-token = ", httpOption.headers.get("x-access-token") );
+
+    // console.log("Frequencia / httpOption.headers = ", httpOption.headers.keys() );
+    // console.log("Frequencia / x-access-token = ", httpOption.headers.get("x-access-token") );
   }
 
 
@@ -70,7 +71,7 @@ export class FrequenciaService {
   */
   deletaFrequencia(idFrequencia : Frequencia) {
 
-    return this.http.delete<Frequencia>( this.frequenciaApi + "/" + idFrequencia )
+    return this.http.delete<Frequencia>( this.frequenciaApi + "/" + idFrequencia, httpOption )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -101,7 +102,7 @@ export class FrequenciaService {
   */
   getFrequenciasPorDescricao(descricao:String) : Observable<Frequencia[]>{
 
-    return this.http.get<Frequencia[]>(this.frequenciaApi + "/" + descricao )
+    return this.http.get<Frequencia[]>(this.frequenciaApi + "/" + descricao, httpOption )
                     .pipe(
                             catchError(
                                         this.errorHandler
