@@ -1,9 +1,9 @@
-// MÓDULOS PADRÕES
+// COMPONENTES PADRÕES
 import { Injectable              } from '@angular/core';
 import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
-// MÓDULOS PERSONALIZADOS
+// COMPONENTES PERSONALIZADOS
 import { Usuario                 } from './usuario';
 import { host, port              } from './../../rootHost';
 import { AuthService             } from './auth.service';
@@ -20,7 +20,10 @@ export class UsuarioService {
   private usuarioApi : string = host+port+"/api/usuario";
   private auth:AuthService    = null;
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient) {
+
+    httpOption.headers =  httpOption.headers.set("x-access-token", this.getAuth().getToken() );
+  }
 
 
   /**
@@ -83,7 +86,7 @@ export class UsuarioService {
     */
   public deletaUsuario(cpfUsuario : String) {
 
-      return this.http.delete<Usuario>( this.usuarioApi + "/" + cpfUsuario )
+      return this.http.delete<Usuario>( this.usuarioApi + "/" + cpfUsuario, httpOption )
                       .pipe(
                               catchError(
                                           this.errorHandler
@@ -98,7 +101,7 @@ export class UsuarioService {
     */
   public getAllUsuarios() : Observable<Usuario[]>{
 
-      return this.http.get<Usuario[]>(this.usuarioApi)
+      return this.http.get<Usuario[]>(this.usuarioApi, httpOption)
                       .pipe(
                               catchError(
                                           this.errorHandler
@@ -114,7 +117,7 @@ export class UsuarioService {
     */
   public getUsuariosPorNome(nome:String) : Observable<Usuario[]>{
 
-      return this.http.get<Usuario[]>(this.usuarioApi + "/" + nome )
+      return this.http.get<Usuario[]>(this.usuarioApi + "/" + nome, httpOption )
                       .pipe(
                               catchError(
                                           this.errorHandler
