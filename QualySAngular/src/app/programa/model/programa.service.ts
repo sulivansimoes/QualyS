@@ -4,12 +4,14 @@ import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http'
 import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
+import { UsuarioService          } from './../../usuario/model/usuario.service';
 import { Programa                } from './programa';
 import { host, port              } from './../../rootHost';
 
 const httpOption = {
-  headers: new HttpHeaders({"Content-Type":"application/json"})
-}
+  headers: new HttpHeaders()
+                           .append("Content-Type","application/json")
+                           .append("x-access-token","")}
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,11 @@ export class ProgramaService {
 
   private programaApi : string = host+port+"/api/programas"
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,
+              private usuario:UsuarioService) { 
+
+    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
+  }
 
   /**
    * @description: Envia solicitação para API salvar programa na base de dados.
@@ -27,12 +33,12 @@ export class ProgramaService {
    */
   salvaPrograma(programa : Programa) : Observable<Programa> {
 
-  return this.http.post<Programa>(this.programaApi, programa, httpOption)
-                  .pipe(
-                          catchError(
-                                       this.errorHandler
-                                    )
-                        );                                              
+    return this.http.post<Programa>(this.programaApi, programa, httpOption)
+                    .pipe(
+                            catchError(
+                                        this.errorHandler
+                                      )
+                          );                                              
   }
 
 
@@ -59,7 +65,7 @@ export class ProgramaService {
   */
   deletaPrograma(idPrograma : Number) {
  
-    return this.http.delete<Programa>( this.programaApi + "/" + idPrograma )
+    return this.http.delete<Programa>( this.programaApi + "/" + idPrograma, httpOption )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -74,7 +80,7 @@ export class ProgramaService {
   */
   getAllProgramas() : Observable<Programa[]>{
 
-    return this.http.get<Programa[]>(this.programaApi)
+    return this.http.get<Programa[]>(this.programaApi, httpOption)
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -90,7 +96,7 @@ export class ProgramaService {
   */
  getProgramasPorDescricao(descricao:String) : Observable<Programa[]>{
 
-    return this.http.get<Programa[]>(this.programaApi + "/" + descricao )
+    return this.http.get<Programa[]>(this.programaApi + "/" + descricao, httpOption )
                   .pipe(
                           catchError(
                                       this.errorHandler
