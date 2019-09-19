@@ -1,11 +1,13 @@
+const auth = require('./../controllers/login');
+
 module.exports = function(application){
 
-    application.post("/api/resposta-formulario", function(req, res){
+    application.post("/api/resposta-formulario", auth.verifyJWT, function(req, res){
 
          application.app.controllers.respostaFormulario.salvaRespostaFormulario(application, req, res );
     });
 
-    application.get("/api/resposta-formulario/vistorias-realizadas/:daEmissao/:ateEmissao/:formulario", function(req, res){
+    application.get("/api/resposta-formulario/vistorias-realizadas/:daEmissao/:ateEmissao/:formulario", auth.verifyJWT, function(req, res){
 
         application.app.controllers.respostaFormulario.getVistoriasRealizadas(application, req, res );
    });
