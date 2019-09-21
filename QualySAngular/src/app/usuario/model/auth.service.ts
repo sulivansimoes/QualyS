@@ -86,7 +86,6 @@ export class AuthService {
    */
   public decodificaToken():any{
 
-    console.log(jwtHelper.decodeToken(this.getToken()));    
     return ( this.isAutenticado() ) ? jwtHelper.decodeToken(this.getToken()) : null;
   }
 
@@ -96,6 +95,7 @@ export class AuthService {
    * @returns {string} token salvo no localstorage
    */
   public getToken():string{
+    
     return window.localStorage.getItem(KEY);
   }
 

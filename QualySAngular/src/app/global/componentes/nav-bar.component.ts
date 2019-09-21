@@ -55,9 +55,9 @@ export class NavBarComponent implements OnInit {
 
 
     //#################################################################################
-    //# RECUPERA USUÁRIO LOGADO NO SISTEMA
+    //# RECUPERA USUÁRIO LOGADO NO SISTEMA (SÓ O PRIMEIRO NOME)
     //#################################################################################
-    this.nomeUsuario = this.usuario.getUsuario().nome;
+    this.nomeUsuario = this.usuario.getUsuario().nome.split(' ')[0];
 
     //#################################################################################
     //# RECUPERA FORMULÁRIOS DO BANCO DE DADOS.
