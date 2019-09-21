@@ -22,14 +22,11 @@ export class UsuarioService {
   private usuarioApi : string = host+port+"/api/usuario";
   private auth:AuthService    = null;
 
-  constructor(private http : HttpClient) {
-
-    httpOption.headers =  httpOption.headers.set("x-access-token", this.getAuth().getToken() );
-  }
+  constructor(private http : HttpClient) { }
 
 
   /**
-   * @description Retorna a classe de autorização do usuário.
+   * @description Retorna a classe de autenticação do usuário.
    * @returns {AuthService} instância do AuthService do usuário em questão
    */
   public getAuth():AuthService{
@@ -56,7 +53,7 @@ export class UsuarioService {
     */
   public salvaUsuario(usuario : Usuario) : Observable<Usuario> {
  
-      return this.http.post<Usuario>(this.usuarioApi, usuario, httpOption)
+      return this.http.post<Usuario>(this.usuarioApi, usuario, this.getHttOption())
                       .pipe(
                               catchError(
                                           this.errorHandler
@@ -72,7 +69,7 @@ export class UsuarioService {
     */
   public atualizaUsuario(usuario : Usuario): Observable<Usuario>{
   
-      return this.http.put<Usuario>(this.usuarioApi, usuario, httpOption)
+      return this.http.put<Usuario>(this.usuarioApi, usuario, this.getHttOption())
                       .pipe(
                               catchError(
                                           this.errorHandler
@@ -88,7 +85,7 @@ export class UsuarioService {
     */
   public deletaUsuario(cpfUsuario : String) {
 
-      return this.http.delete<Usuario>( this.usuarioApi + "/" + cpfUsuario, httpOption )
+      return this.http.delete<Usuario>( this.usuarioApi + "/" + cpfUsuario, this.getHttOption() )
                       .pipe(
                               catchError(
                                           this.errorHandler
@@ -103,7 +100,10 @@ export class UsuarioService {
     */
   public getAllUsuarios() : Observable<Usuario[]>{
 
-      return this.http.get<Usuario[]>(this.usuarioApi, httpOption)
+            
+      
+
+      return this.http.get<Usuario[]>(this.usuarioApi, this.getHttOption())
                       .pipe(
                               catchError(
                                           this.errorHandler
@@ -119,13 +119,26 @@ export class UsuarioService {
     */
   public getUsuariosPorNome(nome:String) : Observable<Usuario[]>{
 
-      return this.http.get<Usuario[]>(this.usuarioApi + "/" + nome, httpOption )
+      return this.http.get<Usuario[]>(this.usuarioApi + "/" + nome, this.getHttOption() )
                       .pipe(
                               catchError(
                                           this.errorHandler
                                         )
                             );
   } 
+
+  /**
+   * @description: retorna o httpOption configurado com o token da aplicação no header
+   * @obs Essa função esta sendo usada neste classe pois o sistema lê o token antigo do localstorage
+   *      se fizer no construtor igual acontece nas outras classes.
+   * @returns httpOption configurado com o token de autenticação
+   */
+  private getHttOption(){
+
+     httpOption.headers =  httpOption.headers.set("x-access-token", this.getAuth().getToken() );
+
+     return httpOption;
+  }
 
 
   /**
@@ -135,7 +148,7 @@ export class UsuarioService {
     */
   private errorHandler(error : HttpErrorResponse){
 
-    return throwError( error.error.mensagem || "Servidor com Erro! "+ error.message);
+    return throwError( (error.error.mensagem || error.error) || "Servidor com Erro! "+ error.message);
   } 
 
 }

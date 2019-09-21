@@ -115,4 +115,6 @@ h1{
     background: -ms-linear-gradient(top, #48bcea 31%, #48bcea 51%, #1fa3e5 74%, #1fa3e5 84%);
     background: linear-gradient(to bottom, #48bcea 31%, #48bcea 51%, #1fa3e5 74%, #1fa3e5 84%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#48bcea', endColorstr='#1fa3e5', GradientType=0 );
+
+   
 }

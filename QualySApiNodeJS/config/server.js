@@ -23,7 +23,7 @@ app.use(function(req, res, next){
 
 //Tratamento de erros
 app.use((error, req, res, next)=>{
-    res.status(error.statusCode).json({mensagem:"Erro interno no Servidor => "+error });
+    res.status(error.statusCode).json({mensagem:"Erro interno no Servidor => " + error + "/ status => " + error.statusCode});
 });
 
 //Adicionando o consing na aplicação para os autoloads.

@@ -1,12 +1,12 @@
-// MÓDULOS PADRÕES
+// COMPONENTES PADRÕES
 import { Injectable  } from '@angular/core';
 import { catchError  } from 'rxjs/operators';
 import { Observable  , throwError        } from 'rxjs';
 import { HttpHeaders , HttpErrorResponse , HttpClient } from '@angular/common/http';
-// MÓDULOS PERSONALIZADOS
+// COMPONENTES PERSONALIZADOS
 import { host, port } from './../../rootHost';
 import { Usuario    } from './usuario';
-// MÓDULOS DE TERCEIROS 
+// COMPONENTES DE TERCEIROS 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 const KEY = '#QualySToken';

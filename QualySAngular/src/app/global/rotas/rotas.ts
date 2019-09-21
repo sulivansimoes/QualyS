@@ -23,22 +23,22 @@ export const rotas : Routes = [
 
     // TELAS DE CADASTROS 
     { path: "login"                         , component: LoginComponent                                               },
-    { path: "browser-frequencia"            , component: BrowserFrequenciaComponent        /*, canActivate: [AuthGuard]*/ },
-    { path: "browser-cadastro-formulario"   , component: BrowserCadastroFormularioComponent/*, canActivate: [AuthGuard]*/ },
-    { path: "browser-local"                 , component: BrowserLocalComponent             /*, canActivate: [AuthGuard]*/ },
-    { path: "browser-programa"              , component: BrowserProgramaComponent          /*, canActivate: [AuthGuard]*/ },
-    { path: "browser-usuario"               , component: BrowserUsuarioComponent           /*, canActivate: [AuthGuard]*/ },
-    { path: "browser-inconforme"            , component: BrowserInconformeComponent        /*, canActivate: [AuthGuard]*/ },
-    { path: "browser-local/local"           , component: LocalComponent                    /*, canActivate: [AuthGuard]*/ },
-    { path: "browser-programa/programa"     , component: ProgramaComponent                 /*, canActivate: [AuthGuard]*/ },
-    { path: "browser-frequencia/frequencia" , component: FrequenciaComponent               /*, canActivate: [AuthGuard]*/ },
-    { path: "browser-inconforme/inconforme" , component: InconformeComponent               /*, canActivate: [AuthGuard]*/ },
-    { path: "browser-usuario/usuario"       , component: UsuarioComponent                  /*, canActivate: [AuthGuard]*/ },
-    { path: "browser-cadastro-formulario/cadastro-formulario", component: CadastroFormularioComponent   /*, canActivate: [AuthGuard]*/ },
-    { path: "resposta-formulario"           , component: RespostaFormularioComponent       /*, canActivate: [AuthGuard]*/ },
+    { path: "browser-frequencia"            , component: BrowserFrequenciaComponent        , canActivate: [AuthGuard] },
+    { path: "browser-cadastro-formulario"   , component: BrowserCadastroFormularioComponent, canActivate: [AuthGuard] },
+    { path: "browser-local"                 , component: BrowserLocalComponent             , canActivate: [AuthGuard] },
+    { path: "browser-programa"              , component: BrowserProgramaComponent          , canActivate: [AuthGuard] },
+    { path: "browser-usuario"               , component: BrowserUsuarioComponent           , canActivate: [AuthGuard] },
+    { path: "browser-inconforme"            , component: BrowserInconformeComponent        , canActivate: [AuthGuard] },
+    { path: "browser-local/local"           , component: LocalComponent                    , canActivate: [AuthGuard] },
+    { path: "browser-programa/programa"     , component: ProgramaComponent                 , canActivate: [AuthGuard] },
+    { path: "browser-frequencia/frequencia" , component: FrequenciaComponent               , canActivate: [AuthGuard] },
+    { path: "browser-inconforme/inconforme" , component: InconformeComponent               , canActivate: [AuthGuard] },
+    { path: "browser-usuario/usuario"       , component: UsuarioComponent                  , canActivate: [AuthGuard] },
+    { path: "browser-cadastro-formulario/cadastro-formulario", component: CadastroFormularioComponent     , canActivate: [AuthGuard] },
+    { path: "resposta-formulario"           , component: RespostaFormularioComponent       , canActivate: [AuthGuard] },
     // RELATÓRIOS
-    { path: "relatorio-vistoria-realizada"  , component: VistoriaRealizadaComponent        /*, canActivate: [AuthGuard]*/ }, 
+    { path: "relatorio-vistoria-realizada"  , component: VistoriaRealizadaComponent        , canActivate: [AuthGuard] }, 
     // OUTROS
-    { path: '', redirectTo :  ''            , pathMatch: 'full'                            /*, canActivate: [AuthGuard]*/},
-    { path: '**'                            , component: PageNotFoundComponent             /*, canActivate: [AuthGuard]*/}
+    { path: '', redirectTo :  ''            , pathMatch: 'full'                            , canActivate: [AuthGuard] },
+    { path: '**'                            , component: PageNotFoundComponent             , canActivate: [AuthGuard] }
 ];
