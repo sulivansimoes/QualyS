@@ -69,15 +69,33 @@
             </li>
         </ul>
 
+        <!-- BOTÃO AJUDA -->
+        <button (click)="alternaAjuda()" class="button-ajuda">Ajuda</button>
+
+        <!-- BOTÃO PARA SAIR DA APLICAÇÃO -->
+        <button (click)="chamaConformiacaoDeLogout()" class="button-logout">Logout</button>
+
         <!-- USUARIO LOGADO NO SOFTWARE -->
         <div class="nome-usuario" >
-          [ usuário: {{ nomeUsuario }} ]
+            [ usuário: {{ nomeUsuario }} ]
         </div>
 
-        <!-- BOTÃO AJUDA -->
-        <button (click)="alternaAjuda()">Ajuda</button>
 
+        <!-- MODAL QUANDO O BOTÃO CANCELAR É CLICADO
+        <tela-dois-botoes
+                    [idModal]="idModal"
+                    [tituloModal]="'Aviso'"
+                    [mensagemModal]="'Deseja realmente sair do sistema ?'"
+                    [nomeBotao01]="'Não'"
+                    [nomeBotao02]="'Sim'"
+                    [controleChamada]="chamaLogout"
+                    (botao01Clicado)="fechaModalLogout()"
+                    (botao02Clicado)="logout()"
+        >
+        </tela-dois-botoes> -->
+        
         <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+        <!-- ele tá com problema o modal aparece errado no DOM -->
         <!-- <div *ngIf="errosApi">
             <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
         </div> -->

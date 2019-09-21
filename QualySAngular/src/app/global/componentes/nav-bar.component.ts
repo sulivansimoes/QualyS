@@ -21,6 +21,9 @@ export class NavBarComponent implements OnInit {
   private resultadoApi = null;
   private errosApi     = null;
   private nomeUsuario  = null;
+   // Variaveis usadas no modal de logout
+   private chamaLogout = false; 
+   private idModal     = "idModalLogout" 
   
   static countErros = 1;
 
@@ -127,6 +130,15 @@ export class NavBarComponent implements OnInit {
 
 
   /**
+   * @description: Aciona modal para confirmar logout
+   * @obs O modal está declarado no app.compoent.html por conta hierarquia do DOM
+   */
+  private chamaConformiacaoDeLogout(){
+    $("#idModalLogout").modal();
+  }
+
+
+  /**
    * @description Envia solicitação ao service para pegar todos formulários cadastrados
    */
   private getAllFormularios(){
@@ -149,7 +161,7 @@ export class NavBarComponent implements OnInit {
    *              para que a mensagem sempre seja alterada e assim ouvida pelo ngOnChanges da tela-erros
    * @param error error ocasionado na aplicação. 
    */
-  setErrosApi(error){
+  private setErrosApi(error){
 
     this.errosApi = error + " /countErros: " + NavBarComponent.countErros++  ;
     console.log(this.errosApi);

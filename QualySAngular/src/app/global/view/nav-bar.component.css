@@ -1,5 +1,10 @@
-/* COMPONENTES PADRÕES */
-button{
+/* CLASSES */
+.nome-usuario{
+    color: aliceblue;
+    margin-left: 1rem;
+}
+
+.button-ajuda{
     background:none;
     border:none;
     color: #007bff;
@@ -7,10 +12,12 @@ button{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* CLASSES */
-.nome-usuario{
-    color: aliceblue;
-    margin-right: 1.5rem;
+.button-logout{
+    background:none;
+    border:none;
+    color: #DC143C	;
+    cursor:pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 

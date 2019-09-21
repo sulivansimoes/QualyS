@@ -1,5 +1,8 @@
-import { UsuarioService } from './usuario/model/usuario.service';
+// COMPONENTES PADRÕES
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
+//COMPONENTES PERSONALIZADOS
+import { UsuarioService } from './usuario/model/usuario.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +13,8 @@ export class AppComponent {
 
   private title:String   = 'QualyS';
 
-  constructor(private usuario:UsuarioService){}
+  constructor(private router : Router,
+              private usuario:UsuarioService){}
 
 
   /**
@@ -20,4 +24,27 @@ export class AppComponent {
   private isLogado():boolean{
     return this.usuario.getAuth().isAutenticado();
   }
+
+
+  /**
+   * @description Efetua logout da aplicação
+   * @param {string} idModal id do modal de logout para poder fecha-lo
+   * @obs destrói o token da aplicação
+   */
+  private logout(idModal:string){
+    
+    this.fechaConfirmacaoLogout(idModal);
+    this.usuario.getAuth().logout();
+    this.router.navigate(['login']);
+  }
+
+
+  /**
+   * @description: Fecha modal de logout para cancela-lo
+   */
+  private fechaConfirmacaoLogout(idModal:string){
+
+    $( '#'+ idModal ).modal('hide');
+  }
+
 }

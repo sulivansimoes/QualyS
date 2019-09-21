@@ -3,10 +3,8 @@
     <app-nav-bar></app-nav-bar>
 </div>
 
-
 <!-- GERENCIADOR DE ROTAS -->
 <router-outlet></router-outlet>
-
 
 <!-- MODAIS DE AJUDA -->
 <ajuda-cadastro-local></ajuda-cadastro-local>
@@ -17,6 +15,19 @@
 <ajuda-resposta-formulario></ajuda-resposta-formulario>
 <ajuda-inconforme></ajuda-inconforme>
 <ajuda-menu-principal></ajuda-menu-principal>
+
+<!-- MODAL QUANDO O BOTÃO LOGOUT É CLICADO -->
+<tela-dois-botoes
+    [idModal]="'idModalLogout'"
+    [tituloModal]="'Aviso'"
+    [mensagemModal]="'Deseja realmente sair do sistema ?'"
+    [nomeBotao01]="'Não'"
+    [nomeBotao02]="'Sim'"   
+    (botao01Clicado)="fechaConfirmacaoLogout('idModalLogout')"
+    (botao02Clicado)="logout('idModalLogout')"
+>
+</tela-dois-botoes>
+
 
 <!-- TESTE CHAMANDO COMPONENTES SEPARADAMENTE -->
 <!-- <app-local></app-local> -->
@@ -29,8 +40,6 @@
 <!-- <app-browser-frequencia></app-browser-frequencia> -->
 <!-- <tela-mensagem></tela-mensagem> -->
 <!-- <tela-box></tela-box> -->
-
-<!-- LOGIN -->
 <!-- <login></login> -->
 
 

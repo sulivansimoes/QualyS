@@ -25,7 +25,7 @@ export class TelaDoisBotoesComponent implements OnInit, OnChanges {
   @Input() idModal    :String   = "";
   @Input() tituloModal:String   = "";
   @Input() mensagemModal:String = ""; 
-  @Input() nomeBotao01:String   = "";     
+  @Input() nomeBotao01:String   = ""; 
   @Input() nomeBotao02:String   = "";
   @Input() controleChamada:Boolean=false; //usada como um flag, ele é negado toda hora para ser observado na alteração e dessa forma ser chamado.
   @Output() botao01Clicado :EventEmitter<any> = new EventEmitter();
