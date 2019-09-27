@@ -6,7 +6,7 @@ import { Observable ,throwError  } from 'rxjs';
 // COMPONENTES PERSONALIZADOS
 import { UsuarioService } from './../../usuario/model/usuario.service';
 import { CadastroFormulario } from './cadastro-formulario';
-import { host, port         } from './../../rootHost';
+import { host, port         } from '../../config/rootHost';
 
 const httpOption = {
   headers: new HttpHeaders()
@@ -22,19 +22,16 @@ export class CadastroFormularioService {
   private formularioApi : string = host+port+"/api/formulario"
 
   constructor(private http : HttpClient,
-              private usuario:UsuarioService) {
-                
-    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
-  }
+              private usuario:UsuarioService) { }
 
 
   /**
    * @description Envia solicitação para API salvar o formulario na base de dados
    * @param {CadastroFormulario} formulario formulario a ser salvo na base de dados.
    */
-  salvaFormulario(formulario:CadastroFormulario): Observable<CadastroFormulario> {
+  public salvaFormulario(formulario:CadastroFormulario): Observable<CadastroFormulario> {
 
-    return this.http.post<CadastroFormulario>(this.formularioApi, formulario, httpOption)
+    return this.http.post<CadastroFormulario>(this.formularioApi, formulario, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -47,9 +44,9 @@ export class CadastroFormularioService {
    * @description Envia solicitação para API atualizar o formulario da base de dados.
    * @param {CadastroFormulario} formulario - formulario à ser atualizado
    */
-  atualizaFormulario(formulario:CadastroFormulario): Observable<CadastroFormulario> {
+  public atualizaFormulario(formulario:CadastroFormulario): Observable<CadastroFormulario> {
     
-    return this.http.put<CadastroFormulario>(this.formularioApi, formulario, httpOption)
+    return this.http.put<CadastroFormulario>(this.formularioApi, formulario, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -62,9 +59,9 @@ export class CadastroFormularioService {
    * @description Envia solicitação para API deletar o formulario da base de dados.
    * @param {number} id_formulario - id do formulario à ser deletado.
    */
-  deletaFormulario(id_formulario:number): Observable<CadastroFormulario> {
+  public deletaFormulario(id_formulario:number): Observable<CadastroFormulario> {
     
-    return this.http.delete<CadastroFormulario>(this.formularioApi + "/" + id_formulario, httpOption )
+    return this.http.delete<CadastroFormulario>(this.formularioApi + "/" + id_formulario, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -77,9 +74,9 @@ export class CadastroFormularioService {
   * @description envia solicitação para API consultar todas os formularios cadastrados 
   *              na base de dados.
   */
- getAllCabecalhoFormularios() : Observable<CadastroFormulario[]>{
+ public getAllCabecalhoFormularios() : Observable<CadastroFormulario[]>{
 
-  return this.http.get<CadastroFormulario[]>(this.formularioApi, httpOption)
+  return this.http.get<CadastroFormulario[]>(this.formularioApi, this.getHttOption() )
                   .pipe(
                           catchError(
                                       this.errorHandler
@@ -93,9 +90,9 @@ export class CadastroFormularioService {
   *              na base de dados.
   * @param {number} id - id do formulario que deve ser localizado 
   */
- findItensFormularioPorId(id:number) : Observable<CadastroFormulario[]>{
+ public findItensFormularioPorId(id:number) : Observable<CadastroFormulario[]>{
 
-  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/" + id, httpOption)
+  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/" + id, this.getHttOption() )
                   .pipe(
                           catchError(
                                       this.errorHandler
@@ -109,9 +106,9 @@ export class CadastroFormularioService {
   *              na base de dados.
   * @param {number} id - id do formulario que deve ser localizado 
   */
- findFormularioPorId(id:number) : Observable<CadastroFormulario[]>{
+ public findFormularioPorId(id:number) : Observable<CadastroFormulario[]>{
 
-  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/id/" + id, httpOption)
+  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/id/" + id, this.getHttOption() )
                   .pipe(
                           catchError(
                                       this.errorHandler
@@ -125,9 +122,9 @@ export class CadastroFormularioService {
   * @param {String} descricao, descricao dos formularios a serem localizados. 
   * @returns Observable
   */ 
- getFormulariosPorDescricao(descricao:String) : Observable<CadastroFormulario[]>{
+ public getFormulariosPorDescricao(descricao:String) : Observable<CadastroFormulario[]>{
 
-  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/descricao/" + descricao, httpOption )
+  return this.http.get<CadastroFormulario[]>(this.formularioApi + "/descricao/" + descricao, this.getHttOption() )
                   .pipe(
                           catchError(
                                       this.errorHandler
@@ -137,12 +134,25 @@ export class CadastroFormularioService {
  }
 
 
+  /**
+   * @description: Retorna o httpOption configurado com o token da aplicação no header
+   * @obs Essa função esta sendo usada neste classe para pegar o token em realtime e assim garantir que ele ainda existe no local storage e está atualizado
+   * @returns httpOption configurado com o token de autenticação
+   */
+  private getHttOption(){
+
+    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
+    
+    return httpOption;
+  }    
+  
+
  /**
   * @description Função intercepta e lança erros originados ao tentar fazer solicitações à API.
   * @param error erros gerados ao fazer solicitações à API
   * @returns retorna uma string contendo o erro que acontenceu. 
   */
- errorHandler(error : HttpErrorResponse){
+ private errorHandler(error : HttpErrorResponse){
 
     return throwError( error.error.mensagem || "Servidor com Erro! "+ error.message);
  }

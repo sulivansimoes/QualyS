@@ -5,7 +5,7 @@ import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
 // COMPONENTES PERSONALIZADOS
 import { Usuario                 } from './usuario';
-import { host, port              } from './../../rootHost';
+import { host, port              } from '../../config/rootHost';
 import { AuthService             } from './auth.service';
 
 const httpOption = {
@@ -129,7 +129,7 @@ export class UsuarioService {
 
   /**
    * @description: Retorna o httpOption configurado com o token da aplicação no header
-   * @obs Essa função esta sendo usada neste classe pois o sistema lê o token antigo do localstorage      
+   * @obs Essa função esta sendo usada neste classe para pegar o token em realtime e assim garantir que ele ainda existe no local storage e está atualizado     
    * @returns httpOption configurado com o token de autenticação
    */
   private getHttOption(){

@@ -6,7 +6,7 @@ import { Observable ,throwError  } from 'rxjs';
 // COMPONENTES PERSONALIZADOS
 import { UsuarioService          } from './../../usuario/model/usuario.service';
 import { Frequencia              } from './frequencia';
-import { host, port              } from './../../rootHost';
+import { host, port              } from '../../config/rootHost';
 
 const httpOption = {
   headers: new HttpHeaders()
@@ -22,14 +22,7 @@ export class FrequenciaService {
   private frequenciaApi : string =  host+port+"/api/frequencia"
 
   constructor(private http : HttpClient,
-              private usuario : UsuarioService) { 
-
-    //seto cabeçalho com o token para poder fazer as operações com a API
-    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
-
-    // console.log("Frequencia / httpOption.headers = ", httpOption.headers.keys() );
-    // console.log("Frequencia / x-access-token = ", httpOption.headers.get("x-access-token") );
-  }
+              private usuario : UsuarioService) { }
 
 
  /**
@@ -39,7 +32,7 @@ export class FrequenciaService {
   */
   salvaFrequencia(frequencia : Frequencia) : Observable<Frequencia> {
 
-    return this.http.post<Frequencia>(this.frequenciaApi, frequencia, httpOption)
+    return this.http.post<Frequencia>(this.frequenciaApi, frequencia, this.getHttOption() )
                     .pipe(
                             catchError(
                                          this.errorHandler
@@ -55,7 +48,7 @@ export class FrequenciaService {
   */
   atualizaFrequencia(frequencia : Frequencia): Observable<Frequencia>{
 
-    return this.http.put<Frequencia>(this.frequenciaApi, frequencia, httpOption)
+    return this.http.put<Frequencia>(this.frequenciaApi, frequencia, this.getHttOption() )
                     .pipe(
                            catchError(
                                        this.errorHandler
@@ -71,7 +64,7 @@ export class FrequenciaService {
   */
   deletaFrequencia(idFrequencia : Frequencia) {
 
-    return this.http.delete<Frequencia>( this.frequenciaApi + "/" + idFrequencia, httpOption )
+    return this.http.delete<Frequencia>( this.frequenciaApi + "/" + idFrequencia, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -86,7 +79,7 @@ export class FrequenciaService {
   */
   getAllFrequencias() : Observable<Frequencia[]>{
 
-    return this.http.get<Frequencia[]>(this.frequenciaApi, httpOption)
+    return this.http.get<Frequencia[]>(this.frequenciaApi, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -102,13 +95,29 @@ export class FrequenciaService {
   */
   getFrequenciasPorDescricao(descricao:String) : Observable<Frequencia[]>{
 
-    return this.http.get<Frequencia[]>(this.frequenciaApi + "/" + descricao, httpOption )
+    return this.http.get<Frequencia[]>(this.frequenciaApi + "/" + descricao, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
                                       )
                           );
   }
+
+
+  /**
+   * @description: Retorna o httpOption configurado com o token da aplicação no header
+   * @obs Essa função esta sendo usada neste classe para pegar o token em realtime e assim garantir que ele ainda existe no local storage e está atualizado
+   * @returns httpOption configurado com o token de autenticação
+   */
+  private getHttOption(){
+
+    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
+    
+    // console.log("Frequencia / httpOption.headers = ", httpOption.headers.keys() );
+    // console.log("Frequencia / x-access-token = ", httpOption.headers.get("x-access-token") );
+
+    return httpOption;
+  }  
 
 
  /**

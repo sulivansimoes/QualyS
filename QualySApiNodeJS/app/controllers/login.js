@@ -1,4 +1,4 @@
-//Bibliotecas
+// Bibliotecas
 const validator_interno  = require("./../libs/validators");
 const { msg_status_3_A } = require("./../libs/mensagens_padroes");
 const { msg_status_3_B } = require("./../libs/mensagens_padroes");
@@ -141,7 +141,7 @@ function isAutorizado(originalUrl, perfilUsuario){
     // console.log("rota solicitada: ",originalUrl);
     
     switch(originalUrl){
-        case "local"      : console.log( isAdmin(perfilUsuario) || isVeterinario(perfilUsuario) ); return isAdmin(perfilUsuario) || isVeterinario(perfilUsuario);
+        case "local"      : return isAdmin(perfilUsuario) || isVeterinario(perfilUsuario);
         case "frequencia" : return isAdmin(perfilUsuario) || isVeterinario(perfilUsuario);
         case "programas"  : return isAdmin(perfilUsuario) || isVeterinario(perfilUsuario);
         case "formulario" : return isAdmin(perfilUsuario) || isVeterinario(perfilUsuario);

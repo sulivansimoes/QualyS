@@ -4,7 +4,7 @@ import { catchError  } from 'rxjs/operators';
 import { Observable  , throwError        } from 'rxjs';
 import { HttpHeaders , HttpErrorResponse , HttpClient } from '@angular/common/http';
 // COMPONENTES PERSONALIZADOS
-import { host, port } from './../../rootHost';
+import { host, port } from '../../config/rootHost';
 import { Usuario    } from './usuario';
 // COMPONENTES DE TERCEIROS 
 import { JwtHelperService } from '@auth0/angular-jwt';

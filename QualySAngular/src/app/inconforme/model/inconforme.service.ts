@@ -1,12 +1,12 @@
 // COMPONENTES PADRÕES
 import { Injectable              } from '@angular/core';
-import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders , HttpErrorResponse } from '@angular/common/http';
 import { catchError              } from 'rxjs/operators';
 import { Observable ,throwError  } from 'rxjs';
 // COMPONENTES PERSONALIZADOS
 import { UsuarioService          } from './../../usuario/model/usuario.service';
 import { Inconforme              } from './inconforme';
-import { host, port              } from './../../rootHost';
+import { host, port              } from '../../config/rootHost';
 
 const httpOption = {
   headers: new HttpHeaders()
@@ -22,10 +22,7 @@ export class InconformeService {
   private inconformeApi : string = host+port+"/api/inconforme"
 
   constructor(private http : HttpClient,
-              private usuario:UsuarioService) {
-
-    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
-  }
+              private usuario:UsuarioService) { }
 
 
  /**
@@ -33,9 +30,9 @@ export class InconformeService {
   * @param inconforme objeto do inconforme que deve ser atualizado.
   * @returns Observable
   */
- corrigeInconforme(inconforme : Inconforme): Observable<Inconforme>{
+ public corrigeInconforme(inconforme : Inconforme): Observable<Inconforme>{
 
-    return this.http.put<Inconforme>(this.inconformeApi+"/correcao", inconforme, httpOption)
+    return this.http.put<Inconforme>(this.inconformeApi+"/correcao", inconforme, this.getHttOption() )
                     .pipe(
                           catchError(
                                       this.errorHandler
@@ -48,9 +45,9 @@ export class InconformeService {
   * @param inconforme objeto do inconforme que deve ser atualizado.
   * @returns Observable
   */
- estornaAcaoCorretiva(inconforme : Inconforme): Observable<Inconforme>{
+ public estornaAcaoCorretiva(inconforme : Inconforme): Observable<Inconforme>{
 
-  return this.http.put<Inconforme>(this.inconformeApi+"/estorno", inconforme, httpOption)
+  return this.http.put<Inconforme>(this.inconformeApi+"/estorno", inconforme, this.getHttOption() )
                   .pipe(
                         catchError(
                                     this.errorHandler
@@ -64,9 +61,9 @@ export class InconformeService {
    *              na base de dados pela da de emissão que foram gerados.
    * @param dataEmissao data de emissão do inconforme
    */
-  getInconformesPorEmissao(dataEmissao) : Observable<Inconforme[]>{
+  public getInconformesPorEmissao(dataEmissao) : Observable<Inconforme[]>{
 
-    return this.http.get<Inconforme[]>(this.inconformeApi + "/" + dataEmissao, httpOption )
+    return this.http.get<Inconforme[]>(this.inconformeApi + "/" + dataEmissao, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -79,9 +76,9 @@ export class InconformeService {
    * @description envia solicitação para API consultar todos inconformes cadastrados 
    *              na base de dados.
    */
-  getAllInconformes() : Observable<Inconforme[]>{
+  public getAllInconformes() : Observable<Inconforme[]>{
 
-    return this.http.get<Inconforme[]>(this.inconformeApi, httpOption)
+    return this.http.get<Inconforme[]>(this.inconformeApi, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -89,13 +86,26 @@ export class InconformeService {
                           );
   }
 
+  
+  /**
+   * @description: Retorna o httpOption configurado com o token da aplicação no header
+   * @obs Essa função esta sendo usada neste classe para pegar o token em realtime e assim garantir que ele ainda existe no local storage e está atualizado
+   * @returns httpOption configurado com o token de autenticação
+   */
+  private getHttOption(){
+
+    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
+    
+    return httpOption;
+  }    
+
 
   /**
    * @description Função intercepta e lança erros originados ao tentar fazer solicitações à API.
    * @param error erros gerados ao fazer solicitações à API
    * @returns retorna uma string contendo o erro que acontenceu. 
    */
-  errorHandler(error : HttpErrorResponse){
+  private errorHandler(error : HttpErrorResponse){
 
     return throwError( error.error.mensagem || "Servidor com Erro! "+ error.message);
   } 

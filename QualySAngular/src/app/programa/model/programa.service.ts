@@ -6,7 +6,7 @@ import { Observable ,throwError  } from 'rxjs';
 // MÓDULOS PERSONALIZADOS
 import { UsuarioService          } from './../../usuario/model/usuario.service';
 import { Programa                } from './programa';
-import { host, port              } from './../../rootHost';
+import { host, port              } from '../../config/rootHost';
 
 const httpOption = {
   headers: new HttpHeaders()
@@ -21,19 +21,16 @@ export class ProgramaService {
   private programaApi : string = host+port+"/api/programas"
 
   constructor(private http : HttpClient,
-              private usuario:UsuarioService) { 
-
-    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
-  }
+              private usuario:UsuarioService) { }
 
   /**
    * @description: Envia solicitação para API salvar programa na base de dados.
    * @param   {Programa  } programa -  objeto da programa que deve ser salva.
    * @returns {Observable} observable 
    */
-  salvaPrograma(programa : Programa) : Observable<Programa> {
+  public salvaPrograma(programa : Programa) : Observable<Programa> {
 
-    return this.http.post<Programa>(this.programaApi, programa, httpOption)
+    return this.http.post<Programa>(this.programaApi, programa, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -47,9 +44,9 @@ export class ProgramaService {
   * @param   {Programa  } programa - objeto da programa que deve ser atualizada.
   * @returns {Observable} observable 
   */
-  atualizaPrograma(programa : Programa): Observable<Programa>{
+ public  atualizaPrograma(programa : Programa): Observable<Programa>{
  
-    return this.http.put<Programa>(this.programaApi, programa, httpOption)
+    return this.http.put<Programa>(this.programaApi, programa, this.getHttOption() )
                     .pipe(
                            catchError(
                                        this.errorHandler
@@ -63,9 +60,9 @@ export class ProgramaService {
   * @param   {Number  } idPrograma - id do programa que deve ser deletado
   * @returns {Observable} Observable
   */
-  deletaPrograma(idPrograma : Number) {
+  public deletaPrograma(idPrograma : Number) {
  
-    return this.http.delete<Programa>( this.programaApi + "/" + idPrograma, httpOption )
+    return this.http.delete<Programa>( this.programaApi + "/" + idPrograma, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -78,9 +75,9 @@ export class ProgramaService {
   * @description envia solicitação para API consultar todos os programas cadastradas 
   *              na base de dados.
   */
-  getAllProgramas() : Observable<Programa[]>{
+  public getAllProgramas() : Observable<Programa[]>{
 
-    return this.http.get<Programa[]>(this.programaApi, httpOption)
+    return this.http.get<Programa[]>(this.programaApi, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -94,9 +91,9 @@ export class ProgramaService {
   * @param   {Programa  } descricao - descricao das programas a serem localizadas. 
   * @returns {Observable} Observable
   */
- getProgramasPorDescricao(descricao:String) : Observable<Programa[]>{
+ public getProgramasPorDescricao(descricao:String) : Observable<Programa[]>{
 
-    return this.http.get<Programa[]>(this.programaApi + "/" + descricao, httpOption )
+    return this.http.get<Programa[]>(this.programaApi + "/" + descricao, this.getHttOption() )
                   .pipe(
                           catchError(
                                       this.errorHandler
@@ -104,13 +101,25 @@ export class ProgramaService {
                         );  
   }
 
+  /**
+   * @description: Retorna o httpOption configurado com o token da aplicação no header
+   * @obs Essa função esta sendo usada neste classe para pegar o token em realtime e assim garantir que ele ainda existe no local storage e está atualizado
+   * @returns httpOption configurado com o token de autenticação
+   */
+  private getHttOption(){
+
+    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
+    
+    return httpOption;
+  }    
+
 
   /**
    * @description Função intercepta e lança erros originados ao tentar fazer solicitações à API.
    * @param   {HttpErrorResponse} error - erros gerados ao fazer solicitações à API
    * @returns {String           } retorna uma string contendo o erro que acontenceu. 
    */
-  errorHandler(error : HttpErrorResponse){
+  private errorHandler(error : HttpErrorResponse){
 
     return throwError( error.error.mensagem || "Servidor com Erro! "+ error.message);
   }  

@@ -6,7 +6,7 @@ import { Observable ,throwError  } from 'rxjs';
 // COMPONENTES PERSONALIZADOS
 import { UsuarioService          } from './../../usuario/model/usuario.service';
 import { Local                   } from './local';
-import { host, port              } from './../../rootHost';
+import { host, port              } from '../../config/rootHost';
 
 const httpOption = {
   headers: new HttpHeaders()
@@ -22,10 +22,7 @@ export class LocalService {
   private localApi : string = host+port+"/api/local"
 
   constructor(private http : HttpClient,
-              private usuario:UsuarioService) { 
-
-    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
-  }
+              private usuario:UsuarioService) { }
 
   
  /**
@@ -33,9 +30,9 @@ export class LocalService {
   * @param local objeto da local que deve ser salva.
   * @returns Observable 
   */
-  salvaLocal(local : Local) : Observable<Local> {
+  public salvaLocal(local : Local) : Observable<Local> {
 
-    return this.http.post<Local>(this.localApi, local, httpOption)
+    return this.http.post<Local>(this.localApi, local, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -49,9 +46,9 @@ export class LocalService {
   * @param local objeto da local que deve ser atualizada.
   * @returns Observable
   */
-  atualizaLocal(local : Local): Observable<Local>{
+  public atualizaLocal(local : Local): Observable<Local>{
 
-    return this.http.put<Local>(this.localApi, local, httpOption)
+    return this.http.put<Local>(this.localApi, local, this.getHttOption() )
                     .pipe(
                            catchError(
                                        this.errorHandler
@@ -65,9 +62,9 @@ export class LocalService {
   * @param idLocal id do local que deve ser deletado
   * @returns Observable
   */
-  deletaLocal(idLocal : number) {
+  public deletaLocal(idLocal : number) {
 
-    return this.http.delete<Local>( this.localApi + "/" + idLocal, httpOption )
+    return this.http.delete<Local>( this.localApi + "/" + idLocal, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -80,9 +77,9 @@ export class LocalService {
   * @description envia solicitação para API consultar todas as locais cadastradas 
   *              na base de dados.
   */
-  getAllLocais() : Observable<Local[]>{
+  public getAllLocais() : Observable<Local[]>{
 
-    return this.http.get<Local[]>(this.localApi, httpOption)
+    return this.http.get<Local[]>(this.localApi, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
@@ -96,23 +93,36 @@ export class LocalService {
   * @param descricao, descricao das locais a serem localizadas. 
   * @returns Observable
   */
-  getLocaisPorDescricao(descricao:String) : Observable<Local[]>{
+  public getLocaisPorDescricao(descricao:String) : Observable<Local[]>{
 
-    return this.http.get<Local[]>(this.localApi + "/" + descricao, httpOption )
+    return this.http.get<Local[]>(this.localApi + "/" + descricao, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler
                                       )
                           );
   } 
+
+
+  /**
+   * @description: Retorna o httpOption configurado com o token da aplicação no header
+   * @obs Essa função esta sendo usada neste classe para pegar o token em realtime e assim garantir que ele ainda existe no local storage e está atualizado
+   * @returns httpOption configurado com o token de autenticação
+   */
+  private getHttOption(){
+
+    httpOption.headers =  httpOption.headers.set("x-access-token", this.usuario.getAuth().getToken() );
+    
+    return httpOption;
+  }    
   
-  
+
  /**
   * @description Função intercepta e lança erros originados ao tentar fazer solicitações à API.
   * @param error erros gerados ao fazer solicitações à API
   * @returns retorna uma string contendo o erro que acontenceu. 
   */
-  errorHandler(error : HttpErrorResponse){
+  private errorHandler(error : HttpErrorResponse){
 
     return throwError( error.error.mensagem || "Servidor com Erro! "+ error.message);
   }

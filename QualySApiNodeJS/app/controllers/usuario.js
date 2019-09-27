@@ -102,6 +102,12 @@ function atualizaUsuario(application, request, response){
                             .digest('hex');
     }
 
+    // Garanto que algumas informações do adm nunca serão alteradas.
+    if (dados.cpf === "00000000000"){
+        dados.perfil    = 1;
+        dados.bloqueado = false;
+    }
+
     connection = application.config.dbConnectionPg;      //Resgatando classe do arquivo.
     connection = new connection.ConnectionPostgreSQL();  //Instanciando classe resgatada  
 
