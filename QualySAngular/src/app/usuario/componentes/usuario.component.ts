@@ -61,6 +61,7 @@ export class UsuarioComponent implements OnInit {
           this.usuario.nome      = queryParams['nome'     ];
           this.usuario.email     = queryParams['email'    ];
           this.usuario.bloqueado = queryParams['bloqueado'];
+          this.usuario.perfil    = queryParams['perfil'   ];
 
           this.edita = this.usuario.cpf ? true : false;
 
@@ -114,7 +115,7 @@ export class UsuarioComponent implements OnInit {
       this.camposObrigatorios = false;
     }
 
-    if(  ! validarCpf( this.usuario.cpf ) ){
+    if(  ! validarCpf( this.usuario.cpf ) && this.usuario.cpf != '00000000000' ){
       this.setMensagemAviso("CPF inválido!");
       return;
     }
@@ -157,7 +158,7 @@ export class UsuarioComponent implements OnInit {
    * @description: Envia solicitação para o service salvar usuário
    */
   private salvaUsuario(){
-    console.log(this.usuario)
+    console.log(this.usuario);  
     this.usuarioService.salvaUsuario(this.usuario)
                        .subscribe( 
                                     result =>{ 
@@ -231,6 +232,8 @@ export class UsuarioComponent implements OnInit {
           this.usuario.nome.trim() =='' ||
           this.usuario.nome == null     ||
 
+          this.usuario.perfil == undefined ||
+          this.usuario.perfil == null      ||
 
           this.usuario.bloqueado == undefined ||
           this.usuario.bloqueado == null      ? true : false;

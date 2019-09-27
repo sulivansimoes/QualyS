@@ -39,8 +39,9 @@
     <div>
         <table class="table table-sm bordas-tabela">
             <thead class="thead-dark">
-                <th scope="col">CPF</th>
-                <th scope="col">Nome</th>
+                <th scope="col">CPF   </th>
+                <th scope="col">Nome  </th>
+                <th scope="col">Perfil</th>
                 <th>Editar</th>
                 <th>Excluir</th>
             </thead>
@@ -51,6 +52,10 @@
 
                         <td>{{ usuario.cpf | cpf }}</td>
                         <td>{{ usuario.nome      }}</td>
+                        <td *ngIf="usuario.perfil == 1">Administrador</td>
+                        <td *ngIf="usuario.perfil == 2">Veterinário  </td>
+                        <td *ngIf="usuario.perfil == 3">Supervisor Qualidade</td>
+                        <td *ngIf="usuario.perfil == 4">Responsável Vistoria</td>
                         <!-- EDITAR -->
                         <td class="align-components-browser-center"> 
                             <input type="button" 
@@ -60,7 +65,8 @@
                                                      cpf:usuario.cpf, 
                                                      nome:usuario.nome, 
                                                      email:usuario.email,
-                                                     bloqueado:usuario.bloqueado
+                                                     bloqueado:usuario.bloqueado,
+                                                     perfil:usuario.perfil
                                                     }" 
                             > 
                         </td>

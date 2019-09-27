@@ -7,7 +7,7 @@ module.exports = function(application){
          application.app.controllers.respostaFormulario.salvaRespostaFormulario(application, req, res );
     });
 
-    application.get("/api/resposta-formulario/vistorias-realizadas/:daEmissao/:ateEmissao/:formulario", auth.verifyJWT, function(req, res){
+    application.get("/api/relatorio/resposta-formulario/vistorias-realizadas/:daEmissao/:ateEmissao/:formulario", auth.verifyJWT, function(req, res){
 
         application.app.controllers.respostaFormulario.getVistoriasRealizadas(application, req, res );
    });

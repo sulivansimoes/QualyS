@@ -37,7 +37,7 @@ export class AjudaCadastroFormularioComponent implements OnInit {
     this.campos.push(["Bloqueado", "Indica se o formulário está bloqueado ( ativo ) ou não na empresa, caso esteja bloqueado não será permitido o uso do cadastro posteriormente."]);
     //ITENS
     this.campos.push(["Item", "Código identificador da pergunta do formulário, este campo é preenchido automaticamente pelo sistema."]);
-    this.campos.push(["Pergunta", "Pergunta do formulário que deverá ser respondida pelo responsável no momento da vistoria"]);
+    this.campos.push(["Pergunta", "Pergunta do formulário que deverá ser respondida pelo responsável no momento da vistoria [não suar o ponto de interrogação '?']"]);
     this.campos.push(["Bloqueado", "Indica se a pergunta especifica do formulário que deverá ser respondida pelo responsável no momento da vistoria está bloqueada ( Ativa ) ou não na empresa, caso esteja bloqueado não será apresentada no momento de responder o formulário de perguntas."]);
   }
 

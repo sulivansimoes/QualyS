@@ -5,8 +5,15 @@ const { msg_status_3_B } = require("./../libs/mensagens_padroes");
 const jwt                = require('jsonwebtoken');
 const crypto             = require("crypto");
 
+// Constantes
+const PERFIL_ADMIN       = 1;
+const PERFIL_VETERINARIO = 2;
+const PERFIL_SUPERVISOR  = 3;
+const PERFIL_VISTORIA    = 4;
+
 // carrega arquivos .env & .env.exemple que estão na raiz do projeto.
 require("dotenv-safe").config();
+
 
 /**
  * @description : Pega dados do request, valida, e envia para o model pesquisar e assim ver se pode efetuar login.
@@ -67,13 +74,14 @@ function login(application, request, response){
             //monta payload
             let cpf   = usuario[0].cpf;
             let nome  = usuario[0].nome;
+            let perfil= usuario[0].perfil;
             
-            let token = jwt.sign({ cpf, nome }, process.env.SECRET, {
+            let token = jwt.sign({ cpf, nome, perfil }, process.env.SECRET, {
                 expiresIn: "2h" // expires in 4h horas
             });
             response.status(200).json({ auth: true, token: token });
 
-        }else {
+        }else{
 
             response.status(401).json({
                                         status:3,
@@ -86,6 +94,7 @@ function login(application, request, response){
     }));
 
 }
+
 
 /**
  * @description : Pega os dados do request e válida se existe o token necessário para poder prosseguir com a aplicação.
@@ -105,9 +114,84 @@ function verifyJWT(request, response, next){
         if (err) return response.status(500).json({ auth: false, mensagem: 'Falha ao autenticar o token. Faça login novamente!' });
         
         // Se tudo estiver ok, salva no request para uso posterior
-        request.cpf = decoded.cpf;
+        // request.cpf = decoded.cpf;
+
+        //Se tudo estiver ok, verifico se usuário tem autorização para acessar a rota.
+        if( ! isAutorizado(request.originalUrl, decoded.perfil ) ){
+
+            return response.status(500).json({ auth: true, mensagem: 'Usuário: '+ decoded.nome + ' não tem persmissão para acessar rotina!' });
+        }
+
         next();
     });
+}
+
+
+
+/**
+ * @description: Verifica se usuário tem persmissão para acessar a rota em questão.
+ * @param {*} originalUrl url que foi requisitada.
+ * @returns true caso o usuário tenha autoriazação, false caso contrário.
+ */
+function isAutorizado(originalUrl, perfilUsuario){
+
+    //Os acessos são baseados nas ROTINAS, ou seja, todos acessos de um Router
+    originalUrl = originalUrl.split("/")[2];
+    
+    // console.log("rota solicitada: ",originalUrl);
+    
+    switch(originalUrl){
+        case "local"      : console.log( isAdmin(perfilUsuario) || isVeterinario(perfilUsuario) ); return isAdmin(perfilUsuario) || isVeterinario(perfilUsuario);
+        case "frequencia" : return isAdmin(perfilUsuario) || isVeterinario(perfilUsuario);
+        case "programas"  : return isAdmin(perfilUsuario) || isVeterinario(perfilUsuario);
+        case "formulario" : return isAdmin(perfilUsuario) || isVeterinario(perfilUsuario);
+        case "relatorio"  : return isAdmin(perfilUsuario) || isVeterinario(perfilUsuario) || isSupervisor(perfilUsuario);
+        case "inconforme" : return isAdmin(perfilUsuario) || isSupervisor(perfilUsuario);
+        case "usuario"    : return isAdmin(perfilUsuario) ;
+        case "resposta-formulario" : return  isAdmin(perfilUsuario) || isVistoria(perfilUsuario);
+    }
+
+    return false;
+}
+
+
+/**
+ * @description: Verifica se o usuário é Administrador
+ * @param {*} perfilUsuario, perfil do usuário que deve ser verificado
+ * @returns true caso for administrador, false caso contrário
+ */
+function isAdmin(perfilUsuario){
+    return (perfilUsuario == PERFIL_ADMIN);
+}
+
+
+/**
+ * @description: Verifica se o usuário é Veterinário
+ * @param {*} perfilUsuario, perfil do usuário que deve ser verificado
+ * @returns true caso for veterinário, false caso contrário
+ */
+function isVeterinario(perfilUsuario){
+    return (perfilUsuario == PERFIL_VETERINARIO);
+}
+
+
+/**
+ * @description: Verifica se o usuário é Supervisor de qualidade
+ * @param {*} perfilUsuario, perfil do usuário que deve ser verificado
+ * @returns true caso for supervisor, false caso contrário
+ */
+function isSupervisor(perfilUsuario){
+    return (perfilUsuario == PERFIL_SUPERVISOR);
+}
+
+
+/**
+ * @description: Verifica se o usuário é responsável por realizar vistorias
+ * @param {*} perfilUsuario, perfil do usuário que deve ser verificado
+ * @returns true caso for responsável por realizar vistorias, false caso contrário
+ */
+function isVistoria(perfilUsuario){
+    return (perfilUsuario == PERFIL_VISTORIA);
 }
 
 

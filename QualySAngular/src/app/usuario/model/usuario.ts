@@ -9,6 +9,7 @@ export class Usuario{
     public senha :string;
     public assinatura :String;
     public bloqueado  :boolean;
+    public perfil:number;
 
     /**
      * @constructor
@@ -18,9 +19,10 @@ export class Usuario{
      * @param {string } senha - Senha do usuário
      * @param {String } assinatura - Imagem encriptada em base64 da assinatura do usuário.
      * @param {boolean} bloqueado  - Flag do cadastro, indicando se está ou não bloqueado.
+     * @param {perfil } perfil - Informe o perfil (nivel de acesso) que o usuário possui.
      */
     constructor(cpf?:string  , nome?:string        , email?:string,
-                senha?:string, assinatura?:String, bloqueado?:boolean,){
+                senha?:string, assinatura?:String, bloqueado?:boolean, perfil?:number){
         
         this.cpf   = cpf;
         this.nome  = nome;
@@ -28,6 +30,7 @@ export class Usuario{
         this.senha = senha;
         this.assinatura = assinatura;
         this.bloqueado  = (bloqueado == null) ? false : bloqueado;
+        this.perfil = perfil;
     }
 
     /**
@@ -68,6 +71,14 @@ export class Usuario{
      */
     public getAssinatura():String{
         return this.assinatura;
+    }
+
+    /**
+     * @description Retorna o perfil do usuário
+     * @return {number} ( perfil ) - perfil do usuário  
+     */
+    public getPerfil(){
+        return this.perfil;
     }
 
     /**
@@ -125,4 +136,13 @@ export class Usuario{
     public setBloqueado(bloqueado:boolean):void {
         this.bloqueado = bloqueado;
     }
+
+    /**
+     * @description Seta perfil do usuário.
+     * @param {number} perfil - numero indicando perfil do usuário de 1 a 4
+     */
+    public setPerfil(perfil):void{
+        this.perfil = perfil;
+    }
+
 }

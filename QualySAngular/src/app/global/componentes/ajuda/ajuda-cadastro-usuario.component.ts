@@ -29,6 +29,7 @@ export class AjudaCadastroUsuarioComponent implements OnInit {
     this.campos.push(["Nome"      , "Nome completo do usuário do sistema"]);
     this.campos.push(["Senha"     , "Senha que usuário fará login no sistema."]);
     this.campos.push(["E-mail"    , "Informe o e-mail do usuário."]);
+    this.campos.push(["Perfil"    , "Informe o perfil de acesso ao sistema do Usuário"]);
     this.campos.push(["Bloqueado" , "Informe se o usuário se encontra bloqueado ( Ativo ) ou não no sistema."]);
     this.campos.push(["Assinatura", "Informe uma imagem contendo a assinatura do usuário. [Este campo é obrigatório apenas na inclusão do usuário]"]);
 

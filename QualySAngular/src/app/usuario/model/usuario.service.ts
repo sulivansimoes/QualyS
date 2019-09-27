@@ -128,9 +128,8 @@ export class UsuarioService {
   } 
 
   /**
-   * @description: retorna o httpOption configurado com o token da aplicação no header
-   * @obs Essa função esta sendo usada neste classe pois o sistema lê o token antigo do localstorage
-   *      se fizer no construtor igual acontece nas outras classes.
+   * @description: Retorna o httpOption configurado com o token da aplicação no header
+   * @obs Essa função esta sendo usada neste classe pois o sistema lê o token antigo do localstorage      
    * @returns httpOption configurado com o token de autenticação
    */
   private getHttOption(){
@@ -148,7 +147,7 @@ export class UsuarioService {
     */
   private errorHandler(error : HttpErrorResponse){
 
-    return throwError( (error.error.mensagem || error.error) || "Servidor com Erro! "+ error.message);
+    return throwError( error.error.mensagem || "Servidor com Erro! "+ error.message);
   } 
 
 }

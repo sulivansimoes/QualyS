@@ -127,6 +127,15 @@ function deletaUsuario(application, request, response){
     //-----------------------------------------------------
     // Validando informações 
     //-----------------------------------------------------
+    if (cpf === "00000000000"){
+
+        response.status(422).json({ 
+                                    status:3, 
+                                    mensagem: "Usuário Administrador não pode ser excluído",
+                                 });
+        return; 
+    }
+
     erros_aux = validator_interno.isObjectEmpty( { cpf: cpf }, [] );
     if( erros_aux ){
 

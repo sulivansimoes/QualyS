@@ -19,7 +19,8 @@ const httpOption = {
 })
 export class RespostaFormularioService {
 
-  private respostaFormularioApi : string = host+port+"/api/resposta-formulario"
+  private respostaFormularioApi : string = host+port+"/api/resposta-formulario";
+  private relatorioApi : string  = host+port+"/api/relatorio/resposta-formulario";
 
   constructor(private http : HttpClient,
               private usuario:UsuarioService) {
@@ -53,7 +54,7 @@ export class RespostaFormularioService {
   */
  getVistoriasRealizadas(daEmissao, ateEmissao, formulario) : Observable<RespostaFormulario[]> {
    
-  return this.http.get<RespostaFormulario[]>(this.respostaFormularioApi + "/vistorias-realizadas/"+daEmissao+"/"+ateEmissao+"/"+formulario, httpOption)
+  return this.http.get<RespostaFormulario[]>(this.relatorioApi + "/vistorias-realizadas/"+daEmissao+"/"+ateEmissao+"/"+formulario, httpOption)
                   .pipe(
                           catchError(
                                       this.errorHandler

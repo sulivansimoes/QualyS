@@ -75,20 +75,21 @@
                                class="form-control"
                         >
                     </div>
-                    <!-- BLOQUEADO -->
-                    <div class="form-group espaco">
-                        <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
+                    <!-- PERFIL DO USUÁRIO -->
+                    <div class="form-group preenchimentoObrigatorio">
+                        <label for="inputPerfil">Perfil</label>
 
-                        <select id   = "inputBloqueado" 
-                                name = "inputBloqueado" 
+                        <select id   = "inputPerfil"
+                                name = "inputPerfil" 
                                 required 
-                                [(ngModel)]="usuario.bloqueado" 
+                                [(ngModel)]="usuario.perfil" 
                                 [class.is-invalid] = "camposObrigatorios"
-                                class="form-control"
+                                class="form-control" 
                         >
-
-                            <option value=false>Não</option>
-                            <option value=true>Sim</option>
+                            <option value=1>Administrador       </option>
+                            <option value=2>Veterinário         </option>
+                            <option value=3>Supervisor Qualidade</option>
+                            <option value=4>Resposável Vistoria </option>
                         </select>
                     </div>
                     <!-- ASSINATURA -->
@@ -103,12 +104,23 @@
                                (change)="fileSelected($event)"                               
                                class="form-control"
                         >
-                        <!-- CASO TENHA UMA ASSINATURA EXIBE A IMAGEM -->
-                        <!-- <div>
-                            <input type="image">
-                        </div> -->
                     </div>
+                    <!-- BLOQUEADO -->
+                    <div class="form-group espaco">
+                        <label for="inputBloqueado" class="preenchimentoObrigatorio">Bloqueado</label>
+    
+                        <select id   = "inputBloqueado" 
+                                name = "inputBloqueado" 
+                                required 
+                                [(ngModel)]="usuario.bloqueado" 
+                                [class.is-invalid] = "camposObrigatorios"
+                                class="form-control"
+                        >
 
+                            <option value=false>Não</option>
+                            <option value=true>Sim</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </fieldset>
