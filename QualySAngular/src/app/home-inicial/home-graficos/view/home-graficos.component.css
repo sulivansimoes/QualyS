@@ -1,0 +1,21 @@
+.embrulho-grafico{
+    margin-top: 8rem;
+    /* margin-top: 2rem; */
+    margin-bottom: 2rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
+}
+
+.titulo-grafico{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.5rem;
+    /* border-bottom-width: 0.03px; */
+    border-bottom: 1px solid #eee;
+    /* border-radius: 4px; */
+}
+
+.grafico{
+    float: left !important;
+    border-bottom: 1px solid #eee;
+}
+

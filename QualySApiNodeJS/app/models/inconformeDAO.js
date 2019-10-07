@@ -74,6 +74,54 @@ class inconformeDAO{
         topConnection.executaQuery(cSql, aValues,  response, msg_status_1_D, msg_status_2_D);      
     }
 
+
+    /**
+     * @description Consulta a quantidade de inconformes gerados, resolvidos e pendentes
+     * @param ano, ano que será considerado na consulta, este diferente do dia e mes, é de preenchimento obrigatório
+     * @param mes, mes que será considerado na consulta
+     * @param dia, dia que será considerado na consulta
+     * @param response, objeto de response da requisição.
+     */
+    getInconformesGeradosResolvidosPendentes(ano, mes, dia,response){
+
+        let cSql =  " SELECT "
+            cSql += "    ( "
+            cSql += "       SELECT COUNT(id_cadastro_formulario) FROM inconformes "
+            cSql += "       WHERE EXTRACT(year FROM emissao)  = $1 "        	
+            if(mes){cSql+= "  AND EXTRACT(month FROM emissao) = $2 "       }
+            if(dia){cSql+= "  AND EXTRACT(day FROM emissao)   = $3 "       }
+            cSql += "    ) AS inconformes_gerados_periodo, "
+            cSql += "    TEMP.total_inconformes_gerados,"
+            cSql += "    TEMP.inconformes_resolvidos,"
+            cSql += "    TEMP.inconformes_pendentes"
+            cSql += " FROM  (  "       
+            cSql += "           SELECT "
+            cSql += "                COUNT(id_cadastro_formulario) AS total_inconformes_gerados,"
+            cSql += "                ("
+            cSql += "                    SELECT COUNT(id_cadastro_formulario) FROM inconformes"
+            cSql += "                    WHERE data_correcao IS NOT NULL      "  
+            cSql += "                      AND EXTRACT(year FROM data_correcao)  = $1 "          	
+            if(mes){cSql+= "               AND EXTRACT(month FROM data_correcao) = $2 "       }
+            if(dia){cSql+= "               AND EXTRACT(day FROM data_correcao)   = $3 "       }
+            cSql += "                ) AS inconformes_resolvidos,"
+            cSql += "                ( "
+            cSql += "                    SELECT COUNT(id_cadastro_formulario) FROM inconformes "
+            cSql += "                    WHERE data_correcao IS NULL  	"
+            cSql += "                      AND EXTRACT(year FROM emissao)  = $1 "          	
+            if(mes){cSql+= "               AND EXTRACT(month FROM emissao) = $2 "            }
+            if(dia){cSql+= "               AND EXTRACT(day FROM emissao)   = $3 "            }            
+            cSql += "                ) AS inconformes_pendentes"
+            cSql += "           FROM inconformes    " 	  	            
+            cSql += " ) AS TEMP";
+        
+        let aValues =  [ano];
+        if(mes) { aValues.push(mes) };
+        if(dia) { aValues.push(dia) };
+
+        topConnection.executaQuery(cSql, aValues,  response, msg_status_1_D, msg_status_2_D);      
+    }    
+
+
     /**
      * @description Atualiza inconforme fazendo atualização necessária para que o mesmo fique na situação de CORRIGIDO.
      * @param {response} response, objeto de response da requisição.

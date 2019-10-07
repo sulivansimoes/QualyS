@@ -1,23 +1,24 @@
-import { AuthGuardService as AuthGuard } from './../../usuario/model/auth-guard.service';
 // COMPONENTES PADRÕES
 import { Routes } from '@angular/router';
 // COMPONENTES PERSONALIZADOS
-import { LoginComponent              } from './../../usuario/componentes/login.component';
-import { PageNotFoundComponent       } from './../componentes/page-not-found.component';
-import { UsuarioComponent            } from '../../usuario/componentes/usuario.component';
-import { ProgramaComponent           } from '../../programa/componentes/programa.component';
-import { InconformeComponent         } from './../../inconforme/componentes/inconforme.component';
-import { LocalComponent              } from '../../local/componentes/local.component';
-import { FrequenciaComponent         } from '../../frequencia/componentes/frequencia.component';
-import { CadastroFormularioComponent } from '../../cadastro-formulario/componentes/cadastro-formulario.component';
-import { BrowserFrequenciaComponent  } from './../../frequencia/componentes/browser-frequencia.component';
-import { BrowserLocalComponent       } from './../../local/componentes/browser-local.component';
-import { BrowserProgramaComponent    } from './../../programa/componentes/browser-programa.component';
-import { BrowserUsuarioComponent     } from './../../usuario/componentes/browser-usuario.component';
-import { BrowserInconformeComponent  } from './../../inconforme/componentes/browser-inconforme.component';
-import { RespostaFormularioComponent } from './../../resposta-formulario/componentes/resposta-formulario.component';
+import { AuthGuardService as AuthGuard } from './../../usuario/model/auth-guard.service';
+import { LoginComponent                } from './../../usuario/componentes/login.component';
+import { PageNotFoundComponent         } from './../componentes/page-not-found.component';
+import { UsuarioComponent              } from '../../usuario/componentes/usuario.component';
+import { ProgramaComponent             } from '../../programa/componentes/programa.component';
+import { InconformeComponent           } from './../../inconforme/componentes/inconforme.component';
+import { LocalComponent                } from '../../local/componentes/local.component';
+import { FrequenciaComponent           } from '../../frequencia/componentes/frequencia.component';
+import { CadastroFormularioComponent   } from '../../cadastro-formulario/componentes/cadastro-formulario.component';
+import { BrowserFrequenciaComponent    } from './../../frequencia/componentes/browser-frequencia.component';
+import { BrowserLocalComponent         } from './../../local/componentes/browser-local.component';
+import { BrowserProgramaComponent      } from './../../programa/componentes/browser-programa.component';
+import { BrowserUsuarioComponent       } from './../../usuario/componentes/browser-usuario.component';
+import { BrowserInconformeComponent    } from './../../inconforme/componentes/browser-inconforme.component';
+import { RespostaFormularioComponent   } from './../../resposta-formulario/componentes/resposta-formulario.component';
 import { BrowserCadastroFormularioComponent } from './../../cadastro-formulario/componentes/browser-cadastro-formulario.component';
-import { VistoriaRealizadaComponent  } from './../../relatorio/componentes/vistoria-realizada.component';
+import { VistoriaRealizadaComponent    } from './../../relatorio/componentes/vistoria-realizada.component';
+import { HomeGraficosComponent         } from './../../home-inicial/home-graficos/componentes/home-graficos.component';
 
 export const rotas : Routes = [
 
@@ -36,6 +37,8 @@ export const rotas : Routes = [
     { path: "browser-usuario/usuario"       , component: UsuarioComponent                  , canActivate: [AuthGuard] },
     { path: "browser-cadastro-formulario/cadastro-formulario", component: CadastroFormularioComponent     , canActivate: [AuthGuard] },
     { path: "resposta-formulario"           , component: RespostaFormularioComponent       , canActivate: [AuthGuard] },
+    // HOME DE GRAFICOS
+    { path: "home-grf"                      , component: HomeGraficosComponent             , canActivate: [AuthGuard] },
     // RELATÓRIOS
     { path: "relatorio-vistoria-realizada"  , component: VistoriaRealizadaComponent        , canActivate: [AuthGuard] }, 
     // OUTROS

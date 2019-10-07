@@ -185,6 +185,43 @@ class RespostaFormularioDAO{
         topConnection.executaQuery(cSql, aValues, response, msg_status_1_D, msg_status_2_D);
     }
 
+
+    /**
+     * @description: Consulta vistorias que foram geradas e as vistorias que geraram não conformidades
+     * @param ano, ano que será considerado na consulta, este diferente do dia e mes, é de preenchimento obrigatório
+     * @param mes, mes que será considerado na consulta
+     * @param dia, dia que será considerado na consulta
+     * @param response, objeto de response da requisição.
+     */
+    getVistoriasRealizadasEVistoriasComInconformes(ano, mes, dia, response){
+        
+        // Query retorna as vistorias que geraram inconformes (
+        // Obs: Caso uma vistoria tenha gerado mais de um inconforme, ela será considerada apenas uma vez.
+        let cSql =  " SELECT "
+            cSql += "      COUNT(TEMP.quantidade_vistorias) AS total_vistorias, "
+            cSql += "      ( "
+            cSql += "         SELECT COUNT(TMP.vistorias_com_inconformes) FROM ( "
+            cSql += "      										         	    SELECT COUNT(id_cadastro_formulario)  AS vistorias_com_inconformes FROM inconformes "
+            cSql += "                                                            WHERE EXTRACT(year FROM emissao)  = $1 "
+            if(mes){cSql+= "                                                       AND EXTRACT(month FROM emissao) = $2 "         }
+            if(dia){cSql+= "                                                       AND EXTRACT(day FROM emissao)   = $3 "         }
+            cSql += "      											            GROUP BY id_cadastro_formulario, emissao, hora "
+            cSql += "  												          ) AS TMP "
+            cSql += "      ) AS  vistorias_com_inconfonformes "               
+            cSql += " FROM ( "
+            cSql += "	       SELECT COUNT(id_cadastro_formulario) AS quantidade_vistorias FROM resposta_formulario "
+            cSql += "           WHERE EXTRACT(year FROM emissao)  = $1 "
+            if(mes){cSql+= "          AND EXTRACT(month FROM emissao) = $2 "           }
+            if(dia){cSql+= "          AND EXTRACT(day FROM emissao)   = $3 "           }
+            cSql += "	       GROUP BY id_cadastro_formulario, emissao, hora "
+            cSql += "       ) AS TEMP";
+
+        let aValues =  [ano];
+        if(mes) { aValues.push(mes) };
+        if(dia) { aValues.push(dia) };
+
+        topConnection.executaQuery(cSql, aValues, response, msg_status_1_D, msg_status_2_D);        
+    }
 }
 
 

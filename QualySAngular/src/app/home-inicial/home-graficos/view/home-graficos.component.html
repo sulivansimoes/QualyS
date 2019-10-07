@@ -1,0 +1,86 @@
+<!-- OPÇÕES / CHECKBOX -->
+<div>
+    <div style="float: left;">
+        <legend for="pordia" style="margin-left: 10px">Dia</legend>
+
+        <input type="checkbox" 
+               name="pordia" 
+               id="pordia" 
+               style="margin-left: 10px" 
+               [(ngModel)]="diaSelecionado" 
+               (click)="atualizaGraficos()"
+        >
+    </div>
+    <div style="float: left">
+        <legend for="pormes" style="margin-left: 10px" checked>Mês</legend>
+
+        <input type="checkbox" 
+               name="pormes" 
+               id="pormes" 
+               style="margin-left: 10px"
+               [(ngModel)]="mesSelecionado" 
+               [disabled]="diaSelecionado" 
+               (click)="atualizaGraficos()"
+        >
+    </div>
+    <div style="float: left;">
+        <legend for="porano" style="margin-left: 10px">Ano</legend>
+        
+        <input type="checkbox" 
+               name="porano" 
+               id="porano" 
+               style="margin-left: 10px"
+               [(ngModel)]="anoSelecionado" 
+               [disabled]="true" 
+               (click)="atualizaGraficos()"
+        >
+    </div>
+</div>
+
+<!-- COMBOS -->
+<!-- DIA -->
+<div class="form-group" style="float: left; margin-left: 20px">
+    <legend for="dia">Dia</legend>
+
+    <select class="form-control" 
+            id="dia" 
+            (change)="atualizaGraficos()" 
+            [(ngModel)]="dia_escolhido"
+    >
+        <option *ngFor="let dia of dias" [ngValue]="dia"> {{dia}}</option>
+    </select>
+</div>
+
+<!-- MES -->
+<div class="form-group" style="float: left;">
+    <legend for="mes">Mês</legend>
+
+    <select class="form-control" 
+            id="mes" 
+            (change)="atualizaGraficos()"
+            [(ngModel)]="mes_escolhido"
+    >
+        <option *ngFor="let mes of meses; index as i " [ngValue]="i+1"> {{mes}}</option>
+    </select>
+</div>
+
+<!-- ANO -->
+<div class="form-group" style="float: left">
+    <legend for="ano">Ano</legend>
+
+    <select class="form-control" 
+            id="ano" 
+            (change)="atualizaGraficos(1)"
+            [(ngModel)]="ano_escolhido"
+    >
+        <option *ngFor="let ano of anos" [ngValue]="ano"> {{ano}}</option>
+    </select>
+</div>
+
+
+<!-- GRAFICOS -->
+<div class="embrulho-grafico">
+    <p class="titulo-grafico">Visão geral das vistorias</p>
+    <google-chart *ngIf ="this.columnChart.dataTable.length > 1" [data]="columnChart" class="grafico"></google-chart>
+    <google-chart *ngIf ="this.pieChart.dataTable.length > 1" [data]="pieChart" class="grafico"></google-chart>
+</div>

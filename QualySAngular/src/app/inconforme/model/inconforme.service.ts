@@ -20,6 +20,7 @@ const httpOption = {
 export class InconformeService {
 
   private inconformeApi : string = host+port+"/api/inconforme"
+  private relatorioApi : string  = host+port+"/api/relatorio/inconforme";
 
   constructor(private http : HttpClient,
               private usuario:UsuarioService) { }
@@ -64,6 +65,24 @@ export class InconformeService {
   public getInconformesPorEmissao(dataEmissao) : Observable<Inconforme[]>{
 
     return this.http.get<Inconforme[]>(this.inconformeApi + "/" + dataEmissao, this.getHttOption() )
+                    .pipe(
+                            catchError(
+                                        this.errorHandler
+                                      )
+                          );
+  }
+
+
+  /**
+   * @description envia solicitação para API consultar a quantidade de inconformes gerados, resolvidos e pendentes
+   *              na base de dados pela da de emissão que foram gerados.
+   * @param ano, ano que deverá ser consultado, o ano não deve vir null, ao contrário dos outros parametros, este é obrigatório. 
+   * @param mes, mes que deverá ser consultado, se passado null o mês não será considarado.
+   * @param dia, dia que deverá ser consultado, se passado null o dia não será considarado.
+   */
+  public getInconformesGeradosResolvidosPendentes(ano, mes?,dia?) : Observable<Inconforme[]>{
+
+    return this.http.get<Inconforme[]>(this.relatorioApi+"/"+ano+"/"+mes+"/"+dia, this.getHttOption() )
                     .pipe(
                             catchError(
                                         this.errorHandler

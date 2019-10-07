@@ -108,14 +108,58 @@ function getVistoriasRealizadas(application, request, response){
 
 
 /**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar
+ * @param : application, aplicação servidora do express.
+ * @param : request, objeto do request.
+ * @param : response, objeto do response.
+ */
+function getVistoriasRealizadasEVistoriasComInconformes(application, request, response){
+
+    let dia  = request.params.dia;
+    let mes  = request.params.mes;
+    let ano  = request.params.ano;
+    let modelRespostasFormulario  = null;
+    let erros_aux                 = null;
+    let erros                     = [];
+
+    //-----------------------------------------------------
+    // Validando informações 
+    //-----------------------------------------------------
+    erros_aux = validator_interno.isObjectEmpty({ ano:ano });
+    if( erros_aux ){
+
+        erros.push(erros_aux);
+        erros_aux = null;
+    }
+
+    if (erros.length > 0){
+
+        response.status(422).json({ 
+                                    status:3, 
+                                    mensagem: msg_status_3_A,
+                                    campos_invalidos: erros
+                                 });
+        return; 
+    }
+
+    //faço uma conversão rapida / fazer algo melhor aqui depois.
+    if(dia === 'null'){
+        dia = null;
+    }   
+    if(mes === 'null'){
+        mes = null;
+    }
+          
+    modelRespostasFormulario = new application.app.models.respostaFormularioDAO();   
+    modelRespostasFormulario.getVistoriasRealizadasEVistoriasComInconformes(ano, mes, dia,response);
+}
+
+
+/**
  * Exportando funções 
  */
 module.exports = {
     salvaRespostaFormulario,
     getVistoriasRealizadas ,
-    // deletaFormulario  ,
-    // getAllCabecalhoFormularios,
-    // findItensFormularioPorId  ,
-    // getCabecalhoFormularioPorDescricao,
-    // findFormularioPorId
+    getVistoriasRealizadasEVistoriasComInconformes
 }

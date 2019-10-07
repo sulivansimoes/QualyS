@@ -38,6 +38,33 @@ function getInconformesPorDataDeEmissao(application, request, response){
 
 
 /**
+ * @description : Pega dados do request, valida, e envia para o model pesquisar.
+ * @param  application, aplicação servidora do express.
+ * @param  request, objeto do request.
+ * @param  response, objeto do response.
+ */
+function getInconformesGeradosResolvidosPendentes(application, request, response){
+
+    let dia =  request.params.dia;
+    let mes =  request.params.mes;
+    let ano =  request.params.ano;
+    let modelInconforme       = null;
+
+    //faço uma conversão rapida / fazer algo melhor aqui depois.
+    if(dia === 'null'){
+       dia = null;
+    }   
+    if(mes === 'null'){
+        mes = null;
+    }
+
+    modelInconforme = new application.app.models.inconformeDAO();   //Instanciando model da inconforme
+    modelInconforme.getInconformesGeradosResolvidosPendentes(ano, mes, dia, response);       
+
+}
+
+
+/**
  * @description : Pega dados do request, valida, e envia para o model salvar a correção do inconforme.
  * @param : application, aplicação servidora do express.
  * @param : request, objeto do request.
@@ -136,5 +163,6 @@ module.exports = {
     getAllInconformes   ,
     corrigeInconforme   ,
     estornaAcaoCorretiva,
-    getInconformesPorDataDeEmissao
+    getInconformesPorDataDeEmissao,
+    getInconformesGeradosResolvidosPendentes
 }

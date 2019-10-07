@@ -117,7 +117,7 @@ export class NavBarComponent implements OnInit {
         $("#modalAjudaCadastroRespostaFormulario").modal();   
         console.log("nav-bar.component.ts","Modal ajuda resposta formulário");
       break;
-      case "/" :
+      case "/":  case "/home-grf":
 
         $("#modalAjudaMenuPrincial").modal();   
         console.log("[nav-bar.component.ts]","Modal ajuda menu principal");

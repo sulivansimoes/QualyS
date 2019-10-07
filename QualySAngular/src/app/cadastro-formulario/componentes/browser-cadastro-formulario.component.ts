@@ -1,5 +1,5 @@
 //COMPONENTES PADRÕES
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { Subscription       } from 'rxjs';
 //COMPONENTES PERSONALIZADOS
 import { CadastroFormulario        } from './../model/cadastro-formulario';
@@ -15,7 +15,7 @@ import { msgConfirmaExclusao  } from 'src/app/global/funcoes/mensagensPadroes';
     './../../global/view/icones.css'
   ]
 })
-export class BrowserCadastroFormularioComponent implements OnInit {
+export class BrowserCadastroFormularioComponent implements OnInit, OnDestroy {
 
   private inscricao     = new Subscription;
   private resultadoApi  = null;
@@ -41,11 +41,14 @@ export class BrowserCadastroFormularioComponent implements OnInit {
 
 
   /**
-   * destruo a inscrição ao fechar.
+   * destruo variaveis antes de fechar
    */
   ngOnDestroy(){
     
     this.inscricao.unsubscribe();
+    this.resultadoApi = null;
+    this.errosApi     = null;
+    this.formularios  = null;     
   }  
 
 

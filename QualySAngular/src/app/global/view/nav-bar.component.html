@@ -1,7 +1,7 @@
 <!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
 <nav class="navbar  sticky-top navbar-dark bg-dark navbar-expand-lg">
 
-    <a class="navbar-brand" href="#">QualyS</a>
+    <a class="navbar-brand" routerLink="/">QualyS</a>
 
     <!-- BOTÃO PARA RESPONSIVIDADE -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -48,6 +48,11 @@
                                     {{ formulario.descricao }} 
                                 </a>
                             </li>
+
+                            <!-- CASO NÃO FOR ENCONTRADO NENHUM FORMULARIO -->
+                            <li *ngIf="formularios.length == 0" class="dropdown-item" style="color:red">
+                                Nenhum formulário encontrado
+                            </li>   
                          
                         </ul>
                     </li>

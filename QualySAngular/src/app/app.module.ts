@@ -15,16 +15,19 @@ import { UsuarioModule    } from './usuario/usuario.module';
 import { ComponenteGlobalModule   } from './global/componente-global.module';
 import { CadastroFormularioModule } from './cadastro-formulario/cadastro-formulario.module';
 import { RespostaFormularioModule } from './resposta-formulario/resposta-formulario.module';
+// MÓDULOES DE TERCEIROS
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 // COMPONENTES PADRÕES
 import { AppComponent     } from './app.component';
 // COMPONENTES PERSONALIZADOS
 import { rotas            } from './global/rotas/rotas';
-
+import { HomeGraficosComponent } from './home-inicial/home-graficos/componentes/home-graficos.component';
 const appRoutes = rotas
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeGraficosComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,9 @@ const appRoutes = rotas
     UsuarioModule,
     CadastroFormularioModule,
     RespostaFormularioModule,
-    RelatorioModule
+    RelatorioModule,
+
+    Ng2GoogleChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

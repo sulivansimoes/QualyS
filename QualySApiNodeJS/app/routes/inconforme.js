@@ -23,4 +23,9 @@ module.exports = function(application){
         application.app.controllers.inconforme.getInconformesPorDataDeEmissao(application, req, res );
     });
 
+    application.get("/api/relatorio/inconforme/:ano/:mes/:dia", auth.verifyJWT, function(req, res){
+
+        application.app.controllers.inconforme.getInconformesGeradosResolvidosPendentes(application, req, res );
+    });
+
 }

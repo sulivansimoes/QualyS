@@ -118,9 +118,9 @@ function verifyJWT(request, response, next){
 
         //Se tudo estiver ok, verifico se usuário tem autorização para acessar a rota.
         if( ! isAutorizado(request.originalUrl, decoded.perfil ) ){
-
             return response.status(500).json({ auth: true, mensagem: 'Usuário: '+ decoded.nome + ' não tem persmissão para acessar rotina!' });
         }
+        // console.log(request)
 
         next();
     });

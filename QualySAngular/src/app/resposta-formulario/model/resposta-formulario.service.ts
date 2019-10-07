@@ -60,6 +60,24 @@ export class RespostaFormularioService {
  }
 
 
+ /**
+  * @description envia solicitação para API recuperar as quantidade de vistorias realizadas e quantidade de vistorias que geraram inconformes
+  * @param ano, ano que deverá ser consultado, o ano não deve vir null, ao contrário dos outros parametros, este é obrigatório. 
+  * @param mes, mes que deverá ser consultado, se passado null o mês não será considarado.
+  * @param dia, dia que deverá ser consultado, se passado null o dia não será considarado.
+  * @returns Observable 
+  */
+ public getVistoriasRealizadasEVistoriasComInconformes(ano, mes?,dia?) : Observable<RespostaFormulario[]>{
+
+    return this.http.get<RespostaFormulario[]>(this.relatorioApi + "2" + "/vistorias-realizadas/"+ano+"/"+mes+"/"+dia, this.getHttOption() )
+                    .pipe(
+                            catchError(
+                                        this.errorHandler
+                                      )
+                          ); 
+ }
+
+
   /**
    * @description: Retorna o httpOption configurado com o token da aplicação no header
    * @obs Essa função esta sendo usada neste classe para pegar o token em realtime e assim garantir que ele ainda existe no local storage e está atualizado

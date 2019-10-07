@@ -1,3 +1,4 @@
+import { Perfilusuario } from './../../global/funcoes/perfilUsuario';
 // COMPONENTES PADRÕES
 import { Component, OnInit } from '@angular/core';
 import { Router            } from '@angular/router';
@@ -72,7 +73,19 @@ export class LoginComponent implements OnInit {
 
                                                       console.log("usuario "+cpf+" logado");
                                                       this.usuario.getAuth().salvaToken(resultApi.token);
-                                                      this.router.navigate(['/']);
+
+                                                      //verifica o perfil para redirecionar o usuário para home certa
+                                                      switch(this.usuario.getAuth().decodificaToken().perfil){
+
+                                                        case Perfilusuario.PERFIL_ADMIN : 
+                                                        case Perfilusuario.PERFIL_SUPERVISOR :
+                                                        case Perfilusuario.PERFIL_VETERINARIO:
+                                                          this.router.navigate(['/home-grf']);
+                                                        break;
+
+                                                        default :
+                                                          this.router.navigate(['/']);
+                                                      } 
                                                     }
                                                   },
                                         erros => { 
