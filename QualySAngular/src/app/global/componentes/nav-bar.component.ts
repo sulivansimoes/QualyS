@@ -6,6 +6,7 @@ import { Subscription      } from 'rxjs';
 import { UsuarioService            } from './../../usuario/model/usuario.service';
 import { CadastroFormulario        } from './../../cadastro-formulario/model/cadastro-formulario';
 import { CadastroFormularioService } from './../../cadastro-formulario/model/cadastro-formulario.service';
+import { navigateMenu              } from '../funcoes/functionsComuns';
 
 @Component({
   selector: 'app-nav-bar',
@@ -153,6 +154,14 @@ export class NavBarComponent implements OnInit {
                     this.setErrosApi(error);
                  }
     );
+  }
+
+
+  /**
+   * @description navega para o menu que o usuário tem acesso.
+   */
+  private home(){
+    navigateMenu(this.usuario.getAuth().decodificaToken().perfil, this.router);
   }
 
 

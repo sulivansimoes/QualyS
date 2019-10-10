@@ -1,3 +1,8 @@
+// COMPONENTES PADRÕES
+
+// COMPONENTES PERSONALIZADOS
+import { Perfilusuario } from './perfilUsuario';
+
 /**
  * @description: Converte um objeto ou array de objetos em um array de valores
  * @param  {Object} ( objeto ) - Objeto ou Array de objetos a ser convertido.
@@ -20,7 +25,7 @@ export function parseObjectsToArray( objeto:any ){
  * @param {String} date data a ser formatada no formato dd/mm/aaaa
  * @returns String  dataFormatada
  */
-export function formataData (date:String){
+export function formataData(date:String){
 
 
     let dia = date.substr(8,2);
@@ -29,6 +34,31 @@ export function formataData (date:String){
     var dataFormatada = dia+"/"+mes+"/"+ano;
 
     return dataFormatada;
+}
+
+
+/**
+ * @description Direciona o usuário para seu respectivo home. De acordo com seu perfil.
+ * @param {number} perfil, código do perfil do usuário
+ * @param router, objeto router para poder redirecionar o usuário
+ */
+export function navigateMenu(perfil:number, router:any){
+    
+    //verifica o perfil para redirecionar o usuário para home certa
+    switch(perfil){
+
+        case Perfilusuario.PERFIL_ADMIN : 
+        case Perfilusuario.PERFIL_SUPERVISOR :
+        case Perfilusuario.PERFIL_VETERINARIO:
+
+            router.navigate(['/home-grf']);
+        break;
+
+        default :
+            router.navigate(['/']);
+        break;
+    } 
+
 }
 
 

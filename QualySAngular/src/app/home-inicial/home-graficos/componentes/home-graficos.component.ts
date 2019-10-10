@@ -120,8 +120,8 @@ export class HomeGraficosComponent implements OnInit, OnDestroy {
                                 let  inconformes_resolvidos = Number.parseInt( this.resultApi.registros[0].inconformes_resolvidos );
                                                       
                                 this.columnChart.dataTable = [
-                                                                ['mes', 'Gerados','Resolvidos', 'Não Resolvidos'],                                                            
-                                                                ['Mês'  , inconformes_gerados, inconformes_resolvidos, inconformes_pendentes]                                                         
+                                                                ['periodo', 'Gerados','Resolvidos', 'Não Resolvidos'],                                                            
+                                                                ['Período', inconformes_gerados, inconformes_resolvidos, inconformes_pendentes]                                                         
                                                              ];
 
                                 //Se não for a primeira vez, então vai atualizar.
@@ -173,7 +173,6 @@ export class HomeGraficosComponent implements OnInit, OnDestroy {
    */
   private atualizaGraficos(){
 
-
     //Verifica se os checkbox estão selecionados, caso não esteja mando null;
     if(!this.diaSelecionado){
       this.dia_escolhido = null;
@@ -184,5 +183,6 @@ export class HomeGraficosComponent implements OnInit, OnDestroy {
 
     this.populaDataTablePieChart();
     this.populaDataTableColumChart();    
+
   }
 }

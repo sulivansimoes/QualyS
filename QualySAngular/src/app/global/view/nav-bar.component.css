@@ -20,6 +20,11 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.button-Logo{
+    background: none;
+    border: none;
+}
+
 
 /* Sub-menu aninhado */
 .dropdown-submenu {
