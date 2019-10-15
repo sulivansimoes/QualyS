@@ -181,13 +181,13 @@ export class UsuarioComponent implements OnInit {
     this.usuarioService.atualizaUsuario(this.usuario)
                        .subscribe( 
                                     result =>{ 
-                                                alert("deu certo atualização");
+                                                console.log("deu certo atualização");
+                                                this.fechaTela();
                                              },
                                     erros => { 
                                                 this.setErrosApi(erros);
                                               }
                                   );
-  // this.fechaTela();
   }
 
 

@@ -119,7 +119,7 @@ export class ProgramaComponent implements OnInit {
     this.programaService.salvaPrograma(this.programa)
                         .subscribe( 
                                      result =>{ 
-                                                 alert("deu certo salvamento");
+                                                 console.log("deu certo salvamento");
                                                  this.programa = new Programa();
                                               },
                                      erros => { 
@@ -137,13 +137,13 @@ export class ProgramaComponent implements OnInit {
     this.programaService.atualizaPrograma(this.programa)
                         .subscribe( 
                                     result =>{ 
-                                               alert("deu certo atualização");
+                                               console.log("deu certo atualização");
+                                               this.fechaTela();
                                              },
                                     erros => { 
                                                this.setErrosApi(erros);
                                              }
                                   );
-    // this.fechaTela();
   } 
 
 

@@ -12,6 +12,8 @@ import { GoogleChartInterface         } from 'ng2-google-charts/google-charts-in
  * @see https://www.devrandom.it/software/ng2-google-charts/demo/
  * @see https://github.com/gmazzamuto/ng2-google-charts/
  * @see https://www.npmjs.com/package/ng2-google-charts
+ * @see https://developers.google.com/chart/interactive/faq
+ * @obs Biblioteca do google-charts exige conexão com internet, pois não fornece as bibliotecas para baixar
  */
 
 @Component({

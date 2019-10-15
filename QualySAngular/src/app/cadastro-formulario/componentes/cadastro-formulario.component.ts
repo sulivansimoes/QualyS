@@ -159,7 +159,7 @@ export class CadastroFormularioComponent implements OnInit {
           result => {
                         this.resultadoApi    = result;
                         this.formulario      = new CadastroFormulario();
-                        alert(this.resultadoApi.mensagem);
+                        console.log(this.resultadoApi.mensagem);
                     },
           error => {
                         this.setErrosApi(error);
@@ -190,13 +190,14 @@ export class CadastroFormularioComponent implements OnInit {
     this.formularioService.atualizaFormulario(this.formulario)
                           .subscribe( 
                                       result =>{ 
-                                                  alert("deu certo atualização");
+                                                  console.log("deu certo atualização");
+                                                  this.fechaTela();
                                                 },
                                       erros => { 
                                                   this.setErrosApi(erros);
                                                 }
                                     );
-                          // this.fechaTela();
+                          
   } 
 
 

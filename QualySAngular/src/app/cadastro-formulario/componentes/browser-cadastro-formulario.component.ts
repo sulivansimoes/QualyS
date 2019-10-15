@@ -105,7 +105,7 @@ export class BrowserCadastroFormularioComponent implements OnInit, OnDestroy {
           result => {
                       this.resultadoApi = result;
                       this.getAll()
-                      alert(this.resultadoApi.mensagem);        
+                      console.log(this.resultadoApi.mensagem);        
                     },
           error => {
                       this.setErrosApi(error);

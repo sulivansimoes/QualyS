@@ -102,7 +102,7 @@ export class FrequenciaComponent implements OnInit {
     this.inscricao.add( this.frequenciaService.salvaFrequencia(this.frequencia)
                             .subscribe( 
                                           result =>{ 
-                                                      alert("deu certo salvamento");
+                                                      console.log("deu certo salvamento");
                                                       this.frequencia = new Frequencia();
                                                   },
                                           erros => { 
@@ -121,15 +121,15 @@ export class FrequenciaComponent implements OnInit {
     /*this.inscricao.add( */this.frequenciaService.atualizaFrequencia(this.getFrequencia())
                                 .subscribe( 
                                             result =>{ 
-                                                        alert("deu certo salvamento");
+                                                        console.log("deu certo atualização");
+                                                        this.fechaTela();
+
                                                     },
-                                                        erros => { 
+                                           erros => { 
                                                         this.setErrosApi(erros);
                                                     }
                                           )
     /*);*/
-    console.log(this.inscricao)
-    this.fechaTela();
   }
 
 

@@ -1,11 +1,12 @@
-import { UsuarioService } from './../../usuario/model/usuario.service';
 // COMPONENTES PADRÕES
 import { Component, OnInit  } from '@angular/core';
 import { Subscription       } from 'rxjs';
 import { ActivatedRoute, Router    } from '@angular/router';
 // COMPONENTES PERSONALIZADOS
+import { UsuarioService     } from './../../usuario/model/usuario.service';
 import { RespostaFormulario } from '../model/resposta-formulario';
 import { ItemFormulario     } from 'src/app/cadastro-formulario/model/item-formulario';
+import { navigateMenu       } from 'src/app/global/funcoes/functionsComuns';
 import { RespostaFormularioService } from './../model/resposta-formulario.service';
 import { CadastroFormularioService } from './../../cadastro-formulario/model/cadastro-formulario.service';
 import { msgConfirmaCancelamento   } from 'src/app/global/funcoes/mensagensPadroes';
@@ -97,7 +98,7 @@ export class RespostaFormularioComponent implements OnInit {
    */
   private fechaTela(){
     this.fechaModalCancelar();
-    this.router.navigateByUrl("/");
+    navigateMenu(this.usuario.getUsuario().perfil, this.router)
   }
 
   

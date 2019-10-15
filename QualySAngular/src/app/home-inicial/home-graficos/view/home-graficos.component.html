@@ -1,17 +1,16 @@
 <!-- OPÇÕES / CHECKBOX -->
 <div>
-    <div style="float: left;">
-        <legend for="pordia" style="margin-left: 10px">Dia</legend>
+    <div style="float: left; margin-left: 28.125rem; margin-top: 1.5rem">
+        <legend for="pordia" >Dia</legend>
 
         <input type="checkbox" 
                name="pordia" 
-               id="pordia" 
-               style="margin-left: 10px" 
+               id="pordia"                               
                [(ngModel)]="diaSelecionado" 
                (click)="atualizaGraficos()"
         >
     </div>
-    <div style="float: left">
+    <div style="float: left;  margin-top: 1.5rem;">
         <legend for="pormes" style="margin-left: 10px" checked>Mês</legend>
 
         <input type="checkbox" 
@@ -23,7 +22,7 @@
                (click)="atualizaGraficos()"
         >
     </div>
-    <div style="float: left;">
+    <div style="float: left;  margin-top: 1.5rem; margin-right: 25px ">
         <legend for="porano" style="margin-left: 10px">Ano</legend>
         
         <input type="checkbox" 
@@ -39,7 +38,7 @@
 
 <!-- COMBOS -->
 <!-- DIA -->
-<div class="form-group" style="float: left; margin-left: 20px">
+<div class="form-group" style="float: left; margin-left: 20px; margin-top: 1.5rem; margin-left: 10px">
     <legend for="dia">Dia</legend>
 
     <select class="form-control" 
@@ -52,7 +51,7 @@
 </div>
 
 <!-- MES -->
-<div class="form-group" style="float: left;">
+<div class="form-group" style="float: left; margin-top: 1.5rem; margin-left: 10px ">
     <legend for="mes">Mês</legend>
 
     <select class="form-control" 
@@ -65,12 +64,12 @@
 </div>
 
 <!-- ANO -->
-<div class="form-group" style="float: left">
+<div class="form-group" style="float: left; margin-top: 1.5rem; ; margin-left: 10px">
     <legend for="ano">Ano</legend>
 
     <select class="form-control" 
             id="ano" 
-            (change)="atualizaGraficos(1)"
+            (change)="atualizaGraficos()"
             [(ngModel)]="ano_escolhido"
     >
         <option *ngFor="let ano of anos" [ngValue]="ano"> {{ano}}</option>
@@ -82,5 +81,5 @@
 <div class="embrulho-grafico">
     <p class="titulo-grafico">Visão geral das vistorias</p>
     <google-chart *ngIf ="this.columnChart.dataTable.length > 1" [data]="columnChart" class="grafico"></google-chart>
-    <google-chart *ngIf ="this.pieChart.dataTable.length > 1" [data]="pieChart" class="grafico"></google-chart>
+    <google-chart *ngIf ="this.pieChart.dataTable.length > 1"    [data]="pieChart" class="grafico"></google-chart>
 </div>

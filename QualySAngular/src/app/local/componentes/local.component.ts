@@ -100,8 +100,9 @@ export class LocalComponent implements OnInit {
      this.localService.salvaLocal(this.local)
                       .subscribe( 
                                   result =>{ 
-                                              alert("deu certo salvamento");
+                                              console.log("deu certo salvamento");
                                               this.local = new Local();
+                                              // this.fechaTela();
                                             },
                                   erros => { 
                                               this.setErrosApi(erros);
