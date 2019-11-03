@@ -1,0 +1,4 @@
+.embrulho-tabela{
+    height: 187px;
+    overflow-y: auto;  /*só aparece o scroll quando necessário*/
+}

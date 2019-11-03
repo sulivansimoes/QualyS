@@ -1,77 +1,98 @@
-<div>
+<div class="embrulho-principal">
+       <form action="#" method="POST" autocomplete="off">
+              <fieldset>
+                     <legend>Relatório Vistorias Realizadas</legend>
+                     <div class="embrulho-campos">
 
-       <!-- DATA INICIAL DO FILTRO DO RELATÓRIO -->
-       <div class="form-row">
-              <div class="form-group col-md-2 espaco">
-                     <label for="inputDataDaEmissao">Da emissão?</label>
-                     <input type="date"
-                            id="inputDataDaEmissao"
-                            class="form-control"
-                            [(ngModel)]="daEmissao"
-                     >
-              </div>
-
-              <!-- DATA FINAL DO FILTRO DO RELATÓRIO -->
-              <div class="form-group col-md-2 espaco">
-                     <label for="inputDataAteEmissao">Ate emissão?</label>
-                     <input type="date"
-                            id="inputDataDaEmissao"
-                            class="form-control"
-                            [(ngModel)]="ateEmissao"
-                     >
-              </div>
-
-              <!-- FORMULARIO DA VISTORIA QUE DEVERÁ SER IMPRESSO -->
-              <div class="form-group col-md-2">
-                     <label for="inputPrograma">Considera qual formulário?</label>
-                     <div class="input-group-append">
-
-                     <input type="number" 
-                            id="inputFormulario" 
-                            name="inputPrograma" 
-                            required 
-                            class="form-control"
-                            [(ngModel)]="formulario"
-                            (keyup.F2)="acionaPesquisaFormulario()"
-                     >
-
-                     <input type="button" 
-                            id="buttonPesquisa" 
-                            class="buttonPesquisa"
-                            (click)="acionaPesquisaFormulario()"
-                     >
-                     </div>
-              </div>
-       </div>
+                            <p>Campos em azul são de preenchimento obrigatório</p>
+                            
+                            <!-- DATA INICIAL DO FILTRO DO RELATÓRIO -->
+                            <div class="form-row">
+                                   <div class="form-group col-md-2 espaco">
+                                          <label for="inputDataDaEmissao" class="preenchimentoObrigatorio">Da emissão?</label> <!-- tcc final -->
+                                          <input type="date"
+                                                 id="inputDataDaEmissao"
+                                                 name="inputDataDaEmissao"
+                                                 class="form-control"
+                                                 [(ngModel)]="daEmissao"
+                                          >
+                                   </div>
        
-       <!-- Botoes -->
-       <div>
-              <input type="button" value="Gerar" (click)="geraRelatorio()">
-              <input type="button" value="Cancelar">
-       </div>
+                                   <!-- DATA FINAL DO FILTRO DO RELATÓRIO -->
+                                   <div class="form-group col-md-2 espaco">
+                                          <label for="inputDataAteEmissao" class="preenchimentoObrigatorio">Ate emissão?</label> <!-- tcc final -->
+                                          <input type="date"
+                                                 id="inputDataAteEmissao"
+                                                 name="inputDataAteEmissao"
+                                                 class="form-control"
+                                                 [(ngModel)]="ateEmissao"                                                 
+                                          >
+                                   </div>
+       
+                                   <!-- FORMULARIO DA VISTORIA QUE DEVERÁ SER IMPRESSO -->
+                                   <div class="form-group col-md-2">
+                                          <label for="inputPrograma" class="preenchimentoObrigatorio">Considera qual formulário?</label> <!-- tcc final -->
 
-        <!-- COMPONENTE DE PESQUISA FORMULARIO -->
-        <app-tela-consulta-padrao
-              [idModalPesquisa]="idPesquisaFormulario"
-              (botaoPesquisarClicado)="pesquisaFormulario($event)"
-              (itemSelecionadoClicado)="itemFormularioSelecionado($event)"
-              [cabecalhoTabela]="cabecalhoConsulta"
-              [tabelaDeDados]="formulariosFiltrados"
-       >
-       </app-tela-consulta-padrao>
+                                          <div class="input-group-append">
+                     
+                                                 <input type="number" 
+                                                        id="inputFormulario" 
+                                                        name="inputPrograma" 
+                                                        required 
+                                                        class="form-control"
+                                                        [(ngModel)]="formulario"
+                                                        (keyup.F2)="acionaPesquisaFormulario()"
+                                                 >
+                            
+                                                 <input type="button" 
+                                                        id="buttonPesquisa" 
+                                                        class="buttonPesquisa"
+                                                        (click)="acionaPesquisaFormulario()"
+                                                 >
+                                          </div>
+                                   </div>
+                            </div>
+              
+       
+                            <!-- COMPONENTE DE PESQUISA FORMULARIO -->
+                            <app-tela-consulta-padrao
+                                   [idModalPesquisa]="idPesquisaFormulario"
+                                   (botaoPesquisarClicado)="pesquisaFormulario($event)"
+                                   (itemSelecionadoClicado)="itemFormularioSelecionado($event)"
+                                   [cabecalhoTabela]="cabecalhoConsulta"
+                                   [tabelaDeDados]="formulariosFiltrados"
+                            >
+                            </app-tela-consulta-padrao>
+                     
+                            <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
+                            <div *ngIf="errosApi">
+                                   <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
+                            </div> 
+                     
+                            <!-- MENSAGEM DE ALERTA -->
+                            <div *ngIf="mensagemAviso">
+                            <tela-mensagem [mensagemAviso]="mensagemAviso"></tela-mensagem>
+                            </div>
+                     
+                            <!-- MENSAGEM DE INFORMATIVA -->
+                            <div *ngIf="mensagemInfo">
+                            <tela-mensagem [mensagemSucesso]="mensagemInfo"></tela-mensagem>
+                            </div>
+                     </div>
+              
+              </fieldset>
 
-       <!-- CASO EXISTA ERROS, ACIONA MODAL COMPONENTE DE ERRO -->
-       <div *ngIf="errosApi">
-              <tela-mensagem [mensagemErro]="errosApi"></tela-mensagem>
-       </div> 
-   
-       <!-- MENSAGEM DE ALERTA -->
-       <div *ngIf="mensagemAviso">
-             <tela-mensagem [mensagemAviso]="mensagemAviso"></tela-mensagem>
-       </div>
-
-       <!-- MENSAGEM DE INFORMATIVA -->
-       <div *ngIf="mensagemInfo">
-             <tela-mensagem [mensagemSucesso]="mensagemInfo"></tela-mensagem>
-       </div>
+              <!-- Botões -->
+              <div class="embrulho-botoes posicao-centro-vertical">
+                     <input type="button" class="btn btn-lg btn-primary botoesCrud" value="Gerar" (click)="geraRelatorio()">
+                     <input type="button" class="btn btn-lg btn-primary botoesCrud" value="Cancelar" (click)="menuPrincipal()">
+              </div>
+       </form>
 </div>
+                    
+                        
+
+
+
+
+      

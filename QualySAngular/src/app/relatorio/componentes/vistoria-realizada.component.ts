@@ -1,7 +1,9 @@
 // COMPONENTES PADRÕES
 import { Component, OnInit } from '@angular/core';
+import { Router   } from '@angular/router';
 // COMPONENTES PERSONALIZADOS
-import { formataData, parseObjectsToArray } from 'src/app/global/funcoes/functionsComuns';
+import { formataData, parseObjectsToArray, navigateMenu } from 'src/app/global/funcoes/functionsComuns';
+import { UsuarioService                   } from './../../usuario/model/usuario.service';
 import { CadastroFormulario               } from './../../cadastro-formulario/model/cadastro-formulario';
 import { RespostaFormularioService        } from './../../resposta-formulario/model/resposta-formulario.service';
 import { CadastroFormularioService        } from './../../cadastro-formulario/model/cadastro-formulario.service';
@@ -42,7 +44,9 @@ export class VistoriaRealizadaComponent implements OnInit {
 
 
   constructor(private respostaFormularioService: RespostaFormularioService,
-              private cadastroFormularioService : CadastroFormularioService
+              private cadastroFormularioService : CadastroFormularioService,
+              private usuarioService : UsuarioService,
+              private router:Router,
              ) { }
 
   ngOnInit() {
@@ -69,6 +73,9 @@ export class VistoriaRealizadaComponent implements OnInit {
         !this.ateEmissao ||
         !this.formulario ){ 
 
+       console.log(this.daEmissao)
+       console.log(this.ateEmissao)
+       console.log(this.formulario)
        this.setMensagemAviso(msgFiltrosNaoPreenchidos);
        return;
     }
@@ -423,5 +430,14 @@ export class VistoriaRealizadaComponent implements OnInit {
     this.mensagemAviso = null;
     this.mensagemInfo = mensagem + " /message: " + VistoriaRealizadaComponent.countErros++  ;
     console.log(this.mensagemInfo);
+  }
+
+
+
+  /**
+   * @description Navega para menu principal de acordo com perfil do usuário.
+   */
+  private menuPrincipal(){
+    navigateMenu(this.usuarioService.getUsuario().perfil, this.router);
   }
 }
