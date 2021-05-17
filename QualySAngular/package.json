@@ -26,7 +26,7 @@
     "dateformat": "^3.0.3",
     "fuctbase64": "^1.4.0",
     "jquery": "^3.4.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "ng2-google-charts": "^4.0.0",
     "ngx-pagination": "^4.1.0",
     "popper.js": "^1.15.0",
